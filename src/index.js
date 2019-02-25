@@ -10,7 +10,7 @@ import * as serviceWorker from './serviceWorker';
 
 import configureStore, {history} from './configureStore';
 
-import App from "./App";
+import App from "./App.js";
 
 
 const store = configureStore();

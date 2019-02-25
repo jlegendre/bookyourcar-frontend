@@ -1,33 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {ConnectedRouter} from 'connected-react-router'
+import App from './App.jsx'
+import {connect} from "react-redux";
+import {getToken} from "./redux/reducers/user";
 
 
-import {Route, Switch} from 'react-router'
-
-const App = ({history}) => {
-
-
-    const requireAuthentificate = (component) => {
-        return component;
+//pour envoyer des objets du store de redux
+const mapStateToProps = (state) => {
+    return {
+        token: getToken(state)
     }
-
-
-    return (
-        <ConnectedRouter history={history}>
-            <div>
-                <Switch>
-                    <Route exact path={"/"} component={requireAuthentificate(<div>ok</div>)}/>
-                    <Route path={"/login"} component={requireAuthentificate(<div>login</div>)}/>
-                    <Route component={() => <div>404</div>}/>
-                </Switch>
-            </div>
-        </ConnectedRouter>
-    )
 };
 
-App.propTypes = {
-    history: PropTypes.object,
-};
-
-export default App
+export default connect(mapStateToProps)(App)
