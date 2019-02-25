@@ -1,4 +1,4 @@
-import {SET_USER_TOKEN, SET_USER_USERNAME} from "../actions/user";
+import {SET_USER_EMPTY, SET_USER_TOKEN, SET_USER_USERNAME} from "../actions/user";
 
 const initialState = {
     username: undefined,
@@ -12,6 +12,8 @@ export default function (state = initialState, action) {
             return {...state, username: action.username};
         case SET_USER_TOKEN:
             return {...state, token: action.token};
+        case SET_USER_EMPTY:
+            return initialState;
         default:
             return state
     }

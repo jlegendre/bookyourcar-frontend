@@ -5,6 +5,7 @@ import {ConnectedRouter} from 'connected-react-router'
 
 import {Redirect, Route, Switch} from 'react-router'
 import Login from "./composant/Login/Login.js";
+import Acceuil from "./composant/Acceuil/Acceuil.js";
 
 
 class App extends Component {
@@ -40,7 +41,7 @@ class App extends Component {
             <ConnectedRouter history={this.props.history}>
                 <div>
                     <Switch>
-                        <Route exact path={"/"} component={() => this.requireLogin(<div>todo</div>)}/>
+                        <Route exact path={"/"} component={() => this.requireLogin(<Acceuil/>)}/>
                         <Route path={"/login"} component={() => <Login/>}/>
                         <Route component={() => <div>404</div>}/>
                     </Switch>

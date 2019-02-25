@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import {Redirect} from "react-router";
 
 /**
  * Page de login de l'application
@@ -46,6 +47,12 @@ class Login extends Component {
 
 
     render() {
+
+        //Si l'utilisateur est déjà connecté, on le redirige vers l'acceuil
+        if(this.props.user && this.props.user.token) {
+            return <Redirect to={"/"} />
+        }
+
         return (
             <div>
                 <form>
@@ -85,7 +92,8 @@ class Login extends Component {
 Login.propTypes = {
     history: PropTypes.object,
     token: PropTypes.object,
-    loginUser: PropTypes.func
+    loginUser: PropTypes.func,
+    user: PropTypes.object
 };
 
 export default Login

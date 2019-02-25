@@ -1,13 +1,13 @@
-import Login from './Login.jsx'
+import Acceuil from './Acceuil.jsx'
 import {connect} from "react-redux";
-import {fetchLoginUser} from "../../redux/actions/user";
 import {getUser} from "../../redux/reducers/user";
+import {setUserEmpty} from "../../redux/actions/user";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginUser: (username, password) => dispatch(fetchLoginUser(username, password))
+        clearUser: () => dispatch(setUserEmpty())
     }
 };
 
@@ -18,4 +18,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Acceuil)

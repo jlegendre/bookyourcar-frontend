@@ -1,9 +1,11 @@
 import fetch from 'isomorphic-fetch'
 
 import config from './../../config';
+import {getJson} from "../../utils/http";
 
 export const SET_USER_USERNAME = 'SET_USER_USERNAME';
 export const SET_USER_TOKEN = 'SET_USER_TOKEN';
+export const SET_USER_EMPTY = 'SET_USER_EMPTY';
 
 /**
  * Call /Auth/Login Url, pour connecter l'utilisateur
@@ -16,15 +18,16 @@ export const fetchLoginUser = (username, password) => {
 
         fetch(`${config.backend}/Auth/login`, {
             method: 'POST',
-            body: {email: username, password},
-        }).then(response => {
-            if (response.status >= 400) {
-                throw new Error("Bad response from server");
-            }
-            console.log(response);
-            return response.json()
-        }).then(json => {
-            dispatch(setToken(json))
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({email: username, password}),
+        }).then(
+            response => getJson(response)
+        ).then(json => {
+            dispatch(setToken(json.token));
+            dispatch(setUsername(username))
+
         })
     }
 };
@@ -34,5 +37,10 @@ export const setUsername = (username) => {
 };
 
 export const setToken = (token) => {
-    return {type: SET_USER_USERNAME, token}
-}
+    return {type: SET_USER_TOKEN, token}
+};
+
+export const setUserEmpty = () => {
+    return {type: SET_USER_EMPTY}
+};
+
