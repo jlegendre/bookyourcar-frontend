@@ -64,6 +64,8 @@ class Login extends Component {
                         onChange={this.setUsername}
                         fullWidth
                         required
+                        error={this.props.error["Email"] !== undefined}
+                        helperText={this.props.error["Email"] !== undefined && this.props.error["Email"][0]}
                     />
                     <TextField
                         id={"password"}
@@ -74,6 +76,8 @@ class Login extends Component {
                         onChange={this.setPassword}
                         fullWidth
                         required
+                        error={this.props.error["Password"] !== undefined}
+                        helperText={this.props.error["Password"] !== undefined && this.props.error["Password"][0]}
                     />
                     <Button
                         variant={"contained"}
@@ -93,7 +97,8 @@ Login.propTypes = {
     history: PropTypes.object,
     token: PropTypes.object,
     loginUser: PropTypes.func,
-    user: PropTypes.object
+    user: PropTypes.object,
+    error: PropTypes.object
 };
 
 export default Login

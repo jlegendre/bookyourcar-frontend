@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch'
 
 import config from './../../config';
 import {getJson} from "../../utils/http";
+import {setError} from "./error";
 
 export const SET_USER_USERNAME = 'SET_USER_USERNAME';
 export const SET_USER_TOKEN = 'SET_USER_TOKEN';
@@ -27,8 +28,10 @@ export const fetchLoginUser = (username, password) => {
         ).then(json => {
             dispatch(setToken(json.token));
             dispatch(setUsername(username))
-
+        }).catch(err => {
+            dispatch(setError(err.description))
         })
+
     }
 };
 
