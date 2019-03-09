@@ -52,7 +52,7 @@ const styles = theme => ({
 function Login(props) {
     const {classes, loginUser, error, token} = props;
 
-    const [input, setInput] = useState({email: "test@gmail.com", password: "Test123!"});
+    const [input, setInput] = useState({email: "", password: ""});
 
     /**
      * Update email input
