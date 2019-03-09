@@ -8,7 +8,7 @@ import {getError} from "../../redux/reducers/error";
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginUser: (username, password) => dispatch(fetchLoginUser(username, password))
+        loginUser: (input) => dispatch(fetchLoginUser(input.email, input.password))
     }
 };
 

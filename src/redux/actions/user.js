@@ -10,11 +10,11 @@ export const SET_USER_EMPTY = 'SET_USER_EMPTY';
 
 /**
  * Call /Auth/Login Url, pour connecter l'utilisateur
- * @param username username de l'utilisateur
+ * @param email username de l'utilisateur
  * @param password password de l'utilisateur
  * @returns {Function}
  */
-export const fetchLoginUser = (username, password) => {
+export const fetchLoginUser = (email, password) => {
     return (dispatch) => {
 
         fetch(`${config.backend}/Auth/login`, {
@@ -22,12 +22,12 @@ export const fetchLoginUser = (username, password) => {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({email: username, password}),
+            body: JSON.stringify({email, password}),
         }).then(
             response => getJson(response)
         ).then(json => {
             dispatch(setToken(json.token));
-            dispatch(setUsername(username))
+            dispatch(setUsername(email))
         }).catch(err => {
             dispatch(setError(err.description))
         })
