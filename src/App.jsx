@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import PropTypes from 'prop-types'
+import * as PropTypes from 'prop-types'
 import {ConnectedRouter} from 'connected-react-router'
 
 
@@ -12,20 +12,12 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from "@material-ui/core/Typography";
-import Menu from "@material-ui/core/Menu";
-import MenuItem from "@material-ui/core/MenuItem";
-import AccountCircle from "@material-ui/icons/AccountCircle";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 class App extends Component {
 
     constructor(props) {
         super(props);
-
-        this.state = {
-            userMenuOpen: false
-        };
-
         this.requireLogin = this.requireLogin.bind(this);
     }
 
@@ -58,33 +50,8 @@ class App extends Component {
                             <MenuIcon/>
                         </IconButton>
                         <Typography variant="h6" color="inherit">
-                            Book Your Car
+                            Book Your Car {this.props.token ? "Logged" : ""}
                         </Typography>
-                        {this.props.token && (
-                            <div>
-                                <IconButton
-                                    aria-owns={'menu-appbar'}
-                                    aria-haspopup="true"
-                                    color="inherit"
-                                >
-                                    <AccountCircle />
-                                </IconButton>
-                                <Menu
-                                    id="menu-appbar"
-                                    anchorOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                    transformOrigin={{
-                                        vertical: 'top',
-                                        horizontal: 'right',
-                                    }}
-                                >
-                                    <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                                    <MenuItem onClick={this.handleClose}>My account</MenuItem>
-                                </Menu>
-                            </div>
-                        )}
                     </Toolbar>
                 </AppBar>
 
@@ -99,7 +66,6 @@ class App extends Component {
                     </div>
                 </ConnectedRouter>
             </div>
-
         )
     }
 }
@@ -120,7 +86,7 @@ const styles = {
 
 App.propTypes = {
     history: PropTypes.object,
-    token: PropTypes.object
+    token: PropTypes.string
 };
 
 export default withStyles(styles)(App)

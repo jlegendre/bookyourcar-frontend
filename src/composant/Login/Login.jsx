@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import PropTypes from 'prop-types';
+import * as PropTypes from 'prop-types';
 //Material UI Componant
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -12,6 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import withStyles from '@material-ui/core/styles/withStyles';
+import {Redirect} from "react-router";
 
 const styles = theme => ({
     main: {
@@ -49,10 +50,14 @@ const styles = theme => ({
  * Formulaire de Login
  */
 function Login(props) {
-    const {classes, loginUser, error} = props;
+    const {classes, loginUser, error, token} = props;
 
-    const [input, setInput] = useState({email: "", password: ""});
+    const [input, setInput] = useState({email: "test@gmail.com", password: "Test123!"});
 
+    /**
+     * Update email input
+     * @param event html event
+     */
     const updateEmail = (event) => {
         setInput({
             ...input,
@@ -60,6 +65,10 @@ function Login(props) {
         })
     };
 
+    /**
+     * Update password input
+     * @param event html event
+     */
     const updatePassword = (event) => {
         setInput({
             ...input,
@@ -67,70 +76,82 @@ function Login(props) {
         })
     };
 
+    /**
+     * Call login user api
+     */
     const fetchUser = () => {
         loginUser(input)
     };
 
-
-    return (
-        <div className={classes.main}>
-            <CssBaseline/>
-            <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon/>
-                </Avatar>
-                <Typography component={"h1"} variant={"h5"}>
-                    Sign in
-                </Typography>
-                <div className={classes.form}>
-                    <FormControl margin={"normal"} fullWidth>
-                        <TextField
-                            id={"email"}
-                            name={"email"}
-                            autoFocus
-                            placeholder={"Email"}
-                            required
-                            helperText={error.Email ? error.Email[0] : undefined}
-                            error={!!error.Email}
-                            onChange={(event) => updateEmail(event)}
-                        />
-                    </FormControl>
-                    <FormControl margin="normal" fullWidth>
-                        <TextField
-                            id={"password"}
-                            name={"password"}
-                            autoFocus
-                            placeholder={"Password"}
-                            required
-                            helperText={error.Password ? error.Password[0] : undefined}
-                            error={!!error.Password}
-                            onChange={(event) => updatePassword(event)}
-                        />
-                    </FormControl>
-                    <FormControlLabel
-                        control={<Checkbox value="remember" color="primary"/>}
-                        label="Remember me"
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        onClick={() => fetchUser()}
-                    >
+    if (token) {
+        console.log("toHome OK");
+        return (
+            <Redirect to={"/"}/>
+        )
+    } else {
+        console.log("toHome NOK");
+        return (
+            <div className={classes.main}>
+                <CssBaseline/>
+                <Paper className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon/>
+                    </Avatar>
+                    <Typography component={"h1"} variant={"h5"}>
                         Sign in
-                    </Button>
-                </div>
-            </Paper>
-        </div>
-    );
+                    </Typography>
+                    <div className={classes.form}>
+                        <FormControl margin={"normal"} fullWidth>
+                            <TextField
+                                id={"email"}
+                                name={"email"}
+                                autoFocus
+                                placeholder={"Email"}
+                                required
+                                helperText={error["Email"] ? error["Email"][0] : undefined}
+                                error={!!error["Email"]}
+                                onChange={(event) => updateEmail(event)}
+                            />
+                        </FormControl>
+                        <FormControl margin="normal" fullWidth>
+                            <TextField
+                                id={"password"}
+                                name={"password"}
+                                autoFocus
+                                placeholder={"Password"}
+                                type={"password"}
+                                required
+                                helperText={error["Password"] ? error["Password"][0] : undefined}
+                                error={!!error["Password"]}
+                                onChange={(event) => updatePassword(event)}
+                            />
+                        </FormControl>
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary"/>}
+                            label="Remember me"
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                            onClick={() => fetchUser()}
+                        >
+                            Sign in
+                        </Button>
+                    </div>
+                </Paper>
+            </div>
+        );
+    }
 }
 
 Login.propTypes = {
     classes: PropTypes.object.isRequired,
     loginUser: PropTypes.func,
-    error: PropTypes.object
+    error: PropTypes.object,
+    token: PropTypes.string
 };
 
 export default withStyles(styles)(Login)

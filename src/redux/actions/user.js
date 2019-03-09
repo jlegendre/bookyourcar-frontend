@@ -16,7 +16,6 @@ export const SET_USER_EMPTY = 'SET_USER_EMPTY';
  */
 export const fetchLoginUser = (email, password) => {
     return (dispatch) => {
-
         fetch(`${config.backend}/Auth/login`, {
             method: 'POST',
             headers: {
@@ -27,12 +26,13 @@ export const fetchLoginUser = (email, password) => {
             response => getJson(response)
         ).then(json => {
             dispatch(setToken(json.token));
-            dispatch(setUsername(email))
+            dispatch(setUsername(email));
+            dispatch(setError());
         }).catch(err => {
-            dispatch(setError(err.description))
+            dispatch(setError(err.description));
         })
-
     }
+
 };
 
 export const setUsername = (username) => {
