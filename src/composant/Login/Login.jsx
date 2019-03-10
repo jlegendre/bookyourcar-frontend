@@ -1,18 +1,120 @@
 import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
+
+
+import {Redirect} from "react-router";
+import InputText from "../Form/InputText.js";
+
 //Material UI Componant
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import FormControl from '@material-ui/core/FormControl';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {Redirect} from "react-router";
+
+/**
+ * Formulaire de Login
+ */
+const Login = (props) => {
+    const {classes, loginUser, token} = props;
+
+    const [input, setInput] = useState({email: "", password: ""});
+
+    /**
+     * Update email input
+     * @param event html event
+     */
+    const updateEmail = (event) => {
+        console.log("Update Email");
+        setInput({
+            ...input,
+            email: event.target.value
+        })
+    };
+
+    /**
+     * Update password input
+     * @param event html event
+     */
+    const updatePassword = (event) => {
+        console.log("Update Pass");
+        setInput({
+            ...input,
+            password: event.target.value
+        })
+    };
+
+    /**
+     * Call login user api
+     */
+    const fetchUser = () => {
+        loginUser(input)
+    };
+
+
+    if (token) {
+        //Si le token est présent on redirige vers la page d'acceuil automatiquement
+        return (
+            <Redirect to={"/"}/>
+        )
+    } else {
+        //Sinon, on affiche le login form
+        return (
+            <div className={classes.main}>
+                <CssBaseline/>
+                <Paper className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon/>
+                    </Avatar>
+                    <Typography component={"h1"} variant={"h5"}>
+                        Sign in
+                    </Typography>
+                    <div className={classes.form}>
+                        <InputText
+                            id={"email"}
+                            autoFocus
+                            name={"Email"}
+                            placeholder={"Email"}
+                            onChange={(event) => updateEmail(event)}
+                        />
+                        <InputText
+                            id={"password"}
+                            name={"Password"}
+                            placeholder={"Password"}
+                            type={"password"}
+                            onChange={(event) => updatePassword(event)}
+                        />
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary"/>}
+                            label="Remember me"
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                            onClick={() => fetchUser()}
+                        >
+                            Sign in
+                        </Button>
+                    </div>
+                </Paper>
+            </div>
+        );
+    }
+}
+
+Login.propTypes = {
+    classes: PropTypes.object.isRequired,
+    loginUser: PropTypes.func,
+    token: PropTypes.string
+};
+
 
 const styles = theme => ({
     main: {
@@ -46,112 +148,5 @@ const styles = theme => ({
     }
 });
 
-/**
- * Formulaire de Login
- */
-function Login(props) {
-    const {classes, loginUser, error, token} = props;
-
-    const [input, setInput] = useState({email: "", password: ""});
-
-    /**
-     * Update email input
-     * @param event html event
-     */
-    const updateEmail = (event) => {
-        setInput({
-            ...input,
-            email: event.target.value
-        })
-    };
-
-    /**
-     * Update password input
-     * @param event html event
-     */
-    const updatePassword = (event) => {
-        setInput({
-            ...input,
-            password: event.target.value
-        })
-    };
-
-    /**
-     * Call login user api
-     */
-    const fetchUser = () => {
-        loginUser(input)
-    };
-
-    if (token) {
-        console.log("toHome OK");
-        return (
-            <Redirect to={"/"}/>
-        )
-    } else {
-        console.log("toHome NOK");
-        return (
-            <div className={classes.main}>
-                <CssBaseline/>
-                <Paper className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon/>
-                    </Avatar>
-                    <Typography component={"h1"} variant={"h5"}>
-                        Sign in
-                    </Typography>
-                    <div className={classes.form}>
-                        <FormControl margin={"normal"} fullWidth>
-                            <TextField
-                                id={"email"}
-                                name={"email"}
-                                autoFocus
-                                placeholder={"Email"}
-                                required
-                                helperText={error["Email"] ? error["Email"][0] : undefined}
-                                error={!!error["Email"]}
-                                onChange={(event) => updateEmail(event)}
-                            />
-                        </FormControl>
-                        <FormControl margin="normal" fullWidth>
-                            <TextField
-                                id={"password"}
-                                name={"password"}
-                                autoFocus
-                                placeholder={"Password"}
-                                type={"password"}
-                                required
-                                helperText={error["Password"] ? error["Password"][0] : undefined}
-                                error={!!error["Password"]}
-                                onChange={(event) => updatePassword(event)}
-                            />
-                        </FormControl>
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>}
-                            label="Remember me"
-                        />
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                            onClick={() => fetchUser()}
-                        >
-                            Sign in
-                        </Button>
-                    </div>
-                </Paper>
-            </div>
-        );
-    }
-}
-
-Login.propTypes = {
-    classes: PropTypes.object.isRequired,
-    loginUser: PropTypes.func,
-    error: PropTypes.object,
-    token: PropTypes.string
-};
 
 export default withStyles(styles)(Login)

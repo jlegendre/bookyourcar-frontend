@@ -2,7 +2,6 @@ import Login from './Login.jsx'
 import {connect} from "react-redux";
 import {fetchLoginUser} from "../../redux/actions/user";
 import {getToken, getUser} from "../../redux/reducers/user";
-import {getError} from "../../redux/reducers/error";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
@@ -16,7 +15,6 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
     return {
         user: getUser(state),
-        error: getError(state),
         token: getToken(state)
     }
 };

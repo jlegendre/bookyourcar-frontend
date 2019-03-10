@@ -16,7 +16,6 @@ class Acceuil extends Component {
         this.props.clearUser();
     }
 
-
     render() {
         return (
             <div>
