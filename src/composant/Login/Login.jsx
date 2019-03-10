@@ -29,7 +29,6 @@ const Login = (props) => {
      * @param event html event
      */
     const updateEmail = (event) => {
-        console.log("Update Email");
         setInput({
             ...input,
             email: event.target.value
@@ -41,7 +40,6 @@ const Login = (props) => {
      * @param event html event
      */
     const updatePassword = (event) => {
-        console.log("Update Pass");
         setInput({
             ...input,
             password: event.target.value
