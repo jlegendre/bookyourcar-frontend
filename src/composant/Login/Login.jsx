@@ -76,7 +76,6 @@ const Login = (props) => {
                     <div className={classes.form}>
                         <InputText
                             id={"email"}
-                            autoFocus
                             name={"Email"}
                             placeholder={"Email"}
                             onChange={(event) => updateEmail(event)}

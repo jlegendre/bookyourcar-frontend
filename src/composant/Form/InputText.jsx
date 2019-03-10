@@ -15,14 +15,13 @@ import FormControl from "@material-ui/core/FormControl";
  */
 const InputText = (props) => {
 
-    const {id, name, autoFocus, placeholder, onChange, type, error} = props;
+    const {id, name, placeholder, onChange, type, error} = props;
 
     return (
         <FormControl margin={"normal"} fullWidth>
             <TextField
                 id={id}
                 name={name}
-                autoFocus={autoFocus}
                 placeholder={placeholder}
                 onChange={(event) => onChange(event)}
                 type={type}
@@ -35,8 +34,7 @@ const InputText = (props) => {
 
 InputText.propTypes = {
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    autoFocus: PropTypes.bool,
+    name: PropTypes.string.isRequired
     placeholder: PropTypes.string,
     onChange: PropTypes.func,
     type: PropTypes.string,
