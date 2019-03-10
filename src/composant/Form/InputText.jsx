@@ -34,7 +34,7 @@ const InputText = (props) => {
 
 InputText.propTypes = {
     id: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+    name: PropTypes.string.isRequired,
     placeholder: PropTypes.string,
     onChange: PropTypes.func,
     type: PropTypes.string,
