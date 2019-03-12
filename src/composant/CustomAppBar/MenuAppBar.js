@@ -1,6 +1,7 @@
 import MenuAppBar from './MenuAppBar.jsx'
 import {connect} from "react-redux";
 import {setUserEmpty} from "../../redux/actions/user";
+import {getToken} from "../../redux/reducers/user";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
@@ -13,7 +14,9 @@ const mapDispatchToProps = (dispatch) => {
 
 //pour envoyer des objets du store de redux
 const mapStateToProps = (state) => {
-    return {}
+    return {
+        token: getToken(state)
+    }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MenuAppBar)

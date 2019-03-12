@@ -4,10 +4,12 @@ import {ConnectedRouter} from 'connected-react-router'
 
 
 import {Redirect, Route, Switch} from 'react-router'
-import Login from "./composant/Login/Login.js";
-import Acceuil from "./composant/Acceuil/Acceuil.js";
 import CustomAppBar from "./composant/CustomAppBar/CustomAppBar.jsx";
 import {withStyles} from "@material-ui/core";
+//Page
+import Login from "./composant/User/Login/Login.js";
+import CreateUser from './composant/User/CreateUser/CreateUser.js'
+import Acceuil from "./composant/Acceuil/Acceuil.js";
 
 const App = props => {
 
@@ -41,8 +43,9 @@ const App = props => {
             <ConnectedRouter history={props.history}>
                 <div>
                     <Switch>
-                        <Route exact path={"/"} component={() => requireLogin(<Acceuil/>)}/>
                         <Route path={"/login"} component={() => <Login/>}/>
+                        <Route path={"/newAccount"} component={() => <CreateUser/>}/>
+                        <Route exact path={"/"} component={() => requireLogin(<Acceuil/>)}/>
                         <Route component={() => <div>404</div>}/>
                     </Switch>
                 </div>
@@ -56,8 +59,6 @@ App.propTypes = {
     token: PropTypes.string
 };
 
-const styles = theme => ({
+export default withStyles((theme) => ({
     toolbar: theme.mixins.toolbar
-});
-
-export default withStyles(styles)(App)
+}))(App)

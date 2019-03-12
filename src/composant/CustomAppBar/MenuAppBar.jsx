@@ -12,7 +12,7 @@ import {withStyles} from "@material-ui/core";
 
 const MenuAppBar = props => {
 
-    const {classes, open, setOpen} = props;
+    const {classes, token, open, setOpen} = props;
 
     const logout = () => {
         props.logout();
@@ -42,16 +42,19 @@ const MenuAppBar = props => {
                     </ListItem>
                 </List>
                 <Divider/>
-                <List>
-                    <ListItem button>
-                        <ListItemIcon><Icon>account_circle</Icon></ListItemIcon>
-                        <ListItemText primary={"Account"}/>
-                    </ListItem>
-                    <ListItem button onClick={() => logout()}>
-                        <ListItemIcon><Icon>exit_to_app</Icon></ListItemIcon>
-                        <ListItemText primary={"Logout"}/>
-                    </ListItem>
-                </List>
+                {token && (
+                    <List>
+                        <ListItem button>
+                            <ListItemIcon><Icon>account_circle</Icon></ListItemIcon>
+                            <ListItemText primary={"Account"}/>
+                        </ListItem>
+                        <ListItem button onClick={() => logout()}>
+                            <ListItemIcon><Icon>exit_to_app</Icon></ListItemIcon>
+                            <ListItemText primary={"Logout"}/>
+                        </ListItem>
+                    </List>
+                )}
+
             </div>
         </Drawer>
     )
@@ -59,13 +62,14 @@ const MenuAppBar = props => {
 
 MenuAppBar.propTypes = {
     open: PropTypes.bool,
+    token: PropTypes.string,
     setOpen: PropTypes.func,
     logout: PropTypes.func
 };
 
 
 const drawerWidth = 240;
-const styles = theme => ({
+export default withStyles((theme) => ({
     drawer: {
         width: drawerWidth,
         flexShrink: 0,
@@ -75,7 +79,5 @@ const styles = theme => ({
         width: drawerWidth,
     },
 
-    toolbar: theme.mixins.toolbar,
-});
-
-export default withStyles(styles)(MenuAppBar);
+    toolbar: theme.mixins.toolbar
+}))(MenuAppBar);

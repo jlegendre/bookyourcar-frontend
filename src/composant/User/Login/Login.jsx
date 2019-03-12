@@ -3,8 +3,7 @@ import * as PropTypes from 'prop-types';
 
 
 import {Redirect} from "react-router";
-import InputText from "../Form/InputText.js";
-
+import InputText from "../../Input/InputText.js";
 //Material UI Componant
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -15,6 +14,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
+import Link from "@material-ui/core/Link";
 
 /**
  * Formulaire de Login
@@ -85,10 +85,15 @@ const Login = (props) => {
                             type={"password"}
                             onChange={(event) => updatePassword(event)}
                         />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>}
-                            label="Remember me"
-                        />
+                        <Typography>
+                            <FormControlLabel
+                                control={<Checkbox value="remember" color="primary"/>}
+                                label="Remember me"
+                            />
+                            <Link href={"/newAccount"} className={classes.link} color={"primary"}>
+                                Create Account
+                            </Link>
+                        </Typography>
                         <Button
                             type="submit"
                             fullWidth
@@ -104,7 +109,7 @@ const Login = (props) => {
             </div>
         );
     }
-}
+};
 
 Login.propTypes = {
     classes: PropTypes.object.isRequired,
@@ -112,8 +117,7 @@ Login.propTypes = {
     token: PropTypes.string
 };
 
-
-const styles = theme => ({
+export default withStyles((theme) => ({
     main: {
         width: 'auto',
         display: 'block', // Fix IE 11 issue.
@@ -142,8 +146,9 @@ const styles = theme => ({
     },
     submit: {
         marginTop: theme.spacing.unit * 3,
+    },
+    link: {
+        float: 'right',
+        marginTop: theme.spacing.unit * 2
     }
-});
-
-
-export default withStyles(styles)(Login)
+}))(Login)

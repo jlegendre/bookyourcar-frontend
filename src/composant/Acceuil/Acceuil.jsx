@@ -5,12 +5,6 @@ import PropTypes from 'prop-types'
  * Page d'acceuil de l'application
  */
 class Acceuil extends Component {
-
-    constructor(props) {
-        super(props);
-    }
-
-
     render() {
         return (
             <div>

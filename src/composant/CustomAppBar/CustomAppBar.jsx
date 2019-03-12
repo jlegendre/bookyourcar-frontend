@@ -41,13 +41,11 @@ const CustomAppBar = (props) => {
     );
 };
 
-const styles = theme => ({
+export default withStyles((theme) => ({
     root: {
         flex: 1
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1
     }
-});
-
-export default withStyles(styles)(CustomAppBar);
+}))(CustomAppBar);
