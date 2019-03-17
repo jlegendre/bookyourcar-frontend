@@ -14,7 +14,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import Link from "@material-ui/core/Link";
+import {Link} from "react-router-dom";
 
 /**
  * Formulaire de Login
@@ -56,60 +56,58 @@ const Login = (props) => {
 
     if (token) {
         //Si le token est présent on redirige vers la page d'acceuil automatiquement
-        return (
-            <Redirect to={"/"}/>
-        )
-    } else {
-        //Sinon, on affiche le login form
-        return (
-            <div className={classes.main}>
-                <CssBaseline/>
-                <Paper className={classes.paper}>
-                    <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon/>
-                    </Avatar>
-                    <Typography component={"h1"} variant={"h5"}>
-                        Sign in
-                    </Typography>
-                    <div className={classes.form}>
-                        <InputText
-                            id={"email"}
-                            name={"Email"}
-                            placeholder={"Email"}
-                            onChange={(event) => updateEmail(event)}
-                        />
-                        <InputText
-                            id={"password"}
-                            name={"Password"}
-                            placeholder={"Password"}
-                            type={"password"}
-                            onChange={(event) => updatePassword(event)}
-                        />
-                        <Typography>
-                            <FormControlLabel
-                                control={<Checkbox value="remember" color="primary"/>}
-                                label="Remember me"
-                            />
-                            <Link href={"/newAccount"} className={classes.link} color={"primary"}>
-                                Create Account
-                            </Link>
-                        </Typography>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            color="primary"
-                            className={classes.submit}
-                            onClick={() => fetchUser()}
-                        >
-                            Sign in
-                        </Button>
-                    </div>
-                </Paper>
-            </div>
-        );
+        return <Redirect to={"/"}/>
     }
-};
+
+    return (
+        <div className={classes.main}>
+            <CssBaseline/>
+            <Paper className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                    <LockOutlinedIcon/>
+                </Avatar>
+                <Typography component={"h1"} variant={"h5"}>
+                    Sign in
+                </Typography>
+                <div className={classes.form}>
+                    <InputText
+                        id={"email"}
+                        name={"Email"}
+                        placeholder={"Email"}
+                        tpe={"email"}
+                        onChange={(event) => updateEmail(event)}
+                    />
+                    <InputText
+                        id={"password"}
+                        name={"Password"}
+                        placeholder={"Password"}
+                        type={"password"}
+                        onChange={(event) => updatePassword(event)}
+                    />
+                    <Typography>
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary"/>}
+                            label="Remember me"
+                        />
+                        <Link className={classes.link} to={"/newAccount"}>
+                            Create Account
+                        </Link>
+                    </Typography>
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={() => fetchUser()}
+                    >
+                        Sign in
+                    </Button>
+                </div>
+            </Paper>
+        </div>
+    );
+}
 
 Login.propTypes = {
     classes: PropTypes.object.isRequired,

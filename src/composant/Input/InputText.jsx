@@ -23,7 +23,7 @@ const InputText = (props) => {
                 id={id}
                 name={name}
                 placeholder={placeholder}
-                onChange={(event) => onChange(event)}
+                onChange={(event) => onChange && onChange(event)}
                 type={type}
                 error={!!error[name]}
                 helperText={error[name] && error[name][0]}
