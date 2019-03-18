@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
-import {Link, Redirect} from "react-router-dom";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
@@ -10,6 +9,8 @@ import Typography from "@material-ui/core/Typography";
 import {HowToRegOutlined as HowToRegOutlinedIcon} from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 import InputText from "../../Input/InputText";
+import {Redirect} from "react-router";
+import Link from "@material-ui/core/Link";
 
 const CreateUser = props => {
 

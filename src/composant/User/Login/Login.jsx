@@ -14,7 +14,6 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {Link} from "react-router-dom";
 
 /**
  * Formulaire de Login
@@ -89,9 +88,9 @@ const Login = (props) => {
                             control={<Checkbox value="remember" color="primary"/>}
                             label="Remember me"
                         />
-                        <Link className={classes.link} to={"/newAccount"}>
+                        <a className={classes.link} href={"/newAccount"}>
                             Create Account
-                        </Link>
+                        </a>
                     </Typography>
                     <Button
                         type="submit"
@@ -107,7 +106,7 @@ const Login = (props) => {
             </Paper>
         </div>
     );
-}
+};
 
 Login.propTypes = {
     classes: PropTypes.object.isRequired,
