@@ -1,7 +1,6 @@
 import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
 
-
 import {Redirect} from "react-router";
 import InputText from "../../Input/InputText.js";
 //Material UI Componant
@@ -110,8 +109,14 @@ const Login = (props) => {
 };
 
 Login.propTypes = {
+
+    //classe css du composant
     classes: PropTypes.object.isRequired,
+
+    //fonction qui permet a l'utilisateur de se connecter
     loginUser: PropTypes.func,
+
+    //token de l'utilisateur en cours
     token: PropTypes.string
 };
 

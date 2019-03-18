@@ -1,14 +1,14 @@
 import React from "react";
 import * as PropTypes from 'prop-types'
-
-import Divider from "@material-ui/core/Divider";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import Drawer from "@material-ui/core/Drawer";
 import Icon from "@material-ui/core/Icon"
+import Divider from "@material-ui/core/Divider";
 import {withStyles} from "@material-ui/core";
+import {Link} from "react-router-dom";
 
 const MenuAppBar = props => {
 
@@ -18,6 +18,7 @@ const MenuAppBar = props => {
         props.logout();
         setOpen(false);
     };
+
 
     return (
         <Drawer
@@ -30,19 +31,30 @@ const MenuAppBar = props => {
                 {/* /!\ IMPORTANT /!\ Permet d'espacer le menu de l'appbar */}
                 <div className={classes.toolbar}/>
 
-                <List>
-                    <ListItem button>
-                        <ListItemText primary={"BlaBla"}/>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary={"BlaBla"}/>
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemText primary={"BlaBla"}/>
-                    </ListItem>
-                </List>
-                <Divider/>
-                {token && (
+                {!token &&
+                <div>
+                    {/** Partie login / create new user **/}
+                    <List>
+                        <Link to={"/login"} className={classes.link}>
+                            <ListItem button>
+                                <ListItemIcon><Icon>lock</Icon></ListItemIcon>
+                                <ListItemText primary={"Login"}/>
+                            </ListItem>
+                        </Link>
+                        <Link to={"/newAccount"} className={classes.link}>
+                            <ListItem button>
+                                <ListItemIcon><Icon>how_to_reg</Icon></ListItemIcon>
+                                <ListItemText primary={"Create Account"}/>
+                            </ListItem>
+                        </Link>
+                    </List>
+                </div>
+                }
+
+                {token &&
+                <div>
+                    {/** Partie Utilisateur **/}
+                    <Divider/>
                     <List>
                         <ListItem button>
                             <ListItemIcon><Icon>account_circle</Icon></ListItemIcon>
@@ -53,7 +65,8 @@ const MenuAppBar = props => {
                             <ListItemText primary={"Logout"}/>
                         </ListItem>
                     </List>
-                )}
+                </div>
+                }
 
             </div>
         </Drawer>
@@ -61,9 +74,17 @@ const MenuAppBar = props => {
 };
 
 MenuAppBar.propTypes = {
+
+    //etat du menu
     open: PropTypes.bool,
+
+    //token de l'utilisateur en cours
     token: PropTypes.string,
+
+    //fonction qui permet de changer l'état du menu
     setOpen: PropTypes.func,
+
+    //fonction qui permet de déconnecter l'utilisateur
     logout: PropTypes.func
 };
 
@@ -74,10 +95,11 @@ export default withStyles((theme) => ({
         width: drawerWidth,
         flexShrink: 0,
     },
-
     drawerPaper: {
         width: drawerWidth,
     },
-
+    link: {
+        textDecoration: 'none'
+    },
     toolbar: theme.mixins.toolbar
 }))(MenuAppBar);

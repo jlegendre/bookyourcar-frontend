@@ -35,13 +35,14 @@ const App = props => {
 
     return (
         <div>
-            <CustomAppBar/>
-            {/* Permet d'espacer le menu de l'appbar */}
-            <div className={classes.toolbar}/>
+
 
             {/** Route de l'application **/}
             <ConnectedRouter history={props.history}>
                 <div>
+                    <CustomAppBar/>
+                    {/* Permet d'espacer le menu de l'appbar */}
+                    <div className={classes.toolbar}/>
                     <Switch>
                         <Route path={"/login"} component={() => <Login/>}/>
                         <Route path={"/newAccount"} component={() => <CreateUser/>}/>

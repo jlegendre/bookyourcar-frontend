@@ -114,8 +114,14 @@ const CreateUser = props => {
 };
 
 CreateUser.propTypes = {
+
+    //classe css du composant
     classes: PropTypes.object,
+
+    //token de l'utilisateur en cours
     token: PropTypes.string,
+
+    //fonction qui permet d'enregistrer un nouveau utilisateur
     registerUser: PropTypes.func
 };
 
