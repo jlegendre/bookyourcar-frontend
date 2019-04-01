@@ -43,8 +43,6 @@ export const fetchRegisterUser = (email, confirmPassword, password) => {
             url: '/Auth/register',
             method: 'POST',
             data: {email, confirmPassword, password}
-        }).then(() => {
-            dispatch(fetchLoginUser(email, password))
         })
     }
 };
