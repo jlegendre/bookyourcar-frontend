@@ -12,7 +12,7 @@ import {Link} from "react-router-dom";
 
 const MenuAppBar = props => {
 
-    const {classes, token, open, setOpen} = props;
+    const {classes, token, open, setOpen, role} = props;
 
     const logout = () => {
         props.logout();
@@ -51,9 +51,22 @@ const MenuAppBar = props => {
                 </div>
                 }
 
+
+                {/** Partie Utilisateur **/}
                 {token &&
                 <div>
-                    {/** Partie Utilisateur **/}
+                    {role && role === 'Admin' &&
+                    <div>
+                        <List>
+                            <Link to={"/validUser"} className={classes.link}>
+                                <ListItem button>
+                                    <ListItemIcon><Icon>how_to_reg</Icon></ListItemIcon>
+                                    <ListItemText primary={"User Validation"}/>
+                                </ListItem>
+                            </Link>
+                        </List>
+                    </div>
+                    }
                     <Divider/>
                     <List>
                         <ListItem button>
@@ -80,6 +93,9 @@ MenuAppBar.propTypes = {
 
     //token de l'utilisateur en cours
     token: PropTypes.string,
+
+    //role de l'utilisateur en cours
+    role: PropTypes.string,
 
     //fonction qui permet de changer l'état du menu
     setOpen: PropTypes.func,

@@ -6,6 +6,7 @@ import {setError, setNoError} from "./error";
 export const SET_USER_USERNAME = 'SET_USER_USERNAME';
 export const SET_USER_TOKEN = 'SET_USER_TOKEN';
 export const SET_USER_EMPTY = 'SET_USER_EMPTY';
+export const SET_USER_ROLE = 'SET_USER_ROLE';
 
 /**
  * Call /Auth/login Url, pour connecter l'utilisateur
@@ -24,6 +25,8 @@ export const fetchLoginUser = (email, password) => {
             dispatch(setToken(response.data.token));
             dispatch(setUsername(email));
             dispatch(setNoError());
+        }).then(() => {
+            dispatch(fetchUserRole())
         }).catch(err => {
             dispatch(setError(err.description));
         })
@@ -47,6 +50,28 @@ export const fetchRegisterUser = (email, confirmPassword, password) => {
     }
 };
 
+/**
+ * Call /User/userRole Url, pour récupérer le role d'un utilisateur connecté
+ *
+ * @return {Function}
+ */
+export const fetchUserRole = () => {
+    return (dispatch, getState) => {
+        let token = getState().user.token;
+
+        axios.request({
+            baseURL: config.backend,
+            url: '/User/userRole',
+            method: 'GET',
+            headers: {'Authorization': `Bearer ${token}`}
+        }).then(response => {
+            dispatch(setUserRole(response.data.role))
+        }).catch(err => {
+            dispatch(setError(err.description))
+        })
+    }
+};
+
 export const setUsername = username => {
     return {type: SET_USER_USERNAME, username}
 };
@@ -59,3 +84,6 @@ export const setUserEmpty = () => {
     return {type: SET_USER_EMPTY}
 };
 
+export const setUserRole = role => {
+    return {type: SET_USER_ROLE, role}
+}

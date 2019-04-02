@@ -22,7 +22,7 @@ const CreateUser = props => {
      * Update email input
      * @param event html event
      */
-    const updateEmail = (event) => {
+    const updateEmail = event => {
         setInput({
             ...input,
             email: event.target.value
@@ -33,7 +33,7 @@ const CreateUser = props => {
      * Update confirm email input
      * @param event html event
      */
-    const updateConfirmPassword = (event) => {
+    const updateConfirmPassword = event => {
         setInput({
             ...input,
             confirmPassword: event.target.value
@@ -44,7 +44,7 @@ const CreateUser = props => {
      * Update password input
      * @param event html event
      */
-    const updatePassword = (event) => {
+    const updatePassword = event => {
         setInput({
             ...input,
             password: event.target.value
@@ -125,7 +125,7 @@ CreateUser.propTypes = {
     registerUser: PropTypes.func
 };
 
-export default withStyles((theme) => ({
+export default withStyles(theme => ({
     main: {
         width: 'auto',
         display: 'block', // Fix IE 11 issue.
