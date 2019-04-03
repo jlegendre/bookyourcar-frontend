@@ -17,6 +17,7 @@ const InputText = (props) => {
 
     const {id, name, placeholder, onChange, type, error} = props;
 
+
     return (
         <FormControl margin={"normal"} fullWidth>
             <TextField

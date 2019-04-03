@@ -28,7 +28,7 @@ export const fetchLoginUser = (email, password) => {
         }).then(() => {
             dispatch(fetchUserRole())
         }).catch(err => {
-            dispatch(setError(err.description));
+            dispatch(setError(err.response.data));
         })
 };
 
@@ -67,7 +67,7 @@ export const fetchUserRole = () => {
         }).then(response => {
             dispatch(setUserRole(response.data.role))
         }).catch(err => {
-            dispatch(setError(err.description))
+            dispatch(setError(err.response.data))
         })
     }
 };
