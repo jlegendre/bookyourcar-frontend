@@ -11,6 +11,7 @@ import Login from "./composant/User/Login/Login.js";
 import CreateUser from './composant/User/CreateUser/CreateUser.js'
 import Acceuil from "./composant/Acceuil/Acceuil.js";
 import ValidUser from "./composant/Admin/ValidUser/ValidUser.js";
+import Message from "./composant/Message/Message.js";
 
 const App = props => {
 
@@ -46,9 +47,9 @@ const App = props => {
      * @return {*} component
      */
     const requireAdminLogin = component => {
-        if(token) {
+        if (token) {
 
-            if(role && role === 'Admin') {
+            if (role && role === 'Admin') {
                 return component;
             } else {
                 console.log("User don't have necessary role, redirect ...");
@@ -68,6 +69,9 @@ const App = props => {
                     <CustomAppBar/>
                     {/* Permet d'espacer le menu de l'appbar */}
                     <div className={classes.toolbar}/>
+
+                    <Message/>
+
                     <Switch>
                         {/* Route générique */}
                         <Route path={"/login"} component={() => <Login/>}/>
@@ -77,7 +81,7 @@ const App = props => {
                         <Route exact path={"/"} component={() => requireUserLogin(<Acceuil/>)}/>
 
                         {/* Route admin */}
-                        <Route path={"/validUser"} component={() => requireAdminLogin(<ValidUser/>)} />
+                        <Route path={"/validUser"} component={() => requireAdminLogin(<ValidUser/>)}/>
 
 
                         <Route component={() => <div>404</div>}/>
@@ -89,6 +93,7 @@ const App = props => {
 };
 
 App.propTypes = {
+    classes: PropTypes.object,
     history: PropTypes.object,
     token: PropTypes.string,
     role: PropTypes.string

@@ -1,13 +1,13 @@
-import {SET_ERROR, SET_NO_ERROR} from "../actions/error";
+import {SET_MESSAGE, SET_NO_MESSAGE} from "../actions/message";
 
 const initialState = {};
 
 
 export default function (state = initialState, action) {
     switch (action.type) {
-        case SET_ERROR:
+        case SET_MESSAGE:
             return action.json;
-        case SET_NO_ERROR:
+        case SET_NO_MESSAGE:
             return initialState;
         default:
             return state
@@ -15,4 +15,4 @@ export default function (state = initialState, action) {
 }
 
 //Retourne les infos de l'utilisateur
-export const getError = (state) => state.error;
+export const getMessage = (state) => state.message;

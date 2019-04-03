@@ -15,7 +15,7 @@ import FormControl from "@material-ui/core/FormControl";
  */
 const InputText = (props) => {
 
-    const {id, name, placeholder, onChange, type, error} = props;
+    const {id, name, placeholder, onChange, type, message} = props;
 
 
     return (
@@ -26,8 +26,8 @@ const InputText = (props) => {
                 placeholder={placeholder}
                 onChange={(event) => onChange && onChange(event)}
                 type={type}
-                error={!!error[name]}
-                helperText={error[name] && error[name][0]}
+                error={message && !!message[name]}
+                helperText={message && message[name] && message[name][0]}
             />
         </FormControl>
     )
@@ -39,7 +39,7 @@ InputText.propTypes = {
     placeholder: PropTypes.string,
     onChange: PropTypes.func,
     type: PropTypes.string,
-    error: PropTypes.object
+    message: PropTypes.object
 };
 
 export default InputText

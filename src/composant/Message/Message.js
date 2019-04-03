@@ -1,4 +1,4 @@
-import InputText from './InputText.jsx'
+import Message from './Message.jsx'
 import {connect} from "react-redux";
 import {getMessage} from "../../redux/reducers/message";
 
@@ -9,4 +9,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(InputText)
+export default connect(mapStateToProps)(Message)

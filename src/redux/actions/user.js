@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import config from './../../config';
-import {setError, setNoError} from "./error";
+import {setMessage, setNoMessage} from "./message";
 
 export const SET_USER_USERNAME = 'SET_USER_USERNAME';
 export const SET_USER_TOKEN = 'SET_USER_TOKEN';
@@ -24,11 +24,11 @@ export const fetchLoginUser = (email, password) => {
         }).then(response => {
             dispatch(setToken(response.data.token));
             dispatch(setUsername(email));
-            dispatch(setNoError());
+            dispatch(setNoMessage());
         }).then(() => {
             dispatch(fetchUserRole())
         }).catch(err => {
-            dispatch(setError(err.response.data));
+            dispatch(setMessage(err.response.data));
         })
 };
 
@@ -67,7 +67,7 @@ export const fetchUserRole = () => {
         }).then(response => {
             dispatch(setUserRole(response.data.role))
         }).catch(err => {
-            dispatch(setError(err.response.data))
+            dispatch(setMessage(err.response.data))
         })
     }
 };
@@ -86,4 +86,4 @@ export const setUserEmpty = () => {
 
 export const setUserRole = role => {
     return {type: SET_USER_ROLE, role}
-}
+};
