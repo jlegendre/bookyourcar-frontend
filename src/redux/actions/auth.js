@@ -46,6 +46,8 @@ export const fetchRegisterUser = (email, confirmPassword, password, name, firstN
             url: '/Auth/register',
             method: 'POST',
             data: {email, confirmPassword, password, name, firstName}
+        }).catch(err => {
+            dispatch(setMessage(err.response.data));
         })
     }
 };
