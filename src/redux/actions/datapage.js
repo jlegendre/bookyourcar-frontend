@@ -53,6 +53,24 @@ export const fetchVehicles = () => {
     }
 };
 
+export const fetchPoles = () => {
+    return (dispatch, getState) => {
+        let token = getState().user.token;
+        axios.request({
+            baseURL: config.backend,
+            url: '/Auth/register',
+            method: 'GET',
+            headers: {'Authorization': `${token}`}
+        }).then(response => {
+            dispatch(clearDatapage());
+            dispatch(setDatapage(response.data));
+            dispatch(setNoMessage());
+        }).catch(err => {
+            dispatch(setMessage(err.response.data));
+        })
+    }
+};
+
 export const clearDatapage = () => {
     return {type: SET_CLEAR_DATAPAGE}
 };
