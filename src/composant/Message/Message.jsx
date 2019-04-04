@@ -24,7 +24,7 @@ const Message = props => {
     const typeMessage = () => {
         if (message) {
             if (message['Error']) {
-                return {type: 'error', message: message['Error'], icon: ErrorIcon}
+                return {type: 'message', message: message['Error'], icon: ErrorIcon}
             } else if (message['Warning']) {
                 return {type: 'warning', message: message['Warning'], icon: WarningIcon}
             } else if (message['Success']) {
@@ -74,7 +74,7 @@ const Message = props => {
 
 Message.propTypes = {
     classes: PropTypes.object,
-    message: PropTypes.object
+    message: PropTypes.any
 };
 
 export default withStyles(theme => ({

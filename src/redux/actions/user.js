@@ -20,7 +20,7 @@ export const fetchLoginUser = (email, password) => {
             baseURL: config.backend,
             url: '/Auth/login',
             method: 'POST',
-            data: {email, password}
+            data: {email, password, remember: true}
         }).then(response => {
             dispatch(setToken(response.data.token));
             dispatch(setUsername(email));
