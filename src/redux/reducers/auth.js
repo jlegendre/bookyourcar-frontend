@@ -1,4 +1,4 @@
-import {SET_USER_EMPTY, SET_USER_ROLE, SET_USER_TOKEN, SET_USER_USERNAME} from "../actions/user";
+import {SET_USER_EMPTY, SET_USER_ROLE, SET_USER_TOKEN, SET_USER_USERNAME} from "../actions/auth";
 
 const initialState = {
     username: undefined,
