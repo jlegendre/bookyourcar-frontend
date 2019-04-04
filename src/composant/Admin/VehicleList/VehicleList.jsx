@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, IconButton,Icon, colors} from "@material-ui/core";
+import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, IconButton,Icon, Typography} from "@material-ui/core";
 
 const VehicleList = props => {
 
@@ -14,8 +14,9 @@ const VehicleList = props => {
     return (
         <div className={classes.main}>
             <CssBaseline/>
+            <Typography variant="h3" gutterBottom>Liste de véhicules</Typography>
             <Paper className={classes.paper}>
-                <Table 	EmailclassName={classes.table}>
+                <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
                             <TableCell>Marque</TableCell>
@@ -25,7 +26,6 @@ const VehicleList = props => {
                             <TableCell>Carburant</TableCell>
                             <TableCell>Nombre de places</TableCell>
                             <TableCell>Emplacement</TableCell>
-                            <TableCell></TableCell>
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
@@ -38,9 +38,8 @@ const VehicleList = props => {
                                 <TableCell>{row.vehRegistration}</TableCell>
                                 <TableCell>{row.vehTypeEssence}</TableCell>
                                 <TableCell>{row.vehNumberplace}</TableCell>
-                                <TableCell>A faire</TableCell>
-                                <TableCell><IconButton><Icon>update</Icon></IconButton></TableCell>
-                                <TableCell><IconButton><Icon>delete</Icon></IconButton></TableCell>
+                                <TableCell>{row.pole}</TableCell>
+                                <TableCell><IconButton><Icon>pageview</Icon></IconButton><div hidden={true}>{row.id}</div></TableCell>
                             </TableRow>
                         )}
                     </TableBody>

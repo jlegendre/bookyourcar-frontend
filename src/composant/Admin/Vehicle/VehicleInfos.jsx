@@ -1,37 +1,44 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@material-ui/core";
+import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, IconButton,Icon, colors} from "@material-ui/core";
 
-const ValidUser = props => {
+const VehicleInfos = props => {
 
-    const {classes, fetchUserInValidation, datapage} = props;
-
-
+    const {classes, fetchVehicleInfos, datapage} = props;
     useEffect(() => {
-        fetchUserInValidation();
+        fetchVehicleInfos();
     }, []);
+
 
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <Typography variant="h3" gutterBottom>Utilisateurs à valider :</Typography>
             <Paper className={classes.paper}>
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Name</TableCell>
-                            <TableCell>First Name</TableCell>
-                            <TableCell>Email</TableCell>
-                            <TableCell>Pole</TableCell>
+                            <TableCell>Marque</TableCell>
+                            <TableCell>Modèle</TableCell>
+                            <TableCell>Couleur</TableCell>
+                            <TableCell>Immatriculation</TableCell>
+                            <TableCell>Carburant</TableCell>
+                            <TableCell>Nombre de places</TableCell>
+                            <TableCell>Emplacement</TableCell>
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {datapage && datapage.map((row, i) =>
                             <TableRow key={i}>
-                                {Object.values(row).map((item , i) =>
-                                    <TableCell key={i}>{item}</TableCell>
-                                )}
+                                <TableCell>{row.vehBrand}</TableCell>
+                                <TableCell>{row.vehModel}</TableCell>
+                                <TableCell>{row.vehColor}</TableCell>
+                                <TableCell>{row.vehRegistration}</TableCell>
+                                <TableCell>{row.vehTypeEssence}</TableCell>
+                                <TableCell>{row.vehNumberplace}</TableCell>
+                                <TableCell>A faire</TableCell>
+                                <TableCell><IconButton><Icon>pageview</Icon></IconButton></TableCell>
                             </TableRow>
                         )}
                     </TableBody>
@@ -41,9 +48,9 @@ const ValidUser = props => {
     )
 };
 
-ValidUser.propTypes = {
+VehicleInfos.propTypes = {
     classes: PropTypes.object,
-    fetchUserInValidation: PropTypes.func,
+    fetchVehicleInfos: PropTypes.func,
     datapage: PropTypes.array
 };
 
@@ -54,9 +61,9 @@ export default withStyles(theme => ({
         marginLeft: theme.spacing.unit * 3,
         marginRight: theme.spacing.unit * 3,
         [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-            width: 1000,
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            width: 'auto',
+            marginLeft: '10%',
+            marginRight: '10%',
         }
     },
     paper: {
@@ -70,12 +77,14 @@ export default withStyles(theme => ({
             padding: 0
         }
     },
+
+
     table: {
         minWidth: 700,
     },
     row: {
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.background.default,
-        }
+        },
     }
-}))(ValidUser);
+}))(VehicleInfos);
