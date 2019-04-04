@@ -1,7 +1,17 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, IconButton,Icon, colors} from "@material-ui/core";
+import {
+    CssBaseline,
+    Icon,
+    IconButton,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow
+} from "@material-ui/core";
 
 const VehicleList = props => {
 
@@ -15,7 +25,7 @@ const VehicleList = props => {
         <div className={classes.main}>
             <CssBaseline/>
             <Paper className={classes.paper}>
-                <Table 	EmailclassName={classes.table}>
+                <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
                             <TableCell>Marque</TableCell>
