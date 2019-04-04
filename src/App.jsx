@@ -10,7 +10,7 @@ import {withStyles} from "@material-ui/core";
 import Login from "./composant/User/Login/Login.js";
 import CreateUser from './composant/User/CreateUser/CreateUser.js'
 import Acceuil from "./composant/Acceuil/Acceuil.js";
-import ValidUser from "./composant/Admin/ValidUser/ValidUser.js";
+import ValidUser from "./composant/Admin/ValidUser/ValidateUser.js";
 import Message from "./composant/Message/Message.js";
 
 const App = props => {

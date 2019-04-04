@@ -5,7 +5,8 @@ import {persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
 import user from './user'
-import error from "./message";
+import message from "./message";
+import datapage from './datapage';
 
 const persistConfig = {
     key: 'auth',
@@ -14,7 +15,8 @@ const persistConfig = {
 
 const rootReducer = (history) => combineReducers({
     user: persistReducer(persistConfig, user),
-    message: error,
+    message,
+    datapage,
     router: connectRouter(history)
 });
 
