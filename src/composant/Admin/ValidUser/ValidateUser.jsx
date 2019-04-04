@@ -1,15 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
 
 const ValidUser = props => {
 
-    const {classes} = props;
+    const {classes, fetchUserInValidation, datapage} = props;
 
-    const data = [
-        {name: "Joe", firstName: "Dupond", email: "joe.dupond@gmail.com", pole: "Nantes"}
-    ];
+
+    useEffect(() => {
+        fetchUserInValidation();
+    }, []);
 
     return (
         <div className={classes.main}>
@@ -25,7 +26,7 @@ const ValidUser = props => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((row, i) =>
+                        {datapage && datapage.map((row, i) =>
                             <TableRow key={i}>
                                 {Object.values(row).map((item , i) =>
                                     <TableCell key={i}>{item}</TableCell>
@@ -40,7 +41,9 @@ const ValidUser = props => {
 };
 
 ValidUser.propTypes = {
-    classes: PropTypes.object
+    classes: PropTypes.object,
+    fetchUserInValidation: PropTypes.func,
+    datapage: PropTypes.array
 };
 
 export default withStyles(theme => ({
