@@ -1,15 +1,15 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, IconButton,Icon, colors} from "@material-ui/core";
 
-const VehiculeList = props => {
+const VehicleList = props => {
 
-    const {classes} = props;
+    const {classes, fetchVehicles, datapage} = props;
+    useEffect(() => {
+        fetchVehicles();
+    }, []);
 
-    const data = [
-        {name: "Joe", firstName: "Dupond", email: "joe.dupond@gmail.com", pole: "Nantes"}
-    ];
 
     return (
         <div className={classes.main}>
@@ -25,15 +25,22 @@ const VehiculeList = props => {
                             <TableCell>Carburant</TableCell>
                             <TableCell>Nombre de places</TableCell>
                             <TableCell>Emplacement</TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {data.map((row, i) =>
+                        {datapage && datapage.map((row, i) =>
                             <TableRow key={i}>
-                                <TableCell>{row.email}</TableCell>
-                                {Object.values(row).map((item , i) =>
-                                    <TableCell key={i}>{item}</TableCell>
-                                )}
+                                <TableCell>{row.vehBrand}</TableCell>
+                                <TableCell>{row.vehModel}</TableCell>
+                                <TableCell>{row.vehColor}</TableCell>
+                                <TableCell>{row.vehRegistration}</TableCell>
+                                <TableCell>{row.vehTypeEssence}</TableCell>
+                                <TableCell>{row.vehNumberplace}</TableCell>
+                                <TableCell>A faire</TableCell>
+                                <TableCell><IconButton><Icon>update</Icon></IconButton></TableCell>
+                                <TableCell><IconButton><Icon>delete</Icon></IconButton></TableCell>
                             </TableRow>
                         )}
                     </TableBody>
@@ -43,8 +50,10 @@ const VehiculeList = props => {
     )
 };
 
-ValidUser.propTypes = {
-    classes: PropTypes.object
+VehicleList.propTypes = {
+    classes: PropTypes.object,
+    fetchVehicles: PropTypes.func,
+    datapage: PropTypes.array
 };
 
 export default withStyles(theme => ({
@@ -54,9 +63,9 @@ export default withStyles(theme => ({
         marginLeft: theme.spacing.unit * 3,
         marginRight: theme.spacing.unit * 3,
         [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-            width: 1000,
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            width: 'auto',
+            marginLeft: '10%',
+            marginRight: '10%',
         }
     },
     paper: {
@@ -70,12 +79,14 @@ export default withStyles(theme => ({
             padding: 0
         }
     },
+
+
     table: {
         minWidth: 700,
     },
     row: {
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.background.default,
-        }
+        },
     }
-}))(ValidUser);
+}))(VehicleList);

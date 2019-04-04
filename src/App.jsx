@@ -12,6 +12,7 @@ import CreateUser from './composant/User/CreateUser/CreateUser.js'
 import Acceuil from "./composant/Acceuil/Acceuil.js";
 import ValidUser from "./composant/Admin/ValidUser/ValidateUser.js";
 import Message from "./composant/Message/Message.js";
+import VehicleList from "./composant/Admin/VehicleList/VehicleList";
 
 const App = props => {
 
@@ -82,6 +83,7 @@ const App = props => {
 
                         {/* Route admin */}
                         <Route path={"/validUser"} component={() => requireAdminLogin(<ValidUser/>)}/>
+                        <Route path={"/vehicleList"} component={() => requireAdminLogin(<VehicleList/>)}/>
 
                         <Route component={() => <div>404</div>}/>
                     </Switch>

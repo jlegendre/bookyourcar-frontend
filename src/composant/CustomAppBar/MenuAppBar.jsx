@@ -61,7 +61,13 @@ const MenuAppBar = props => {
                             <Link to={"/validUser"} className={classes.link}>
                                 <ListItem button>
                                     <ListItemIcon><Icon>how_to_reg</Icon></ListItemIcon>
-                                    <ListItemText primary={"User Validation"}/>
+                                    <ListItemText primary={"Validation d'utilisateurs"}/>
+                                </ListItem>
+                            </Link>
+                            <Link to={"/vehicleList"} className={classes.link}>
+                                <ListItem button>
+                                    <ListItemIcon><Icon>how_to_reg</Icon></ListItemIcon>
+                                    <ListItemText primary={"Liste de véhicules"}/>
                                 </ListItem>
                             </Link>
                         </List>
