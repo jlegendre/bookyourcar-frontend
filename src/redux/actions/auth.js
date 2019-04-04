@@ -20,7 +20,7 @@ export const fetchLoginUser = (email, password) => {
             baseURL: config.backend,
             url: '/Auth/login',
             method: 'POST',
-            data: {email, password, remember: true}
+            data: {email, password, rememberMe: true}
         }).then(response => {
             dispatch(setToken(response.data.token));
             dispatch(setUsername(email));
@@ -57,7 +57,7 @@ export const fetchRegisterUser = (email, confirmPassword, password, name, firstN
  */
 export const fetchUserRole = () => {
     return (dispatch, getState) => {
-        let token = getState().user.token;
+        let token = getState().auth.token;
 
         axios.request({
             baseURL: config.backend,

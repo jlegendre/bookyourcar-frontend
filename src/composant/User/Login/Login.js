@@ -1,7 +1,7 @@
 import Login from './Login.jsx'
 import {connect} from "react-redux";
-import {fetchLoginUser} from "../../../redux/actions/user";
-import {getToken, getUser} from "../../../redux/reducers/user";
+import {fetchLoginUser} from "../../../redux/actions/auth";
+import {getToken, getUser} from "../../../redux/reducers/auth";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)

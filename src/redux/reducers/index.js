@@ -4,7 +4,7 @@ import {connectRouter} from 'connected-react-router'
 import {persistReducer} from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import user from './user'
+import auth from './auth'
 import message from "./message";
 import datapage from './datapage';
 
@@ -14,7 +14,7 @@ const persistConfig = {
 };
 
 const rootReducer = (history) => combineReducers({
-    user: persistReducer(persistConfig, user),
+    auth: persistReducer(persistConfig, auth),
     message,
     datapage,
     router: connectRouter(history)

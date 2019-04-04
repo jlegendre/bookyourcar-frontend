@@ -1,4 +1,4 @@
-import {SET_USER_EMPTY, SET_USER_ROLE, SET_USER_TOKEN, SET_USER_USERNAME} from "../actions/user";
+import {SET_USER_EMPTY, SET_USER_ROLE, SET_USER_TOKEN, SET_USER_USERNAME} from "../actions/auth";
 
 const initialState = {
     username: undefined,
@@ -23,6 +23,6 @@ export default function (state = initialState, action) {
 }
 
 //Retourne les infos de l'utilisateur
-export const getUser = state => state.user;
+export const getUser = state => state.auth;
 export const getToken = state => getUser(state).token;
-export const getRole = state => state.user.role;
+export const getRole = state => state.auth.role;

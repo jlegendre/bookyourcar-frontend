@@ -1,7 +1,21 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
+<<<<<<< HEAD
 import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, IconButton,Icon, Typography} from "@material-ui/core";
+=======
+import {
+    CssBaseline,
+    Icon,
+    IconButton,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow
+} from "@material-ui/core";
+>>>>>>> 49789d0750c49a9861843ed0581da4c2c5fc1214
 
 const VehicleList = props => {
 

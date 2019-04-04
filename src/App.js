@@ -1,6 +1,6 @@
 import App from './App.jsx'
 import {connect} from "react-redux";
-import {getRole, getToken} from "./redux/reducers/user";
+import {getRole, getToken} from "./redux/reducers/auth";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)

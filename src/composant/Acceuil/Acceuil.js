@@ -1,6 +1,6 @@
 import Acceuil from './Acceuil.jsx'
 import {connect} from "react-redux";
-import {getUser} from "../../redux/reducers/user";
+import {getUser} from "../../redux/reducers/auth";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
