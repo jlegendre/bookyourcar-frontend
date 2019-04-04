@@ -25,8 +25,8 @@ const VehicleList = props => {
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <Typography variant="h3" gutterBottom>Liste de véhicules</Typography>
             <Paper className={classes.paper}>
+                <Typography variant="h4" gutterBottom>Liste de véhicules</Typography>
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>

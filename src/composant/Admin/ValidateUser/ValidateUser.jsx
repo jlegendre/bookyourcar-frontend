@@ -34,8 +34,8 @@ const ValidateUser = props => {
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <Typography variant="h3" gutterBottom>Utilisateurs à valider :</Typography>
             <Paper className={classes.paper}>
+                <Typography variant="h5" gutterBottom>Utilisateurs à valider </Typography>
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
