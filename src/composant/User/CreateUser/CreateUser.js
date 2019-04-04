@@ -7,7 +7,7 @@ import {getToken} from "../../../redux/reducers/user";
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = (dispatch) => {
     return {
-        registerUser : (input) => dispatch(fetchRegisterUser(input.email, input.confirmPassword, input.password))
+        registerUser : (input) => dispatch(fetchRegisterUser(input.email, input.confirmPassword, input.password, input.name, input.firstName))
     }
 };
 
