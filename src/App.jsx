@@ -83,7 +83,6 @@ const App = props => {
                         {/* Route admin */}
                         <Route path={"/validUser"} component={() => requireAdminLogin(<ValidUser/>)}/>
 
-
                         <Route component={() => <div>404</div>}/>
                     </Switch>
                 </div>
