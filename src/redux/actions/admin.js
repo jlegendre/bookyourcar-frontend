@@ -13,9 +13,10 @@ export const fetchValidateUser = id => {
         let token = getState().auth.token;
         axios.request({
             baseURL: config.backend,
-            url: `/User/ValidateUserInWaiting/${id}`,
+            url: `/User/ValidateUserInWaiting`,
             method: 'POST',
-            headers: {'Authorization': `${token}`}
+            headers: {'Authorization': `${token}`, "Content-Type": "text/plain"},
+            data: id
         }).catch(err => {
             dispatch(setMessage(err.response.data));
         })
