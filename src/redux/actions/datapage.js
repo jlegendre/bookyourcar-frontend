@@ -13,7 +13,7 @@ export const SET_CLEAR_DATAPAGE = 'SET_CLEAR_DATAPAGE';
 export const fetchUserInValidation = () => {
     return (dispatch, getState) => {
 
-        let token = getState().user.token;
+        let token = getState().auth.token;
         axios.request({
             baseURL: config.backend,
             url: '/User/userInWaiting',
@@ -37,7 +37,7 @@ export const fetchUserInValidation = () => {
 export const fetchVehicles = () => {
     return (dispatch, getState) => {
 
-        let token = getState().user.token;
+        let token = getState().auth.token;
         axios.request({
             baseURL: config.backend,
             url: '/Vehicle',

@@ -57,7 +57,7 @@ export const fetchRegisterUser = (email, confirmPassword, password, name, firstN
  */
 export const fetchUserRole = () => {
     return (dispatch, getState) => {
-        let token = getState().user.token;
+        let token = getState().auth.token;
 
         axios.request({
             baseURL: config.backend,
