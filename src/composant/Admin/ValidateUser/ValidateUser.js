@@ -2,12 +2,14 @@ import ValidUser from "./ValidateUser.jsx";
 import {connect} from "react-redux";
 import {fetchUserInValidation} from "../../../redux/actions/datapage";
 import {getDataPage} from "../../../redux/reducers/datapage";
+import {fetchValidateUser} from "../../../redux/actions/admin";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUserInValidation : () => dispatch(fetchUserInValidation())
+        fetchUserInValidation : () => dispatch(fetchUserInValidation()),
+        fetchValidateUser : id => dispatch(fetchValidateUser(id))
     }
 };
 

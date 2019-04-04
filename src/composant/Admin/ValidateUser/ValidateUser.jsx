@@ -7,7 +7,7 @@ import CheckIcon from '@material-ui/icons/Check'
 
 const ValidateUser = props => {
 
-    const {classes, fetchUserInValidation, datapage} = props;
+    const {classes, fetchUserInValidation, datapage, fetchValidateUser} = props;
 
 
     useEffect(() => {
@@ -20,7 +20,8 @@ const ValidateUser = props => {
      * @param id identifiant de l'utilisateur
      */
     const acceptUser = id => {
-
+        fetchValidateUser(id);
+        fetchUserInValidation();
     };
 
     /**
@@ -52,7 +53,7 @@ const ValidateUser = props => {
                                 <TableCell>{row.userName}</TableCell>
                                 <TableCell>{row.userFirstname}</TableCell>
                                 <TableCell>{row.userEmail}</TableCell>
-                                <TableCell>{row.userPole} ?? a remonté du back</TableCell>
+                                <TableCell>{row.userPole} TODO</TableCell>
                                 <TableCell>
                                     <IconButton onClick={() => acceptUser(row.userId)}>
                                         <CheckIcon/>
@@ -75,7 +76,8 @@ const ValidateUser = props => {
 ValidateUser.propTypes = {
     classes: PropTypes.object,
     fetchUserInValidation: PropTypes.func,
-    datapage: PropTypes.array
+    datapage: PropTypes.array,
+    fetchValidateUser: PropTypes.func
 };
 
 export default withStyles(theme => ({
