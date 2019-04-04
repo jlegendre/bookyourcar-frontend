@@ -16,40 +16,19 @@ const CreateUser = props => {
 
     const {classes, registerUser, token} = props;
 
-    const [input, setInput] = useState({email: "", confirmPassword: "", password: ""});
+    const [input, setInput] = useState({email: "", confirmPassword: "", password: "", name: "", firstName: ""});
 
     /**
-     * Update email input
-     * @param event html event
+     * @Input event: données de l'input
+     * @Input type: donnée concernée par l'input
+     * @type {Function}
      */
-    const updateEmail = event => {
+    const updateForm = ((event, type) => {
         setInput({
             ...input,
-            email: event.target.value
+            [type]: event.target.value
         })
-    };
-
-    /**
-     * Update confirm email input
-     * @param event html event
-     */
-    const updateConfirmPassword = event => {
-        setInput({
-            ...input,
-            confirmPassword: event.target.value
-        })
-    };
-
-    /**
-     * Update password input
-     * @param event html event
-     */
-    const updatePassword = event => {
-        setInput({
-            ...input,
-            password: event.target.value
-        })
-    };
+    });
 
     const fetchCreateUser = () => {
         registerUser(input);
@@ -72,25 +51,37 @@ const CreateUser = props => {
                 </Typography>
                 <div className={classes.form}>
                     <InputText
+                        name={"Prenom"}
+                        id={"prenom"}
+                        placeholder={"Prénom"}
+                        type={"text"}
+                        onChange={(event) => updateForm(event, 'firstName')}
+                    /><InputText
+                        id={"nom"}
+                        name={"Nom"}
+                        placeholder={"Nom"}
+                        type={"text"}
+                        onChange={(event) => updateForm(event, 'name')}
+                    /><InputText
                         id={"email"}
                         name={"Email"}
                         placeholder={"Email"}
                         type={"email"}
-                        onChange={(event) => updateEmail(event)}
+                        onChange={(event) => updateForm(event, 'email')}
                     />
                     <InputText
                         id={"password"}
                         name={"Password"}
                         placeholder={"Password"}
                         type={"password"}
-                        onChange={(event) => updatePassword(event)}
+                        onChange={(event) => updateForm(event, 'password')}
                     />
                     <InputText
                         id={"confirmPassword"}
                         name={"ConfirmPassword"}
                         placeholder={"Confirm Password"}
                         type={"password"}
-                        onChange={(event) => updateConfirmPassword(event)}
+                        onChange={(event) => updateForm(event, 'confirmPassword')}
                     />
                     <Typography>
                         <Link className={classes.link} to={"/login"}>
