@@ -39,13 +39,13 @@ export const fetchLoginUser = (email, password) => {
  * @param password le mot de passe
  * @returns {Function}
  */
-export const fetchRegisterUser = (email, confirmPassword, password) => {
+export const fetchRegisterUser = (email, confirmPassword, password, name, firstName) => {
     return dispatch => {
         axios.request({
             baseURL: config.backend,
             url: '/Auth/register',
             method: 'POST',
-            data: {email, confirmPassword, password}
+            data: {email, confirmPassword, password, name, firstName}
         })
     }
 };
