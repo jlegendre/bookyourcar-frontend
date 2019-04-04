@@ -31,7 +31,31 @@ export const fetchUserInValidation = () => {
 
 
 /**
- * Call /Vehicule Url, pour récupérer tous les véhicules disponibles
+ * Call /Vehicle/{i} Url, pour récupérer toutes les informations sur un vehicule donné
+ * @returns {Function}
+ */
+export const fetchVehicleInfos = () => {
+    return (dispatch, getState) => {
+
+        let token = getState().user.token;
+        axios.request({
+            baseURL: config.backend,
+            url: '/Vehicle',
+            method: 'GET',
+            headers: {'Authorization': `${token}`}
+        }).then(response => {
+            dispatch(setDatapage(response.data));
+            dispatch(setNoMessage());
+        }).catch(err => {
+            console.log(err.response);
+            dispatch(setMessage(err.response.data));
+        })
+    }
+};
+
+
+/**
+ * Call /Vehicle Url, pour récupérer tous les véhicules disponibles
  * @returns {Function}
  */
 export const fetchVehicles = () => {
@@ -48,6 +72,7 @@ export const fetchVehicles = () => {
             dispatch(setDatapage(response.data));
             dispatch(setNoMessage());
         }).catch(err => {
+            console.log(err.response);
             dispatch(setMessage(err.response.data));
         })
     }

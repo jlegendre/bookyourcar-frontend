@@ -1,31 +1,19 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {
-    CssBaseline,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    IconButton,
-    Icon,
-    Typography
-} from "@material-ui/core";
+import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, IconButton,Icon, colors} from "@material-ui/core";
 
-const VehicleList = props => {
+const VehicleInfos = props => {
 
-    const {classes, fetchVehicles, datapage} = props;
+    const {classes, fetchVehicleInfos, datapage} = props;
     useEffect(() => {
-        fetchVehicles();
+        fetchVehicleInfos();
     }, []);
 
 
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <Typography variant="h3" gutterBottom>Liste de véhicules</Typography>
             <Paper className={classes.paper}>
                 <Table className={classes.table}>
                     <TableHead>
@@ -49,10 +37,8 @@ const VehicleList = props => {
                                 <TableCell>{row.vehRegistration}</TableCell>
                                 <TableCell>{row.vehTypeEssence}</TableCell>
                                 <TableCell>{row.vehNumberplace}</TableCell>
-                                <TableCell>{row.pole}</TableCell>
-                                <TableCell><IconButton><Icon>pageview</Icon></IconButton>
-                                    <div hidden={true}>{row.id}</div>
-                                </TableCell>
+                                <TableCell>A faire</TableCell>
+                                <TableCell><IconButton><Icon>pageview</Icon></IconButton></TableCell>
                             </TableRow>
                         )}
                     </TableBody>
@@ -62,9 +48,9 @@ const VehicleList = props => {
     )
 };
 
-VehicleList.propTypes = {
+VehicleInfos.propTypes = {
     classes: PropTypes.object,
-    fetchVehicles: PropTypes.func,
+    fetchVehicleInfos: PropTypes.func,
     datapage: PropTypes.array
 };
 
@@ -101,4 +87,4 @@ export default withStyles(theme => ({
             backgroundColor: theme.palette.background.default,
         },
     }
-}))(VehicleList);
+}))(VehicleInfos);
