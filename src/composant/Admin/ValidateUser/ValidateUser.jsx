@@ -1,13 +1,9 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-<<<<<<< HEAD:src/composant/Admin/ValidUser/ValidateUser.jsx
-import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@material-ui/core";
-=======
-import {CssBaseline, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import {CssBaseline, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check'
->>>>>>> 49789d0750c49a9861843ed0581da4c2c5fc1214:src/composant/Admin/ValidateUser/ValidateUser.jsx
 
 const ValidateUser = props => {
 
