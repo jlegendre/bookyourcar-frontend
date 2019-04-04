@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {CssBaseline, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import {CssBaseline, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check'
 
@@ -34,6 +34,7 @@ const ValidateUser = props => {
     return (
         <div className={classes.main}>
             <CssBaseline/>
+            <Typography variant="h3" gutterBottom>Utilisateurs à valider :</Typography>
             <Paper className={classes.paper}>
                 <Table className={classes.table}>
                     <TableHead>

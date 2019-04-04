@@ -66,7 +66,7 @@ const MenuAppBar = props => {
                             </Link>
                             <Link to={"/vehicleList"} className={classes.link}>
                                 <ListItem button>
-                                    <ListItemIcon><Icon>how_to_reg</Icon></ListItemIcon>
+                                    <ListItemIcon><Icon>directions_car</Icon></ListItemIcon>
                                     <ListItemText primary={"Liste de véhicules"}/>
                                 </ListItem>
                             </Link>
