@@ -2,13 +2,9 @@ import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
-    CssBaseline,
-    Paper,
-    IconButton,
     Icon,
-    colors
+    Paper,
 } from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/es/TextField/TextField";
 import Grid from "@material-ui/core/Grid";
@@ -27,14 +23,16 @@ const VehicleInfos = props => {
             <Paper className={classes.paper}>
                 <Grid direction={"column"}>
                     <Grid direction={"row"}>
-                        <p>PHOTO</p>
-                        <Grid direction={"column"}>
+                        <Icon fontSize={"large"}>directions_car</Icon>
+                        <Grid id="plop" direction={"column"}>
                             <Grid direction={"row"}>
                                 <TextField label={datapage.vehBrand}/>
                                 <TextField label={datapage.vehModel}/>
                             </Grid>
-                            <TextField label={datapage.vehRegistration}/>
-                            <TextField label={datapage.vehColor}/>
+                            <Grid direction={"column"}>
+                                <TextField label={datapage.vehRegistration}/>
+                                <TextField label={datapage.vehColor}/>
+                            </Grid>
                         </Grid>
                     </Grid>
                     <TextField label={datapage.vehNumberplace}/>
