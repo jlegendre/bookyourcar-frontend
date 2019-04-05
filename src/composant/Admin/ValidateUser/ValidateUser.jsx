@@ -1,13 +1,23 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {CssBaseline, IconButton, Paper, Table, TableBody, TableCell, TableHead, TableRow, Typography} from "@material-ui/core";
+import {
+    CssBaseline,
+    IconButton,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Typography
+} from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check'
 
 const ValidateUser = props => {
 
-    const {classes, fetchUserInValidation, datapage} = props;
+    const {classes, fetchUserInValidation, datapage, fetchValidateUser, fetchDeleteUser} = props;
 
 
     useEffect(() => {
@@ -20,7 +30,7 @@ const ValidateUser = props => {
      * @param id identifiant de l'utilisateur
      */
     const acceptUser = id => {
-
+        fetchValidateUser(id);
     };
 
     /**
@@ -28,14 +38,14 @@ const ValidateUser = props => {
      * @param id identifiant de l'utilisateur
      */
     const refuseUser = id => {
-
+        fetchDeleteUser(id);
     };
 
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <Typography variant="h3" gutterBottom>Utilisateurs à valider :</Typography>
             <Paper className={classes.paper}>
+                <Typography variant="h5" gutterBottom>Utilisateurs à valider </Typography>
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
@@ -43,6 +53,7 @@ const ValidateUser = props => {
                             <TableCell>First Name</TableCell>
                             <TableCell>Email</TableCell>
                             <TableCell>Pole</TableCell>
+                            <TableCell/>
                             <TableCell/>
                         </TableRow>
                     </TableHead>
@@ -52,7 +63,7 @@ const ValidateUser = props => {
                                 <TableCell>{row.userName}</TableCell>
                                 <TableCell>{row.userFirstname}</TableCell>
                                 <TableCell>{row.userEmail}</TableCell>
-                                <TableCell>{row.userPole} ?? a remonté du back</TableCell>
+                                <TableCell>{row.userPole} TODO</TableCell>
                                 <TableCell>
                                     <IconButton onClick={() => acceptUser(row.userId)}>
                                         <CheckIcon/>
@@ -75,7 +86,9 @@ const ValidateUser = props => {
 ValidateUser.propTypes = {
     classes: PropTypes.object,
     fetchUserInValidation: PropTypes.func,
-    datapage: PropTypes.array
+    datapage: PropTypes.array,
+    fetchValidateUser: PropTypes.func,
+    fetchDeleteUser: PropTypes.func
 };
 
 export default withStyles(theme => ({

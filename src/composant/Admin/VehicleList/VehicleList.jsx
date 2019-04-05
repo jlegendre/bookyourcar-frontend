@@ -21,12 +21,18 @@ const VehicleList = props => {
         fetchVehicles();
     }, []);
 
+    /**
+     * Redirige vers la page d'infos du vehicule selectionné
+     * @param id identifiant du vehicule
+     */
+    const navigateToVehicleInfos = id => {
+    };
 
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <Typography variant="h3" gutterBottom>Liste de véhicules</Typography>
             <Paper className={classes.paper}>
+                <Typography variant="h4" gutterBottom>Liste de véhicules</Typography>
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
@@ -50,8 +56,9 @@ const VehicleList = props => {
                                 <TableCell>{row.vehTypeEssence}</TableCell>
                                 <TableCell>{row.vehNumberplace}</TableCell>
                                 <TableCell>{row.pole}</TableCell>
-                                <TableCell><IconButton><Icon>pageview</Icon></IconButton>
-                                    <div hidden={true}>{row.id}</div>
+                                <TableCell><IconButton onClick={() => navigateToVehicleInfos(row.vehId)}>
+                                    <Icon>pageview</Icon>
+                                </IconButton>
                                 </TableCell>
                             </TableRow>
                         )}

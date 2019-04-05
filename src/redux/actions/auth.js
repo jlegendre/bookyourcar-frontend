@@ -32,25 +32,22 @@ export const fetchLoginUser = (email, password) => {
         })
 };
 
-
 /**
  * Call /Auth/register Url, pour enregistrer un nouveau utilisateur
- * @param name prénom de l'utilisateur
- * @param firstName nom de l'utilisateur
- * @param pole pole de l'utilisateur
- * @param phoneNumber numéro de tel de l'utilisateur
  * @param email email de l'utilisateur
  * @param confirmPassword le mot de passe
  * @param password le mot de passe
  * @returns {Function}
  */
-export const fetchRegisterUser = (email, confirmPassword, password, name, firstName, pole, phoneNumber) => {
+export const fetchRegisterUser = (email, confirmPassword, password, name, firstName) => {
     return dispatch => {
         axios.request({
             baseURL: config.backend,
             url: '/Auth/register',
             method: 'POST',
-            data: {email, confirmPassword, password, name, firstName, pole, phoneNumber}
+            data: {email, confirmPassword, password, name, firstName}
+        }).catch(err => {
+            dispatch(setMessage(err.response.data));
         })
     }
 };

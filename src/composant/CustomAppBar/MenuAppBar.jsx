@@ -77,11 +77,11 @@ const MenuAppBar = props => {
                     <List>
                         <ListItem button>
                             <ListItemIcon><Icon>account_circle</Icon></ListItemIcon>
-                            <ListItemText primary={"Account"}/>
+                            <ListItemText primary={"Compte"}/>
                         </ListItem>
                         <ListItem button onClick={() => logout()}>
                             <ListItemIcon><Icon>exit_to_app</Icon></ListItemIcon>
-                            <ListItemText primary={"Logout"}/>
+                            <ListItemText primary={"Deconnexion"}/>
                         </ListItem>
                     </List>
                 </div>

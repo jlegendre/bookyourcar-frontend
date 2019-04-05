@@ -51,7 +51,7 @@ const CreateUser = props => {
                     <HowToRegOutlinedIcon/>
                 </Avatar>
                 <Typography component={"h1"} variant={"h5"}>
-                    Register
+                    Inscription
                 </Typography>
                 <div className={classes.form}>
                     <InputText
@@ -92,20 +92,20 @@ const CreateUser = props => {
                     <InputText
                         id={"password"}
                         name={"Password"}
-                        placeholder={"Password"}
+                        placeholder={"Mot de passe"}
                         type={"password"}
                         onChange={(event) => updateForm(event, 'password')}
                     />
                     <InputText
                         id={"confirmPassword"}
                         name={"ConfirmPassword"}
-                        placeholder={"Confirm Password"}
+                        placeholder={"Confirmation du mot de passe"}
                         type={"password"}
                         onChange={(event) => updateForm(event, 'confirmPassword')}
                     />
                     <Typography>
                         <Link className={classes.link} to={"/login"}>
-                            Already have an account ?
+                            Déjà un compte ?
                         </Link>
                     </Typography>
                     <Button
@@ -116,7 +116,7 @@ const CreateUser = props => {
                         className={classes.submit}
                         onClick={() => fetchCreateUser()}
                     >
-                        Create account
+                        Créer un compte
                     </Button>
                 </div>
             </Paper>
