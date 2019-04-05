@@ -2,8 +2,12 @@ import httpClient from './../../utils/httpClient';
 import {setNoMessage} from "./message";
 
 export const SET_DATAPAGE_USERINWAITING = 'SET_DATAPAGE_USERINWAITING';
+
 export const SET_DATAPAGE_LISTVEHICLE = 'SET_DATAPAGE_LISTVEHICLE';
 export const SET_DATAPAGE_DETAILVEHICLE = 'SET_DATAPAGE_DETAILVEHICLE';
+
+export const SET_DATAPAGE_LISTPOLES = 'SET_DATAPAGE_LISTPOLES';
+export const SET_DATAPAGE_DETAILPOLE = 'SET_DATAPAGE_DETAILPOLE';
 
 /**
  * Call /User/userInWaiting Url, pour récupérer tous les utilisateurs en attente de validation
@@ -21,7 +25,6 @@ export const fetchUserInValidation = () => {
     }
 };
 
-
 /**
  * Call /Vehicle/{i} Url, pour récupérer toutes les informations sur un vehicule donné
  * @returns {Function}
@@ -33,6 +36,38 @@ export const fetchVehicleInfos = id => {
             method: 'GET',
         }).then(response => {
            dispatch(setDetailVehicle(response.data));
+            dispatch(setNoMessage());
+        })
+    }
+};
+
+/**
+ * Call /Pole Url, pour récupérer tous les poles disponibles
+ * @returns {Function}
+ */
+export const fetchPoles = () => {
+    return dispatch => {
+        httpClient.request({
+            url: '/Pole',
+            method: 'GET',
+        }).then(response => {
+            dispatch(setListPoles(response.data));
+            dispatch(setNoMessage());
+        })
+    }
+};
+
+/**
+ * Call /Pole/{i} Url, pour récupérer toutes les informations sur un pole donné
+ * @returns {Function}
+ */
+export const fetchPoleInfos = () => {
+    return dispatch => {
+        httpClient.request({
+            url: '/Pole',
+            method: 'GET',
+        }).then(response => {
+            dispatch(setDetailPole(response.data));
             dispatch(setNoMessage());
         })
     }
@@ -54,49 +89,11 @@ export const fetchVehicles = () => {
     }
 };
 
+
+
+
 export const setUserInWaiting = users => {
     return {type: SET_DATAPAGE_USERINWAITING, users}
-/**
- * Call /Pole Url, pour récupérer tous les poles disponibles
- * @returns {Function}
- */
-export const fetchPoles = () => {
-    return (dispatch, getState) => {
-
-        let token = getState().auth.token;
-        httpClient.request({
-            url: '/Pole',
-            method: 'GET',
-            headers: { 'Authorization': `${token}` }
-        }).then(response => {
-            dispatch(clearDatapage());
-            dispatch(setDatapage(response.data));
-            dispatch(setNoMessage());
-        })
-    }
-};
-
-/**
- * Call /Pole/{i} Url, pour récupérer toutes les informations sur un pole donné
- * @returns {Function}
- */
-export const fetchPoleInfos = () => {
-    return (dispatch, getState) => {
-
-        let token = getState().user.token;
-        httpClient.request({
-            url: '/Pole',
-            method: 'GET',
-            headers: { 'Authorization': `${token}` }
-        }).then(response => {
-            dispatch(setDatapage(response.data));
-            dispatch(setNoMessage());
-        })
-    }
-};
-
-export const clearDatapage = () => {
-    return {type: SET_CLEAR_DATAPAGE}
 };
 
 export const setListVehicle = vehicles => {
@@ -106,3 +103,11 @@ export const setListVehicle = vehicles => {
 export const setDetailVehicle = detailVehicle => {
     return {type: SET_DATAPAGE_DETAILVEHICLE, detailVehicle}
 };
+
+export const setListPoles = poles => {
+    return {type: SET_DATAPAGE_LISTPOLES, poles}
+};
+
+export const setDetailPole = detailPole => {
+    return {type: SET_DATAPAGE_DETAILPOLE, detailPole}
+}

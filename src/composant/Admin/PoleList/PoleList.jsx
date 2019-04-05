@@ -16,13 +16,13 @@ import {
 
 const PoleList = props => {
 
-    const { classes, fetchPoles, datapage } = props;
+    const { classes, fetchPoles, listPoles } = props;
     useEffect(() => {
         fetchPoles();
     }, []);
 
     /**
-     * Redirige vers la page d'infos du pole selectionné
+     * Redirige vers la page d'infos du pole selectionnï¿½
      * @param id identifiant du pole
      */
     const navigateToPoleInfos = id => {
@@ -43,7 +43,7 @@ const PoleList = props => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {datapage && datapage.map((row, i) =>
+                        {listPoles && listPoles.map((row, i) =>
                             <TableRow key={i}>
                                 <TableCell>{row.poleName}</TableCell>
                                 <TableCell>{row.poleAddress}</TableCell>
@@ -65,7 +65,7 @@ const PoleList = props => {
 PoleList.propTypes = {
     classes: PropTypes.object,
     fetchVehicles: PropTypes.func,
-    datapage: PropTypes.array
+    listPoles: PropTypes.array
 };
 
 export default withStyles(theme => ({

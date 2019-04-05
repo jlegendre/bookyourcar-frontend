@@ -1,29 +1,29 @@
-import React, { useEffect } from 'react';
+import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
     CssBaseline,
+    Icon,
+    IconButton,
     Paper,
     Table,
     TableBody,
     TableCell,
     TableHead,
     TableRow,
-    IconButton,
-    Icon,
     Typography
 } from "@material-ui/core";
 
 const PoleInfos = props => {
 
-    const { classes, fetchPolesInfoq, datapage } = props;
+    const {classes, fetchPolesInfoq, datapage} = props;
     useEffect(() => {
         fetchPolesInfos();
     }, []);
 
     return (
         <div className={classes.main}>
-            <CssBaseline />
+            <CssBaseline/>
             <Paper className={classes.paper}>
                 <Typography variant="h4" gutterBottom>Liste des Poles</Typography>
                 <Table className={classes.table}>
@@ -94,4 +94,4 @@ export default withStyles(theme => ({
             backgroundColor: theme.palette.background.default,
         },
     }
-}))(PoleList);
+}))(PoleInfos);

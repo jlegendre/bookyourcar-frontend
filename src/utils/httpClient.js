@@ -49,12 +49,14 @@ const handleError = error => {
 //Interceptions des erreurs, pour envoyer les erreurs automatiquements
 httpClient.interceptors.response.use(handleSuccess, handleError);
 
-httpClient.interceptors.request.use(request => {
-    if(store && store.auth && store.auth.token) {
-        request.headers = {...request.headers, 'Authorization' : store.auth.token}
-    }
+//envoie le token automatiquement si il est présent
+httpClient.interceptors.request.use(
+    request => {
+        if (store && store.getState().auth && store.getState().auth.token) {
+            request.headers.Authorization = store.getState().auth.token
+        }
 
-    return request;
-});
+        return request;
+    });
 
 export default httpClient;

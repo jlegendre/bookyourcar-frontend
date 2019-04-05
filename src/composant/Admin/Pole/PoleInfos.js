@@ -1,7 +1,6 @@
 import PoleInfos from "./PoleInfos.jsx";
-import { connect } from "react-redux";
-import { fetchVehicleInfos } from "../../../redux/actions/datapage";
-import { getDataPage } from "../../../redux/reducers/datapage";
+import {connect} from "react-redux";
+import {getDataPage} from "../../../redux/reducers/datapage";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)

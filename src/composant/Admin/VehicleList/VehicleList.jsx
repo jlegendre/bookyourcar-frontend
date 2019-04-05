@@ -17,7 +17,7 @@ import {Link} from "react-router-dom";
 
 const VehicleList = props => {
 
-    const {classes, fetchVehicles, datapage} = props;
+    const {classes, fetchVehicles, listVehicle} = props;
     useEffect(() => {
         fetchVehicles();
     }, []);
@@ -42,7 +42,7 @@ const VehicleList = props => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {datapage && datapage.map((row, i) =>
+                        {listVehicle && listVehicle.map((row, i) =>
                             <TableRow key={i}>
                                 <TableCell>{row.vehBrand}</TableCell>
                                 <TableCell>{row.vehModel}</TableCell>
@@ -70,7 +70,7 @@ const VehicleList = props => {
 VehicleList.propTypes = {
     classes: PropTypes.object,
     fetchVehicles: PropTypes.func,
-    datapage: PropTypes.array
+    listVehicle: PropTypes.array
 };
 
 export default withStyles(theme => ({
