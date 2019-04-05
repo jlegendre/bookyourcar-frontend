@@ -13,7 +13,8 @@ import MenuAppBar from "./MenuAppBar.js";
  */
 const CustomAppBar = (props) => {
 
-    const {classes} = props;
+    const {classes,  token} = props;
+    console.log('props', props)
 
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -21,11 +22,15 @@ const CustomAppBar = (props) => {
         setMenuOpen(!menuOpen);
     };
 
+    const showMenu = () => {
+
+    }
+
     return (
         <div className={classes.root}>
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
-                    <IconButton color={"inherit"} onClick={() => handleMenuOpen()}>
+                    <IconButton style={{display :token? 'block' : 'none'}} color={"inherit"} onClick={() => handleMenuOpen()}>
                         <Icon>menu</Icon>
                     </IconButton>
                     <Typography variant="h6" color="inherit" noWrap>
@@ -47,5 +52,5 @@ export default withStyles((theme) => ({
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1
-    }
+    },
 }))(CustomAppBar);
