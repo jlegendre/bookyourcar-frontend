@@ -27,34 +27,13 @@ const MenuAppBar = props => {
             className={classes.drawer}
             classes={{paper: classes.drawerPaper}}
         >
-            <div>
-                {/* /!\ IMPORTANT /!\ Permet d'espacer le menu de l'appbar */}
-                <div className={classes.toolbar}/>
-
-                {!token &&
-                <div>
-                    {/** Partie login / create new user **/}
-                    <List>
-                        <Link to={"/login"} className={classes.link}>
-                            <ListItem button>
-                                <ListItemIcon><Icon>lock</Icon></ListItemIcon>
-                                <ListItemText primary={"Login"}/>
-                            </ListItem>
-                        </Link>
-                        <Link to={"/newAccount"} className={classes.link}>
-                            <ListItem button>
-                                <ListItemIcon><Icon>how_to_reg</Icon></ListItemIcon>
-                                <ListItemText primary={"Create Account"}/>
-                            </ListItem>
-                        </Link>
-                    </List>
-                </div>
-                }
-
-
                 {/** Partie Utilisateur **/}
                 {token &&
                 <div>
+                    {/* /!\ IMPORTANT /!\ Permet d'espacer le menu de l'appbar */}
+                    <div className={classes.toolbar}/>
+
+                    <div>
                     {role && role === 'Admin' &&
                     <div>
                         <List>
@@ -91,9 +70,8 @@ const MenuAppBar = props => {
                         </ListItem>
                     </List>
                 </div>
-                }
-
             </div>
+                }
         </Drawer>
     )
 };

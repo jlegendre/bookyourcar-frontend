@@ -1,48 +1,49 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, IconButton,Icon, colors} from "@material-ui/core";
+import {Paper} from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/es/TextField/TextField";
+import Grid from "@material-ui/core/Grid";
 
 const VehicleInfos = props => {
 
-    const {classes, fetchVehicleInfos, datapage} = props;
+    const {classes, fetchVehicleInfos, detailVehicle, match} = props;
+
     useEffect(() => {
-        fetchVehicleInfos();
+        console.log(match)
+        fetchVehicleInfos(match.params.vehId);
     }, []);
 
-
     return (
-        <div className={classes.main}>
-            <CssBaseline/>
+        <div>
             <Paper className={classes.paper}>
-                <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Marque</TableCell>
-                            <TableCell>Modèle</TableCell>
-                            <TableCell>Couleur</TableCell>
-                            <TableCell>Immatriculation</TableCell>
-                            <TableCell>Carburant</TableCell>
-                            <TableCell>Nombre de places</TableCell>
-                            <TableCell>Emplacement</TableCell>
-                            <TableCell></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {datapage && datapage.map((row, i) =>
-                            <TableRow key={i}>
-                                <TableCell>{row.vehBrand}</TableCell>
-                                <TableCell>{row.vehModel}</TableCell>
-                                <TableCell>{row.vehColor}</TableCell>
-                                <TableCell>{row.vehRegistration}</TableCell>
-                                <TableCell>{row.vehTypeEssence}</TableCell>
-                                <TableCell>{row.vehNumberplace}</TableCell>
-                                <TableCell>A faire</TableCell>
-                                <TableCell><IconButton><Icon>pageview</Icon></IconButton></TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
+                <Grid direction={"column"}>
+                    <Grid direction={"row"}>
+                        <p>PHOTO</p>
+                        <Grid direction={"column"}>
+                            <Grid direction={"row"}>
+                                <TextField label={detailVehicle.vehBrand}/>
+                                <TextField label={detailVehicle.vehModel}/>
+                            </Grid>
+                            <TextField label={detailVehicle.vehRegistration}/>
+                            <TextField label={detailVehicle.vehColor}/>
+                        </Grid>
+                    </Grid>
+                    <TextField label={detailVehicle.vehNumberplace}/>
+                    <TextField label={detailVehicle.vehTypeEssence}/>
+                    <TextField label={detailVehicle.poleName}/>
+
+                </Grid>
+                <Grid direction={"row"}>
+                    <Button variant="contained" color="primary" className={classes.button}>
+                        Mise à jour
+                    </Button>
+                    <Button variant="contained" color="secondary" className={classes.button}>
+                        Supprimer
+                    </Button>
+                </Grid>
+
             </Paper>
         </div>
     )
@@ -51,7 +52,7 @@ const VehicleInfos = props => {
 VehicleInfos.propTypes = {
     classes: PropTypes.object,
     fetchVehicleInfos: PropTypes.func,
-    datapage: PropTypes.array
+    detailVehicle: PropTypes.object
 };
 
 export default withStyles(theme => ({

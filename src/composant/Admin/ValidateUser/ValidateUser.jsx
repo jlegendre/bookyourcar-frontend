@@ -17,7 +17,7 @@ import CheckIcon from '@material-ui/icons/Check'
 
 const ValidateUser = props => {
 
-    const {classes, fetchUserInValidation, datapage, fetchValidateUser, fetchDeleteUser} = props;
+    const {classes, fetchUserInValidation, userInWaiting, fetchValidateUser, fetchDeleteUser} = props;
 
 
     useEffect(() => {
@@ -58,7 +58,7 @@ const ValidateUser = props => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {datapage && datapage.map((row, i) =>
+                        {userInWaiting && userInWaiting.map((row, i) =>
                             <TableRow key={i}>
                                 <TableCell>{row.userName}</TableCell>
                                 <TableCell>{row.userFirstname}</TableCell>
@@ -86,7 +86,7 @@ const ValidateUser = props => {
 ValidateUser.propTypes = {
     classes: PropTypes.object,
     fetchUserInValidation: PropTypes.func,
-    datapage: PropTypes.array,
+    userInWaiting: PropTypes.array,
     fetchValidateUser: PropTypes.func,
     fetchDeleteUser: PropTypes.func
 };
