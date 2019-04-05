@@ -19,9 +19,9 @@ const handleSuccess = success => {
 };
 
 /**
- * Gestion des erreurs des requêtes https
- * @param error erreur axios
- * @return {{response}}
+ * Gestion des erreurs https
+ * @param error erreur de la requêtes
+ * @return {Promise<*>}
  */
 const handleError = error => {
     if (error.response) {
@@ -41,7 +41,8 @@ const handleError = error => {
     } else {
         console.log('Error', error.message);
     }
-    return error;
+
+    return Promise.reject(error);
 };
 
 
