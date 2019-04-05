@@ -66,7 +66,7 @@ const Login = (props) => {
                     <LockOutlinedIcon/>
                 </Avatar>
                 <Typography component={"h1"} variant={"h5"}>
-                    Sign in
+                    Connexion
                 </Typography>
                 <div className={classes.form}>
                     <InputText
@@ -79,17 +79,17 @@ const Login = (props) => {
                     <InputText
                         id={"password"}
                         name={"Password"}
-                        placeholder={"Password"}
+                        placeholder={"Mot de passe"}
                         type={"password"}
                         onChange={(event) => updatePassword(event)}
                     />
                     <Typography>
                         <FormControlLabel
                             control={<Checkbox value="remember" color="primary"/>}
-                            label="Remember me"
+                            label="Se souvenir de moi?"
                         />
                         <Link className={classes.link} to={"/newAccount"}>
-                            Create Account
+                            Créer un compte
                         </Link>
                     </Typography>
                     <Button
@@ -100,7 +100,7 @@ const Login = (props) => {
                         className={classes.submit}
                         onClick={() => fetchUser()}
                     >
-                        Sign in
+                        Connexion
                     </Button>
                 </div>
             </Paper>
