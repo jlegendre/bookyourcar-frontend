@@ -23,6 +23,6 @@ export default function (state = initialState, action) {
 }
 
 //Retourne les infos de l'utilisateur
-export const getUser = state => state.auth;
-export const getToken = state => getUser(state).token;
+export const getAuth = state => state.auth;
+export const getToken = state => getAuth(state).token;
 export const getRole = state => state.auth.role;

@@ -35,12 +35,12 @@ export const fetchLoginUser = (email, password) => {
  * @param success fonction a executer si la requêtes a bien fonctionné
  * @returns {Function}
  */
-export const fetchRegisterUser = ({email, confirmPassword, password, name, firstName}, success) => {
+export const fetchRegisterUser = ({email, confirmPassword, password, name, firstName, pole, phoneNumber}, success) => {
     return dispatch => {
         httpClient.request({
             url: '/Auth/register',
             method: 'POST',
-            data: {email, confirmPassword, password, name, firstName}
+            data: {email, confirmPassword, password, name, firstName, pole, phoneNumber}
         }).then(() => {
             success()
         })
@@ -53,13 +53,10 @@ export const fetchRegisterUser = ({email, confirmPassword, password, name, first
  * @return {Function}
  */
 export const fetchUserRole = () => {
-    return (dispatch, getState) => {
-        let token = getState().auth.token;
-
+    return dispatch => {
         httpClient.request({
             url: '/User/userRole',
             method: 'GET',
-            headers: {'Authorization': `Bearer ${token}`}
         }).then(response => {
             dispatch(setUserRole(response.data.role))
         })

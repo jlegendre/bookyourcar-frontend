@@ -8,17 +8,11 @@ import {fetchUserInValidation} from "./datapage";
  *
  */
 export const fetchValidateUser = id => {
-    return (dispatch, getState) => {
-        let token = getState().auth.token;
-
-        let formData = new FormData();
-        formData.set("id", id);
+    return dispatch => {
 
         httpClient.request({
-            url: `/User/ValidateUserInWaiting`,
-            method: 'PUT',
-            headers: {'Authorization': `${token}`, 'Content-Type': 'multipart/form-data'},
-            data: formData
+            url: `/User/ValidateUserInWaiting/${id}`,
+            method: 'POST',
         }).then(() => {
             dispatch(fetchUserInValidation())
         })
@@ -32,12 +26,10 @@ export const fetchValidateUser = id => {
  * @return {Function}
  */
 export const fetchDeleteUser = id => {
-    return (dispatch, getState) => {
-        let token = getState().auth.token;
+    return dispatch => {
         httpClient.request({
             url: `/User/${id}`,
             method: 'DELETE',
-            headers: {'Authorization': `${token}`}
         }).then(() => {
             dispatch(fetchUserInValidation())
         })

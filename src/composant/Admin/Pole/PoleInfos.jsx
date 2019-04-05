@@ -13,50 +13,38 @@ import {
     TableRow,
     Typography
 } from "@material-ui/core";
-import {Link} from "react-router-dom";
 
-const VehicleList = props => {
+const PoleInfos = props => {
 
-    const {classes, fetchVehicles, listVehicle} = props;
+    const {classes, fetchPolesInfoq, datapage} = props;
     useEffect(() => {
-        fetchVehicles();
+        fetchPolesInfos();
     }, []);
-
 
     return (
         <div className={classes.main}>
             <CssBaseline/>
             <Paper className={classes.paper}>
-                <Typography variant="h4" gutterBottom>Liste de véhicules</Typography>
+                <Typography variant="h4" gutterBottom>Liste des Poles</Typography>
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
-                            <TableCell>Marque</TableCell>
-                            <TableCell>Modèle</TableCell>
-                            <TableCell>Couleur</TableCell>
-                            <TableCell>Immatriculation</TableCell>
-                            <TableCell>Carburant</TableCell>
-                            <TableCell>Nombre de places</TableCell>
-                            <TableCell>Emplacement</TableCell>
-                            <TableCell/>
+                            <TableCell>Nom</TableCell>
+                            <TableCell>Adresse</TableCell>
+                            <TableCell>CodePostal</TableCell>
+                            <TableCell>Ville</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {listVehicle && listVehicle.map((row, i) =>
+                        {datapage && datapage.map((row, i) =>
                             <TableRow key={i}>
-                                <TableCell>{row.vehBrand}</TableCell>
-                                <TableCell>{row.vehModel}</TableCell>
-                                <TableCell>{row.vehColor}</TableCell>
-                                <TableCell>{row.vehRegistration}</TableCell>
-                                <TableCell>{row.vehTypeEssence}</TableCell>
-                                <TableCell>{row.vehNumberplace}</TableCell>
-                                <TableCell>{row.pole}</TableCell>
-                                <TableCell>
-                                    <Link to={`/vehicleInfos/${row.vehId}`}>
-                                        <IconButton>
-                                            <Icon>pageview</Icon>
-                                        </IconButton>
-                                    </Link>
+                                <TableCell>{row.poleName}</TableCell>
+                                <TableCell>{row.poleAddress}</TableCell>
+                                <TableCell>{row.poleCp}</TableCell>
+                                <TableCell>{row.poleCity}</TableCell>
+                                <TableCell><IconButton onClick={() => navigateToPoleInfos(row.poleId)}>
+                                    <Icon>pageview</Icon>
+                                </IconButton>
                                 </TableCell>
                             </TableRow>
                         )}
@@ -67,10 +55,10 @@ const VehicleList = props => {
     )
 };
 
-VehicleList.propTypes = {
+PoleList.propTypes = {
     classes: PropTypes.object,
     fetchVehicles: PropTypes.func,
-    listVehicle: PropTypes.array
+    datapage: PropTypes.array
 };
 
 export default withStyles(theme => ({
@@ -106,4 +94,4 @@ export default withStyles(theme => ({
             backgroundColor: theme.palette.background.default,
         },
     }
-}))(VehicleList);
+}))(PoleInfos);
