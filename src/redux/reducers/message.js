@@ -1,6 +1,6 @@
 import {SET_MESSAGE, SET_NO_MESSAGE} from "../actions/message";
 
-const initialState = {};
+const initialState = [];
 
 
 export default function (state = initialState, action) {
