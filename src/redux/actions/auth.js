@@ -53,13 +53,10 @@ export const fetchRegisterUser = ({email, confirmPassword, password, name, first
  * @return {Function}
  */
 export const fetchUserRole = () => {
-    return (dispatch, getState) => {
-        let token = getState().auth.token;
-
+    return dispatch => {
         httpClient.request({
             url: '/User/userRole',
             method: 'GET',
-            headers: {'Authorization': `Bearer ${token}`}
         }).then(response => {
             dispatch(setUserRole(response.data.role))
         })

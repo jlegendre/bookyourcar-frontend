@@ -10,13 +10,10 @@ export const SET_DATAPAGE_DETAILVEHICLE = 'SET_DATAPAGE_DETAILVEHICLE';
  * @returns {Function}
  */
 export const fetchUserInValidation = () => {
-    return (dispatch, getState) => {
-
-        let token = getState().auth.token;
+    return dispatch => {
         httpClient.request({
             url: '/User/userInWaiting',
             method: 'GET',
-            headers: {'Authorization': `${token}`}
         }).then(response => {
             dispatch(setUserInWaiting(response.data));
             dispatch(setNoMessage());
@@ -30,13 +27,10 @@ export const fetchUserInValidation = () => {
  * @returns {Function}
  */
 export const fetchVehicleInfos = id => {
-    return (dispatch, getState) => {
-
-        let token = getState().auth.token;
+    return dispatch => {
         httpClient.request({
             url: `/Vehicle/${id}`,
             method: 'GET',
-            headers: {'Authorization': `${token}`}
         }).then(response => {
            dispatch(setDetailVehicle(response.data));
             dispatch(setNoMessage());
@@ -50,13 +44,10 @@ export const fetchVehicleInfos = id => {
  * @returns {Function}
  */
 export const fetchVehicles = () => {
-    return (dispatch, getState) => {
-
-        let token = getState().auth.token;
+    return dispatch => {
         httpClient.request({
             url: '/Vehicle',
             method: 'GET',
-            headers: {'Authorization': `${token}`}
         }).then(response => {
             dispatch(setListVehicle(response.data));
         })

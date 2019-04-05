@@ -3,14 +3,14 @@ import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
     CssBaseline,
+    Icon,
+    IconButton,
     Paper,
     Table,
     TableBody,
     TableCell,
     TableHead,
     TableRow,
-    IconButton,
-    Icon,
     Typography
 } from "@material-ui/core";
 import {Link} from "react-router-dom";
@@ -22,12 +22,6 @@ const VehicleList = props => {
         fetchVehicles();
     }, []);
 
-    /**
-     * Redirige vers la page d'infos du vehicule selectionné
-     * @param id identifiant du vehicule
-     */
-    const navigateToVehicleInfos = id => {
-    };
 
     return (
         <div className={classes.main}>
