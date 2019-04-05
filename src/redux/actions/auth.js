@@ -1,7 +1,5 @@
-import axios from 'axios';
-
-import config from './../../config';
-import {setMessage, setNoMessage} from "./message";
+import httpClient from './../../utils/httpClient';
+import {setNoMessage} from "./message";
 
 export const SET_USER_USERNAME = 'SET_USER_USERNAME';
 export const SET_USER_TOKEN = 'SET_USER_TOKEN';
@@ -16,8 +14,7 @@ export const SET_USER_ROLE = 'SET_USER_ROLE';
  */
 export const fetchLoginUser = (email, password) => {
     return dispatch =>
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/Auth/login',
             method: 'POST',
             data: {email, password, rememberMe: true}
@@ -27,9 +24,7 @@ export const fetchLoginUser = (email, password) => {
             dispatch(setNoMessage());
         }).then(() => {
             dispatch(fetchUserRole())
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
-        })
+        });
 };
 
 /**
@@ -41,13 +36,10 @@ export const fetchLoginUser = (email, password) => {
  */
 export const fetchRegisterUser = (email, confirmPassword, password, name, firstName) => {
     return dispatch => {
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/Auth/register',
             method: 'POST',
             data: {email, confirmPassword, password, name, firstName}
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
         })
     }
 };
@@ -61,15 +53,12 @@ export const fetchUserRole = () => {
     return (dispatch, getState) => {
         let token = getState().auth.token;
 
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/User/userRole',
             method: 'GET',
             headers: {'Authorization': `Bearer ${token}`}
         }).then(response => {
             dispatch(setUserRole(response.data.role))
-        }).catch(err => {
-            dispatch(setMessage(err.response.data))
         })
     }
 };

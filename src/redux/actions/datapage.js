@@ -1,6 +1,5 @@
-import config from './../../config';
-import axios from 'axios';
-import {setMessage, setNoMessage} from "./message";
+import httpClient from './../../utils/httpClient';
+import {setNoMessage} from "./message";
 
 export const SET_DATAPAGE = 'SET_DATAPAGE';
 export const SET_CLEAR_DATAPAGE = 'SET_CLEAR_DATAPAGE';
@@ -14,8 +13,7 @@ export const fetchUserInValidation = () => {
     return (dispatch, getState) => {
 
         let token = getState().auth.token;
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/User/userInWaiting',
             method: 'GET',
             headers: {'Authorization': `${token}`}
@@ -23,8 +21,6 @@ export const fetchUserInValidation = () => {
             dispatch(clearDatapage());
             dispatch(setDatapage(response.data));
             dispatch(setNoMessage());
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
         })
     }
 };
@@ -38,17 +34,13 @@ export const fetchVehicleInfos = () => {
     return (dispatch, getState) => {
 
         let token = getState().user.token;
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/Vehicle',
             method: 'GET',
             headers: {'Authorization': `${token}`}
         }).then(response => {
             dispatch(setDatapage(response.data));
             dispatch(setNoMessage());
-        }).catch(err => {
-            console.log(err.response);
-            dispatch(setMessage(err.response.data));
         })
     }
 };
@@ -62,8 +54,7 @@ export const fetchVehicles = () => {
     return (dispatch, getState) => {
 
         let token = getState().auth.token;
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/Vehicle',
             method: 'GET',
             headers: {'Authorization': `${token}`}
@@ -71,9 +62,6 @@ export const fetchVehicles = () => {
             dispatch(clearDatapage());
             dispatch(setDatapage(response.data));
             dispatch(setNoMessage());
-        }).catch(err => {
-            console.log(err.response);
-            dispatch(setMessage(err.response.data));
         })
     }
 };
