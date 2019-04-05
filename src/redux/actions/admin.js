@@ -12,12 +12,16 @@ import {fetchUserInValidation} from "./datapage";
 export const fetchValidateUser = id => {
     return (dispatch, getState) => {
         let token = getState().auth.token;
+
+        let formData = new FormData();
+        formData.set("id", id);
+
         axios.request({
             baseURL: config.backend,
             url: `/User/ValidateUserInWaiting`,
-            method: 'POST',
-            headers: {'Authorization': `${token}`, "Content-Type": "text/plain"},
-            data: id
+            method: 'PUT',
+            headers: {'Authorization': `${token}`, 'Content-Type': 'multipart/form-data'},
+            data: formData
         }).then(() => {
             dispatch(fetchUserInValidation())
         }).catch(err => {
