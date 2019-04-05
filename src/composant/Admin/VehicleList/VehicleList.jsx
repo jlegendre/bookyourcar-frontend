@@ -44,7 +44,7 @@ const VehicleList = props => {
                             <TableCell>Carburant</TableCell>
                             <TableCell>Nombre de places</TableCell>
                             <TableCell>Emplacement</TableCell>
-                            <TableCell></TableCell>
+                            <TableCell/>
                         </TableRow>
                     </TableHead>
                     <TableBody>

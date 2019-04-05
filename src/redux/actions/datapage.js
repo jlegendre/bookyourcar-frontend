@@ -1,5 +1,4 @@
-import config from './../../config';
-import axios from 'axios';
+import httpClient from './../../utils/httpClient';
 import {setMessage, setNoMessage} from "./message";
 
 export const SET_DATAPAGE = 'SET_DATAPAGE';
@@ -14,8 +13,7 @@ export const fetchUserInValidation = () => {
     return (dispatch, getState) => {
 
         let token = getState().auth.token;
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/User/userInWaiting',
             method: 'GET',
             headers: {'Authorization': `${token}`}
@@ -38,8 +36,7 @@ export const fetchVehicleInfos = () => {
     return (dispatch, getState) => {
 
         let token = getState().user.token;
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/Vehicle',
             method: 'GET',
             headers: {'Authorization': `${token}`}
@@ -62,8 +59,7 @@ export const fetchVehicles = () => {
     return (dispatch, getState) => {
 
         let token = getState().auth.token;
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/Vehicle',
             method: 'GET',
             headers: {'Authorization': `${token}`}

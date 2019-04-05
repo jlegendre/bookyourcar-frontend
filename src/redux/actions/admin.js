@@ -1,5 +1,4 @@
-import axios from 'axios';
-import config from './../../config'
+import httpClient from './../../utils/httpClient'
 import {setMessage} from "./message";
 import {fetchUserInValidation} from "./datapage";
 
@@ -16,8 +15,7 @@ export const fetchValidateUser = id => {
         let formData = new FormData();
         formData.set("id", id);
 
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: `/User/ValidateUserInWaiting`,
             method: 'PUT',
             headers: {'Authorization': `${token}`, 'Content-Type': 'multipart/form-data'},
@@ -39,8 +37,7 @@ export const fetchValidateUser = id => {
 export const fetchDeleteUser = id => {
     return (dispatch, getState) => {
         let token = getState().auth.token;
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: `/User/${id}`,
             method: 'DELETE',
             headers: {'Authorization': `${token}`}

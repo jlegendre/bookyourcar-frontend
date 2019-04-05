@@ -1,6 +1,4 @@
-import axios from 'axios';
-
-import config from './../../config';
+import httpClient from './../../utils/httpClient';
 import {setMessage, setNoMessage} from "./message";
 
 export const SET_USER_USERNAME = 'SET_USER_USERNAME';
@@ -16,8 +14,7 @@ export const SET_USER_ROLE = 'SET_USER_ROLE';
  */
 export const fetchLoginUser = (email, password) => {
     return dispatch =>
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/Auth/login',
             method: 'POST',
             data: {email, password, rememberMe: true}
@@ -41,8 +38,7 @@ export const fetchLoginUser = (email, password) => {
  */
 export const fetchRegisterUser = (email, confirmPassword, password, name, firstName) => {
     return dispatch => {
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/Auth/register',
             method: 'POST',
             data: {email, confirmPassword, password, name, firstName}
@@ -61,8 +57,7 @@ export const fetchUserRole = () => {
     return (dispatch, getState) => {
         let token = getState().auth.token;
 
-        axios.request({
-            baseURL: config.backend,
+        httpClient.request({
             url: '/User/userRole',
             method: 'GET',
             headers: {'Authorization': `Bearer ${token}`}
