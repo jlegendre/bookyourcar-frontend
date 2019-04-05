@@ -1,5 +1,5 @@
 import httpClient from './../../utils/httpClient';
-import {setMessage, setNoMessage} from "./message";
+import {setNoMessage} from "./message";
 
 export const SET_USER_USERNAME = 'SET_USER_USERNAME';
 export const SET_USER_TOKEN = 'SET_USER_TOKEN';
@@ -24,9 +24,7 @@ export const fetchLoginUser = (email, password) => {
             dispatch(setNoMessage());
         }).then(() => {
             dispatch(fetchUserRole())
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
-        })
+        });
 };
 
 /**
@@ -34,16 +32,17 @@ export const fetchLoginUser = (email, password) => {
  * @param email email de l'utilisateur
  * @param confirmPassword le mot de passe
  * @param password le mot de passe
+ * @param success fonction a executer si la requêtes a bien fonctionné
  * @returns {Function}
  */
-export const fetchRegisterUser = (email, confirmPassword, password, name, firstName) => {
+export const fetchRegisterUser = ({email, confirmPassword, password, name, firstName}, success) => {
     return dispatch => {
         httpClient.request({
             url: '/Auth/register',
             method: 'POST',
             data: {email, confirmPassword, password, name, firstName}
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
+        }).then(() => {
+            success()
         })
     }
 };
@@ -63,8 +62,6 @@ export const fetchUserRole = () => {
             headers: {'Authorization': `Bearer ${token}`}
         }).then(response => {
             dispatch(setUserRole(response.data.role))
-        }).catch(err => {
-            dispatch(setMessage(err.response.data))
         })
     }
 };

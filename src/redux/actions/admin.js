@@ -1,5 +1,4 @@
 import httpClient from './../../utils/httpClient'
-import {setMessage} from "./message";
 import {fetchUserInValidation} from "./datapage";
 
 /**
@@ -22,8 +21,6 @@ export const fetchValidateUser = id => {
             data: formData
         }).then(() => {
             dispatch(fetchUserInValidation())
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
         })
     }
 };
@@ -43,8 +40,6 @@ export const fetchDeleteUser = id => {
             headers: {'Authorization': `${token}`}
         }).then(() => {
             dispatch(fetchUserInValidation())
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
         })
     }
 };

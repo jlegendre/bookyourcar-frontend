@@ -17,6 +17,7 @@ const CreateUser = props => {
     const {classes, registerUser, token} = props;
 
     const [input, setInput] = useState({email: "", confirmPassword: "", password: "", name: "", firstName: ""});
+    const [accountSuccess, setAccountSuccess] = useState(false);
 
     /**
      * @Input event: données de l'input
@@ -31,12 +32,13 @@ const CreateUser = props => {
     });
 
     const fetchCreateUser = () => {
-        registerUser(input);
+        registerUser(input, () => {
+            setAccountSuccess(true);
+        })
     };
 
-    if(token) {
-        //Si un token est présent, on redirige vers la page d'acceuil
-        return <Redirect to={"/"} />
+    if (token || accountSuccess) {
+        return <Redirect to={"/"}/>
     }
 
     return (
@@ -57,18 +59,18 @@ const CreateUser = props => {
                         type={"text"}
                         onChange={(event) => updateForm(event, 'firstName')}
                     /><InputText
-                        id={"nom"}
-                        name={"Nom"}
-                        placeholder={"Nom"}
-                        type={"text"}
-                        onChange={(event) => updateForm(event, 'name')}
-                    /><InputText
-                        id={"email"}
-                        name={"Email"}
-                        placeholder={"Email"}
-                        type={"email"}
-                        onChange={(event) => updateForm(event, 'email')}
-                    />
+                    id={"nom"}
+                    name={"Nom"}
+                    placeholder={"Nom"}
+                    type={"text"}
+                    onChange={(event) => updateForm(event, 'name')}
+                /><InputText
+                    id={"email"}
+                    name={"Email"}
+                    placeholder={"Email"}
+                    type={"email"}
+                    onChange={(event) => updateForm(event, 'email')}
+                />
                     <InputText
                         id={"password"}
                         name={"Password"}

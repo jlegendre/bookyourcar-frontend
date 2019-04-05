@@ -1,5 +1,5 @@
 import httpClient from './../../utils/httpClient';
-import {setMessage, setNoMessage} from "./message";
+import {setNoMessage} from "./message";
 
 export const SET_DATAPAGE = 'SET_DATAPAGE';
 export const SET_CLEAR_DATAPAGE = 'SET_CLEAR_DATAPAGE';
@@ -21,8 +21,6 @@ export const fetchUserInValidation = () => {
             dispatch(clearDatapage());
             dispatch(setDatapage(response.data));
             dispatch(setNoMessage());
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
         })
     }
 };
@@ -43,9 +41,6 @@ export const fetchVehicleInfos = id => {
         }).then(response => {
             dispatch(setDatapage(response.data));
             dispatch(setNoMessage());
-        }).catch(err => {
-            console.log(err.response);
-            dispatch(setMessage(err.response.data));
         })
     }
 };
@@ -67,9 +62,6 @@ export const fetchVehicles = () => {
             dispatch(clearDatapage());
             dispatch(setDatapage(response.data));
             dispatch(setNoMessage());
-        }).catch(err => {
-            console.log(err.response);
-            dispatch(setMessage(err.response.data));
         })
     }
 };
