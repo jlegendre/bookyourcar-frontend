@@ -1,5 +1,5 @@
 import httpClient from './../../utils/httpClient';
-import {setMessage, setNoMessage} from "./message";
+import {setNoMessage} from "./message";
 
 export const SET_DATAPAGE = 'SET_DATAPAGE';
 export const SET_CLEAR_DATAPAGE = 'SET_CLEAR_DATAPAGE';

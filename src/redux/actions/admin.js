@@ -1,5 +1,4 @@
 import httpClient from './../../utils/httpClient'
-import {setMessage} from "./message";
 import {fetchUserInValidation} from "./datapage";
 
 /**

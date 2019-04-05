@@ -1,5 +1,5 @@
 import httpClient from './../../utils/httpClient';
-import {setMessage, setNoMessage} from "./message";
+import {setNoMessage} from "./message";
 
 export const SET_USER_USERNAME = 'SET_USER_USERNAME';
 export const SET_USER_TOKEN = 'SET_USER_TOKEN';
