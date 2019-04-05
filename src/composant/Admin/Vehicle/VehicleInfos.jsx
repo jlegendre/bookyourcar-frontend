@@ -5,7 +5,7 @@ import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, Ic
 
 const VehicleInfos = props => {
 
-    const {classes, fetchVehicleInfos, datapage} = props;
+    const {classes, fetchVehicleInfos, detailVehicle} = props;
     useEffect(() => {
         fetchVehicleInfos();
     }, []);
@@ -29,18 +29,7 @@ const VehicleInfos = props => {
                         </TableRow>
                     </TableHead>
                     <TableBody>
-                        {datapage && datapage.map((row, i) =>
-                            <TableRow key={i}>
-                                <TableCell>{row.vehBrand}</TableCell>
-                                <TableCell>{row.vehModel}</TableCell>
-                                <TableCell>{row.vehColor}</TableCell>
-                                <TableCell>{row.vehRegistration}</TableCell>
-                                <TableCell>{row.vehTypeEssence}</TableCell>
-                                <TableCell>{row.vehNumberplace}</TableCell>
-                                <TableCell>A faire</TableCell>
-                                <TableCell><IconButton><Icon>pageview</Icon></IconButton></TableCell>
-                            </TableRow>
-                        )}
+
                     </TableBody>
                 </Table>
             </Paper>
@@ -51,7 +40,7 @@ const VehicleInfos = props => {
 VehicleInfos.propTypes = {
     classes: PropTypes.object,
     fetchVehicleInfos: PropTypes.func,
-    datapage: PropTypes.array
+    detailVehicle: PropTypes.object
 };
 
 export default withStyles(theme => ({

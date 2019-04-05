@@ -48,7 +48,8 @@ const Login = (props) => {
     /**
      * Call login user api
      */
-    const fetchUser = () => {
+    const fetchUser = event => {
+        event.preventDefault();
         loginUser(input)
     };
 
@@ -61,49 +62,50 @@ const Login = (props) => {
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <LockOutlinedIcon/>
-                </Avatar>
-                <Typography component={"h1"} variant={"h5"}>
-                    Connexion
-                </Typography>
-                <div className={classes.form}>
-                    <InputText
-                        id={"email"}
-                        name={"Email"}
-                        placeholder={"Email"}
-                        tpe={"email"}
-                        onChange={(event) => updateEmail(event)}
-                    />
-                    <InputText
-                        id={"password"}
-                        name={"Password"}
-                        placeholder={"Mot de passe"}
-                        type={"password"}
-                        onChange={(event) => updatePassword(event)}
-                    />
-                    <Typography>
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary"/>}
-                            label="Se souvenir de moi?"
-                        />
-                        <Link className={classes.link} to={"/newAccount"}>
-                            Créer un compte
-                        </Link>
-                    </Typography>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        onClick={() => fetchUser()}
-                    >
+            <form onSubmit={event => fetchUser(event)}>
+                <Paper className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <LockOutlinedIcon/>
+                    </Avatar>
+                    <Typography component={"h1"} variant={"h5"}>
                         Connexion
-                    </Button>
-                </div>
-            </Paper>
+                    </Typography>
+                    <div className={classes.form}>
+                        <InputText
+                            id={"email"}
+                            name={"Email"}
+                            placeholder={"Email"}
+                            tpe={"email"}
+                            onChange={(event) => updateEmail(event)}
+                        />
+                        <InputText
+                            id={"password"}
+                            name={"Password"}
+                            placeholder={"Mot de passe"}
+                            type={"password"}
+                            onChange={(event) => updatePassword(event)}
+                        />
+                        <Typography>
+                            <FormControlLabel
+                                control={<Checkbox value="remember" color="primary"/>}
+                                label="Se souvenir de moi?"
+                            />
+                            <Link className={classes.link} to={"/newAccount"}>
+                                Créer un compte
+                            </Link>
+                        </Typography>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Connexion
+                        </Button>
+                    </div>
+                </Paper>
+            </form>
         </div>
     );
 };
