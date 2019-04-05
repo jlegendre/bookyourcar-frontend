@@ -12,7 +12,7 @@ import CreateUser from './composant/User/CreateUser/CreateUser.js'
 import Acceuil from "./composant/Acceuil/Acceuil.js";
 import ValidUser from "./composant/Admin/ValidateUser/ValidateUser.js";
 import Message from "./composant/Message/Message.js";
-import VehicleList from "./composant/Admin/VehicleList/VehicleList";
+import VehicleList from "./composant/Admin/VehicleList/VehicleList.js";
 
 const App = props => {
 
@@ -75,15 +75,15 @@ const App = props => {
 
                     <Switch>
                         {/* Route générique */}
-                        <Route path={"/login"} component={() => <Login/>}/>
-                        <Route path={"/newAccount"} component={() => <CreateUser/>}/>
+                        <Route path={"/login"} component={Login}/>
+                        <Route path={"/newAccount"} component={CreateUser}/>
 
                         {/* Route user */}
-                        <Route exact path={"/"} component={() => requireUserLogin(<Acceuil/>)}/>
+                        <Route exact path={"/"} component={params => requireUserLogin(<Acceuil {...params}/>)}/>
 
                         {/* Route admin */}
-                        <Route path={"/validUser"} component={() => requireAdminLogin(<ValidUser/>)}/>
-                        <Route path={"/vehicleList"} component={() => requireAdminLogin(<VehicleList/>)}/>
+                        <Route path={"/validUser"} component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
+                        <Route path={"/vehicleList"} component={params => requireAdminLogin(<VehicleList {...params}/>)}/>
 
                         <Route component={() => <div>404</div>}/>
                     </Switch>
