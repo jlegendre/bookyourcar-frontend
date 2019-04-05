@@ -10,13 +10,15 @@ import Typography from "@material-ui/core/Typography";
 import {HowToRegOutlined as HowToRegOutlinedIcon} from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 import InputText from "../../Input/InputText";
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from "@material-ui/core/Select"
 import {Redirect} from "react-router";
 
 const CreateUser = props => {
 
     const {classes, registerUser, token} = props;
 
-    const [input, setInput] = useState({email: "", confirmPassword: "", password: "", name: "", firstName: ""});
+    const [input, setInput] = useState({email: "", confirmPassword: "", password: "", name: "", firstName: "", pole: "", phoneNumber: ""});
     const [accountSuccess, setAccountSuccess] = useState(false);
 
     /**
@@ -64,7 +66,24 @@ const CreateUser = props => {
                     placeholder={"Nom"}
                     type={"text"}
                     onChange={(event) => updateForm(event, 'name')}
-                /><InputText
+                    /><InputText
+                        id={"phoneNumber"}
+                        name={"PhoneNumber"}
+                        placeholder={"Numero de telephone"}
+                        type={"text"}
+                        onChange={(event) => updateForm(event, 'phoneNumber')}
+                    />
+                    <Select
+                        id={"pole"}
+                        name={"Pole"}
+                        placeholder={"Pole"}
+                        onChange={(event) => updateForm(event, 'pole')}
+                    >
+                        <MenuItem>
+
+                        </MenuItem>
+                    </Select>
+                    <InputText
                     id={"email"}
                     name={"Email"}
                     placeholder={"Email"}

@@ -66,20 +66,41 @@ export const fetchVehicles = () => {
     }
 };
 
+/**
+ * Call /Pole Url, pour récupérer tous les poles disponibles
+ * @returns {Function}
+ */
 export const fetchPoles = () => {
     return (dispatch, getState) => {
-        let token = getState().user.token;
-        axios.request({
-            baseURL: config.backend,
-            url: '/Auth/register',
+
+        let token = getState().auth.token;
+        httpClient.request({
+            url: '/Pole',
             method: 'GET',
-            headers: {'Authorization': `${token}`}
+            headers: { 'Authorization': `${token}` }
         }).then(response => {
             dispatch(clearDatapage());
             dispatch(setDatapage(response.data));
             dispatch(setNoMessage());
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
+        })
+    }
+};
+
+/**
+ * Call /Pole/{i} Url, pour récupérer toutes les informations sur un pole donné
+ * @returns {Function}
+ */
+export const fetchPoleInfos = () => {
+    return (dispatch, getState) => {
+
+        let token = getState().user.token;
+        httpClient.request({
+            url: '/Pole',
+            method: 'GET',
+            headers: { 'Authorization': `${token}` }
+        }).then(response => {
+            dispatch(setDatapage(response.data));
+            dispatch(setNoMessage());
         })
     }
 };

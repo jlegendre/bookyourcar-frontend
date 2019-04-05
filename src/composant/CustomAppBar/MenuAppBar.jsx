@@ -70,6 +70,12 @@ const MenuAppBar = props => {
                                     <ListItemText primary={"Liste de véhicules"}/>
                                 </ListItem>
                             </Link>
+                            <Link to={"/poleList"} className={classes.link}>
+                                <ListItem button>
+                                    <ListItemIcon><Icon>location_city</Icon></ListItemIcon>
+                                    <ListItemText primary={"Liste des pôles"} />
+                                </ListItem>
+                            </Link>
                         </List>
                     </div>
                     }
