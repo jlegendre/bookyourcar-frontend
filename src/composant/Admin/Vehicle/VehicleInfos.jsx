@@ -19,10 +19,10 @@ const VehicleInfos = props => {
     const {classes, fetchVehicleInfos, datapage} = props;
 
     useEffect(() => {
-        console.log(props);
-        fetchVehicleInfos();
+        fetchVehicleInfos(3);
     }, []);
 
+    console.log(props);
 
     return (
         <div>
