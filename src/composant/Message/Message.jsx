@@ -15,8 +15,14 @@ import amber from '@material-ui/core/colors/amber';
 
 const Message = props => {
 
-    const {classes, message} = props;
+    const {classes, message, clearMessage} = props;
 
+    /**
+     * Permet de fermer le message d'erreur
+     */
+    const closeMessage = () => {
+        clearMessage();
+    };
 
     /**
      * Detecte et construits les informations du message
@@ -24,7 +30,7 @@ const Message = props => {
     const typeMessage = () => {
         if (message) {
             if (message['Error']) {
-                return {type: 'message', message: message['Error'], icon: ErrorIcon}
+                return {type: 'error', message: message['Error'], icon: ErrorIcon}
             } else if (message['Warning']) {
                 return {type: 'warning', message: message['Warning'], icon: WarningIcon}
             } else if (message['Success']) {
@@ -61,6 +67,7 @@ const Message = props => {
                 }
                 action={[
                     <IconButton
+                        onClick={() => closeMessage()}
                         key="close"
                         aria-label="Close"
                         color="inherit">
@@ -74,7 +81,8 @@ const Message = props => {
 
 Message.propTypes = {
     classes: PropTypes.object,
-    message: PropTypes.any
+    message: PropTypes.array,
+    clearMessage: PropTypes.func
 };
 
 export default withStyles(theme => ({
