@@ -4,7 +4,7 @@ import {ConnectedRouter} from 'connected-react-router'
 
 
 import {Redirect, Route, Switch} from 'react-router'
-import CustomAppBar from "./composant/CustomAppBar/CustomAppBar.js";
+import CustomAppBar from "./composant/CustomAppBar/CustomAppBar.jsx";
 import {withStyles} from "@material-ui/core";
 //Page
 import Login from "./composant/User/Login/Login.js";
@@ -14,6 +14,7 @@ import ValidUser from "./composant/Admin/ValidateUser/ValidateUser.js";
 import Message from "./composant/Message/Message.js";
 import VehicleList from "./composant/Admin/VehicleList/VehicleList.js";
 import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos.js";
+import PoleList from "./composant/Admin/PoleList/PoleList.js";
 
 const App = props => {
 
@@ -83,10 +84,11 @@ const App = props => {
                         <Route exact path={"/"} component={params => requireUserLogin(<Acceuil {...params}/>)}/>
 
                         {/* Route admin */}
-                        <Route path={"/vehicleInfos/:vehId"} component={params => requireAdminLogin(<VehicleInfos {...params}/>)}/>
                         <Route path={"/validUser"} component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
                         <Route path={"/vehicleList"}
                                component={params => requireAdminLogin(<VehicleList {...params}/>)}/>
+                        <Route path={"/vehicleList"} component={params => requireAdminLogin(<VehicleList {...params} />)} />
+                        <Route path={"/poleList"} component={params => requireAdminLogin(<PoleList {...params} />)} />
 
                         <Route component={() => <div>404</div>}/>
                     </Switch>
