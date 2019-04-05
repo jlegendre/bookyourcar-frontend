@@ -1,26 +1,30 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-<<<<<<< HEAD
 import {
     Icon,
     Paper,
 } from "@material-ui/core";
-=======
-import {Paper} from "@material-ui/core";
->>>>>>> 667ce42fab4cff11949eea1e07b0ae6e52160679
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/es/TextField/TextField";
 import Grid from "@material-ui/core/Grid";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const VehicleInfos = props => {
 
     const {classes, fetchVehicleInfos, detailVehicle, match} = props;
 
     useEffect(() => {
-        console.log(match)
         fetchVehicleInfos(match.params.vehId);
     }, []);
+
+    if(!detailVehicle){
+        return (
+            <div>
+                <CircularProgress className={classes.progress} />
+            </div>
+        )
+    }
 
     return (
         <div>
@@ -33,15 +37,10 @@ const VehicleInfos = props => {
                                 <TextField label={detailVehicle.vehBrand}/>
                                 <TextField label={detailVehicle.vehModel}/>
                             </Grid>
-<<<<<<< HEAD
                             <Grid direction={"column"}>
-                                <TextField label={datapage.vehRegistration}/>
-                                <TextField label={datapage.vehColor}/>
+                                <TextField label={detailVehicle.vehRegistration}/>
+                                <TextField label={detailVehicle.vehColor}/>
                             </Grid>
-=======
-                            <TextField label={detailVehicle.vehRegistration}/>
-                            <TextField label={detailVehicle.vehColor}/>
->>>>>>> 667ce42fab4cff11949eea1e07b0ae6e52160679
                         </Grid>
                     </Grid>
                     <TextField label={detailVehicle.vehNumberplace}/>

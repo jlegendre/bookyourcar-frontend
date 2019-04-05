@@ -14,6 +14,7 @@ import ValidUser from "./composant/Admin/ValidateUser/ValidateUser.js";
 import Message from "./composant/Message/Message.js";
 import VehicleList from "./composant/Admin/VehicleList/VehicleList.js";
 import PoleList from "./composant/Admin/PoleList/PoleList.js";
+import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos";
 
 const App = props => {
 
@@ -86,8 +87,8 @@ const App = props => {
                         <Route path={"/validUser"} component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
                         <Route path={"/vehicleList"}
                                component={params => requireAdminLogin(<VehicleList {...params}/>)}/>
-                        <Route path={"/vehicleList"}
-                               component={params => requireAdminLogin(<VehicleList {...params} />)}/>
+                        <Route path={"/vehicleInfos/:vehId"}
+                               component={params => requireAdminLogin(<VehicleInfos {...params} />)}/>
                         <Route path={"/poleList"} component={params => requireAdminLogin(<PoleList {...params} />)}/>
 
                         <Route component={() => <div>404</div>}/>
