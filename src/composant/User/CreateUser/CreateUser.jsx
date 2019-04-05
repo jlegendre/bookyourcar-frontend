@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
-import MenuItem from '@material-ui/core/MenuItem';
+
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
 import withStyles from '@material-ui/core/styles/withStyles';
@@ -10,17 +10,14 @@ import Typography from "@material-ui/core/Typography";
 import {HowToRegOutlined as HowToRegOutlinedIcon} from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 import InputText from "../../Input/InputText";
-import Select from '@material-ui/core/Select';
 import {Redirect} from "react-router";
-import {fetchPoles} from "../../../redux/actions/datapage";
 
 const CreateUser = props => {
 
     const {classes, registerUser, token} = props;
 
-    const datable = fetchPoles();
-
-    const [input, setInput] = useState({email: "", confirmPassword: "", password: "", name: "", firstName: "", pole: "", phoneNumber: ""});
+    const [input, setInput] = useState({email: "", confirmPassword: "", password: "", name: "", firstName: ""});
+    const [accountSuccess, setAccountSuccess] = useState(false);
 
     /**
      * @Input event: données de l'input
@@ -35,12 +32,13 @@ const CreateUser = props => {
     });
 
     const fetchCreateUser = () => {
-        registerUser(input);
+        registerUser(input, () => {
+            setAccountSuccess(true);
+        })
     };
 
-    if(token) {
-        //Si un token est présent, on redirige vers la page d'acceuil
-        return <Redirect to={"/"} />
+    if (token || accountSuccess) {
+        return <Redirect to={"/"}/>
     }
 
     return (
@@ -61,34 +59,18 @@ const CreateUser = props => {
                         type={"text"}
                         onChange={(event) => updateForm(event, 'firstName')}
                     /><InputText
-                        id={"nom"}
-                        name={"Nom"}
-                        placeholder={"Nom"}
-                        type={"text"}
-                        onChange={(event) => updateForm(event, 'name')}
-                    /><Select
-                        id={"pole"}
-                        name={"Pole"}
-                        placeholder={"Pole"}
-                        onChange={(event) => updateForm(event, 'pole')}>
-                    {datable.forEach( datable =>
-                        <MenuItem value="{row.poleName}">
-                            {datable.poleName}
-                        </MenuItem>)
-                    }
-                    </Select><InputText
-                        id={"phoneNumber"}
-                        name={"PhoneNumber"}
-                        placeholder={"Numero de telephone"}
-                        type={"tel"}
-                        onChange={(event) => updateForm(event, 'phoneNumber')}
-                    /><InputText
-                        id={"email"}
-                        name={"Email"}
-                        placeholder={"Email"}
-                        type={"email"}
-                        onChange={(event) => updateForm(event, 'email')}
-                    />
+                    id={"nom"}
+                    name={"Nom"}
+                    placeholder={"Nom"}
+                    type={"text"}
+                    onChange={(event) => updateForm(event, 'name')}
+                /><InputText
+                    id={"email"}
+                    name={"Email"}
+                    placeholder={"Email"}
+                    type={"email"}
+                    onChange={(event) => updateForm(event, 'email')}
+                />
                     <InputText
                         id={"password"}
                         name={"Password"}
