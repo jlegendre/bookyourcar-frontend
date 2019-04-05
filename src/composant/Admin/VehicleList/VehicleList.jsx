@@ -13,6 +13,7 @@ import {
     Icon,
     Typography
 } from "@material-ui/core";
+import {Link} from "react-router-dom";
 
 const VehicleList = props => {
 
@@ -56,9 +57,12 @@ const VehicleList = props => {
                                 <TableCell>{row.vehTypeEssence}</TableCell>
                                 <TableCell>{row.vehNumberplace}</TableCell>
                                 <TableCell>{row.pole}</TableCell>
-                                <TableCell><IconButton onClick={() => navigateToVehicleInfos(row.vehId)}>
-                                    <Icon>pageview</Icon>
-                                </IconButton>
+                                <TableCell>
+                                    <Link to={`/vehicleInfos/${row.vehId}`}>
+                                        <IconButton>
+                                            <Icon>pageview</Icon>
+                                        </IconButton>
+                                    </Link>
                                 </TableCell>
                             </TableRow>
                         )}

@@ -1,49 +1,32 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {CssBaseline, Paper, Table, TableBody, TableCell, TableHead, TableRow, IconButton,Icon, colors} from "@material-ui/core";
+import {
+    CssBaseline,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    IconButton,
+    Icon,
+    colors
+} from "@material-ui/core";
 
 const VehicleInfos = props => {
 
     const {classes, fetchVehicleInfos, datapage} = props;
+
     useEffect(() => {
+        console.log(props);
         fetchVehicleInfos();
     }, []);
 
 
     return (
-        <div className={classes.main}>
-            <CssBaseline/>
-            <Paper className={classes.paper}>
-                <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Marque</TableCell>
-                            <TableCell>Modèle</TableCell>
-                            <TableCell>Couleur</TableCell>
-                            <TableCell>Immatriculation</TableCell>
-                            <TableCell>Carburant</TableCell>
-                            <TableCell>Nombre de places</TableCell>
-                            <TableCell>Emplacement</TableCell>
-                            <TableCell></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {datapage && datapage.map((row, i) =>
-                            <TableRow key={i}>
-                                <TableCell>{row.vehBrand}</TableCell>
-                                <TableCell>{row.vehModel}</TableCell>
-                                <TableCell>{row.vehColor}</TableCell>
-                                <TableCell>{row.vehRegistration}</TableCell>
-                                <TableCell>{row.vehTypeEssence}</TableCell>
-                                <TableCell>{row.vehNumberplace}</TableCell>
-                                <TableCell>A faire</TableCell>
-                                <TableCell><IconButton><Icon>pageview</Icon></IconButton></TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
-            </Paper>
+        <div>
+            PLOPPPP
         </div>
     )
 };
