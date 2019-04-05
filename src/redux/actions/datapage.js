@@ -21,8 +21,6 @@ export const fetchUserInValidation = () => {
             dispatch(clearDatapage());
             dispatch(setDatapage(response.data));
             dispatch(setNoMessage());
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
         })
     }
 };
@@ -43,9 +41,6 @@ export const fetchVehicleInfos = () => {
         }).then(response => {
             dispatch(setDatapage(response.data));
             dispatch(setNoMessage());
-        }).catch(err => {
-            console.log(err.response);
-            dispatch(setMessage(err.response.data));
         })
     }
 };
@@ -67,9 +62,6 @@ export const fetchVehicles = () => {
             dispatch(clearDatapage());
             dispatch(setDatapage(response.data));
             dispatch(setNoMessage());
-        }).catch(err => {
-            console.log(err.response);
-            dispatch(setMessage(err.response.data));
         })
     }
 };

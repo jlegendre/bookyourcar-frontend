@@ -1,16 +1,28 @@
 import config from './../config';
 import axios from 'axios';
 
-const httpClinet = axios.create({
+import store from './../index'
+import {setMessage} from "../redux/actions/message";
+
+const httpClient = axios.create({
     baseURL: config.backend
 });
 
 
-httpClinet.interceptors.response.use(response => {
+httpClient.interceptors.response.use(response => {
     return response;
 }, error => {
-    console.log(error);
+    if (error.response) {
+        if(error.response.data) {
+            store.dispatch(setMessage(error.response.data))
+        } else {
+            store.dispatch(setMessage({"Error": "Une erreur est survenue"}))
+        }
+
+    } else {
+        console.log('Error', error.message);
+    }
+    return error;
 });
 
-
-export default httpClinet;
+export default httpClient;

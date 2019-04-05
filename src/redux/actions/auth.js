@@ -24,9 +24,7 @@ export const fetchLoginUser = (email, password) => {
             dispatch(setNoMessage());
         }).then(() => {
             dispatch(fetchUserRole())
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
-        })
+        });
 };
 
 /**
@@ -42,8 +40,6 @@ export const fetchRegisterUser = (email, confirmPassword, password, name, firstN
             url: '/Auth/register',
             method: 'POST',
             data: {email, confirmPassword, password, name, firstName}
-        }).catch(err => {
-            dispatch(setMessage(err.response.data));
         })
     }
 };
@@ -63,8 +59,6 @@ export const fetchUserRole = () => {
             headers: {'Authorization': `Bearer ${token}`}
         }).then(response => {
             dispatch(setUserRole(response.data.role))
-        }).catch(err => {
-            dispatch(setMessage(err.response.data))
         })
     }
 };
