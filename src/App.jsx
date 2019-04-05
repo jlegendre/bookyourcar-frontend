@@ -76,16 +76,16 @@ const App = props => {
 
                     <Switch>
                         {/* Route générique */}
-                        <Route path={"/login"} component={() => <Login/>}/>
-                        <Route path={"/newAccount"} component={() => <CreateUser/>}/>
+                        <Route path={"/login"} component={Login}/>
+                        <Route path={"/newAccount"} component={CreateUser}/>
 
                         {/* Route user */}
-                        <Route exact path={"/"} component={() => requireUserLogin(<Acceuil/>)}/>
+                        <Route exact path={"/"} component={params => requireUserLogin(<Acceuil {...params}/>)}/>
 
                         {/* Route admin */}
-                        <Route path={"/validUser"} component={() => requireAdminLogin(<ValidUser/>)}/>
-                        <Route path={"/vehicleList"} component={() => requireAdminLogin(<VehicleList/>)}/>
-                        <Route path={"/vehicleInfos/:vehId"} component={() => requireAdminLogin(VehicleInfos)}/>
+                        <Route path={"/vehicleInfos/:vehId"} component={params => requireAdminLogin(<VehicleInfos {...params}/>)}/>
+                        <Route path={"/validUser"} component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
+                        <Route path={"/vehicleList"} component={params => requireAdminLogin(<VehicleList {...params}/>)}/>
 
                         <Route component={() => <div>404</div>}/>
                     </Switch>

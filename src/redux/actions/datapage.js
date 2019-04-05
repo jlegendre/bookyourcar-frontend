@@ -37,7 +37,7 @@ export const fetchVehicleInfos = id => {
 
         let token = getState().auth.token;
         httpClient.request({
-            url: `/Vehicle/`,
+            url: `/Vehicle/${id}`,
             method: 'GET',
             headers: {'Authorization': `${token}`}
         }).then(response => {

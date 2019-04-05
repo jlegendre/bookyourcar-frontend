@@ -4,11 +4,6 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import {
     CssBaseline,
     Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
     IconButton,
     Icon,
     colors
@@ -16,17 +11,17 @@ import {
 
 const VehicleInfos = props => {
 
-    const {classes, fetchVehicleInfos, datapage} = props;
+    const {classes, fetchVehicleInfos, datapage, match} = props;
 
     useEffect(() => {
-        fetchVehicleInfos(3);
+        fetchVehicleInfos(match.param.vehId);
     }, []);
-
-    console.log(props);
 
     return (
         <div>
-            PLOPPPP
+            <Paper className={classes.paper}>
+
+            </Paper>
         </div>
     )
 };
