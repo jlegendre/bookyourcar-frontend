@@ -13,6 +13,7 @@ import Acceuil from "./composant/Acceuil/Acceuil.js";
 import ValidUser from "./composant/Admin/ValidateUser/ValidateUser.js";
 import Message from "./composant/Message/Message.js";
 import VehicleList from "./composant/Admin/VehicleList/VehicleList.js";
+import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos.js";
 
 const App = props => {
 
@@ -82,6 +83,7 @@ const App = props => {
                         <Route exact path={"/"} component={params => requireUserLogin(<Acceuil {...params}/>)}/>
 
                         {/* Route admin */}
+                        <Route path={"/vehicleInfos/:vehId"} component={params => requireAdminLogin(<VehicleInfos {...params}/>)}/>
                         <Route path={"/validUser"} component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
                         <Route path={"/vehicleList"}
                                component={params => requireAdminLogin(<VehicleList {...params}/>)}/>

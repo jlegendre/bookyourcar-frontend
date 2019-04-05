@@ -7,7 +7,7 @@ import {getDetailVehicle} from "../../../redux/reducers/datapage";
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = dispatch => {
     return {
-        fetchVehicleInfos: () => dispatch(fetchVehicleInfos())
+        fetchVehicleInfos : id => dispatch(fetchVehicleInfos(id))
     }
 };
 

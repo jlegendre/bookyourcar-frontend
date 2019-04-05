@@ -14,17 +14,12 @@ import MenuAppBar from "./MenuAppBar.js";
 const CustomAppBar = (props) => {
 
     const {classes,  token} = props;
-    console.log('props', props)
 
     const [menuOpen, setMenuOpen] = useState(false);
 
     const handleMenuOpen = () => {
         setMenuOpen(!menuOpen);
     };
-
-    const showMenu = () => {
-
-    }
 
     return (
         <div className={classes.root}>

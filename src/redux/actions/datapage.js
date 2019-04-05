@@ -29,12 +29,12 @@ export const fetchUserInValidation = () => {
  * Call /Vehicle/{i} Url, pour récupérer toutes les informations sur un vehicule donné
  * @returns {Function}
  */
-export const fetchVehicleInfos = () => {
+export const fetchVehicleInfos = id => {
     return (dispatch, getState) => {
 
-        let token = getState().user.token;
+        let token = getState().auth.token;
         httpClient.request({
-            url: '/Vehicle',
+            url: `/Vehicle/${id}`,
             method: 'GET',
             headers: {'Authorization': `${token}`}
         }).then(response => {
