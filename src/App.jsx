@@ -1,11 +1,9 @@
-import React from 'react'
-import * as PropTypes from 'prop-types'
-import {ConnectedRouter} from 'connected-react-router'
-
+import React from 'react';
+import {ConnectedRouter} from 'connected-react-router';
+import * as PropTypes from 'prop-types';
 
 import {Redirect, Route, Switch} from 'react-router'
-import CustomAppBar from "./composant/CustomAppBar/CustomAppBar.js";
-import {withStyles} from "@material-ui/core";
+import {AppBar, CssBaseline, Toolbar, Typography, withStyles} from "@material-ui/core";
 //Page
 import Login from "./composant/User/Login/Login.js";
 import CreateUser from './composant/User/CreateUser/CreateUser.js'
@@ -14,7 +12,8 @@ import ValidUser from "./composant/Admin/ValidateUser/ValidateUser.js";
 import Message from "./composant/Message/Message.js";
 import VehicleList from "./composant/Admin/VehicleList/VehicleList.js";
 import PoleList from "./composant/Admin/PoleList/PoleList.js";
-import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos";
+import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos.js";
+import MenuAppBar from "./composant/MenuAppBar/MenuAppBar.js";
 
 const App = props => {
 
@@ -65,14 +64,23 @@ const App = props => {
     };
 
     return (
-        <div>
-            {/** Route de l'application **/}
-            <ConnectedRouter history={props.history}>
-                <div>
-                    <CustomAppBar/>
-                    {/* Permet d'espacer le menu de l'appbar */}
-                    <div className={classes.toolbar}/>
+        <ConnectedRouter history={props.history}>
+            <div className={classes.root}>
+                <CssBaseline/>
+                <AppBar position="fixed" className={classes.appBar}>
+                    <Toolbar>
+                        <Typography variant="h6" color="inherit" noWrap>
+                            Book Your Car
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
 
+                {/** Affichage du menu si il y a un token */}
+                {token && <MenuAppBar/>}
+
+                <main className={classes.content}>
+
+                    <div className={classes.toolbar}/>
                     <Message/>
 
                     <Switch>
@@ -84,18 +92,20 @@ const App = props => {
                         <Route exact path={"/"} component={params => requireUserLogin(<Acceuil {...params}/>)}/>
 
                         {/* Route admin */}
-                        <Route path={"/validUser"} component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
+                        <Route path={"/validUser"}
+                               component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
                         <Route path={"/vehicleList"}
                                component={params => requireAdminLogin(<VehicleList {...params}/>)}/>
                         <Route path={"/vehicleInfos/:vehId"}
                                component={params => requireAdminLogin(<VehicleInfos {...params} />)}/>
-                        <Route path={"/poleList"} component={params => requireAdminLogin(<PoleList {...params} />)}/>
+                        <Route path={"/poleList"}
+                               component={params => requireAdminLogin(<PoleList {...params} />)}/>
 
                         <Route component={() => <div>404</div>}/>
                     </Switch>
-                </div>
-            </ConnectedRouter>
-        </div>
+                </main>
+            </div>
+        </ConnectedRouter>
     )
 };
 
@@ -107,5 +117,15 @@ App.propTypes = {
 };
 
 export default withStyles(theme => ({
-    toolbar: theme.mixins.toolbar
+    root: {
+        display: 'flex',
+    },
+    appBar: {
+        zIndex: theme.zIndex.drawer + 1,
+    },
+    content: {
+        flexGrow: 1,
+        padding: theme.spacing.unit * 3,
+    },
+    toolbar: theme.mixins.toolbar,
 }))(App)
