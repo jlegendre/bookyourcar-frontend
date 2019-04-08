@@ -8,25 +8,18 @@ import Drawer from "@material-ui/core/Drawer";
 import Icon from "@material-ui/core/Icon"
 import Divider from "@material-ui/core/Divider";
 import {Link} from "react-router-dom";
-import {withStyles} from "@material-ui/core";
+import {Hidden, withStyles} from "@material-ui/core";
 
 const MenuAppBar = props => {
 
-    const {classes, role} = props;
+    const {classes, theme, role} = props;
 
     const logout = () => {
         props.logout();
     };
 
-    return (
-        <Drawer
-            className={classes.drawer}
-            variant="permanent"
-            classes={{
-                paper: classes.drawerPaper,
-            }}
-        >
-            {/* /!\ IMPORTANT /!\ Permet d'espacer le menu de l'appbar */}
+    const menu = (
+        <div>
             <div className={classes.toolbar}/>
 
             {role && role === 'Admin' &&
@@ -62,7 +55,32 @@ const MenuAppBar = props => {
                     <ListItemText primary={"Deconnexion"}/>
                 </ListItem>
             </List>
-        </Drawer>
+        </div>
+    );
+
+
+    return (
+        <nav className={classes.drawer}>
+            {/** Cas Ordinateur */}
+            <Hidden
+                xsDown
+                implementation={"css"}
+            >
+                <Drawer variant="permanent" classes={{paper: classes.drawerPaper}}>
+                    {menu}
+                </Drawer>
+            </Hidden>
+            {/** Cas Tablette ou telephone */}
+            <Hidden smUp implementation={"css"}>
+                <Drawer
+                    variant={"temporary"}
+                    anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+                    classes={{paper: classes.drawerPaper}}
+                >
+                    {menu}
+                </Drawer>
+            </Hidden>
+        </nav>
     )
 };
 
@@ -85,8 +103,10 @@ MenuAppBar.propTypes = {
 const drawerWidth = 240;
 export default withStyles(theme => ({
     drawer: {
-        width: drawerWidth,
-        flexShrink: 0
+        [theme.breakpoints.up('sm')]: {
+            width: drawerWidth,
+            flexShrink: 0
+        }
     },
     drawerPaper: {
         width: drawerWidth,
@@ -95,4 +115,4 @@ export default withStyles(theme => ({
     link: {
         textDecoration: 'none'
     }
-}))(MenuAppBar);
+}), {withTheme: true})(MenuAppBar);
