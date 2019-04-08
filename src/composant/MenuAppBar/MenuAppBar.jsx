@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import * as PropTypes from 'prop-types';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -12,7 +12,7 @@ import {Hidden, withStyles} from "@material-ui/core";
 
 const MenuAppBar = props => {
 
-    const {classes, theme, role} = props;
+    const {classes, theme, role, open, onClose} = props;
 
     const logout = () => {
         props.logout();
@@ -20,8 +20,6 @@ const MenuAppBar = props => {
 
     const menu = (
         <div>
-            <div className={classes.toolbar}/>
-
             {role && role === 'Admin' &&
             <List>
                 <Link to={"/validUser"} className={classes.link}>
@@ -58,7 +56,6 @@ const MenuAppBar = props => {
         </div>
     );
 
-
     return (
         <nav className={classes.drawer}>
             {/** Cas Ordinateur */}
@@ -67,6 +64,7 @@ const MenuAppBar = props => {
                 implementation={"css"}
             >
                 <Drawer variant="permanent" classes={{paper: classes.drawerPaper}}>
+                    <div className={classes.toolbar}/>
                     {menu}
                 </Drawer>
             </Hidden>
@@ -76,6 +74,8 @@ const MenuAppBar = props => {
                     variant={"temporary"}
                     anchor={theme.direction === 'rtl' ? 'right' : 'left'}
                     classes={{paper: classes.drawerPaper}}
+                    open={open}
+                    onClose={onClose}
                 >
                     {menu}
                 </Drawer>
@@ -85,20 +85,18 @@ const MenuAppBar = props => {
 };
 
 MenuAppBar.propTypes = {
-
     //etat du menu
     open: PropTypes.bool,
+
+    //ferme le menu
+    onClose: PropTypes.func,
 
     //role de l'utilisateur en cours
     role: PropTypes.string,
 
-    //fonction qui permet de changer l'état du menu
-    setOpen: PropTypes.func,
-
     //fonction qui permet de déconnecter l'utilisateur
     logout: PropTypes.func
 };
-
 
 const drawerWidth = 240;
 export default withStyles(theme => ({

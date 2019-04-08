@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {ConnectedRouter} from 'connected-react-router';
 import * as PropTypes from 'prop-types';
 
 import {Redirect, Route, Switch} from 'react-router'
-import {AppBar, CssBaseline, Toolbar, Typography, withStyles} from "@material-ui/core";
+import {AppBar, CssBaseline, Hidden, IconButton, Toolbar, Typography, withStyles} from "@material-ui/core";
+import {Menu as MenuIcon} from "@material-ui/icons"
+
 //Page
 import Login from "./composant/User/Login/Login.js";
 import CreateUser from './composant/User/CreateUser/CreateUser.js'
@@ -18,6 +20,8 @@ import MenuAppBar from "./composant/MenuAppBar/MenuAppBar.js";
 const App = props => {
 
     const {classes, token, role} = props;
+
+    const [openMobile, setOpenMobile] = useState(false);
 
     /**
      * Détect si l'utilisateur est connecté
@@ -69,6 +73,16 @@ const App = props => {
                 <CssBaseline/>
                 <AppBar position="fixed" className={classes.appBar}>
                     <Toolbar>
+                        <Hidden smUp implementation={"css"}>
+                            <IconButton
+                                color={"inherit"}
+                                aria-label={"Open drawer"}
+                                onClick={() => setOpenMobile(!openMobile)}
+                            >
+                                <MenuIcon/>
+                            </IconButton>
+                        </Hidden>
+
                         <Typography variant="h6" color="inherit" noWrap>
                             Book Your Car
                         </Typography>
@@ -76,7 +90,7 @@ const App = props => {
                 </AppBar>
 
                 {/** Affichage du menu si il y a un token */}
-                {token && <MenuAppBar/>}
+                {token && <MenuAppBar open={openMobile} onClose={() => setOpenMobile(false)}/>}
 
                 <main className={classes.content}>
 
