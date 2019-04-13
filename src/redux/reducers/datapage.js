@@ -18,7 +18,7 @@ const initialState = {
 export default function (state = initialState, action) {
     switch (action.type) {
         case SET_DATAPAGE_USERINWAITING:
-            return {...state, userInWaiting: action.user};
+            return {...state, userInWaiting: action.users};
         case SET_DATAPAGE_LISTVEHICLE:
             return {...state, listVehicle: action.vehicles};
         case SET_DATAPAGE_DETAILVEHICLE:
