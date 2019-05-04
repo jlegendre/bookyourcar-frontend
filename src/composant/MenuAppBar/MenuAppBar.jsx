@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import * as PropTypes from 'prop-types';
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -48,6 +48,12 @@ const MenuAppBar = props => {
                     <ListItemIcon><Icon>account_circle</Icon></ListItemIcon>
                     <ListItemText primary={"Compte"}/>
                 </ListItem>
+                <Link to={"/booking"} className={classes.link}>
+                    <ListItem button>
+                        <ListItemIcon><Icon>bookmarks</Icon></ListItemIcon>
+                        <ListItemText primary={"Réservations"}/>
+                    </ListItem>
+                </Link>
                 <ListItem button onClick={() => logout()}>
                     <ListItemIcon><Icon>exit_to_app</Icon></ListItemIcon>
                     <ListItemText primary={"Deconnexion"}/>

@@ -5,7 +5,6 @@ import * as PropTypes from 'prop-types';
 import {Redirect, Route, Switch} from 'react-router'
 import {AppBar, CssBaseline, Hidden, IconButton, Toolbar, Typography, withStyles} from "@material-ui/core";
 import {Menu as MenuIcon} from "@material-ui/icons"
-
 //Page
 import Login from "./composant/User/Login/Login.js";
 import CreateUser from './composant/User/CreateUser/CreateUser.js'
@@ -16,6 +15,7 @@ import VehicleList from "./composant/Admin/VehicleList/VehicleList.js";
 import PoleList from "./composant/Admin/PoleList/PoleList.js";
 import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos.js";
 import MenuAppBar from "./composant/MenuAppBar/MenuAppBar.js";
+import BookNewCar from "./composant/User/BookNewCar/BookNewCar.js";
 
 const App = props => {
 
@@ -104,6 +104,7 @@ const App = props => {
 
                         {/* Route user */}
                         <Route exact path={"/"} component={params => requireUserLogin(<Acceuil {...params}/>)}/>
+                        <Route path={"/booking"} component={params => requireUserLogin(<BookNewCar {...params}/>)}/>
 
                         {/* Route admin */}
                         <Route path={"/validUser"}
@@ -114,7 +115,6 @@ const App = props => {
                                component={params => requireAdminLogin(<VehicleInfos {...params} />)}/>
                         <Route path={"/poleList"}
                                component={params => requireAdminLogin(<PoleList {...params} />)}/>
-
                         <Route component={() => <div>404</div>}/>
                     </Switch>
                 </main>

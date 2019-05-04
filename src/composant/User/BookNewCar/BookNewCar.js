@@ -1,22 +1,21 @@
-import Login from './Login.jsx'
+import BookNewCar from './BookNewCar.jsx'
 import {connect} from "react-redux";
-import {fetchLoginUser} from "../../../redux/actions/auth";
-import {getToken, getAuth} from "../../../redux/reducers/auth";
+import {fetchPoles} from "../../../redux/actions/datapage";
+import {getListPoles} from "../../../redux/reducers/datapage";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginUser: (input) => dispatch(fetchLoginUser(input.email, input.password))
+        fetchPoles: () => dispatch(fetchPoles())
     }
 };
 
 //pour envoyer des objets du store de redux
 const mapStateToProps = (state) => {
     return {
-        user: getAuth(state),
-        token: getToken(state)
+        poles: getListPoles(state)
     }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(BookNewCar)

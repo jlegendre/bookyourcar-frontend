@@ -15,7 +15,7 @@ import FormControl from "@material-ui/core/FormControl";
  */
 const InputText = (props) => {
 
-    const {id, name, placeholder, onChange, type, message} = props;
+    const {id, name, onChange, message} = props;
 
 
     return (
@@ -23,11 +23,10 @@ const InputText = (props) => {
             <TextField
                 id={id}
                 name={name}
-                placeholder={placeholder}
                 onChange={(event) => onChange && onChange(event)}
-                type={type}
                 error={message && !!message[name]}
                 helperText={message && message[name] && message[name][0]}
+                {...props}
             />
         </FormControl>
     )
@@ -36,9 +35,7 @@ const InputText = (props) => {
 InputText.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
-    placeholder: PropTypes.string,
     onChange: PropTypes.func,
-    type: PropTypes.string,
     message: PropTypes.object
 };
 
