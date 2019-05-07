@@ -1,109 +1,149 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
+import * as PropTypes from 'prop-types';
 //Material UI Componant
 import CssBaseline from '@material-ui/core/CssBaseline';
-import {Paper, Grid, Select, MenuItem} from '@material-ui/core';
 import withStyles from '@material-ui/core/styles/withStyles';
 import Typography from "@material-ui/core/Typography";
-import InputText from './../../Input/InputText.js';
+import Stepper from "@material-ui/core/Stepper";
+import Step from "@material-ui/core/Step";
+import StepLabel from "@material-ui/core/StepLabel";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import StepInformation from "./Steps/StepInformation.js";
+import StepComments from "./Steps/StepComments";
+import StepFinish from "./Steps/StepFinish";
 
 /**
  * Formulaire de réservation
  */
 const BookNewCar = (props) => {
-    const {classes, poles, fetchPoles} = props;
+    const {classes} = props;
 
-    const [formulaire, setFormulaire] = useState({dateDebut: "", dateFin: "", poleDebut: "", poleFin: ""});
+    const [activeStep, setActiveStep] = useState(0);
+    const [formulaire, setFormulaire] = useState({
+        dateDebut: "",
+        dateFin: "",
+        poleDebut: "",
+        poleFin: "",
+        commentaire: ""
+    });
 
-    useEffect(() => {
-        fetchPoles();
-    }, []);
+    /**
+     * Fonction pour aller sur la page suivante
+     */
+    const handleNext = () => {
+        if(activeStep === steps.length - 1) {
 
-    console.log(poles);
+        } else {
+            setActiveStep(activeStep + 1);
+        }
+    };
+
+    /**
+     * Fonction pour aller  sur la page précendente
+     */
+    const handleBack = () => {
+        setActiveStep(activeStep - 1);
+    };
+
+
+    /**
+     * Les étapes de la réservation
+     * @type {string[]}
+     */
+    const steps = ["Information", "Commentaire", "Finalisation"];
+
+    /**
+     * Permet de savoir quelle étape afficher
+     * @param step
+     * @return {*}
+     */
+    const getStepContent = step => {
+        switch (step) {
+            case 0:
+                return <StepInformation formulaire={formulaire} setFormulaire={setFormulaire}/>;
+            case 1:
+                return <StepComments formulaire={formulaire} setFormulaire={setFormulaire}/>;
+            case 2:
+                return <StepFinish/>;
+            default:
+                throw new Error('Unknown Step')
+        }
+    };
 
     return (
-        <div className={classes.main}>
+        <React.Fragment>
             <CssBaseline/>
-            <form>
+            <main className={classes.layout}>
                 <Paper className={classes.paper}>
-                    <Typography component={"h1"} variant={"h5"}>
-                        Demande de réservation
+                    <Typography component="h1" variant="h4">
+                        Réservation
                     </Typography>
-
-                    <Grid container>
-                        <Grid item xs={6}>
-                            <InputText
-                                value={formulaire.dateDebut}
-                                name={"dateDebut"}
-                                onChange={event => setFormulaire({...formulaire, dateDebut: event.target.value})}
-                                placeholder="Début de la réservation"
-                                type="datetime-local"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <InputText
-                                value={formulaire.dateFin}
-                                name={"dateFin"}
-                                onChange={event => setFormulaire({...formulaire, dateFin: event.target.value})}
-                                placeholder="Fin de la réservation"
-                                type="datetime-local"
-                                InputLabelProps={{
-                                    shrink: true,
-                                }}
-                            />
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Select
-                                value={formulaire.poleDebut}
-                                onChange={event => setFormulaire({...formulaire, poleDebut: event.target.value})}
+                    <Stepper activeStep={activeStep} className={classes.stepper}>
+                        {steps.map(label =>
+                            <Step key={label}>
+                                <StepLabel>{label}</StepLabel>
+                            </Step>
+                        )}
+                    </Stepper>
+                    <React.Fragment>
+                        {getStepContent(activeStep)}
+                        <div className={classes.buttons}>
+                            {activeStep !== 0 && (
+                                <Button onClick={handleBack} className={classes.button}>
+                                    Retour
+                                </Button>
+                            )}
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={handleNext}
+                                className={classes.button}
                             >
-                                {poles && poles.map(item =>
-                                    <MenuItem key={item.poleId} value={item.poleId}>{item.poleName}</MenuItem>
-                                )}
-                            </Select>
-                        </Grid>
-                        <Grid item xs={6}>
-                            <Select
-                                value={formulaire.poleFin}
-                                onChange={event => setFormulaire({...formulaire, poleFin: event.target.value})}
-                            >
-                                {poles && poles.map(item =>
-                                    <MenuItem key={item.poleId} value={item.poleId}>{item.poleName}</MenuItem>
-                                )}
-                            </Select>
-                        </Grid>
-                    </Grid>
+                                {activeStep === steps.length - 1 ? 'Confirmer' : 'Suivant'}
+                            </Button>
+                        </div>
+                    </React.Fragment>
                 </Paper>
-            </form>
-        </div>
+            </main>
+        </React.Fragment>
     );
 };
 
-BookNewCar.propTypes = {};
+BookNewCar.propTypes = {
+    classes: PropTypes.object
+};
 
-export default withStyles((theme) => ({
-    main: {
+export default withStyles(theme => ({
+    layout: {
         width: 'auto',
-        display: 'block', // Fix IE 11 issue.
-        marginLeft: theme.spacing.unit * 3,
-        marginRight: theme.spacing.unit * 3,
-        [theme.breakpoints.up(1000 + theme.spacing.unit * 3 * 2)]: {
-            width: 1000,
+        marginLeft: theme.spacing.unit * 2,
+        marginRight: theme.spacing.unit * 2,
+        [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
+            width: 600,
             marginLeft: 'auto',
             marginRight: 'auto',
         },
     },
     paper: {
-        marginTop: theme.spacing.unit * 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+        marginTop: theme.spacing.unit * 3,
+        marginBottom: theme.spacing.unit * 3,
+        padding: theme.spacing.unit * 2,
+        [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
+            marginTop: theme.spacing.unit * 6,
+            marginBottom: theme.spacing.unit * 6,
+            padding: theme.spacing.unit * 3,
+        },
     },
-    form: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing.unit,
-    }
+    stepper: {
+        padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`,
+    },
+    buttons: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+    },
+    button: {
+        marginTop: theme.spacing.unit * 3,
+        marginLeft: theme.spacing.unit,
+    },
 }))(BookNewCar)

@@ -51,7 +51,7 @@ const MenuAppBar = props => {
                 <Link to={"/booking"} className={classes.link}>
                     <ListItem button>
                         <ListItemIcon><Icon>bookmarks</Icon></ListItemIcon>
-                        <ListItemText primary={"Réservations"}/>
+                        <ListItemText primary={"Demande de réservation"}/>
                     </ListItem>
                 </Link>
                 <ListItem button onClick={() => logout()}>
