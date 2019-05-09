@@ -9,6 +9,8 @@ export const SET_DATAPAGE_DETAILVEHICLE = 'SET_DATAPAGE_DETAILVEHICLE';
 export const SET_DATAPAGE_LISTPOLES = 'SET_DATAPAGE_LISTPOLES';
 export const SET_DATAPAGE_DETAILPOLE = 'SET_DATAPAGE_DETAILPOLE';
 
+export const SET_DATAPAGE_RESERVATIONINWAITING = 'SET_DATAPAGE_RESERVATIONINWAITING';
+
 /**
  * Call /User/userInWaiting Url, pour récupérer tous les utilisateurs en attente de validation
  * @returns {Function}
@@ -29,14 +31,15 @@ export const fetchUserInValidation = () => {
  * Call /Vehicle/{i} Url, pour récupérer toutes les informations sur un vehicule donné
  * @returns {Function}
  */
-export const fetchVehicleInfos = id => {
+export const fetchVehicleInfos = (id, success) => {
     return dispatch => {
         httpClient.request({
             url: `/Vehicle/${id}`,
             method: 'GET',
         }).then(response => {
-           dispatch(setDetailVehicle(response.data));
+            dispatch(setDetailVehicle(response.data));
             dispatch(setNoMessage());
+            success && success(response.data );
         })
     }
 };
@@ -89,6 +92,20 @@ export const fetchVehicles = () => {
     }
 };
 
+export const fetchReservationInWaiting = () => {
+    return dispatch => {
+        httpClient.request({
+            url: '/Reservation/reservationInWaiting',
+            method: 'GET',
+        }).then(response => {
+            dispatch(setReservationInWaiting(response.data));
+        })
+    }
+}
+
+
+
+
 export const setUserInWaiting = users => {
     return {type: SET_DATAPAGE_USERINWAITING, users}
 };
@@ -107,4 +124,8 @@ export const setListPoles = poles => {
 
 export const setDetailPole = detailPole => {
     return {type: SET_DATAPAGE_DETAILPOLE, detailPole}
+}
+
+export const setReservationInWaiting = reservations => {
+    return {type: SET_DATAPAGE_RESERVATIONINWAITING, reservations}
 }
