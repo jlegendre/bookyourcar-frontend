@@ -14,7 +14,6 @@ const MenuAppBar = props => {
         props.logout();
     };
 
-
     const menu = (
         <div>
             <List>
@@ -23,13 +22,13 @@ const MenuAppBar = props => {
             <Divider/>
             {role && role === 'Admin' &&
             <List>
-                <MenuItem label={"Liste de véhicules"} url={"vehicleList"} iconName={"directions_car"}/>
-                <MenuItem label={"Liste des pôles"} url={"poleList"} iconName={"location_city"}/>
+                <MenuItem label={"Liste de véhicules"} url={"vehicleList"} iconName={"directions_car"} onClick={onClose}/>
+                <MenuItem label={"Liste des pôles"} url={"poleList"} iconName={"location_city"} onClick={onClose}/>
             </List>
             }
             <Divider/>
             <List>
-                <MenuItem label={"Demande de réservation"} url={"booking"} iconName={"bookmarks"}/>
+                <MenuItem label={"Demande de réservation"} url={"booking"} iconName={"bookmarks"} onClick={onClose}/>
                 <MenuItem label={"Deconnexion"} iconName={"exit_to_app"} onClick={() => logout()}/>
             </List>
         </div>
