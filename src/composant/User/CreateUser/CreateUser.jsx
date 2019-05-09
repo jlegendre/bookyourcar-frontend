@@ -12,6 +12,7 @@ import Button from "@material-ui/core/Button";
 import InputText from "../../Input/InputText";
 import {Redirect} from "react-router";
 import InputSelect from "../../Input/InputSelect";
+import {getBreakingLimit} from "../../../utils/cssUtils";
 
 const CreateUser = props => {
 
@@ -49,7 +50,7 @@ const CreateUser = props => {
     const updateSelect = event => {
         setInput({
             ...input,
-            [event.target.name] : event.target.value
+            [event.target.name]: event.target.value
         })
     };
 
@@ -66,91 +67,92 @@ const CreateUser = props => {
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <Paper className={classes.paper}>
-                <Avatar className={classes.avatar}>
-                    <HowToRegOutlinedIcon/>
-                </Avatar>
-                <Typography component={"h1"} variant={"h5"}>
-                    Inscription
-                </Typography>
-                <div className={classes.form}>
-                    <InputText
-                        name={"Prenom"}
-                        id={"prenom"}
-                        label={"Prénom"}
-                        required
-                        type={"text"}
-                        onChange={updateInput}
-                        value={input.prenom}
-                    />
-                    <InputText
-                        id={"nom"}
-                        name={"Nom"}
-                        label={"Nom"}
-                        type={"text"}
-                        onChange={updateInput}
-                        value={input.name}
-                        required
-                    />
-                    <InputText
-                        id={"phoneNumber"}
-                        name={"PhoneNumber"}
-                        label={"Numero de telephone"}
-                        type={"text"}
-                        onChange={updateInput}
-                        value={input.phoneNumber}
-                    />
-                    <InputSelect
-                        id={"poleId"}
-                        name={"poleId"}
-                        onChange={updateSelect}
-                        label={"Pole"}
-                        data={poles}
-                        value={input.poleId}
-                    />
-                    <InputText
-                        id={"email"}
-                        name={"Email"}
-                        label={"Email"}
-                        type={"email"}
-                        required
-                        onChange={updateInput}
-                        value={input.email}
-                    />
-                    <InputText
-                        id={"password"}
-                        name={"Password"}
-                        label={"Mot de passe"}
-                        type={"password"}
-                        required
-                        onChange={updateInput}
-                        value={input.password}
-                    />
-                    <InputText
-                        id={"confirmPassword"}
-                        name={"ConfirmPassword"}
-                        label={"Confirmation du mot de passe"}
-                        type={"password"}
-                        onChange={updateInput}
-                        value={input.confirmPassword}
-                    />
-                    <Typography>
-                        <Link className={classes.link} to={"/login"}>
-                            Déjà un compte ?
-                        </Link>
+            <form className={classes.form} onSubmit={() => fetchCreateUser()}>
+                <Paper className={classes.paper}>
+                    <Avatar className={classes.avatar}>
+                        <HowToRegOutlinedIcon/>
+                    </Avatar>
+                    <Typography component={"h1"} variant={"h5"}>
+                        Inscription
                     </Typography>
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.submit}
-                        onClick={() => fetchCreateUser()}
-                    >
-                        Créer un compte
-                    </Button>
-                </div>
-            </Paper>
+                    <div className={classes.formInput}>
+                        <InputText
+                            name={"Prenom"}
+                            id={"prenom"}
+                            label={"Prénom"}
+                            required
+                            type={"text"}
+                            onChange={updateInput}
+                            value={input.prenom}
+                        />
+                        <InputText
+                            id={"nom"}
+                            name={"Nom"}
+                            label={"Nom"}
+                            type={"text"}
+                            onChange={updateInput}
+                            value={input.name}
+                            required
+                        />
+                        <InputText
+                            id={"phoneNumber"}
+                            name={"PhoneNumber"}
+                            label={"Numero de telephone"}
+                            type={"text"}
+                            onChange={updateInput}
+                            value={input.phoneNumber}
+                        />
+                        <InputSelect
+                            id={"poleId"}
+                            name={"poleId"}
+                            onChange={updateSelect}
+                            label={"Pole"}
+                            data={poles}
+                            value={input.poleId}
+                        />
+                        <InputText
+                            id={"email"}
+                            name={"Email"}
+                            label={"Email"}
+                            type={"email"}
+                            required
+                            onChange={updateInput}
+                            value={input.email}
+                        />
+                        <InputText
+                            id={"password"}
+                            name={"Password"}
+                            label={"Mot de passe"}
+                            type={"password"}
+                            required
+                            onChange={updateInput}
+                            value={input.password}
+                        />
+                        <InputText
+                            id={"confirmPassword"}
+                            name={"ConfirmPassword"}
+                            label={"Confirmation du mot de passe"}
+                            type={"password"}
+                            onChange={updateInput}
+                            value={input.confirmPassword}
+                        />
+                        <Typography>
+                            <Link className={classes.link} to={"/login"}>
+                                Déjà un compte ?
+                            </Link>
+                        </Typography>
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            color="primary"
+                            className={classes.submit}
+                        >
+                            Créer un compte
+                        </Button>
+                    </div>
+                </Paper>
+            </form>
         </div>
     )
 };
@@ -179,11 +181,16 @@ export default withStyles(theme => ({
         display: 'block', // Fix IE 11 issue.
         marginLeft: theme.spacing.unit * 3,
         marginRight: theme.spacing.unit * 3,
-        [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+        [theme.breakpoints.up(getBreakingLimit(theme))]: {
             width: 400,
             marginLeft: 'auto',
             marginRight: 'auto',
         },
+        [theme.breakpoints.down(getBreakingLimit(theme))] : {
+            width: '100%',
+            margin: 0,
+            height: '100%'
+        }
     },
     paper: {
         marginTop: theme.spacing.unit * 8,
@@ -191,14 +198,24 @@ export default withStyles(theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+        [theme.breakpoints.down(getBreakingLimit(theme))]: {
+            width: '100%',
+            height: '600',
+            margin: 0
+        }
     },
     avatar: {
         margin: theme.spacing.unit,
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
+        [theme.breakpoints.down(getBreakingLimit(theme))]: {
+            height: '100%'
+        }
+    },
+    formInput: {
         width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing.unit,
+        marginTop: theme.spacing.unit
     },
     submit: {
         marginTop: theme.spacing.unit * 3,
