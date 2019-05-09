@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 
 import {Redirect} from "react-router";
@@ -20,9 +20,13 @@ import {getBreakingLimit} from "../../../utils/cssUtils";
  * Formulaire de Login
  */
 const Login = (props) => {
-    const {classes, loginUser, token} = props;
+    const {classes, loginUser, token, clearMessage} = props;
 
     const [input, setInput] = useState({email: "", password: ""});
+
+    useEffect(() => {
+        clearMessage();
+    }, []);
 
     /**
      * Update email input
@@ -78,6 +82,7 @@ const Login = (props) => {
                             placeholder={"Email"}
                             tpe={"email"}
                             onChange={(event) => updateEmail(event)}
+                            required
                         />
                         <InputText
                             id={"password"}
@@ -85,6 +90,7 @@ const Login = (props) => {
                             placeholder={"Mot de passe"}
                             type={"password"}
                             onChange={(event) => updatePassword(event)}
+                            required
                         />
                         <Typography>
                             <FormControlLabel
@@ -112,6 +118,8 @@ const Login = (props) => {
 };
 
 Login.propTypes = {
+    //Clear les messages
+    clearMessage: PropTypes.func,
 
     //classe css du composant
     classes: PropTypes.object.isRequired,

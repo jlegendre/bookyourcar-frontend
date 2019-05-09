@@ -24,7 +24,7 @@ const StepInformation = props => {
                         id={"dateDebut"}
                         name={"dateDebut"}
                         label={"Date début"}
-                        type={"datetime-local"}
+                        type={"date"}
                         value={formulaire.dateDebut}
                         onChange={event => setFormulaire({...formulaire, dateDebut: event.target.value})}
                     />
@@ -34,7 +34,7 @@ const StepInformation = props => {
                         id={"dateFin"}
                         name={"dateFin"}
                         label={"Date fin"}
-                        type={"datetime-local"}
+                        type={"date"}
                         value={formulaire.dateFin}
                         onChange={event => setFormulaire({...formulaire, dateFin: event.target.value})}
                     />
