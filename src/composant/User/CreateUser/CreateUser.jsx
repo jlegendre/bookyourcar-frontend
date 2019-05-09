@@ -27,22 +27,31 @@ const CreateUser = props => {
         password: "",
         name: "",
         firstName: "",
-        pole: "",
+        poleId: 0,
         phoneNumber: ""
     });
     const [accountSuccess, setAccountSuccess] = useState(false);
 
     /**
      * @Input event: données de l'input
-     * @Input type: donnée concernée par l'input
-     * @type {Function}
      */
-    const updateForm = ((event, type) => {
+    const updateInput = event => {
         setInput({
             ...input,
-            [type]: event.target.value
+            [event.target.id]: event.target.value
         })
-    });
+    };
+
+    /**
+     *
+     * @param event donnée du select
+     */
+    const updateSelect = event => {
+        setInput({
+            ...input,
+            [event.target.name] : event.target.value
+        })
+    };
 
     const fetchCreateUser = () => {
         registerUser(input, () => {
@@ -67,32 +76,35 @@ const CreateUser = props => {
                 <div className={classes.form}>
                     <InputText
                         name={"Prenom"}
-                        id={"prenom"}
+                        id={"firstName"}
                         label={"Prénom"}
                         type={"text"}
-                        onChange={(event) => updateForm(event, 'firstName')}
+                        onChange={updateInput}
+                        value={input.firstName}
                     />
                     <InputText
-                        id={"nom"}
+                        id={"name"}
                         name={"Nom"}
                         label={"Nom"}
                         type={"text"}
-                        onChange={(event) => updateForm(event, 'name')}
+                        onChange={updateInput}
+                        value={input.name}
                     />
                     <InputText
                         id={"phoneNumber"}
                         name={"PhoneNumber"}
                         label={"Numero de telephone"}
                         type={"text"}
-                        onChange={(event) => updateForm(event, 'phoneNumber')}
+                        onChange={updateInput}
+                        value={input.phoneNumber}
                     />
                     <InputSelect
-                        id={"pole"}
-                        name={"Pole"}
-                        onChange={(event) => updateForm(event, 'pole')}
+                        id={"poleId"}
+                        name={"poleId"}
+                        onChange={updateSelect}
                         label={"Pole"}
                         data={poles}
-                        value={input.pole}
+                        value={input.poleId}
                     />
                     <InputText
                         id={"email"}
@@ -100,7 +112,8 @@ const CreateUser = props => {
                         label={"Email"}
                         type={"email"}
                         required
-                        onChange={(event) => updateForm(event, 'email')}
+                        onChange={updateInput}
+                        value={input.email}
                     />
                     <InputText
                         id={"password"}
@@ -108,14 +121,16 @@ const CreateUser = props => {
                         label={"Mot de passe"}
                         type={"password"}
                         required
-                        onChange={(event) => updateForm(event, 'password')}
+                        onChange={updateInput}
+                        value={input.password}
                     />
                     <InputText
                         id={"confirmPassword"}
                         name={"ConfirmPassword"}
                         label={"Confirmation du mot de passe"}
                         type={"password"}
-                        onChange={(event) => updateForm(event, 'confirmPassword')}
+                        onChange={updateInput}
+                        value={input.confirmPassword}
                     />
                     <Typography>
                         <Link className={classes.link} to={"/login"}>

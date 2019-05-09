@@ -1,5 +1,4 @@
 import React, {useEffect} from 'react';
-import _ from 'lodash';
 import * as PropTypes from 'prop-types';
 import InputText from "../../../Input/InputText.js";
 import InputSelect from "../../../Input/InputSelect.js";

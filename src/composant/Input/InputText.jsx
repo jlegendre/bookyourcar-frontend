@@ -40,7 +40,7 @@ InputText.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
-    message: PropTypes.object
+    message: PropTypes.array
 };
 
 export default InputText

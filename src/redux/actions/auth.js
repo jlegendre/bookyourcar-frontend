@@ -33,14 +33,18 @@ export const fetchLoginUser = (email, password) => {
  * @param confirmPassword le mot de passe
  * @param password le mot de passe
  * @param success fonction a executer si la requêtes a bien fonctionné
+ * @param name le prenom de l'utilisateur
+ * @param firstName le nom de l'utilisateur
+ * @param pole l'identifiant du pole
+ * @param phoneNumber le numéro de téléhpone
  * @returns {Function}
  */
-export const fetchRegisterUser = ({email, confirmPassword, password, name, firstName, pole, phoneNumber}, success) => {
+export const fetchRegisterUser = ({email, confirmPassword, password, name, firstName, poleId, phoneNumber}, success) => {
     return dispatch => {
         httpClient.request({
             url: '/Auth/register',
             method: 'POST',
-            data: {email, confirmPassword, password, name, firstName, pole, phoneNumber}
+            data: {email, confirmPassword, password, name, firstName, poleId, phoneNumber}
         }).then(() => {
             success()
         })

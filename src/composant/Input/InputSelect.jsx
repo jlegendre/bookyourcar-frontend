@@ -7,7 +7,7 @@ import FormHelperText from "@material-ui/core/FormHelperText";
 
 const InputSelect = props => {
 
-    const {fullWidth, onChange, value, data, name, label, message} = props;
+    const {fullWidth, onChange, data, name, label, message, value, id} = props;
 
     return (
         <FormControl margin={"normal"} fullWidth={fullWidth}>
@@ -16,13 +16,17 @@ const InputSelect = props => {
                 onChange={onChange}
                 value={value}
                 error={message && !!message[name]}
+                inputProps={{
+                    name: name,
+                    id: id
+                }}
             >
                 {data && data.map((item, i) =>
                     <MenuItem key={i} value={item.value}>{item.label}</MenuItem>
                 )}
             </Select>
             {message && message[name] &&
-                <FormHelperText>{message[name][0]}</FormHelperText>
+            <FormHelperText>{message[name][0]}</FormHelperText>
             }
 
         </FormControl>
@@ -35,12 +39,13 @@ InputSelect.defaultProps = {
 };
 
 InputSelect.propTypes = {
+    id: PropTpyes.string,
     data: PropTpyes.array,
     fullWidth: PropTpyes.bool,
     onChange: PropTpyes.func,
-    value: PropTpyes.any,
     name: PropTpyes.string,
-    label: PropTpyes.string
+    label: PropTpyes.string,
+    message: PropTpyes.array
 };
 
 

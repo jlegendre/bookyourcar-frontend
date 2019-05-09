@@ -49,6 +49,10 @@ export const getDetailPoles = state => getDataPage(state).detailPole;
  * @param state
  * @return {Array}
  */
-export const getListPolesForSelect = state => _.map(getListPoles(state), pole => {
-    return {value: pole.poleId, label: pole.poleName}
-});
+export const getListPolesForSelect = state => {
+    const map = _.map(getListPoles(state), pole => {
+        return {value: pole.poleId, label: pole.poleName}
+    });
+
+    return [{value: 0, label: "Sans information"}, ...map]
+};

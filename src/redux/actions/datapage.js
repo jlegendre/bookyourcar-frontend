@@ -89,9 +89,6 @@ export const fetchVehicles = () => {
     }
 };
 
-
-
-
 export const setUserInWaiting = users => {
     return {type: SET_DATAPAGE_USERINWAITING, users}
 };
