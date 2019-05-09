@@ -90,7 +90,7 @@ const App = props => {
                 </AppBar>
 
                 {/** Affichage du menu si il y a un token */}
-                {token && <MenuAppBar open={openMobile} onClose={() => setOpenMobile(false)}/>}
+                {token && <MenuAppBar open={openMobile} onClose={() => setOpenMobile(false)}/> }
 
                 <main className={classes.content}>
 

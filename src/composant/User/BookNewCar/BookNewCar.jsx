@@ -20,8 +20,6 @@ import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMedi
 const BookNewCar = (props) => {
     const {classes} = props;
 
-    console.log(props);
-
     const computerView = useMediaQuery('(min-width:767px)');
     const [activeStep, setActiveStep] = useState(0);
     const [formulaire, setFormulaire] = useState({

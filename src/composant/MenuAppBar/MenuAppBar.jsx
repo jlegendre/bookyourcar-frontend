@@ -12,11 +12,14 @@ import {Hidden, withStyles} from "@material-ui/core";
 
 const MenuAppBar = props => {
 
-    const {classes, theme, role, open, onClose} = props;
+    const {classes, theme, role, open, onClose, pathname} = props;
 
     const logout = () => {
         props.logout();
     };
+
+
+    console.log(pathname);
 
     const menu = (
         <div>
@@ -30,19 +33,19 @@ const MenuAppBar = props => {
             {role && role === 'Admin' &&
             <List>
                 <Link to={"/validUser"} className={classes.link}>
-                    <ListItem button>
+                    <ListItem button selected={pathname === "/validUser"}>
                         <ListItemIcon><Icon>how_to_reg</Icon></ListItemIcon>
                         <ListItemText primary={"Validation d'utilisateurs"}/>
                     </ListItem>
                 </Link>
                 <Link to={"/vehicleList"} className={classes.link}>
-                    <ListItem button>
+                    <ListItem button selected={pathname === "/vehiculeList"}>
                         <ListItemIcon><Icon>directions_car</Icon></ListItemIcon>
                         <ListItemText primary={"Liste de véhicules"}/>
                     </ListItem>
                 </Link>
                 <Link to={"/poleList"} className={classes.link}>
-                    <ListItem button>
+                    <ListItem button selected={pathname === "/poleList"}>
                         <ListItemIcon><Icon>location_city</Icon></ListItemIcon>
                         <ListItemText primary={"Liste des pôles"}/>
                     </ListItem>
@@ -52,7 +55,7 @@ const MenuAppBar = props => {
             <Divider/>
             <List>
                 <Link to={"/booking"} className={classes.link}>
-                    <ListItem button>
+                    <ListItem button selected={pathname === "/booking"}>
                         <ListItemIcon><Icon>bookmarks</Icon></ListItemIcon>
                         <ListItemText primary={"Demande de réservation"}/>
                     </ListItem>
@@ -104,7 +107,10 @@ MenuAppBar.propTypes = {
     role: PropTypes.string,
 
     //fonction qui permet de déconnecter l'utilisateur
-    logout: PropTypes.func
+    logout: PropTypes.func,
+
+    //Pathanem de l'url
+    pathname: PropTypes.string
 };
 
 const drawerWidth = 240;
