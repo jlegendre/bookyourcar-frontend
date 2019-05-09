@@ -78,9 +78,10 @@ const CreateUser = props => {
                         name={"Prenom"}
                         id={"prenom"}
                         label={"Prénom"}
+                        required
                         type={"text"}
                         onChange={updateInput}
-                        value={input.firstName}
+                        value={input.prenom}
                     />
                     <InputText
                         id={"nom"}
@@ -89,6 +90,7 @@ const CreateUser = props => {
                         type={"text"}
                         onChange={updateInput}
                         value={input.name}
+                        required
                     />
                     <InputText
                         id={"phoneNumber"}

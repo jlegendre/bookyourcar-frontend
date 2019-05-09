@@ -79,7 +79,7 @@ const Login = (props) => {
                         <InputText
                             id={"email"}
                             name={"Email"}
-                            placeholder={"Email"}
+                            label={"Email"}
                             tpe={"email"}
                             onChange={(event) => updateEmail(event)}
                             required
@@ -87,7 +87,7 @@ const Login = (props) => {
                         <InputText
                             id={"password"}
                             name={"Password"}
-                            placeholder={"Mot de passe"}
+                            label={"Mot de passe"}
                             type={"password"}
                             onChange={(event) => updatePassword(event)}
                             required
