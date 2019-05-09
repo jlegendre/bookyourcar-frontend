@@ -11,6 +11,7 @@ const MenuAppBar = props => {
     const {classes, theme, role, open, onClose} = props;
 
     const logout = () => {
+        onClose();
         props.logout();
     };
 

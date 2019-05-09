@@ -16,6 +16,7 @@ import PoleList from "./composant/Admin/PoleList/PoleList.js";
 import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos.js";
 import MenuAppBar from "./composant/MenuAppBar/MenuAppBar.js";
 import BookNewCar from "./composant/User/BookNewCar/BookNewCar.js";
+import {getBreakingLimit} from "./utils/cssUtils";
 
 const App = props => {
 
@@ -71,7 +72,7 @@ const App = props => {
         <ConnectedRouter history={props.history}>
             <div className={classes.root}>
                 <CssBaseline/>
-                <AppBar position="fixed" className={classes.appBar}>
+                <AppBar position="fixed" className={classes.appBar} id={"customAppBar"}>
                     <Toolbar>
                         <Hidden smUp implementation={"css"}>
                             <IconButton
@@ -90,7 +91,7 @@ const App = props => {
                 </AppBar>
 
                 {/** Affichage du menu si il y a un token */}
-                {token && <MenuAppBar open={openMobile} onClose={() => setOpenMobile(false)}/> }
+                {token && <MenuAppBar open={openMobile} onClose={() => setOpenMobile(false)}/>}
 
                 <main className={classes.content}>
 
@@ -133,6 +134,9 @@ App.propTypes = {
 export default withStyles(theme => ({
     root: {
         display: 'flex',
+        [theme.breakpoints.down(getBreakingLimit(theme))]: {
+            height: '100%'
+        }
     },
     appBar: {
         zIndex: theme.zIndex.drawer + 1,
@@ -140,6 +144,10 @@ export default withStyles(theme => ({
     content: {
         flexGrow: 1,
         padding: theme.spacing.unit * 3,
+        [theme.breakpoints.down(getBreakingLimit(theme))]: {
+            padding: 0,
+            height: "calc(100% - 56px)" //56 c'est le nombre de pixem de l'appbar (+ ou - )
+        }
     },
     toolbar: theme.mixins.toolbar,
 }))(App)

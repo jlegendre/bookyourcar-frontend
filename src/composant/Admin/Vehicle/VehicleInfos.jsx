@@ -1,13 +1,8 @@
-import React, {useEffect} from 'react';
-import {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {
-    Icon,
-    Paper,
-} from "@material-ui/core";
+import {Icon, Paper,} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/es/TextField/TextField";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Input/InputText";
@@ -18,18 +13,16 @@ const VehicleInfos = props => {
     const [input, setInput] = useState(detailVehicle);
 
 
-
     useEffect(() => {
         fetchVehicleInfos(match.params.vehId, (vehicle) => {
-            setInput(
-                vehicle);
+            setInput(vehicle);
         });
     }, []);
 
-    if(!detailVehicle){
+    if (!detailVehicle) {
         return (
             <div>
-                <CircularProgress className={classes.progress} />
+                <CircularProgress className={classes.progress}/>
             </div>
         )
     }
@@ -57,26 +50,35 @@ const VehicleInfos = props => {
                         <Icon fontSize={"large"}>directions_car</Icon>
                         <Grid id="plop" direction={"column"}>
                             <Grid direction={"row"}>
-                                <InputText label='Marque' defaultValue={detailVehicle.vehBrand} onChange={(event) => update(event, 'vehBrand')}/>
-                                <InputText label='Modèle' defaultValue={detailVehicle.vehModel} onChange={(event) => update(event, 'vehModel')}/>
+                                <InputText label='Marque' defaultValue={detailVehicle.vehBrand}
+                                           onChange={(event) => update(event, 'vehBrand')}/>
+                                <InputText label='Modèle' defaultValue={detailVehicle.vehModel}
+                                           onChange={(event) => update(event, 'vehModel')}/>
                             </Grid>
                             <Grid direction={"column"}>
-                                <InputText label='Immatriculation' defaultValue={detailVehicle.vehRegistration} onChange={(event) => update(event, 'vehRegistration')}/>
-                                <InputText  label='Couleur' defaultValue={detailVehicle.vehColor} onChange={(event) => update(event, 'vehColor')}/>
+                                <InputText label='Immatriculation' defaultValue={detailVehicle.vehRegistration}
+                                           onChange={(event) => update(event, 'vehRegistration')}/>
+                                <InputText label='Couleur' defaultValue={detailVehicle.vehColor}
+                                           onChange={(event) => update(event, 'vehColor')}/>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <InputText label='Nombre de places' defaultValue={detailVehicle.vehNumberplace} onChange={(event) => update(event, 'vehNumberplace')}/>
-                    <InputText label='Type de carburant' defaultValue={detailVehicle.vehTypeEssence} onChange={(event) => update(event, 'vehTypeEssence')}/>
-                    <InputText label='Pôle' defaultValue={detailVehicle.poleName} onChange={(event) => update(event, 'poleName')}/>
+                    <InputText label='Nombre de places' defaultValue={detailVehicle.vehNumberplace}
+                               onChange={(event) => update(event, 'vehNumberplace')}/>
+                    <InputText label='Type de carburant' defaultValue={detailVehicle.vehTypeEssence}
+                               onChange={(event) => update(event, 'vehTypeEssence')}/>
+                    <InputText label='Pôle' defaultValue={detailVehicle.poleName}
+                               onChange={(event) => update(event, 'poleName')}/>
 
                 </Grid>
                 <Grid direction={"row"}>
-                    <Button variant="contained" color="primary" className={classes.button}                         onClick={() => updateVehicle()}
+                    <Button variant="contained" color="primary" className={classes.button}
+                            onClick={() => updateVehicle()}
                     >
                         Mise à jour
                     </Button>
-                    <Button variant="contained" color="secondary" className={classes.button} onClick={() => deleteVehicle()}
+                    <Button variant="contained" color="secondary" className={classes.button}
+                            onClick={() => deleteVehicle()}
                     >>
                         Supprimer
                     </Button>
