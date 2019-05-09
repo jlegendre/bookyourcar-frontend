@@ -5,7 +5,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import Icon from "@material-ui/core/Icon";
 import ListItemText from "@material-ui/core/ListItemText";
 import {Link} from "react-router-dom";
-import {withStyles} from "@material-ui/styles";
+import {withStyles} from "@material-ui/core";
 
 /**
  * Composant de MenuItem pour le MenuAppBar

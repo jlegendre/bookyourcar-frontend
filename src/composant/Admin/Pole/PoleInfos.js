@@ -2,7 +2,7 @@ import PoleInfos from "./PoleInfos.jsx";
 import {connect} from "react-redux";
 import { fetchPoleInfos } from "../../../redux/actions/datapage";
 import { fetchUpdatePole } from "../../../redux/actions/datapage";
-import { getDetailPole } from "../../../redux/reducers/datapage";
+import { getDetailPoles } from "../../../redux/reducers/datapage";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
@@ -16,7 +16,7 @@ const mapDispatchToProps = dispatch => {
 //pour envoyer des objets du store de redux
 const mapStateToProps = state => {
     return {
-        detailPole: getDetailPole(state)
+        detailPole: getDetailPoles(state)
     }
 };
 
