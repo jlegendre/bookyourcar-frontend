@@ -1,13 +1,15 @@
 import PoleList from "./PoleList.jsx";
 import {connect} from "react-redux";
 import {fetchPoles} from "../../../redux/actions/datapage";
-import {getListPoles} from "../../../redux/reducers/datapage";
+import { getListPoles } from "../../../redux/reducers/datapage";
+
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = dispatch => {
     return {
-        fetchPoles: () => dispatch(fetchPoles())
+        fetchPoles: () => dispatch(fetchPoles()),
+
     }
 };
 

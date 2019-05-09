@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
+import { useState } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
     CssBaseline,
@@ -13,52 +14,93 @@ import {
     TableRow,
     Typography
 } from "@material-ui/core";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/es/TextField/TextField";
+import Grid from "@material-ui/core/Grid";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import InputText from "../../Input/InputText";
 
 const PoleInfos = props => {
 
-    const {classes, fetchPolesInfoq, datapage} = props;
+    const { classes, fetchPoleInfos, fetchUpdatePole, detailPole, match } = props;
+    const [input, setInput] = useState(detailPole);
+
     useEffect(() => {
-        fetchPolesInfos();
+        fetchPoleInfos(match.params.poleId, (pole) => {
+            setInput(pole);
+        });
+
     }, []);
+
+
+    const update = ((event, type) => {
+        setInput({
+            ...input,
+            [type]: event.target.value
+        });
+    });
+
+    const updatepole = (() => {
+        fetchUpdatePole(input);
+
+    })
+
+ 
+
+    if (!detailPole) {
+        return (
+            <div>
+                <CircularProgress className={classes.progress} />
+            </div>
+        )
+    }
 
     return (
         <div className={classes.main}>
             <CssBaseline/>
             <Paper className={classes.paper}>
-                <Typography variant="h4" gutterBottom>Liste des Poles</Typography>
+                <Typography variant="h4" gutterBottom>Pole</Typography>
                 <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Nom</TableCell>
-                            <TableCell>Adresse</TableCell>
-                            <TableCell>CodePostal</TableCell>
-                            <TableCell>Ville</TableCell>
-                        </TableRow>
-                    </TableHead>
                     <TableBody>
-                        {datapage && datapage.map((row, i) =>
-                            <TableRow key={i}>
-                                <TableCell>{row.poleName}</TableCell>
-                                <TableCell>{row.poleAddress}</TableCell>
-                                <TableCell>{row.poleCp}</TableCell>
-                                <TableCell>{row.poleCity}</TableCell>
-                                <TableCell><IconButton onClick={() => navigateToPoleInfos(row.poleId)}>
-                                    <Icon>pageview</Icon>
-                                </IconButton>
-                                </TableCell>
-                            </TableRow>
-                        )}
+                       
+                        <TableRow>
+                            <TableCell className={classes.cell}>Nom : </TableCell>
+                            <TableCell className={classes.cell}><InputText  defaultValue={detailPole.poleName} onChange={(event) => update(event, 'poleName')} /></TableCell>
+                           
+                        </TableRow>
+                        <TableRow>
+                            <TableCell className={classes.cell}>Adresse : </TableCell>
+                            <TableCell className={classes.cell}><InputText  defaultValue={detailPole.poleAddress} onChange={(event) => update(event, 'poleAddress')} /> </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell className={classes.cell}>Code postal : </TableCell>
+                            <TableCell className={classes.cell}><InputText  defaultValue={detailPole.poleCp} onChange={(event) => update(event, 'poleCp')} />  </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell className={classes.cell}>Ville : </TableCell>
+                            <TableCell className={classes.cell}><InputText  defaultValue={detailPole.poleCity} onChange={(event) => update(event, 'poleCity')} /></TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
+                <Button
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.button}
+                    onClick={() => updatepole()}
+                >
+                    Valider
+                        </Button>
             </Paper>
         </div>
     )
 };
 
-PoleList.propTypes = {
+
+PoleInfos.propTypes = {
     classes: PropTypes.object,
-    fetchVehicles: PropTypes.func,
-    datapage: PropTypes.array
+    fetchPoleInfos: PropTypes.func,
+    detailPole: PropTypes.object
 };
 
 export default withStyles(theme => ({
@@ -85,13 +127,17 @@ export default withStyles(theme => ({
         }
     },
 
-
     table: {
         minWidth: 700,
+    },
+    cell: {
+        border: 'none',
+        
     },
     row: {
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.background.default,
         },
+        border: 'none',
     }
 }))(PoleInfos);

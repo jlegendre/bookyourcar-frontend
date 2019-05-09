@@ -64,17 +64,33 @@ export const fetchPoles = () => {
  * Call /Pole/{i} Url, pour récupérer toutes les informations sur un pole donné
  * @returns {Function}
  */
-export const fetchPoleInfos = () => {
+export const fetchPoleInfos = (id, success) => {
     return dispatch => {
         httpClient.request({
-            url: '/Pole',
+            url: `/Pole/${id}`,
             method: 'GET',
         }).then(response => {
             dispatch(setDetailPole(response.data));
             dispatch(setNoMessage());
+            success && success(response.data);
         })
     }
 };
+
+export const fetchUpdatePole = ({ poleId, poleName, poleCity, poleAddress, poleCp }) => {
+    return dispatch => {
+        httpClient.request({
+            url: `/Pole/${poleId}`,
+            method: 'PUT',
+            data: { poleId, poleName, poleCity, poleAddress, poleCp},
+        }).then(() => {
+            dispatch(fetchPoleInfos(poleId))
+        })
+    }
+
+}
+
+
 
 
 /**
