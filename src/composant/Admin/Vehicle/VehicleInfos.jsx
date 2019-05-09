@@ -34,18 +34,18 @@ const VehicleInfos = props => {
                         <Icon fontSize={"large"}>directions_car</Icon>
                         <Grid id="plop" direction={"column"}>
                             <Grid direction={"row"}>
-                                <TextField label={detailVehicle.vehBrand}/>
-                                <TextField label={detailVehicle.vehModel}/>
+                                <TextField label='Marque' value={detailVehicle.vehBrand}/>
+                                <TextField label='Modèle' value={detailVehicle.vehModel}/>
                             </Grid>
                             <Grid direction={"column"}>
-                                <TextField label={detailVehicle.vehRegistration}/>
-                                <TextField label={detailVehicle.vehColor}/>
+                                <TextField label='Immatriculation' value={detailVehicle.vehRegistration}/>
+                                <TextField  label='Couleur' value={detailVehicle.vehColor}/>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <TextField label={detailVehicle.vehNumberplace}/>
-                    <TextField label={detailVehicle.vehTypeEssence}/>
-                    <TextField label={detailVehicle.poleName}/>
+                    <TextField label='Nombre de places' value={detailVehicle.vehNumberplace}/>
+                    <TextField label='Type de carburant' value={detailVehicle.vehTypeEssence}/>
+                    <TextField label='Pôle' value={detailVehicle.poleName}/>
 
                 </Grid>
                 <Grid direction={"row"}>
