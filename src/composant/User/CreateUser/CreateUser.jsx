@@ -25,8 +25,8 @@ const CreateUser = props => {
         email: "",
         confirmPassword: "",
         password: "",
-        name: "",
-        firstName: "",
+        nom: "",
+        prenom: "",
         poleId: 0,
         phoneNumber: ""
     });
@@ -76,14 +76,14 @@ const CreateUser = props => {
                 <div className={classes.form}>
                     <InputText
                         name={"Prenom"}
-                        id={"firstName"}
+                        id={"prenom"}
                         label={"Prénom"}
                         type={"text"}
                         onChange={updateInput}
                         value={input.firstName}
                     />
                     <InputText
-                        id={"name"}
+                        id={"nom"}
                         name={"Nom"}
                         label={"Nom"}
                         type={"text"}
