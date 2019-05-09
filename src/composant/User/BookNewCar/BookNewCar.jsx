@@ -18,16 +18,16 @@ import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMedi
  * Formulaire de réservation
  */
 const BookNewCar = (props) => {
-    const {classes} = props;
+    const {classes, fetchNewLocation} = props;
 
     const computerView = useMediaQuery('(min-width:767px)');
     const [activeStep, setActiveStep] = useState(0);
     const [formulaire, setFormulaire] = useState({
-        dateDebut: "",
-        dateFin: "",
-        poleDebut: "",
-        poleFin: "",
-        commentaire: ""
+        dateDebutResa: "",
+        dateFinResa: "",
+        poleIdDepart: "",
+        poleIdDestination: "",
+        comments: ""
     });
 
     /**
@@ -35,7 +35,9 @@ const BookNewCar = (props) => {
      */
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
-            //call api here
+            fetchNewLocation(formulaire, () => {
+                //it's ok, #TODO faire une redirection
+            })
         } else {
             setActiveStep(activeStep + 1);
         }
@@ -113,7 +115,8 @@ const BookNewCar = (props) => {
 };
 
 BookNewCar.propTypes = {
-    classes: PropTypes.object
+    classes: PropTypes.object,
+    fetchNewLocation: PropTypes.func
 };
 
 export default withStyles(theme => ({
@@ -131,6 +134,7 @@ export default withStyles(theme => ({
         marginTop: theme.spacing.unit * 3,
         marginBottom: theme.spacing.unit * 3,
         padding: theme.spacing.unit * 2,
+        height: 500,
         [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
             marginTop: theme.spacing.unit * 6,
             marginBottom: theme.spacing.unit * 6,

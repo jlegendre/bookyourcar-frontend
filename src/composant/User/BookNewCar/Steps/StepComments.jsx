@@ -20,8 +20,8 @@ const StepComments = props => {
                     label={"Commentaire sur la réservation"}
                     multiline
                     rows={5}
-                    value={formulaire.dateDebut}
-                    onChange={event => setFormulaire({...formulaire, dateDebut: event.target.value})}
+                    value={formulaire.comments}
+                    onChange={event => setFormulaire({...formulaire, comments: event.target.value})}
                 />
             </Grid>
         </React.Fragment>

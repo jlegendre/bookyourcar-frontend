@@ -39,7 +39,7 @@ export const fetchVehicleInfos = (id, success) => {
         }).then(response => {
             dispatch(setDetailVehicle(response.data));
             dispatch(setNoMessage());
-            success && success(response.data );
+            success && success(response.data);
         })
     }
 };
@@ -101,10 +101,19 @@ export const fetchReservationInWaiting = () => {
             dispatch(setReservationInWaiting(response.data));
         })
     }
-}
+};
 
-
-
+export const fetchNewLocation = (input, success) => {
+    return dispatch => {
+        httpClient.request({
+            url: '/Location/AskLocation',
+            method: 'POST',
+            body: input
+        }).then(() => {
+            success && success();
+        })
+    }
+};
 
 export const setUserInWaiting = users => {
     return {type: SET_DATAPAGE_USERINWAITING, users}

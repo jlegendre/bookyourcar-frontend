@@ -25,8 +25,8 @@ const StepInformation = props => {
                         name={"dateDebut"}
                         label={"Date début"}
                         type={"date"}
-                        value={formulaire.dateDebut}
-                        onChange={event => setFormulaire({...formulaire, dateDebut: event.target.value})}
+                        value={formulaire.dateDebutResa}
+                        onChange={event => setFormulaire({...formulaire, dateDebutResa: event.target.value})}
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -35,16 +35,16 @@ const StepInformation = props => {
                         name={"dateFin"}
                         label={"Date fin"}
                         type={"date"}
-                        value={formulaire.dateFin}
-                        onChange={event => setFormulaire({...formulaire, dateFin: event.target.value})}
+                        value={formulaire.dateFinResa}
+                        onChange={event => setFormulaire({...formulaire, dateFinResa: event.target.value})}
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <InputSelect
                         label={"Pole Début"}
                         name={"PoleDebut"}
-                        value={formulaire.poleDebut}
-                        onChange={event => setFormulaire({...formulaire, poleDebut: event.target.value})}
+                        value={formulaire.poleIdDepart}
+                        onChange={event => setFormulaire({...formulaire, poleIdDepart: event.target.value})}
                         data={poles}
                     />
                 </Grid>
@@ -52,8 +52,8 @@ const StepInformation = props => {
                     <InputSelect
                         label={"Pole Fin"}
                         name={"PoleFin"}
-                        value={formulaire.poleFin}
-                        onChange={event => setFormulaire({...formulaire, poleFin: event.target.value})}
+                        value={formulaire.poleIdDestination}
+                        onChange={event => setFormulaire({...formulaire, poleIdDestination: event.target.value})}
                         data={poles}
                     />
                 </Grid>
