@@ -15,8 +15,7 @@ const mapDispatchToProps = (dispatch) => {
 //pour envoyer des objets du store de redux
 const mapStateToProps = (state) => {
     return {
-        role: getRole(state),
-        pathname: state.router.location.pathname
+        role: getRole(state)
     }
 };
 

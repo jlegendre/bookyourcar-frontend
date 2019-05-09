@@ -1,69 +1,36 @@
 import React from "react";
 import * as PropTypes from 'prop-types';
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import Drawer from "@material-ui/core/Drawer";
-import Icon from "@material-ui/core/Icon"
 import Divider from "@material-ui/core/Divider";
-import {Link} from "react-router-dom";
 import {Hidden, withStyles} from "@material-ui/core";
+import MenuItem from "./MenuItem.js";
 
 const MenuAppBar = props => {
 
-    const {classes, theme, role, open, onClose, pathname} = props;
+    const {classes, theme, role, open, onClose} = props;
 
     const logout = () => {
         props.logout();
     };
 
 
-    console.log(pathname);
-
     const menu = (
         <div>
             <List>
-                <ListItem button>
-                    <ListItemIcon><Icon>account_circle</Icon></ListItemIcon>
-                    <ListItemText primary={"Compte"}/>
-                </ListItem>
+                <MenuItem label={"Compte"} iconName={"account_circle"}/>
             </List>
             <Divider/>
             {role && role === 'Admin' &&
             <List>
-                <Link to={"/validUser"} className={classes.link}>
-                    <ListItem button selected={pathname === "/validUser"}>
-                        <ListItemIcon><Icon>how_to_reg</Icon></ListItemIcon>
-                        <ListItemText primary={"Validation d'utilisateurs"}/>
-                    </ListItem>
-                </Link>
-                <Link to={"/vehicleList"} className={classes.link}>
-                    <ListItem button selected={pathname === "/vehiculeList"}>
-                        <ListItemIcon><Icon>directions_car</Icon></ListItemIcon>
-                        <ListItemText primary={"Liste de véhicules"}/>
-                    </ListItem>
-                </Link>
-                <Link to={"/poleList"} className={classes.link}>
-                    <ListItem button selected={pathname === "/poleList"}>
-                        <ListItemIcon><Icon>location_city</Icon></ListItemIcon>
-                        <ListItemText primary={"Liste des pôles"}/>
-                    </ListItem>
-                </Link>
+                <MenuItem label={"Liste de véhicules"} url={"vehicleList"} iconName={"directions_car"}/>
+                <MenuItem label={"Liste des pôles"} url={"poleList"} iconName={"location_city"}/>
             </List>
             }
             <Divider/>
             <List>
-                <Link to={"/booking"} className={classes.link}>
-                    <ListItem button selected={pathname === "/booking"}>
-                        <ListItemIcon><Icon>bookmarks</Icon></ListItemIcon>
-                        <ListItemText primary={"Demande de réservation"}/>
-                    </ListItem>
-                </Link>
-                <ListItem button onClick={() => logout()}>
-                    <ListItemIcon><Icon>exit_to_app</Icon></ListItemIcon>
-                    <ListItemText primary={"Deconnexion"}/>
-                </ListItem>
+                <MenuItem label={"Demande de réservation"} url={"booking"} iconName={"bookmarks"}/>
+                <MenuItem label={"Deconnexion"} iconName={"exit_to_app"} onClick={() => logout()}/>
             </List>
         </div>
     );
@@ -107,10 +74,7 @@ MenuAppBar.propTypes = {
     role: PropTypes.string,
 
     //fonction qui permet de déconnecter l'utilisateur
-    logout: PropTypes.func,
-
-    //Pathanem de l'url
-    pathname: PropTypes.string
+    logout: PropTypes.func
 };
 
 const drawerWidth = 240;
@@ -124,8 +88,5 @@ export default withStyles(theme => ({
     drawerPaper: {
         width: drawerWidth,
     },
-    toolbar: theme.mixins.toolbar,
-    link: {
-        textDecoration: 'none'
-    }
+    toolbar: theme.mixins.toolbar
 }), {withTheme: true})(MenuAppBar);
