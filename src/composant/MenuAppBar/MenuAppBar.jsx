@@ -20,6 +20,13 @@ const MenuAppBar = props => {
 
     const menu = (
         <div>
+            <List>
+                <ListItem button>
+                    <ListItemIcon><Icon>account_circle</Icon></ListItemIcon>
+                    <ListItemText primary={"Compte"}/>
+                </ListItem>
+            </List>
+            <Divider/>
             {role && role === 'Admin' &&
             <List>
                 <Link to={"/validUser"} className={classes.link}>
@@ -44,10 +51,6 @@ const MenuAppBar = props => {
             }
             <Divider/>
             <List>
-                <ListItem button>
-                    <ListItemIcon><Icon>account_circle</Icon></ListItemIcon>
-                    <ListItemText primary={"Compte"}/>
-                </ListItem>
                 <Link to={"/booking"} className={classes.link}>
                     <ListItem button>
                         <ListItemIcon><Icon>bookmarks</Icon></ListItemIcon>

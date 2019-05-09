@@ -12,6 +12,7 @@ import Button from "@material-ui/core/Button";
 import StepInformation from "./Steps/StepInformation.js";
 import StepComments from "./Steps/StepComments";
 import StepFinish from "./Steps/StepFinish";
+import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
 
 /**
  * Formulaire de réservation
@@ -19,6 +20,9 @@ import StepFinish from "./Steps/StepFinish";
 const BookNewCar = (props) => {
     const {classes} = props;
 
+    console.log(props);
+
+    const computerView = useMediaQuery('(min-width:767px)');
     const [activeStep, setActiveStep] = useState(0);
     const [formulaire, setFormulaire] = useState({
         dateDebut: "",
@@ -32,7 +36,7 @@ const BookNewCar = (props) => {
      * Fonction pour aller sur la page suivante
      */
     const handleNext = () => {
-        if(activeStep === steps.length - 1) {
+        if (activeStep === steps.length - 1) {
 
         } else {
             setActiveStep(activeStep + 1);
@@ -51,7 +55,7 @@ const BookNewCar = (props) => {
      * Les étapes de la réservation
      * @type {string[]}
      */
-    const steps = ["Information", "Commentaire", "Finalisation"];
+    const steps = computerView ? ["Information", "Commentaire", "Finalisation"] : ["", "", ""];
 
     /**
      * Permet de savoir quelle étape afficher
