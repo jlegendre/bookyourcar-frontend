@@ -13,6 +13,8 @@ import {
     Icon,
     Typography
 } from "@material-ui/core";
+import DeleteIcon from '@material-ui/icons/Delete';
+import { Link } from "react-router-dom";
 
 const PoleList = props => {
 
@@ -21,13 +23,9 @@ const PoleList = props => {
         fetchPoles();
     }, []);
 
-    /**
-     * Redirige vers la page d'infos du pole selectionn�
-     * @param id identifiant du pole
-     */
-    const navigateToPoleInfos = id => {
-    };
+   
 
+  
     return (
         <div className={classes.main}>
             <CssBaseline />
@@ -40,6 +38,8 @@ const PoleList = props => {
                             <TableCell>Adresse</TableCell>
                             <TableCell>CodePostal</TableCell>
                             <TableCell>Ville</TableCell>
+                            <TableCell></TableCell>
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -49,14 +49,23 @@ const PoleList = props => {
                                 <TableCell>{row.poleAddress}</TableCell>
                                 <TableCell>{row.poleCp}</TableCell>
                                 <TableCell>{row.poleCity}</TableCell>
-                                <TableCell><IconButton onClick={() => navigateToPoleInfos(row.poleId)}>
-                                    <Icon>pageview</Icon>
-                                </IconButton>
+                                <TableCell>
+                                    <Link to={`/poleInfos/${row.poleId}`}>
+                                        <IconButton>
+                                            <Icon>pageview</Icon>
+                                        </IconButton>
+                                    </Link>
+                                </TableCell>
+                                <TableCell>
+                                    <IconButton>
+                                            <DeleteIcon />
+                                    </IconButton>
                                 </TableCell>
                             </TableRow>
                         )}
                     </TableBody>
                 </Table>
+             
             </Paper>
         </div>
     )

@@ -40,4 +40,4 @@ export const getUserInWaiting = state => getDataPage(state).userInWaiting;
 export const getListVehicles = state => getDataPage(state).listVehicle;
 export const getDetailVehicle = state => getDataPage(state).detailVehicle;
 export const getListPoles = state => getDataPage(state).listPoles;
-export const getDetailPoles = state => getDataPage(state).detailPole;
+export const getDetailPole = state => getDataPage(state).detailPole;

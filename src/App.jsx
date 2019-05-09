@@ -14,6 +14,7 @@ import Message from "./composant/Message/Message.js";
 import VehicleList from "./composant/Admin/VehicleList/VehicleList.js";
 import PoleList from "./composant/Admin/PoleList/PoleList.js";
 import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos.js";
+import PoleInfos from "./composant/Admin/Pole/PoleInfos.js";
 import MenuAppBar from "./composant/MenuAppBar/MenuAppBar.js";
 import BookNewCar from "./composant/User/BookNewCar/BookNewCar.js";
 
@@ -114,7 +115,9 @@ const App = props => {
                         <Route path={"/vehicleInfos/:vehId"}
                                component={params => requireAdminLogin(<VehicleInfos {...params} />)}/>
                         <Route path={"/poleList"}
-                               component={params => requireAdminLogin(<PoleList {...params} />)}/>
+                            component={params => requireAdminLogin(<PoleList {...params} />)} />
+                        <Route path={"/poleInfos/:poleId"}
+                            component={params => requireAdminLogin(<PoleInfos {...params} />)} />
                         <Route component={() => <div>404</div>}/>
                     </Switch>
                 </main>

@@ -75,7 +75,7 @@ const Login = (props) => {
                             id={"email"}
                             name={"Email"}
                             placeholder={"Email"}
-                            tpe={"email"}
+                            type={"email"}
                             onChange={(event) => updateEmail(event)}
                         />
                         <InputText
