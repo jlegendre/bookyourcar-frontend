@@ -1,30 +1,46 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {
-    Icon,
-    Paper,
-} from "@material-ui/core";
+import {Icon, Paper,} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/es/TextField/TextField";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import InputText from "../../Input/InputText";
 
 const VehicleInfos = props => {
 
-    const {classes, fetchVehicleInfos, detailVehicle, match} = props;
+    const {classes, fetchVehicleInfos, detailVehicle, match, fetchUpdateVehicle, fetchDeleteVehicle} = props;
+    const [input, setInput] = useState(detailVehicle);
+
 
     useEffect(() => {
-        fetchVehicleInfos(match.params.vehId);
+        fetchVehicleInfos(match.params.vehId, (vehicle) => {
+            setInput(vehicle);
+        });
     }, []);
 
-    if(!detailVehicle){
+    if (!detailVehicle) {
         return (
             <div>
-                <CircularProgress className={classes.progress} />
+                <CircularProgress className={classes.progress}/>
             </div>
         )
     }
+    const update = ((event, type) => {
+        setInput({
+            ...input,
+            [type]: event.target.value
+        });
+    });
+
+    const updateVehicle = (() => {
+        fetchUpdateVehicle(input);
+
+    })
+
+    const deleteVehicle = (() => {
+        fetchDeleteVehicle(input.vehId);
+    })
 
     return (
         <div>
@@ -34,25 +50,36 @@ const VehicleInfos = props => {
                         <Icon fontSize={"large"}>directions_car</Icon>
                         <Grid id="plop" direction={"column"}>
                             <Grid direction={"row"}>
-                                <TextField label={detailVehicle.vehBrand}/>
-                                <TextField label={detailVehicle.vehModel}/>
+                                <InputText label='Marque' defaultValue={detailVehicle.vehBrand}
+                                           onChange={(event) => update(event, 'vehBrand')}/>
+                                <InputText label='Modèle' defaultValue={detailVehicle.vehModel}
+                                           onChange={(event) => update(event, 'vehModel')}/>
                             </Grid>
                             <Grid direction={"column"}>
-                                <TextField label={detailVehicle.vehRegistration}/>
-                                <TextField label={detailVehicle.vehColor}/>
+                                <InputText label='Immatriculation' defaultValue={detailVehicle.vehRegistration}
+                                           onChange={(event) => update(event, 'vehRegistration')}/>
+                                <InputText label='Couleur' defaultValue={detailVehicle.vehColor}
+                                           onChange={(event) => update(event, 'vehColor')}/>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <TextField label={detailVehicle.vehNumberplace}/>
-                    <TextField label={detailVehicle.vehTypeEssence}/>
-                    <TextField label={detailVehicle.poleName}/>
+                    <InputText label='Nombre de places' defaultValue={detailVehicle.vehNumberplace}
+                               onChange={(event) => update(event, 'vehNumberplace')}/>
+                    <InputText label='Type de carburant' defaultValue={detailVehicle.vehTypeEssence}
+                               onChange={(event) => update(event, 'vehTypeEssence')}/>
+                    <InputText label='Pôle' defaultValue={detailVehicle.poleName}
+                               onChange={(event) => update(event, 'poleName')}/>
 
                 </Grid>
                 <Grid direction={"row"}>
-                    <Button variant="contained" color="primary" className={classes.button}>
+                    <Button variant="contained" color="primary" className={classes.button}
+                            onClick={() => updateVehicle()}
+                    >
                         Mise à jour
                     </Button>
-                    <Button variant="contained" color="secondary" className={classes.button}>
+                    <Button variant="contained" color="secondary" className={classes.button}
+                            onClick={() => deleteVehicle()}
+                    >>
                         Supprimer
                     </Button>
                 </Grid>

@@ -29,18 +29,16 @@ export const fetchLoginUser = (email, password) => {
 
 /**
  * Call /Auth/register Url, pour enregistrer un nouveau utilisateur
- * @param email email de l'utilisateur
- * @param confirmPassword le mot de passe
- * @param password le mot de passe
+ * @param input formulaire
  * @param success fonction a executer si la requêtes a bien fonctionné
  * @returns {Function}
  */
-export const fetchRegisterUser = ({email, confirmPassword, password, name, firstName, pole, phoneNumber}, success) => {
+export const fetchRegisterUser = (input, success) => {
     return dispatch => {
         httpClient.request({
             url: '/Auth/register',
             method: 'POST',
-            data: {email, confirmPassword, password, name, firstName, pole, phoneNumber}
+            data: input
         }).then(() => {
             success()
         })

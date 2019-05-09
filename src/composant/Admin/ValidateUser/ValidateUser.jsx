@@ -63,7 +63,7 @@ const ValidateUser = props => {
                                 <TableCell>{row.userName}</TableCell>
                                 <TableCell>{row.userFirstname}</TableCell>
                                 <TableCell>{row.userEmail}</TableCell>
-                                <TableCell>{row.userPole} TODO</TableCell>
+                                <TableCell>{row.poleName}</TableCell>
                                 <TableCell>
                                     <IconButton onClick={() => acceptUser(row.userId)}>
                                         <CheckIcon/>

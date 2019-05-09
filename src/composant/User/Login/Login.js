@@ -2,12 +2,14 @@ import Login from './Login.jsx'
 import {connect} from "react-redux";
 import {fetchLoginUser} from "../../../redux/actions/auth";
 import {getToken, getAuth} from "../../../redux/reducers/auth";
+import {setNoMessage} from "../../../redux/actions/message";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = (dispatch) => {
     return {
-        loginUser: (input) => dispatch(fetchLoginUser(input.email, input.password))
+        loginUser: (input) => dispatch(fetchLoginUser(input.email, input.password)),
+        clearMessage: () => dispatch(setNoMessage())
     }
 };
 

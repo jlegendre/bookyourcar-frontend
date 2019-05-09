@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import {
     SET_DATAPAGE_DETAILPOLE,
     SET_DATAPAGE_DETAILVEHICLE,
@@ -40,4 +42,17 @@ export const getUserInWaiting = state => getDataPage(state).userInWaiting;
 export const getListVehicles = state => getDataPage(state).listVehicle;
 export const getDetailVehicle = state => getDataPage(state).detailVehicle;
 export const getListPoles = state => getDataPage(state).listPoles;
-export const getDetailPole = state => getDataPage(state).detailPole;
+export const getDetailPoles = state => getDataPage(state).detailPole;
+
+/**
+ * Fonction qui permet de construire une liste de pôle pour l'objet InputSelect
+ * @param state
+ * @return {Array}
+ */
+export const getListPolesForSelect = state => {
+    const map = _.map(getListPoles(state), pole => {
+        return {value: pole.poleId, label: pole.poleName}
+    });
+
+    return [{value: 0, label: "Sans information"}, ...map]
+};

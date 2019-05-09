@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 
@@ -10,28 +10,48 @@ import Typography from "@material-ui/core/Typography";
 import {HowToRegOutlined as HowToRegOutlinedIcon} from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
 import InputText from "../../Input/InputText";
-import MenuItem from '@material-ui/core/MenuItem';
-import Select from "@material-ui/core/Select"
 import {Redirect} from "react-router";
+import InputSelect from "../../Input/InputSelect";
 
 const CreateUser = props => {
 
-    const {classes, registerUser, token} = props;
+    const {classes, registerUser, token, fetchPoles, poles} = props;
 
-    const [input, setInput] = useState({email: "", confirmPassword: "", password: "", name: "", firstName: "", pole: "", phoneNumber: ""});
+    useEffect(() => {
+        fetchPoles()
+    }, []);
+
+    const [input, setInput] = useState({
+        email: "",
+        confirmPassword: "",
+        password: "",
+        nom: "",
+        prenom: "",
+        poleId: 0,
+        phoneNumber: ""
+    });
     const [accountSuccess, setAccountSuccess] = useState(false);
 
     /**
      * @Input event: données de l'input
-     * @Input type: donnée concernée par l'input
-     * @type {Function}
      */
-    const updateForm = ((event, type) => {
+    const updateInput = event => {
         setInput({
             ...input,
-            [type]: event.target.value
+            [event.target.id]: event.target.value
         })
-    });
+    };
+
+    /**
+     *
+     * @param event donnée du select
+     */
+    const updateSelect = event => {
+        setInput({
+            ...input,
+            [event.target.name] : event.target.value
+        })
+    };
 
     const fetchCreateUser = () => {
         registerUser(input, () => {
@@ -57,52 +77,62 @@ const CreateUser = props => {
                     <InputText
                         name={"Prenom"}
                         id={"prenom"}
-                        placeholder={"Prénom"}
+                        label={"Prénom"}
+                        required
                         type={"text"}
-                        onChange={(event) => updateForm(event, 'firstName')}
-                    /><InputText
-                    id={"nom"}
-                    name={"Nom"}
-                    placeholder={"Nom"}
-                    type={"text"}
-                    onChange={(event) => updateForm(event, 'name')}
-                    /><InputText
+                        onChange={updateInput}
+                        value={input.prenom}
+                    />
+                    <InputText
+                        id={"nom"}
+                        name={"Nom"}
+                        label={"Nom"}
+                        type={"text"}
+                        onChange={updateInput}
+                        value={input.name}
+                        required
+                    />
+                    <InputText
                         id={"phoneNumber"}
                         name={"PhoneNumber"}
-                        placeholder={"Numero de telephone"}
+                        label={"Numero de telephone"}
                         type={"text"}
-                        onChange={(event) => updateForm(event, 'phoneNumber')}
+                        onChange={updateInput}
+                        value={input.phoneNumber}
                     />
-                    <Select
-                        id={"pole"}
-                        name={"Pole"}
-                        placeholder={"Pole"}
-                        onChange={(event) => updateForm(event, 'pole')}
-                    >
-                        <MenuItem>
-
-                        </MenuItem>
-                    </Select>
+                    <InputSelect
+                        id={"poleId"}
+                        name={"poleId"}
+                        onChange={updateSelect}
+                        label={"Pole"}
+                        data={poles}
+                        value={input.poleId}
+                    />
                     <InputText
-                    id={"email"}
-                    name={"Email"}
-                    placeholder={"Email"}
-                    type={"email"}
-                    onChange={(event) => updateForm(event, 'email')}
-                />
+                        id={"email"}
+                        name={"Email"}
+                        label={"Email"}
+                        type={"email"}
+                        required
+                        onChange={updateInput}
+                        value={input.email}
+                    />
                     <InputText
                         id={"password"}
                         name={"Password"}
-                        placeholder={"Mot de passe"}
+                        label={"Mot de passe"}
                         type={"password"}
-                        onChange={(event) => updateForm(event, 'password')}
+                        required
+                        onChange={updateInput}
+                        value={input.password}
                     />
                     <InputText
                         id={"confirmPassword"}
                         name={"ConfirmPassword"}
-                        placeholder={"Confirmation du mot de passe"}
+                        label={"Confirmation du mot de passe"}
                         type={"password"}
-                        onChange={(event) => updateForm(event, 'confirmPassword')}
+                        onChange={updateInput}
+                        value={input.confirmPassword}
                     />
                     <Typography>
                         <Link className={classes.link} to={"/login"}>
@@ -134,7 +164,13 @@ CreateUser.propTypes = {
     token: PropTypes.string,
 
     //fonction qui permet d'enregistrer un nouveau utilisateur
-    registerUser: PropTypes.func
+    registerUser: PropTypes.func,
+
+    //Lise de poles
+    poles: PropTypes.array,
+
+    //fonction qui permet de récuperer les poles
+    fetchPoles: PropTypes.func
 };
 
 export default withStyles(theme => ({

@@ -15,11 +15,11 @@ import FormControl from "@material-ui/core/FormControl";
  */
 const InputText = (props) => {
 
-    const {id, name, onChange, message} = props;
+    const {id, name, onChange, message, fullWidth} = props;
 
 
     return (
-        <FormControl margin={"normal"} fullWidth>
+        <FormControl margin={"normal"} fullWidth={fullWidth}>
             <TextField
                 id={id}
                 name={name}
@@ -32,11 +32,15 @@ const InputText = (props) => {
     )
 };
 
+InputText.defaultProps = {
+    fullWidth: true
+};
+
 InputText.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
-    message: PropTypes.object
+    message: PropTypes.array
 };
 
 export default InputText
