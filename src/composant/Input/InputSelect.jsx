@@ -10,9 +10,7 @@ const InputSelect = props => {
     const {fullWidth, onChange, value, data, name, label, message} = props;
 
     return (
-        <FormControl
-            fullWidth={fullWidth}
-        >
+        <FormControl margin={"normal"} fullWidth={fullWidth}>
             <InputLabel>{label}</InputLabel>
             <Select
                 onChange={onChange}
@@ -23,10 +21,17 @@ const InputSelect = props => {
                     <MenuItem key={i} value={item.value}>{item.label}</MenuItem>
                 )}
             </Select>
-            <FormHelperText>{message && message[name] && message[name][0]}</FormHelperText>
+            {message && message[name] &&
+                <FormHelperText>{message[name][0]}</FormHelperText>
+            }
+
         </FormControl>
     )
 
+};
+
+InputSelect.defaultProps = {
+    fullWidth: true
 };
 
 InputSelect.propTypes = {

@@ -14,12 +14,6 @@ const StepInformation = props => {
         fetchPoles();
     }, []);
 
-    //Construction de la liste pour les Selects
-    const listPole = [];
-    _.each(poles, pole => {
-        listPole.push({value: pole.poleId, label: pole.poleName})
-    });
-
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
@@ -48,22 +42,20 @@ const StepInformation = props => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <InputSelect
-                        fullWidth
                         label={"Pole Début"}
                         name={"PoleDebut"}
                         value={formulaire.poleDebut}
                         onChange={event => setFormulaire({...formulaire, poleDebut: event.target.value})}
-                        data={listPole}
+                        data={poles}
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <InputSelect
-                        fullWidth
                         label={"Pole Fin"}
                         name={"PoleFin"}
                         value={formulaire.poleFin}
                         onChange={event => setFormulaire({...formulaire, poleFin: event.target.value})}
-                        data={listPole}
+                        data={poles}
                     />
                 </Grid>
             </Grid>
