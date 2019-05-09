@@ -90,9 +90,6 @@ export const fetchUpdatePole = ({ poleId, poleName, poleCity, poleAddress, poleC
 
 }
 
-
-
-
 /**
  * Call /Vehicle Url, pour récupérer tous les véhicules disponibles
  * @returns {Function}
