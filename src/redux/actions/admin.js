@@ -1,5 +1,5 @@
 import httpClient from './../../utils/httpClient'
-import {fetchUserInValidation, fetchReservationInWaiting, fetchVehicleInfos} from "./datapage";
+import {fetchUserInValidation, fetchReservationInWaiting, fetchVehicleInfos, fetchPoles} from "./datapage";
 
 
 /**
@@ -38,6 +38,22 @@ export const fetchDeleteUser = id => {
 };
 
 /**
+ * Call /Pole/:id, Url pour supprimer un pole
+ * @param id identifiant du pole
+ * @return {Function}
+ */
+export const fetchDeletePole = id => {
+    return dispatch => {
+        httpClient.request({
+            url: `/Pole/${id}`,
+            method: 'DELETE',
+        }).then(() => {
+            dispatch(fetchPoles())
+        })
+    }
+};
+
+/**
  * Call /User/:id, Url pour supprimer un utilisateur
  * @param id identifiant de l'utilisateur
  * @return {Function}
@@ -69,6 +85,12 @@ export const fetchValidateReservation = id => {
     }
 };
 
+
+/**
+ * Call /Vehicle/:id, Url pour modifier un véhicule
+ * @param vehId identifiant du véhicule
+ * @return {Function}
+ */
 export const fetchUpdateVehicle = ({vehId, vehRegistration, vehBrand, vehModel, vehKm, vehDatemec, vehTypeEssence, vehColor, vehNumberplace, vehIsactive, poleName}) => {
     return dispatch => {
         httpClient.request({
@@ -80,7 +102,11 @@ export const fetchUpdateVehicle = ({vehId, vehRegistration, vehBrand, vehModel, 
         })
     }
 }
-
+/**
+ * Call /Vehicle/:id, Url pour supprimer un vehicule
+ * @param id identifiant du vehicule
+ * @return {Function}
+ */
 export const fetchDeleteVehicle = id => {
     return dispatch => {
         httpClient.request({
