@@ -88,7 +88,7 @@ export const fetchUpdatePole = ({ poleId, poleName, poleCity, poleAddress, poleC
         })
     }
 
-}
+};
 
 /**
  * Call /Vehicle Url, pour récupérer tous les véhicules disponibles
@@ -105,6 +105,10 @@ export const fetchVehicles = () => {
     }
 };
 
+/**
+ * Retourne les réservations en attente
+ * @return {Function}
+ */
 export const fetchReservationInWaiting = () => {
     return dispatch => {
         httpClient.request({
@@ -116,8 +120,15 @@ export const fetchReservationInWaiting = () => {
     }
 };
 
+/**
+ * Créer une noubelle réservation
+ * @param input donnée a envoyer
+ * @param success fonction en cas de succes
+ * @return {Function}
+ */
 export const fetchNewLocation = (input, success) => {
     return dispatch => {
+        console.log(input);
         httpClient.request({
             url: '/Location/AskLocation',
             method: 'POST',
@@ -146,8 +157,8 @@ export const setListPoles = poles => {
 
 export const setDetailPole = detailPole => {
     return {type: SET_DATAPAGE_DETAILPOLE, detailPole}
-}
+};
 
 export const setReservationInWaiting = reservations => {
     return {type: SET_DATAPAGE_RESERVATIONINWAITING, reservations}
-}
+};

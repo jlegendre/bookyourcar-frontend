@@ -18,7 +18,7 @@ const MenuAppBar = props => {
     const menu = (
         <div>
             <List>
-                <MenuItem label={"Compte"} iconName={"account_circle"}/>
+                <MenuItem label={"Compte"} url={"profil"} iconName={"account_circle"} onClick={onClose}/>
             </List>
             <Divider/>
             {role && role === 'Admin' &&

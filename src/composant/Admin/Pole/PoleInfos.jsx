@@ -1,28 +1,14 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
-import { useState } from 'react';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {
-    CssBaseline,
-    Icon,
-    IconButton,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    Typography
-} from "@material-ui/core";
+import {CssBaseline, Paper, Table, TableBody, TableCell, TableRow, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/es/TextField/TextField";
-import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Input/InputText";
 
 const PoleInfos = props => {
 
-    const { classes, fetchPoleInfos, fetchUpdatePole, detailPole, match } = props;
+    const {classes, fetchPoleInfos, fetchUpdatePole, detailPole, match} = props;
     const [input, setInput] = useState(detailPole);
 
     useEffect(() => {
@@ -45,12 +31,11 @@ const PoleInfos = props => {
 
     })
 
- 
 
     if (!detailPole) {
         return (
             <div>
-                <CircularProgress className={classes.progress} />
+                <CircularProgress className={classes.progress}/>
             </div>
         )
     }
@@ -62,23 +47,29 @@ const PoleInfos = props => {
                 <Typography variant="h4" gutterBottom>Pole</Typography>
                 <Table className={classes.table}>
                     <TableBody>
-                       
+
                         <TableRow>
                             <TableCell className={classes.cell}>Nom : </TableCell>
-                            <TableCell className={classes.cell}><InputText  defaultValue={detailPole.poleName} onChange={(event) => update(event, 'poleName')} /></TableCell>
-                           
+                            <TableCell className={classes.cell}><InputText defaultValue={detailPole.poleName}
+                                                                           onChange={(event) => update(event, 'poleName')}/></TableCell>
+
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Adresse : </TableCell>
-                            <TableCell className={classes.cell}><InputText  defaultValue={detailPole.poleAddress} onChange={(event) => update(event, 'poleAddress')} /> </TableCell>
+                            <TableCell className={classes.cell}><InputText defaultValue={detailPole.poleAddress}
+                                                                           onChange={(event) => update(event, 'poleAddress')}/>
+                            </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Code postal : </TableCell>
-                            <TableCell className={classes.cell}><InputText  defaultValue={detailPole.poleCp} onChange={(event) => update(event, 'poleCp')} />  </TableCell>
+                            <TableCell className={classes.cell}><InputText defaultValue={detailPole.poleCp}
+                                                                           onChange={(event) => update(event, 'poleCp')}/>
+                            </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Ville : </TableCell>
-                            <TableCell className={classes.cell}><InputText  defaultValue={detailPole.poleCity} onChange={(event) => update(event, 'poleCity')} /></TableCell>
+                            <TableCell className={classes.cell}><InputText defaultValue={detailPole.poleCity}
+                                                                           onChange={(event) => update(event, 'poleCity')}/></TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -90,7 +81,7 @@ const PoleInfos = props => {
                     onClick={() => updatepole()}
                 >
                     Valider
-                        </Button>
+                </Button>
             </Paper>
         </div>
     )
@@ -132,7 +123,7 @@ export default withStyles(theme => ({
     },
     cell: {
         border: 'none',
-        
+
     },
     row: {
         '&:nth-of-type(odd)': {

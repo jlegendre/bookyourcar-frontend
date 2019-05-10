@@ -9,4 +9,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps)(InputText)
+export default connect(mapStateToProps, undefined)(InputText)

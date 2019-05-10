@@ -1,8 +1,7 @@
 import React from "react";
 import * as PropTypes from "prop-types";
+import {FormControl, TextField} from "@material-ui/core";
 
-import TextField from "@material-ui/core/TextField";
-import FormControl from "@material-ui/core/FormControl";
 
 /**
  * Composant de saisie de text
@@ -15,7 +14,7 @@ import FormControl from "@material-ui/core/FormControl";
  */
 const InputText = (props) => {
 
-    const {id, name, onChange, message, fullWidth} = props;
+    const {id, name, onChange, message, fullWidth, required, label, type} = props;
 
 
     return (
@@ -26,7 +25,9 @@ const InputText = (props) => {
                 onChange={(event) => onChange && onChange(event)}
                 error={message && !!message[name]}
                 helperText={message && message[name] && message[name][0]}
-                {...props}
+                required={required}
+                label={label}
+                type={type}
             />
         </FormControl>
     )
@@ -40,7 +41,10 @@ InputText.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
-    message: PropTypes.array
+    message: PropTypes.array,
+    required: PropTypes.bool,
+    label: PropTypes.string,
+    type: PropTypes.string
 };
 
 export default InputText

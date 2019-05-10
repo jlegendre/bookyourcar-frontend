@@ -17,6 +17,7 @@ import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos.js";
 import PoleInfos from "./composant/Admin/Pole/PoleInfos.js";
 import MenuAppBar from "./composant/MenuAppBar/MenuAppBar.js";
 import BookNewCar from "./composant/User/BookNewCar/BookNewCar.js";
+import Profil from "./composant/User/Profil/Profil.js";
 import {getBreakingLimit} from "./utils/cssUtils";
 
 const App = props => {
@@ -107,8 +108,9 @@ const App = props => {
                         {/* Route user */}
                         <Route exact path={"/"} component={params => requireUserLogin(<Acceuil {...params}/>)}/>
                         <Route path={"/booking"} component={params => requireUserLogin(<BookNewCar {...params}/>)}/>
+                        <Route path={"/profil"} component={params => requireUserLogin(<Profil {...params}/>)}/>
 
-                        {/* Route admin */}
+                            {/* Route admin */}
                         <Route path={"/validUser"}
                                component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
                         <Route path={"/vehicleList"}
@@ -116,9 +118,9 @@ const App = props => {
                         <Route path={"/vehicleInfos/:vehId"}
                                component={params => requireAdminLogin(<VehicleInfos {...params} />)}/>
                         <Route path={"/poleList"}
-                            component={params => requireAdminLogin(<PoleList {...params} />)} />
+                               component={params => requireAdminLogin(<PoleList {...params} />)}/>
                         <Route path={"/poleInfos/:poleId"}
-                            component={params => requireAdminLogin(<PoleInfos {...params} />)} />
+                               component={params => requireAdminLogin(<PoleInfos {...params} />)}/>
                         <Route component={() => <div>404</div>}/>
                     </Switch>
                 </main>
