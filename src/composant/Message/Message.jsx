@@ -81,7 +81,7 @@ const Message = props => {
 
 Message.propTypes = {
     classes: PropTypes.object,
-    message: PropTypes.array,
+    message: PropTypes.any,
     clearMessage: PropTypes.func
 };
 

@@ -27,6 +27,9 @@ const StepInformation = props => {
                         type={"date"}
                         value={formulaire.dateDebutResa}
                         onChange={event => setFormulaire({...formulaire, dateDebutResa: event.target.value})}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -37,6 +40,9 @@ const StepInformation = props => {
                         type={"date"}
                         value={formulaire.dateFinResa}
                         onChange={event => setFormulaire({...formulaire, dateFinResa: event.target.value})}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>

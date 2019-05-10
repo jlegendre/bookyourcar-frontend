@@ -6,7 +6,7 @@ import {fetchNewLocation} from "../../../redux/actions/user";
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchNewLocation: (input) => dispatch(fetchNewLocation(input))
+        fetchNewLocation: (input, callback) => dispatch(fetchNewLocation(input, callback))
     }
 };
 

@@ -13,6 +13,7 @@ import StepInformation from "./Steps/StepInformation.js";
 import StepComments from "./Steps/StepComments";
 import StepFinish from "./Steps/StepFinish";
 import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
+import {Redirect} from "react-router";
 
 /**
  * Formulaire de réservation
@@ -22,6 +23,7 @@ const BookNewCar = (props) => {
 
     const computerView = useMediaQuery('(min-width:767px)');
     const [activeStep, setActiveStep] = useState(0);
+    const [redirect, setRedirect] = useState(false);
     const [formulaire, setFormulaire] = useState({
         dateDebutResa: "",
         dateFinResa: "",
@@ -36,7 +38,7 @@ const BookNewCar = (props) => {
     const handleNext = () => {
         if (activeStep === steps.length - 1) {
             fetchNewLocation(formulaire, () => {
-                //it's ok, #TODO faire une redirection
+                setRedirect(true)
             })
         } else {
             setActiveStep(activeStep + 1);
@@ -74,6 +76,10 @@ const BookNewCar = (props) => {
                 throw new Error('Unknown Step')
         }
     };
+
+    if(redirect) {
+        return <Redirect to={"/"}/>
+    }
 
     return (
         <React.Fragment>

@@ -1,4 +1,5 @@
 import httpClient from './../../utils/httpClient'
+import {setMessage} from "./message";
 
 /**
  * Créer une noubelle réservation
@@ -8,13 +9,13 @@ import httpClient from './../../utils/httpClient'
  */
 export const fetchNewLocation = (input, success) => {
     return dispatch => {
-        console.log(input);
         httpClient.request({
             url: '/Location/AskLocation',
             method: 'POST',
-            body: input
+            data: input
         }).then(() => {
             success && success();
+            dispatch(setMessage({"Success" : ["Votre réservation a bien été pris en compte"]}))
         })
     }
 };
