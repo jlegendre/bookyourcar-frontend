@@ -18,12 +18,14 @@ import { Link } from "react-router-dom";
 
 const PoleList = props => {
 
-    const { classes, fetchPoles, listPoles } = props;
+    const { classes, fetchPoles, listPoles, fetchDeletePole } = props;
     useEffect(() => {
         fetchPoles();
     }, []);
 
-   
+    const deletePole = id => {
+        fetchDeletePole(id);
+    }
 
   
     return (
@@ -57,7 +59,7 @@ const PoleList = props => {
                                     </Link>
                                 </TableCell>
                                 <TableCell>
-                                    <IconButton>
+                                    <IconButton onClick={() => deletePole(row.poleId)}>
                                             <DeleteIcon />
                                     </IconButton>
                                 </TableCell>
