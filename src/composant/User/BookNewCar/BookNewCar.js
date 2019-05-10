@@ -1,6 +1,6 @@
 import BookNewCar from './BookNewCar.jsx'
 import {connect} from "react-redux";
-import {fetchNewLocation} from "../../../redux/actions/datapage";
+import {fetchNewLocation} from "../../../redux/actions/user";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
