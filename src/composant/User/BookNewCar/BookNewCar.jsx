@@ -135,6 +135,13 @@ const BookNewCar = (props) => {
             setNoMessageFor("poleIdDepart");
         }
 
+        if(formulaire.poleIdDestination === '') {
+            setMessage({"poleIdDestination" : ["Veuillez choisir une pole de destination"]})
+            success = false
+        } else {
+            setNoMessageFor("poleIdDestination")
+        }
+
         return success;
     };
 

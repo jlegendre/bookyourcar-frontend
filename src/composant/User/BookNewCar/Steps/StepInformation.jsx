@@ -16,6 +16,32 @@ const StepInformation = props => {
         fetchPoles();
     }, [fetchPoles]);
 
+
+    /**
+     * Fonction qui permet gérer le changement du same pole
+     * @param event
+     */
+    const handleChangeSamePole = event => {
+        setSamePole(event.target.checked);
+
+        if(event.target.checked) {
+            setFormulaire({...formulaire, poleIdDestination: formulaire.poleIdDepart})
+        }
+    }
+
+    /**
+     * Fonction qui permet de gérer la modification du pole de départ
+     * @param event
+     */
+    const handlePoleDepart = event => {
+        let id = event.target.value;
+        if(samePole) {
+            setFormulaire({...formulaire, poleIdDepart: id, poleIdDestination: id})
+        } else {
+            setFormulaire({...formulaire, poleIdDepart: id})
+        }
+    }
+
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
@@ -55,7 +81,7 @@ const StepInformation = props => {
                         label={"Pole Début"}
                         name={"poleIdDepart"}
                         value={formulaire.poleIdDepart}
-                        onChange={event => setFormulaire({...formulaire, poleIdDepart: event.target.value})}
+                        onChange={handlePoleDepart}
                         data={poles}
                     />
                 </Grid>
@@ -72,7 +98,7 @@ const StepInformation = props => {
                 </Grid>
                 <Grid item xs={12}>
                     <InputSwitch
-                        onChange={event => setSamePole(event.target.checked)}
+                        onChange={handleChangeSamePole}
                         label={"Même pôle de retour ?"}
                         checked={samePole}
                     />
