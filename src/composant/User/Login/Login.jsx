@@ -26,7 +26,7 @@ const Login = (props) => {
 
     useEffect(() => {
         clearMessage();
-    });
+    }, [clearMessage]);
 
     /**
      * Update email input

@@ -20,7 +20,7 @@ const CreateUser = props => {
 
     useEffect(() => {
         fetchPoles()
-    });
+    }, [fetchPoles]);
 
     const [input, setInput] = useState({
         email: "",

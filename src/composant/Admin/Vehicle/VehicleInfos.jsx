@@ -17,7 +17,7 @@ const VehicleInfos = props => {
         fetchVehicleInfos(match.params.vehId, (vehicle) => {
             setInput(vehicle);
         });
-    });
+    }, [fetchVehicleInfos, match.params.vehId]);
 
     if (!detailVehicle) {
         return (

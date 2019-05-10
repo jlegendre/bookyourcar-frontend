@@ -1,17 +1,20 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import InputText from "../../../Input/InputText.js";
 import InputSelect from "../../../Input/InputSelect.js";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import InputSwitch from "../../../Input/InputSwitch";
 
 const StepInformation = props => {
 
     const {fetchPoles, poles, formulaire, setFormulaire} = props;
 
+    const [samePole, setSamePole] = useState(true);
+
     useEffect(() => {
         fetchPoles();
-    });
+    }, [fetchPoles]);
 
     return (
         <React.Fragment>
@@ -57,12 +60,21 @@ const StepInformation = props => {
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <InputSelect
-                        label={"Pole Fin"}
-                        name={"poleIdDestination"}
-                        value={formulaire.poleIdDestination}
-                        onChange={event => setFormulaire({...formulaire, poleIdDestination: event.target.value})}
-                        data={poles}
+                    {!samePole &&
+                        <InputSelect
+                            label={"Pole Fin"}
+                            name={"poleIdDestination"}
+                            value={formulaire.poleIdDestination}
+                            onChange={event => setFormulaire({...formulaire, poleIdDestination: event.target.value})}
+                            data={poles}
+                        />
+                    }
+                </Grid>
+                <Grid item xs={12}>
+                    <InputSwitch
+                        onChange={event => setSamePole(event.target.checked)}
+                        label={"Même pôle de retour ?"}
+                        checked={samePole}
                     />
                 </Grid>
             </Grid>

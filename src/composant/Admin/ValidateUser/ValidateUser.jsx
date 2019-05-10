@@ -22,7 +22,7 @@ const ValidateUser = props => {
 
     useEffect(() => {
         fetchUserInValidation();
-    });
+    }, [fetchUserInValidation]);
 
 
     /**

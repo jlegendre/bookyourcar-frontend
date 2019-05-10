@@ -16,7 +16,7 @@ const PoleInfos = props => {
             setInput(pole);
         });
 
-    });
+    }, [fetchPoleInfos, match.params.poleId]);
 
 
     const update = ((event, type) => {
