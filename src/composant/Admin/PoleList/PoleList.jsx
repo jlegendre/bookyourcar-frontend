@@ -21,7 +21,7 @@ const PoleList = props => {
     const { classes, fetchPoles, listPoles, fetchDeletePole } = props;
     useEffect(() => {
         fetchPoles();
-    }, []);
+    });
 
     const deletePole = id => {
         fetchDeletePole(id);

@@ -20,7 +20,7 @@ const VehicleList = props => {
     const {classes, fetchVehicles, listVehicle} = props;
     useEffect(() => {
         fetchVehicles();
-    }, []);
+    });
 
 
     return (

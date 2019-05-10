@@ -16,7 +16,7 @@ const PoleInfos = props => {
             setInput(pole);
         });
 
-    }, []);
+    });
 
 
     const update = ((event, type) => {

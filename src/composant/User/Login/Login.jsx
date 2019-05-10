@@ -26,7 +26,7 @@ const Login = (props) => {
 
     useEffect(() => {
         clearMessage();
-    }, []);
+    });
 
     /**
      * Update email input
@@ -143,7 +143,6 @@ export default withStyles((theme) => ({
             marginRight: 'auto',
         },
         [theme.breakpoints.down(getBreakingLimit(theme))]: {
-            width: '100%',
             margin: 0,
             height: '100%'
         }
@@ -155,7 +154,6 @@ export default withStyles((theme) => ({
         alignItems: 'center',
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
         [theme.breakpoints.down(getBreakingLimit(theme))]: {
-            width: '100%',
             height: '100%',
             margin: 0
         }

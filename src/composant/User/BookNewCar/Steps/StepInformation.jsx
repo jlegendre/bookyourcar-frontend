@@ -11,7 +11,7 @@ const StepInformation = props => {
 
     useEffect(() => {
         fetchPoles();
-    }, []);
+    });
 
     return (
         <React.Fragment>
