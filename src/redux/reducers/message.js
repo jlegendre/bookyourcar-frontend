@@ -1,4 +1,4 @@
-import {SET_MESSAGE, SET_NO_MESSAGE} from "../actions/message";
+import {SET_MESSAGE, SET_NO_MESSAGE, SET_NO_MESSAGE_FOR_ATTRIBUT} from "../actions/message";
 
 const initialState = [];
 
@@ -6,9 +6,12 @@ const initialState = [];
 export default function (state = initialState, action) {
     switch (action.type) {
         case SET_MESSAGE:
-            return action.json;
+            return {...state, ...action.json};
         case SET_NO_MESSAGE:
             return initialState;
+        case SET_NO_MESSAGE_FOR_ATTRIBUT:
+            delete state[action.attribut];
+            return state;
         default:
             return state
     }

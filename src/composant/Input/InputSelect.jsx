@@ -45,7 +45,7 @@ InputSelect.propTypes = {
     onChange: PropTpyes.func,
     name: PropTpyes.string,
     label: PropTpyes.string,
-    message: PropTpyes.array
+    message: PropTpyes.any
 };
 
 

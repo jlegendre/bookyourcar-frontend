@@ -14,22 +14,23 @@ import StepComments from "./Steps/StepComments";
 import StepFinish from "./Steps/StepFinish";
 import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
 import {Redirect} from "react-router";
+import {isValidDate} from "../../../utils/dateUtils";
 
 /**
  * Formulaire de réservation
  */
 const BookNewCar = (props) => {
-    const {classes, fetchNewLocation} = props;
+    const {classes, fetchNewLocation, setMessage, setNoMessageFor} = props;
 
     const computerView = useMediaQuery('(min-width:767px)');
     const [activeStep, setActiveStep] = useState(0);
     const [redirect, setRedirect] = useState(false);
     const [formulaire, setFormulaire] = useState({
-        dateDebutResa: "",
-        dateFinResa: "",
-        poleIdDepart: "",
-        poleIdDestination: "",
-        comments: ""
+        dateDebutResa: '',
+        dateFinResa: '',
+        poleIdDepart: '',
+        poleIdDestination: '',
+        comments: ''
     });
 
     /**
@@ -41,7 +42,21 @@ const BookNewCar = (props) => {
                 setRedirect(true)
             })
         } else {
-            setActiveStep(activeStep + 1);
+            let success = true;
+            switch (activeStep) {
+                case 0:
+                    success = checkStepInformation();
+                    break;
+                case 1:
+                    success = checkStepComments();
+                    break;
+                default:
+                    success = false;
+                    break;
+            }
+            if (success) {
+                setActiveStep(activeStep + 1);
+            }
         }
     };
 
@@ -73,11 +88,65 @@ const BookNewCar = (props) => {
             case 2:
                 return <StepFinish/>;
             default:
-                throw new Error('Unknown Step')
+                break;
         }
     };
 
-    if(redirect) {
+    /**
+     * Vérifie le step Information
+     * @return {boolean}
+     */
+    const checkStepInformation = () => {
+        let success = true;
+        let dateDebut = new Date(formulaire.dateDebutResa);
+        let dateFin = new Date(formulaire.dateFinResa);
+
+        if (!isValidDate(dateDebut)) {
+            setMessage({"dateDebutResa": ["La date début est invalide"]});
+            success = false;
+        } else {
+            setNoMessageFor("dateDebutResa")
+        }
+
+        if (!isValidDate(dateFin)) {
+            setMessage({"dateFinResa": ["La date de fin est invalide"]});
+            success = false;
+        } else {
+            setNoMessageFor("dateFinResa")
+        }
+
+        if(isValidDate(dateDebut) && isValidDate(dateFin)) {
+            if (dateDebut > dateFin) {
+                setMessage({
+                    "dateDebutResa": ["La date doit être avant la date de fin"],
+                    "dateFinResa": ["La date doit être après la date de début"]
+                });
+                success = false;
+            } else {
+                setNoMessageFor("dateDebutResa");
+                setNoMessageFor("dateFinResa");
+            }
+        }
+
+        if(formulaire.poleIdDepart === '') {
+            setMessage({"poleIdDepart" : ["Veuillez choisir un pole de départ"]})
+        } else {
+            setNoMessageFor("poleIdDepart");
+        }
+
+        return success;
+    };
+
+
+    /**
+     * Vérifie le Step comments
+     * @return {boolean}
+     */
+    const checkStepComments = () => {
+        return true;
+    };
+
+    if (redirect) {
         return <Redirect to={"/"}/>
     }
 
@@ -122,7 +191,9 @@ const BookNewCar = (props) => {
 
 BookNewCar.propTypes = {
     classes: PropTypes.object,
-    fetchNewLocation: PropTypes.func
+    fetchNewLocation: PropTypes.func,
+    setMessage: PropTypes.func,
+    setNoMessageFor: PropTypes.func
 };
 
 export default withStyles(theme => ({

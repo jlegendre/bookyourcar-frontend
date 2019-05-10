@@ -55,7 +55,6 @@ export const fetchPoles = () => {
             method: 'GET',
         }).then(response => {
             dispatch(setListPoles(response.data));
-            dispatch(setNoMessage());
         })
     }
 };

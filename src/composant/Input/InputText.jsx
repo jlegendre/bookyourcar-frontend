@@ -42,7 +42,7 @@ InputText.propTypes = {
     id: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
-    message: PropTypes.array,
+    message: PropTypes.any,
     required: PropTypes.bool,
     label: PropTypes.string,
     type: PropTypes.string,

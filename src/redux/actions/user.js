@@ -16,6 +16,8 @@ export const fetchNewLocation = (input, success) => {
         }).then(() => {
             success && success();
             dispatch(setMessage({"Success" : ["Votre réservation a bien été pris en compte"]}))
+        }).catch(() => {
+            dispatch(setMessage({"Error" : ["Votre demande comporte des erreurs, veuillez vérifier vos données saisies"]}))
         })
     }
 };
