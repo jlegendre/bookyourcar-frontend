@@ -16,10 +16,8 @@ const StepComments = props => {
             <Grid container spacing={24}>
                 <InputText
                     id={"comments"}
-                    name={"Comments"}
+                    name={"comments"}
                     label={"Commentaire sur la réservation"}
-                    multiline
-                    rows={5}
                     value={formulaire.comments}
                     onChange={event => setFormulaire({...formulaire, comments: event.target.value})}
                 />

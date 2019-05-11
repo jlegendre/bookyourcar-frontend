@@ -15,6 +15,7 @@ import StepFinish from "./Steps/StepFinish";
 import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
 import {Redirect} from "react-router";
 import {isValidDate} from "../../../utils/dateUtils";
+import {getBreakingLimit} from "../../../utils/cssUtils";
 
 /**
  * Formulaire de réservation
@@ -101,6 +102,7 @@ const BookNewCar = (props) => {
         let dateDebut = new Date(formulaire.dateDebutResa);
         let dateFin = new Date(formulaire.dateFinResa);
 
+        //vérification de la date de début
         if (!isValidDate(dateDebut)) {
             setMessage({"dateDebutResa": ["La date début est invalide"]});
             success = false;
@@ -108,6 +110,7 @@ const BookNewCar = (props) => {
             setNoMessageFor("dateDebutResa")
         }
 
+        //vérification de la date de fin
         if (!isValidDate(dateFin)) {
             setMessage({"dateFinResa": ["La date de fin est invalide"]});
             success = false;
@@ -115,7 +118,8 @@ const BookNewCar = (props) => {
             setNoMessageFor("dateFinResa")
         }
 
-        if(isValidDate(dateDebut) && isValidDate(dateFin)) {
+        //si les deux dates sont ok on vérifie si la date début est avant la date de fin
+        if (isValidDate(dateDebut) && isValidDate(dateFin)) {
             if (dateDebut > dateFin) {
                 setMessage({
                     "dateDebutResa": ["La date doit être avant la date de fin"],
@@ -128,15 +132,17 @@ const BookNewCar = (props) => {
             }
         }
 
-        if(formulaire.poleIdDepart === '') {
-            setMessage({"poleIdDepart" : ["Veuillez choisir un pole de départ"]})
+        //vérification pour le pole id depart
+        if (formulaire.poleIdDepart === '') {
+            setMessage({"poleIdDepart": ["Veuillez choisir un pole de départ"]})
             success = false;
         } else {
             setNoMessageFor("poleIdDepart");
         }
 
-        if(formulaire.poleIdDestination === '') {
-            setMessage({"poleIdDestination" : ["Veuillez choisir une pole de destination"]})
+        //vérification pour le pole id destination
+        if (formulaire.poleIdDestination === '') {
+            setMessage({"poleIdDestination": ["Veuillez choisir une pole de destination"]})
             success = false
         } else {
             setNoMessageFor("poleIdDestination")
@@ -151,6 +157,12 @@ const BookNewCar = (props) => {
      * @return {boolean}
      */
     const checkStepComments = () => {
+        if(formulaire.comments.trim().length <= 10) {
+            setMessage({"comments" : ["Veuillez saisir au moins 10 caracteres"]});
+            return false;
+        } else {
+            setNoMessageFor("comments");
+        }
         return true;
     };
 
@@ -209,22 +221,29 @@ export default withStyles(theme => ({
         width: 'auto',
         marginLeft: theme.spacing.unit * 2,
         marginRight: theme.spacing.unit * 2,
-        [theme.breakpoints.up(600 + theme.spacing.unit * 2 * 2)]: {
+        [theme.breakpoints.up(getBreakingLimit(theme))]: {
             width: 600,
             marginLeft: 'auto',
             marginRight: 'auto',
         },
+        [theme.breakpoints.down(getBreakingLimit(theme))]: {
+            margin: 0,
+            height: '100%'
+        }
     },
     paper: {
         marginTop: theme.spacing.unit * 3,
         marginBottom: theme.spacing.unit * 3,
         padding: theme.spacing.unit * 2,
-        height: 500,
         [theme.breakpoints.up(600 + theme.spacing.unit * 3 * 2)]: {
             marginTop: theme.spacing.unit * 6,
             marginBottom: theme.spacing.unit * 6,
             padding: theme.spacing.unit * 3,
         },
+        [theme.breakpoints.down(getBreakingLimit(theme))]: {
+            margin: 0,
+            height: '100%'
+        }
     },
     stepper: {
         padding: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 5}px`,
