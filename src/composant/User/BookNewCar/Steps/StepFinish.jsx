@@ -2,10 +2,11 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import {withStyles} from "@material-ui/styles";
 
 const StepFinish = props => {
 
-    const {formulaire, getPole} = props;
+    const {formulaire, getPole, classes} = props;
 
     return (
         <React.Fragment>
@@ -14,19 +15,19 @@ const StepFinish = props => {
             </Typography>
             <Grid container spacing={24}>
                 <Grid item xs={12} md={6}>
-                    Date début de location : {formulaire.dateDebutResa}
+                    Date début de location : <span className={classes.donnee}>{formulaire.dateDebutResa}</span>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    Date de fin de location : {formulaire.dateFinResa}
+                    Date de fin de location : <span className={classes.donnee}>{formulaire.dateFinResa}</span>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    Départ : {getPole(formulaire.poleIdDepart).poleName}
+                    Départ : <span className={classes.donnee}>{getPole(formulaire.poleIdDepart).poleName}</span>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    Arrivée : {getPole(formulaire.poleIdDestination).poleName}
+                    Arrivée : <span className={classes.donnee}>{getPole(formulaire.poleIdDestination).poleName}</span>
                 </Grid>
                 <Grid item xs={12}>
-                    Commentaire : {formulaire.comments}
+                    Commentaire : <span className={classes.donnee}>{formulaire.comments}</span>
                 </Grid>
             </Grid>
 
@@ -39,4 +40,8 @@ StepFinish.propTypes = {
     getPole: PropTypes.func
 };
 
-export default StepFinish;
+export default withStyles({
+    donnee: {
+        fontWeight: 'bold'
+    }
+})(StepFinish);
