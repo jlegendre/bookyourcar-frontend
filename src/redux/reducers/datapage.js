@@ -55,3 +55,12 @@ export const getListPolesForSelect = state => {
     });
 
 };
+
+/**
+ * Fonction qui permet de récupérer dans le state le pole par rapport a sont identifiant
+ * @param state
+ * @param identifiant identifiant du pole a récuperer
+ */
+export const getPoleById = (state, identifiant) => {
+    return _.find(getListPoles(state), {poleId: identifiant});
+};

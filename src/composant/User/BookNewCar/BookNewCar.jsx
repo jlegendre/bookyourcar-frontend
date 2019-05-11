@@ -11,7 +11,7 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import StepInformation from "./Steps/StepInformation.js";
 import StepComments from "./Steps/StepComments";
-import StepFinish from "./Steps/StepFinish";
+import StepFinish from "./Steps/StepFinish.js";
 import {unstable_useMediaQuery as useMediaQuery} from "@material-ui/core/useMediaQuery";
 import {Redirect} from "react-router";
 import {isValidDate} from "../../../utils/dateUtils";
@@ -87,7 +87,7 @@ const BookNewCar = (props) => {
             case 1:
                 return <StepComments formulaire={formulaire} setFormulaire={setFormulaire}/>;
             case 2:
-                return <StepFinish/>;
+                return <StepFinish formulaire={formulaire} />;
             default:
                 break;
         }
@@ -176,7 +176,7 @@ const BookNewCar = (props) => {
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
                     <Typography component="h1" variant="h4">
-                        Réservation
+                        Location
                     </Typography>
                     <Stepper activeStep={activeStep} className={classes.stepper}>
                         {steps.map(label =>

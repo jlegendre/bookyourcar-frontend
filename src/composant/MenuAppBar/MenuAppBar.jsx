@@ -30,7 +30,11 @@ const MenuAppBar = props => {
             }
             <Divider/>
             <List>
-                <MenuItem label={"Demande de réservation"} url={"booking"} iconName={"bookmarks"} onClick={onClose}/>
+                <MenuItem label={"Demande de location"} url={"booking"} iconName={"bookmarks"} onClick={onClose}/>
+                <MenuItem label={"Mes locations"} url={"booking/me"} iconName={"bookmarks"} onClick={onClose}/>
+            </List>
+            <Divider/>
+            <List>
                 <MenuItem label={"Deconnexion"} iconName={"exit_to_app"} onClick={() => logout()}/>
             </List>
         </div>
