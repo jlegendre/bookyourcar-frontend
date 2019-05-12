@@ -6,18 +6,21 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Input/InputText";
+import InputSelect from "../../Input/InputSelect";
 
 const VehicleInfos = props => {
 
-    const {classes, fetchVehicleInfos, detailVehicle, match, fetchUpdateVehicle, fetchDeleteVehicle} = props;
+    const {classes, fetchVehicleInfos, detailVehicle, match, fetchUpdateVehicle, fetchDeleteVehicle, poles, fetchPoles} = props;
     const [input, setInput] = useState(detailVehicle);
 
 
     useEffect(() => {
         fetchVehicleInfos(match.params.vehId, (vehicle) => {
+            console.log(vehicle);
             setInput(vehicle);
         });
-    }, [fetchVehicleInfos, match.params.vehId]);
+       fetchPoles();
+    }, [fetchVehicleInfos, match.params.vehId, fetchPoles]);
 
     if (!detailVehicle) {
         return (
@@ -27,6 +30,8 @@ const VehicleInfos = props => {
         )
     }
     const update = ((event, type) => {
+        console.log(input);
+
         setInput({
             ...input,
             [type]: event.target.value
@@ -40,7 +45,31 @@ const VehicleInfos = props => {
 
     const deleteVehicle = (() => {
         fetchDeleteVehicle(input.vehId);
-    })
+    });
+
+    const updateSelect = event => {
+        setInput({
+            ...input,
+            [event.target.name]: event.target.value
+        })
+    };
+
+
+    const carburants = [
+        {
+            value: 'Essence',
+            label: 'Essence',
+        },
+        {
+            value: 'Diesel',
+            label: 'Diesel',
+        },
+        {
+            value: 'Electrique',
+            label: 'Electrique',
+        },
+    ];
+
 
     return (
         <div>
@@ -50,26 +79,42 @@ const VehicleInfos = props => {
                         <Icon fontSize={"large"}>directions_car</Icon>
                         <Grid id="plop" direction={"column"}>
                             <Grid direction={"row"}>
-                                <InputText label='Marque' defaultValue={detailVehicle.vehBrand}
+                                <InputText label='Marque' value={detailVehicle.vehBrand}
                                            onChange={(event) => update(event, 'vehBrand')}/>
-                                <InputText label='Modèle' defaultValue={detailVehicle.vehModel}
+                                <InputText label='Modèle' value={detailVehicle.vehModel}
                                            onChange={(event) => update(event, 'vehModel')}/>
                             </Grid>
                             <Grid direction={"column"}>
-                                <InputText label='Immatriculation' defaultValue={detailVehicle.vehRegistration}
+                                <InputText label='Immatriculation' value={detailVehicle.vehRegistration}
                                            onChange={(event) => update(event, 'vehRegistration')}/>
-                                <InputText label='Couleur' defaultValue={detailVehicle.vehColor}
+                                <InputText label='Couleur' value={detailVehicle.vehColor}
                                            onChange={(event) => update(event, 'vehColor')}/>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <InputText label='Nombre de places' defaultValue={detailVehicle.vehNumberplace}
+                    <InputText label='Nombre de places' value={detailVehicle.vehNumberplace}
                                onChange={(event) => update(event, 'vehNumberplace')}/>
-                    <InputText label='Type de carburant' defaultValue={detailVehicle.vehTypeEssence}
-                               onChange={(event) => update(event, 'vehTypeEssence')}/>
-                    <InputText label='Pôle' defaultValue={detailVehicle.poleName}
+                 {/*   <InputText label='Type de carburant' value={detailVehicle.vehTypeEssence}
+                               onChange={(event) => update(event, 'vehTypeEssence')}/>*/}
+                {/*    <InputText label='Pôle' value={detailVehicle.poleName}
                                onChange={(event) => update(event, 'poleName')}/>
-
+*/}
+                    <InputSelect
+                        id={"vehTypeEssence"}
+                        name={"vehTypeEssence"}
+                        onChange={updateSelect}
+                        label={"Carburant"}
+                        data={carburants}
+                        value={detailVehicle.vehTypeEssence}
+                    />
+                    <InputSelect
+                        id={"poleName"}
+                        name={"poleName"}
+                        onChange={updateSelect}
+                        label={"Pole"}
+                        data={poles}
+                        value={detailVehicle.poleName}
+                    />
                 </Grid>
                 <Grid direction={"row"}>
                     <Button variant="contained" color="primary" className={classes.button}
@@ -79,8 +124,7 @@ const VehicleInfos = props => {
                     </Button>
                     <Button variant="contained" color="secondary" className={classes.button}
                             onClick={() => deleteVehicle()}
-                    >>
-                        Supprimer
+                    >Supprimer
                     </Button>
                 </Grid>
 

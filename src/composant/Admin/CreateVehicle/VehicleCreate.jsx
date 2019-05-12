@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {Icon, Paper,InputAdornment, TextField, MenuItem} from "@material-ui/core";
+import {Icon, Paper, InputAdornment, TextField, MenuItem} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
@@ -10,8 +10,20 @@ import InputSelect from "../../Input/InputSelect";
 
 const VehicleCreate = props => {
 
-    const {classes, fetchCreateVehicle,  fetchPoles, poles} = props;
-    const [input, setInput] = useState({vehId :0, vehRegistration: '', vehBrand: '', vehModel: '', vehKm: 0, vehDatemec: '', vehTypeEssence: '', vehColor: '', vehNumberplace: '', vehIsactive: true, poleName: ''});
+    const {classes, fetchCreateVehicle, fetchPoles, poles} = props;
+    const [input, setInput] = useState({
+        vehId: 0,
+        vehRegistration: '',
+        vehBrand: '',
+        vehModel: '',
+        vehKm: 0,
+        vehDatemec: '',
+        vehTypeEssence: '',
+        vehColor: '',
+        vehNumberplace: '',
+        vehIsactive: true,
+        poleName: ''
+    });
 
 
     useEffect(() => {
@@ -19,15 +31,14 @@ const VehicleCreate = props => {
     }, [fetchPoles]);
 
     const update = ((event, type) => {
-        console.log(input)
-        if(!input) {
+        if (!input) {
             setInput({
                 ...input,
                 ['vehId']: 0,
                 ['vehIsactive']: true,
                 [type]: event.target.value
             })
-        } else if(event){
+        } else if (event) {
             setInput({
                 ...input,
                 [type]: event.target.value
@@ -39,6 +50,7 @@ const VehicleCreate = props => {
 
         fetchCreateVehicle(input);
     });
+
     const carburants = [
         {
             value: 'Essence',
@@ -48,15 +60,17 @@ const VehicleCreate = props => {
             value: 'Diesel',
             label: 'Diesel',
         },
+        {
+            value: 'Electrique',
+            label: 'Electrique',
+        },
     ];
 
     const updateSelect = event => {
-        console.log(event);
         setInput({
             ...input,
             [event.target.name]: event.target.value
         })
-        console.log(input)
     };
 
     return (
@@ -76,10 +90,11 @@ const VehicleCreate = props => {
                                 <Grid direction={"column"}>
                                     <InputText required label='Immatriculation'
                                                onChange={(event) => update(event, 'vehRegistration')}/>
-                                               <InputText label="date d'immatriculation" type={'date'} required onChange={(event) => update(event, 'vehDatemec')}
-                                                          InputLabelProps={{
-                                                              shrink: true,
-                                                          }}/>
+                                    <InputText label="date d'immatriculation" type={'date'} required
+                                               onChange={(event) => update(event, 'vehDatemec')}
+                                               InputLabelProps={{
+                                                   shrink: true,
+                                               }}/>
                                     <InputText required label='Couleur'
                                                onChange={(event) => update(event, 'vehColor')}/>
                                 </Grid>
@@ -87,10 +102,8 @@ const VehicleCreate = props => {
                         </Grid>
                         <InputText required={true} type='number' label='Nombre de places'
                                    onChange={(event) => update(event, 'vehNumberplace')}/>
-                                   <InputText required={true} type='number' label='Kilometrage'
+                        <InputText required={true} type='number' label='Kilometrage'
                                    onChange={(event) => update(event, 'vehKm')}/>
-                     {/*   <InputText required={true} label='Type de carburant'
-                                   onChange={(event) => update(event, 'vehTypeEssence')}/>*/}
                         <InputSelect
                             id={"vehTypeEssence"}
                             name={"vehTypeEssence"}
@@ -99,25 +112,6 @@ const VehicleCreate = props => {
                             data={carburants}
                             value={input.vehTypeEssence}
                         />
-{/*
-
-                        <TextField
-                            select
-                            label="Type de carburant"
-                            className={classes.margin}
-                            onChange={update(undefined, 'vehTypeEssence')}
-                            InputProps={{
-                                startAdornment: <InputAdornment position="start">Kg</InputAdornment>,
-                            }}
-                        >
-                            {ranges.map(option => (
-                                <MenuItem key={option.value} value={option.value}>
-                                    {option.label}
-                                </MenuItem>
-                            ))}
-                        </TextField>
-*/}
-
                         <InputSelect
                             id={"poleName"}
                             name={"poleName"}
@@ -126,14 +120,11 @@ const VehicleCreate = props => {
                             data={poles}
                             value={input.poleName}
                         />
-
                     </Grid>
                 </form>
                 <Grid direction={"row"}>
                     <Button variant="contained" color="primary" className={classes.button}
-                            onClick={() => createVehicle()}
-                    >
-                        Créer
+                            onClick={() => createVehicle()}>Créer
                     </Button>
                 </Grid>
 
