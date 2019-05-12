@@ -124,13 +124,11 @@ export const fetchDeleteVehicle = id => {
  */
 export const fetchCreateVehicle = ({vehId, vehRegistration, vehBrand, vehModel, vehKm, vehDatemec, vehTypeEssence, vehColor, vehNumberplace, vehIsactive, poleName}) => {
     return dispatch => {
-        console.log({vehId, vehRegistration, vehBrand, vehModel, vehKm, vehDatemec, vehTypeEssence, vehColor, vehNumberplace, vehIsactive, poleName})
         httpClient.request({
             url :`/Vehicle`,
             method: 'POST',
             data: {vehId, vehRegistration, vehBrand, vehModel, vehKm, vehDatemec, vehTypeEssence, vehColor, vehNumberplace, vehIsactive, poleName}
         }).then(() => {
-            dispatch(fetchVehicleInfos());
         })
     }
 }
