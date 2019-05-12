@@ -1,4 +1,4 @@
-import BookNewCar from './BookNewCar.jsx'
+import NewLocation from './NewLocation.jsx'
 import {connect} from "react-redux";
 import {fetchNewLocation} from "../../../redux/actions/user";
 import {setMessage, setNoMessageFor} from "../../../redux/actions/message";
@@ -18,4 +18,4 @@ const mapStateToProps = (state) => {
     return {}
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(BookNewCar)
+export default connect(mapStateToProps, mapDispatchToProps)(NewLocation)
