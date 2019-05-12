@@ -20,6 +20,7 @@ import NewLocation from "./composant/User/NewLocation/NewLocation.js";
 import MyLocation from './composant/User/MyLocation/MyLocation.js';
 import Profil from "./composant/User/Profil/Profil.js";
 import {getBreakingLimit} from "./utils/cssUtils";
+import VehicleCreate from "./composant/Admin/CreateVehicle/VehicleCreate";
 
 const App = props => {
 
@@ -117,16 +118,19 @@ const App = props => {
                         <Route exact path={"/profil"} component={params => requireUserLogin(<Profil {...params}/>)}/>
 
                         {/* Route admin */}
-                        <Route exact path={"/validUser"}
+                        <Route path={"/validUser"}
                                component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
                         <Route exact path={"/vehicleList"}
                                component={params => requireAdminLogin(<VehicleList {...params}/>)}/>
                         <Route exact path={"/vehicleInfos/:vehId"}
                                component={params => requireAdminLogin(<VehicleInfos {...params} />)}/>
-                        <Route exact path={"/poleList"}
+                        <Route path={"/vehicleCreate"}
+                               component={params => requireAdminLogin(<VehicleCreate {...params} />)}/>
+                        <Route path={"/poleList"}
                                component={params => requireAdminLogin(<PoleList {...params} />)}/>
                         <Route exact path={"/poleInfos/:poleId"}
                                component={params => requireAdminLogin(<PoleInfos {...params} />)}/>
+
                         <Route component={() => <div>404</div>}/>
                     </Switch>
                 </main>

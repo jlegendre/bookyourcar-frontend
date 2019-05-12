@@ -87,8 +87,8 @@ export const fetchValidateReservation = id => {
 
 
 /**
- * Call /Vehicle/:id, Url pour modifier un véhicule
- * @param vehId identifiant du véhicule
+ * Call /Vehicle/:id, Url pour modifier un vï¿½hicule
+ * @param vehId identifiant du vï¿½hicule
  * @return {Function}
  */
 export const fetchUpdateVehicle = ({vehId, vehRegistration, vehBrand, vehModel, vehKm, vehDatemec, vehTypeEssence, vehColor, vehNumberplace, vehIsactive, poleName}) => {
@@ -114,6 +114,23 @@ export const fetchDeleteVehicle = id => {
             method: 'DELETE',
         }).then(() => {
             dispatch(fetchVehicleInfos(id));
+        })
+    }
+}
+
+/**
+ * Call /Vehicle/, Url pour crÃ©er un vehicule
+ * @return {Function}
+ */
+export const fetchCreateVehicle = ({vehId, vehRegistration, vehBrand, vehModel, vehKm, vehDatemec, vehTypeEssence, vehColor, vehNumberplace, vehIsactive, poleName}) => {
+    return dispatch => {
+        console.log({vehId, vehRegistration, vehBrand, vehModel, vehKm, vehDatemec, vehTypeEssence, vehColor, vehNumberplace, vehIsactive, poleName})
+        httpClient.request({
+            url :`/Vehicle`,
+            method: 'POST',
+            data: {vehId, vehRegistration, vehBrand, vehModel, vehKm, vehDatemec, vehTypeEssence, vehColor, vehNumberplace, vehIsactive, poleName}
+        }).then(() => {
+            dispatch(fetchVehicleInfos());
         })
     }
 }
