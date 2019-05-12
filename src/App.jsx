@@ -16,7 +16,8 @@ import PoleList from "./composant/Admin/PoleList/PoleList.js";
 import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos.js";
 import PoleInfos from "./composant/Admin/Pole/PoleInfos.js";
 import MenuAppBar from "./composant/MenuAppBar/MenuAppBar.js";
-import BookNewCar from "./composant/User/BookNewCar/BookNewCar.js";
+import NewLocation from "./composant/User/NewLocation/NewLocation.js";
+import MyLocation from './composant/User/MyLocation/MyLocation.js';
 import Profil from "./composant/User/Profil/Profil.js";
 import {getBreakingLimit} from "./utils/cssUtils";
 
@@ -77,6 +78,7 @@ const App = props => {
                 <AppBar position="fixed" className={classes.appBar} id={"customAppBar"}>
                     <Toolbar>
                         <Hidden smUp implementation={"css"}>
+                            {token &&
                             <IconButton
                                 color={"inherit"}
                                 aria-label={"Open drawer"}
@@ -84,6 +86,7 @@ const App = props => {
                             >
                                 <MenuIcon/>
                             </IconButton>
+                            }
                         </Hidden>
 
                         <Typography variant="h6" color="inherit" noWrap>
@@ -107,19 +110,22 @@ const App = props => {
 
                         {/* Route user */}
                         <Route exact path={"/"} component={params => requireUserLogin(<Acceuil {...params}/>)}/>
-                        <Route path={"/booking"} component={params => requireUserLogin(<BookNewCar {...params}/>)}/>
-                        <Route path={"/profil"} component={params => requireUserLogin(<Profil {...params}/>)}/>
+                        <Route exact path={"/booking"}
+                               component={params => requireUserLogin(<NewLocation {...params}/>)}/>
+                        <Route exact path={"/booking/me"}
+                               component={params => requireUserLogin(<MyLocation {...params}/>)}/>
+                        <Route exact path={"/profil"} component={params => requireUserLogin(<Profil {...params}/>)}/>
 
-                            {/* Route admin */}
-                        <Route path={"/validUser"}
+                        {/* Route admin */}
+                        <Route exact path={"/validUser"}
                                component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
-                        <Route path={"/vehicleList"}
+                        <Route exact path={"/vehicleList"}
                                component={params => requireAdminLogin(<VehicleList {...params}/>)}/>
-                        <Route path={"/vehicleInfos/:vehId"}
+                        <Route exact path={"/vehicleInfos/:vehId"}
                                component={params => requireAdminLogin(<VehicleInfos {...params} />)}/>
-                        <Route path={"/poleList"}
+                        <Route exact path={"/poleList"}
                                component={params => requireAdminLogin(<PoleList {...params} />)}/>
-                        <Route path={"/poleInfos/:poleId"}
+                        <Route exact path={"/poleInfos/:poleId"}
                                component={params => requireAdminLogin(<PoleInfos {...params} />)}/>
                         <Route component={() => <div>404</div>}/>
                     </Switch>

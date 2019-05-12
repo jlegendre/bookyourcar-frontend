@@ -14,6 +14,7 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import CheckIcon from '@material-ui/icons/Check'
+import {getBreakingLimit} from "../../../utils/cssUtils";
 
 const ValidateUser = props => {
 
@@ -97,7 +98,7 @@ export default withStyles(theme => ({
         display: 'block', // Fix IE 11 issue.
         marginLeft: theme.spacing.unit * 3,
         marginRight: theme.spacing.unit * 3,
-        [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+        [theme.breakpoints.up(getBreakingLimit(theme))]: {
             width: 1000,
             marginLeft: 'auto',
             marginRight: 'auto',
@@ -109,7 +110,7 @@ export default withStyles(theme => ({
         flexDirection: 'column',
         alignItems: 'center',
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-        [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+        [theme.breakpoints.up(getBreakingLimit(theme))]: {
             width: '100%',
             padding: 0
         }

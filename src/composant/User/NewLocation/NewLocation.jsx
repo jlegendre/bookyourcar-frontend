@@ -20,7 +20,7 @@ import {getBreakingLimit} from "../../../utils/cssUtils";
 /**
  * Formulaire de réservation
  */
-const BookNewCar = (props) => {
+const NewLocation = (props) => {
     const {classes, fetchNewLocation, setMessage, setNoMessageFor} = props;
 
     const computerView = useMediaQuery('(min-width:767px)');
@@ -209,7 +209,7 @@ const BookNewCar = (props) => {
     );
 };
 
-BookNewCar.propTypes = {
+NewLocation.propTypes = {
     classes: PropTypes.object,
     fetchNewLocation: PropTypes.func,
     setMessage: PropTypes.func,
@@ -256,4 +256,4 @@ export default withStyles(theme => ({
         marginTop: theme.spacing.unit * 3,
         marginLeft: theme.spacing.unit,
     },
-}))(BookNewCar)
+}))(NewLocation)
