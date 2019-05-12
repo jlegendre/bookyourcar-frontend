@@ -11,7 +11,19 @@ import InputSelect from "../../Input/InputSelect";
 const VehicleInfos = props => {
 
     const {classes, fetchVehicleInfos, detailVehicle, match, fetchUpdateVehicle, fetchDeleteVehicle, poles, fetchPoles} = props;
-    const [input, setInput] = useState(detailVehicle);
+    const [input, setInput] = useState({
+        vehId: 0,
+        vehRegistration: '',
+        vehBrand: '',
+        vehModel: '',
+        vehKm: 0,
+        vehDatemec: '',
+        vehTypeEssence: '',
+        vehColor: '',
+        vehNumberplace: '',
+        vehIsactive: true,
+        poleName: ''
+    });
 
 
     useEffect(() => {
@@ -79,24 +91,24 @@ const VehicleInfos = props => {
                         <Icon fontSize={"large"}>directions_car</Icon>
                         <Grid id="plop" direction={"column"}>
                             <Grid direction={"row"}>
-                                <InputText label='Marque' value={detailVehicle.vehBrand}
+                                <InputText label='Marque' value={input.vehBrand}
                                            onChange={(event) => update(event, 'vehBrand')}/>
-                                <InputText label='Modèle' value={detailVehicle.vehModel}
+                                <InputText label='Modèle' value={input.vehModel}
                                            onChange={(event) => update(event, 'vehModel')}/>
                             </Grid>
                             <Grid direction={"column"}>
-                                <InputText label='Immatriculation' value={detailVehicle.vehRegistration}
+                                <InputText label='Immatriculation' value={input.vehRegistration}
                                            onChange={(event) => update(event, 'vehRegistration')}/>
-                                <InputText label='Couleur' value={detailVehicle.vehColor}
+                                <InputText label='Couleur' value={input.vehColor}
                                            onChange={(event) => update(event, 'vehColor')}/>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <InputText label='Nombre de places' value={detailVehicle.vehNumberplace}
+                    <InputText label='Nombre de places' type={'number'} value={input.vehNumberplace}
                                onChange={(event) => update(event, 'vehNumberplace')}/>
-                 {/*   <InputText label='Type de carburant' value={detailVehicle.vehTypeEssence}
+                 {/*   <InputText label='Type de carburant' value={input.vehTypeEssence}
                                onChange={(event) => update(event, 'vehTypeEssence')}/>*/}
-                {/*    <InputText label='Pôle' value={detailVehicle.poleName}
+                {/*    <InputText label='Pôle' value={input.poleName}
                                onChange={(event) => update(event, 'poleName')}/>
 */}
                     <InputSelect
@@ -105,7 +117,7 @@ const VehicleInfos = props => {
                         onChange={updateSelect}
                         label={"Carburant"}
                         data={carburants}
-                        value={detailVehicle.vehTypeEssence}
+                        value={input.vehTypeEssence}
                     />
                     <InputSelect
                         id={"poleName"}
@@ -113,7 +125,7 @@ const VehicleInfos = props => {
                         onChange={updateSelect}
                         label={"Pole"}
                         data={poles}
-                        value={detailVehicle.poleName}
+                        value={input.poleName}
                     />
                 </Grid>
                 <Grid direction={"row"}>
