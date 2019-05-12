@@ -2,6 +2,7 @@ import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
+    Button,
     CssBaseline,
     Icon,
     IconButton,
@@ -38,7 +39,11 @@ const VehicleList = props => {
                             <TableCell>Carburant</TableCell>
                             <TableCell>Nombre de places</TableCell>
                             <TableCell>Emplacement</TableCell>
-                            <TableCell/>
+                            <TableCell><Link to={`/vehicleCreate`}>
+                                <Button>
+                                    Nouveau vehicule
+                                </Button>
+                            </Link></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>

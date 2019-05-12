@@ -19,6 +19,7 @@ import MenuAppBar from "./composant/MenuAppBar/MenuAppBar.js";
 import BookNewCar from "./composant/User/BookNewCar/BookNewCar.js";
 import Profil from "./composant/User/Profil/Profil.js";
 import {getBreakingLimit} from "./utils/cssUtils";
+import VehicleCreate from "./composant/Admin/CreateVehicle/VehicleCreate";
 
 const App = props => {
 
@@ -110,13 +111,15 @@ const App = props => {
                         <Route path={"/booking"} component={params => requireUserLogin(<BookNewCar {...params}/>)}/>
                         <Route path={"/profil"} component={params => requireUserLogin(<Profil {...params}/>)}/>
 
-                            {/* Route admin */}
+                        {/* Route admin */}
                         <Route path={"/validUser"}
                                component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
                         <Route path={"/vehicleList"}
                                component={params => requireAdminLogin(<VehicleList {...params}/>)}/>
                         <Route path={"/vehicleInfos/:vehId"}
                                component={params => requireAdminLogin(<VehicleInfos {...params} />)}/>
+                        <Route path={"/vehicleCreate"}
+                               component={params => requireAdminLogin(<VehicleCreate {...params} />)}/>
                         <Route path={"/poleList"}
                                component={params => requireAdminLogin(<PoleList {...params} />)}/>
                         <Route path={"/poleInfos/:poleId"}
