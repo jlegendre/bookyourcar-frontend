@@ -6,16 +6,17 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Input/InputText";
+import InputSelect from "../../Input/InputSelect";
 
 const VehicleCreate = props => {
 
-    const {classes, fetchCreateVehicle} = props;
-    const [input, setInput] = useState();
+    const {classes, fetchCreateVehicle,  fetchPoles, poles} = props;
+    const [input, setInput] = useState({vehId :0, vehRegistration: '', vehBrand: '', vehModel: '', vehKm: 0, vehDatemec: '', vehTypeEssence: '', vehColor: '', vehNumberplace: '', vehIsactive: true, poleName: ''});
 
 
     useEffect(() => {
-
-    }, []);
+        fetchPoles()
+    }, [fetchPoles]);
 
     const update = ((event, type) => {
         console.log(input)
@@ -23,7 +24,6 @@ const VehicleCreate = props => {
             setInput({
                 ...input,
                 ['vehId']: 0,
-                ['vehKm']: 0,
                 ['vehIsactive']: true,
                 [type]: event.target.value
             })
@@ -39,7 +39,7 @@ const VehicleCreate = props => {
 
         fetchCreateVehicle(input);
     });
-    const ranges = [
+    const carburants = [
         {
             value: 'Essence',
             label: 'Essence',
@@ -50,6 +50,14 @@ const VehicleCreate = props => {
         },
     ];
 
+    const updateSelect = event => {
+        console.log(event);
+        setInput({
+            ...input,
+            [event.target.name]: event.target.value
+        })
+        console.log(input)
+    };
 
     return (
         <div>
@@ -66,17 +74,31 @@ const VehicleCreate = props => {
                                                onChange={(event) => update(event, 'vehModel')}/>
                                 </Grid>
                                 <Grid direction={"column"}>
-                                    <InputText required={true} label='Immatriculation'
+                                    <InputText required label='Immatriculation'
                                                onChange={(event) => update(event, 'vehRegistration')}/>
-                                    <InputText required={true} label='Couleur'
+                                               <InputText label="date d'immatriculation" type={'date'} required onChange={(event) => update(event, 'vehDatemec')}
+                                                          InputLabelProps={{
+                                                              shrink: true,
+                                                          }}/>
+                                    <InputText required label='Couleur'
                                                onChange={(event) => update(event, 'vehColor')}/>
                                 </Grid>
                             </Grid>
                         </Grid>
                         <InputText required={true} type='number' label='Nombre de places'
                                    onChange={(event) => update(event, 'vehNumberplace')}/>
-                        <InputText required={true} label='Type de carburant'
-                                   onChange={(event) => update(event, 'vehTypeEssence')}/>
+                                   <InputText required={true} type='number' label='Kilometrage'
+                                   onChange={(event) => update(event, 'vehKm')}/>
+                     {/*   <InputText required={true} label='Type de carburant'
+                                   onChange={(event) => update(event, 'vehTypeEssence')}/>*/}
+                        <InputSelect
+                            id={"vehTypeEssence"}
+                            name={"vehTypeEssence"}
+                            onChange={updateSelect}
+                            label={"Carburant"}
+                            data={carburants}
+                            value={input.vehTypeEssence}
+                        />
 {/*
 
                         <TextField
@@ -96,8 +118,14 @@ const VehicleCreate = props => {
                         </TextField>
 */}
 
-                        <InputText required={true} label='Pôle'
-                                   onChange={(event) => update(event, 'poleName')}/>
+                        <InputSelect
+                            id={"poleName"}
+                            name={"poleName"}
+                            onChange={updateSelect}
+                            label={"Pole"}
+                            data={poles}
+                            value={input.poleName}
+                        />
 
                     </Grid>
                 </form>

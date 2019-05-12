@@ -57,6 +57,18 @@ export const getListPolesForSelect = state => {
 };
 
 /**
+ * Fonction qui permet de construire une liste de pôle pour l'objet InputSelect
+ * @param state
+ * @return {Array}
+ */
+export const getListPolesForSelectByName = state => {
+    return _.map(getListPoles(state), pole => {
+        return {value: pole.poleName, label: pole.poleName}
+    });
+
+};
+
+/**
  * Fonction qui permet de récupérer dans le state le pole par rapport a sont identifiant
  * @param state
  * @param identifiant identifiant du pole a récuperer
