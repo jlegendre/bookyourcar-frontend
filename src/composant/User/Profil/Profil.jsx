@@ -55,7 +55,6 @@ const Profil = props => {
                                         {profil.userEmail}
                                     </Typography>
                                 </CardContent>
-                                <div>
                                 <CardActions>
                                     <Button size="small" color="primary">
                                         Modifier
