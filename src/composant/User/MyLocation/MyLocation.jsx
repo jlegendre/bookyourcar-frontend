@@ -14,8 +14,6 @@ const MyLocation = props => {
         fetchUserLocation();
     }, [fetchUserLocation]);
 
-    console.log(location);
-
     return (
         <div className={classes.main}>
             <CssBaseline/>

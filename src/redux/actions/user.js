@@ -2,6 +2,7 @@ import httpClient from './../../utils/httpClient'
 import {setMessage} from "./message";
 
 export const SET_USER_LOCATION = 'SET_USER_LOCATION';
+export const SET_USER_PROFIL = 'SET_USER_PROFIL';
 
 /**
  * Créer une noubelle réservation
@@ -39,6 +40,25 @@ export const fetchUserLocation = () => {
     }
 };
 
+/**
+ * Retourne le profil de l'utilisateur
+ * @return {Function}
+ */
+export const fetchUserProfil = () => {
+    return dispatch => {
+        httpClient.request({
+            url: '/User/50',
+            method: 'GET'
+        }).then(response => {
+            dispatch(setUserProfil(response.data))
+        })
+    }
+}
+
 export const setUserLocation = location => {
     return {type: SET_USER_LOCATION, location}
 };
+
+export const setUserProfil = profil => {
+    return {type: SET_USER_PROFIL, profil}
+}

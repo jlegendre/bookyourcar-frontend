@@ -1,11 +1,19 @@
 import {connect} from "react-redux"
 import Profil from './Profil.jsx'
+import {getProfil} from "../../../redux/reducers/user";
+import {fetchUserProfil} from "../../../redux/actions/user";
 
 
 const mapStateToProps = state => {
     return {
-
+        profil: getProfil(state)
     }
 };
 
-export default connect(mapStateToProps)(Profil)
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchProfil : () => dispatch(fetchUserProfil())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profil)

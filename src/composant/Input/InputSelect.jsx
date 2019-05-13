@@ -26,7 +26,7 @@ const InputSelect = props => {
                 )}
             </Select>
             {message && message[name] &&
-            <FormHelperText>{message[name][0]}</FormHelperText>
+                <FormHelperText>{message[name][0]}</FormHelperText>
             }
 
         </FormControl>

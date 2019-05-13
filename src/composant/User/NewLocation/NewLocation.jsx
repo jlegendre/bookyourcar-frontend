@@ -134,7 +134,7 @@ const NewLocation = (props) => {
 
         //vérification pour le pole id depart
         if (formulaire.poleIdDepart === '') {
-            setMessage({"poleIdDepart": ["Veuillez choisir un pole de départ"]})
+            setMessage({"poleIdDepart": ["Veuillez choisir un pole de départ"]});
             success = false;
         } else {
             setNoMessageFor("poleIdDepart");
@@ -142,7 +142,7 @@ const NewLocation = (props) => {
 
         //vérification pour le pole id destination
         if (formulaire.poleIdDestination === '') {
-            setMessage({"poleIdDestination": ["Veuillez choisir une pole de destination"]})
+            setMessage({"poleIdDestination": ["Veuillez choisir une pole de destination"]});
             success = false
         } else {
             setNoMessageFor("poleIdDestination")
@@ -176,7 +176,7 @@ const NewLocation = (props) => {
             <main className={classes.layout}>
                 <Paper className={classes.paper}>
                     <Typography component="h1" variant="h4">
-                        Location
+                        Demande de location
                     </Typography>
                     <Stepper activeStep={activeStep} className={classes.stepper}>
                         {steps.map(label =>

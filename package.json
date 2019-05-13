@@ -25,6 +25,7 @@
     "jss": "^10.0.0-alpha.16",
     "lodash": "latest",
     "material-ui-time-picker": "^1.2.0",
+    "md5": "^2.2.1",
     "prop-types": "^15.7.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
