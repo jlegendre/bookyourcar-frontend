@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {Icon, Paper, InputAdornment, TextField, MenuItem} from "@material-ui/core";
+import {Icon, Paper} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Input/InputText";
 import InputSelect from "../../Input/InputSelect";
 
@@ -34,8 +33,8 @@ const VehicleCreate = props => {
         if (!input) {
             setInput({
                 ...input,
-                ['vehId']: 0,
-                ['vehIsactive']: true,
+                'vehId': 0,
+                'vehIsactive': true,
                 [type]: event.target.value
             })
         } else if (event) {
@@ -43,7 +42,7 @@ const VehicleCreate = props => {
                 ...input,
                 [type]: event.target.value
             });
-        };
+        }
     });
 
     const createVehicle = (() => {
@@ -82,27 +81,27 @@ const VehicleCreate = props => {
                             <Icon fontSize={"large"}>directions_car</Icon>
                             <Grid id="plop" direction={"column"}>
                                 <Grid direction={"row"}>
-                                    <InputText required label='Marque'
+                                    <InputText id='vehBrand' name='vehBrand' required label='Marque'
                                                onChange={(event) => update(event, 'vehBrand')}/>
-                                    <InputText required label='Modèle'
+                                    <InputText id='vehModel' name='vehModel' required label='Modèle'
                                                onChange={(event) => update(event, 'vehModel')}/>
                                 </Grid>
                                 <Grid direction={"column"}>
-                                    <InputText required label='Immatriculation'
+                                    <InputText id='vehRegistration' name='vehRegistration' required label='Immatriculation'
                                                onChange={(event) => update(event, 'vehRegistration')}/>
-                                    <InputText label="date d'immatriculation" type={'date'} required
+                                    <InputText id='vehDatemec' name='vehDatemec' label="date d'immatriculation" type={'date'} required
                                                onChange={(event) => update(event, 'vehDatemec')}
                                                InputLabelProps={{
                                                    shrink: true,
                                                }}/>
-                                    <InputText required label='Couleur'
+                                    <InputText id='vehColor' name='vehColor' required label='Couleur'
                                                onChange={(event) => update(event, 'vehColor')}/>
                                 </Grid>
                             </Grid>
                         </Grid>
-                        <InputText required={true} type='number' label='Nombre de places'
+                        <InputText id='vehNumberplace' name='vehNumberplace' required={true} type='number' label='Nombre de places'
                                    onChange={(event) => update(event, 'vehNumberplace')}/>
-                        <InputText required={true} type='number' label='Kilometrage'
+                        <InputText id='vehKm' name='vehKm' required={true} type='number' label='Kilometrage'
                                    onChange={(event) => update(event, 'vehKm')}/>
                         <InputSelect
                             id={"vehTypeEssence"}

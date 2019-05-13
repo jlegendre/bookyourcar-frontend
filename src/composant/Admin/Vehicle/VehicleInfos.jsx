@@ -53,7 +53,7 @@ const VehicleInfos = props => {
     const updateVehicle = (() => {
         fetchUpdateVehicle(input);
 
-    })
+    });
 
     const deleteVehicle = (() => {
         fetchDeleteVehicle(input.vehId);
@@ -91,26 +91,21 @@ const VehicleInfos = props => {
                         <Icon fontSize={"large"}>directions_car</Icon>
                         <Grid id="plop" direction={"column"}>
                             <Grid direction={"row"}>
-                                <InputText label='Marque' value={input.vehBrand}
+                                <InputText id='vehBrand' name='vehBrand' label='Marque' value={input.vehBrand}
                                            onChange={(event) => update(event, 'vehBrand')}/>
-                                <InputText label='Modèle' value={input.vehModel}
+                                <InputText id='vehModel' name='vehModel' label='Modèle' value={input.vehModel}
                                            onChange={(event) => update(event, 'vehModel')}/>
                             </Grid>
                             <Grid direction={"column"}>
-                                <InputText label='Immatriculation' value={input.vehRegistration}
+                                <InputText id='vehRegistration' name='vehRegistration' label='Immatriculation' value={input.vehRegistration}
                                            onChange={(event) => update(event, 'vehRegistration')}/>
-                                <InputText label='Couleur' value={input.vehColor}
+                                <InputText id='vehColor' name='vehColor' label='Couleur' value={input.vehColor}
                                            onChange={(event) => update(event, 'vehColor')}/>
                             </Grid>
                         </Grid>
                     </Grid>
-                    <InputText label='Nombre de places' type={'number'} value={input.vehNumberplace}
+                    <InputText id='vehNumberplace' name='vehNumberplace' label='Nombre de places' type={'number'} value={input.vehNumberplace}
                                onChange={(event) => update(event, 'vehNumberplace')}/>
-                 {/*   <InputText label='Type de carburant' value={input.vehTypeEssence}
-                               onChange={(event) => update(event, 'vehTypeEssence')}/>*/}
-                {/*    <InputText label='Pôle' value={input.poleName}
-                               onChange={(event) => update(event, 'poleName')}/>
-*/}
                     <InputSelect
                         id={"vehTypeEssence"}
                         name={"vehTypeEssence"}
