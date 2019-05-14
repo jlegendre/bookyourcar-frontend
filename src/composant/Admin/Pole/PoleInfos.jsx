@@ -9,7 +9,7 @@ import InputText from "../../Input/InputText";
 const PoleInfos = props => {
 
     const {classes, fetchPoleInfos, fetchUpdatePole, detailPole, match} = props;
-    const [input, setInput] = useState(detailPole);
+    const [input, setInput] = useState({ poleId: 0, poleName: '', poleCity: '', poleAddress: '', poleCp: '' });
 
     useEffect(() => {
         fetchPoleInfos(match.params.poleId, (pole) => {
@@ -51,25 +51,25 @@ const PoleInfos = props => {
 
                         <TableRow>
                             <TableCell className={classes.cell}>Nom : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleName' name='poleName' value={detailPole.poleName}
+                            <TableCell className={classes.cell}><InputText id='poleName' name='poleName' value={input.poleName}
                                                                            onChange={(event) => update(event, 'poleName')}/></TableCell>
 
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Adresse : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleAdress' name='poleAddress' value={detailPole.poleAddress}
+                            <TableCell className={classes.cell}><InputText id='poleAdress' name='poleAddress' value={input.poleAddress}
                                                                            onChange={(event) => update(event, 'poleAddress')}/>
                             </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Code postal : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleCp' name='poleCp' value={detailPole.poleCp}
+                            <TableCell className={classes.cell}><InputText id='poleCp' name='poleCp' value={input.poleCp}
                                                                            onChange={(event) => update(event, 'poleCp')}/>
                             </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Ville : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleCity' name='poleCity' value={detailPole.poleCity}
+                            <TableCell className={classes.cell}><InputText id='poleCity' name='poleCity' value={input.poleCity}
                                                                            onChange={(event) => update(event, 'poleCity')}/></TableCell>
                         </TableRow>
                     </TableBody>

@@ -1,15 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
     CssBaseline,
-    Icon,
-    IconButton,
     Paper,
     Table,
     TableBody,
     TableCell,
-    TableHead,
     TableRow,
     Typography
 } from "@material-ui/core";
@@ -18,7 +15,7 @@ import InputText from "../../Input/InputText";
 
 const NewPole = props => {
 
-    const { classes, fetchAddPole, datapage, token } = props;
+    const { classes, fetchAddPole } = props;
 
     const [input, setInput] = useState({poleName: '', poleCity: '', poleAddress: '', poleCp: ''});
 
@@ -43,20 +40,20 @@ const NewPole = props => {
 
                         <TableRow>
                             <TableCell className={classes.cell}>Nom : </TableCell>
-                            <TableCell className={classes.cell}><InputText  onChange={(event) => update(event, 'poleName')} /></TableCell>
+                            <TableCell className={classes.cell}><InputText id='poleName' name='poleName'  onChange={(event) => update(event, 'poleName')} /></TableCell>
 
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Adresse : </TableCell>
-                            <TableCell className={classes.cell}><InputText onChange={(event) => update(event, 'poleAddress')} /> </TableCell>
+                            <TableCell className={classes.cell}><InputText id='poleAddress' name='poleAddress' onChange={(event) => update(event, 'poleAddress')} /> </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Code postal : </TableCell>
-                            <TableCell className={classes.cell}><InputText onChange={(event) => update(event, 'poleCp')} />  </TableCell>
+                            <TableCell className={classes.cell}><InputText id='poleCp' name='poleCp' onChange={(event) => update(event, 'poleCp')} />  </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Ville : </TableCell>
-                            <TableCell className={classes.cell}><InputText  onChange={(event) => update(event, 'poleCity')} /></TableCell>
+                            <TableCell className={classes.cell}><InputText id='poleCity' name='poleCity'  onChange={(event) => update(event, 'poleCity')} /></TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>

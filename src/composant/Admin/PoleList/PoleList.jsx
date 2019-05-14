@@ -38,7 +38,7 @@ const PoleList = props => {
                     <Button variant="contained"
                         color="primary"
                         className={classes.button}>
-                        Nouveau vehicule
+                        Nouveau Pole
                                 </Button>
                 </Link>
                 <Table className={classes.table}>
