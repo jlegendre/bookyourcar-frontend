@@ -5,16 +5,26 @@ import {getBreakingLimit} from "../../../utils/cssUtils";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
 import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import InputSelect from "../../Input/InputSelect";
 
 const ValidateReservation = props => {
 
-    const {classes, location, fetchUserLocation} = props;
+    const {classes, location, fetchUserLocation, fetchVehicles, listVehicle} = props;
 
     useEffect(() => {
         fetchUserLocation();
-    }, [fetchUserLocation]);
+        fetchVehicles();
+    }, [fetchUserLocation, fetchVehicles]);
+
+    const updateSelect = event => {
+        /*setInput({
+            ...input,
+            [event.target.name]: event.target.value
+        })*/
+    };
 
     console.log(location);
+    console.log(listVehicle);
 
     return (
         <div className={classes.main}>
@@ -28,6 +38,7 @@ const ValidateReservation = props => {
                             <TableCell>Date début</TableCell>
                             <TableCell>Date de fin</TableCell>
                             <TableCell>Véhicule</TableCell>
+                            <TableCell>Vehicule à attribuer</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -38,6 +49,14 @@ const ValidateReservation = props => {
                                 <TableCell>{item.dateDebutResa}</TableCell>
                                 <TableCell>{item.dateFinResa}</TableCell>
                                 <TableCell>{item.vehicleFriendlyName}</TableCell>
+                                <TableCell><InputSelect
+                                    id={"poleName"}
+                                    name={"poleName"}
+                                    onChange={updateSelect}
+                                    label={"Vehicule"}
+                                    data={listVehicle}
+                                    value={listVehicle.vehBrand}
+                                /></TableCell>
                             </TableRow>
                         )}
                     </TableBody>
