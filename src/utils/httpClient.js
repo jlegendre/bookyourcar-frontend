@@ -30,7 +30,7 @@ const handleError = error => {
         if (error.response.data) {
             store.dispatch(setMessage(error.response.data))
         } else {
-            store.dispatch(setMessage({"Error": "Une erreur est survenue"}))
+            store.dispatch(setMessage({"Error": ["Une erreur est survenue"]}))
         }
 
         //Si il y a une erreur 401, on déconnecte l'utilisateur, car il n'a pas le droit d'acceder a la page

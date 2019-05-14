@@ -39,7 +39,7 @@ export const fetchRegisterUser = (input, success) => {
             url: '/Auth/register',
             method: 'POST',
             data: input
-        }).then(() => {
+        }).then(response => {
             success()
         })
     }

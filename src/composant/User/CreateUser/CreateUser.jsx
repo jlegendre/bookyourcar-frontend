@@ -54,7 +54,8 @@ const CreateUser = props => {
         })
     };
 
-    const fetchCreateUser = () => {
+    const fetchCreateUser = event => {
+        event.preventDefault();
         registerUser(input, () => {
             setAccountSuccess(true);
         })
@@ -67,7 +68,7 @@ const CreateUser = props => {
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <form className={classes.form} onSubmit={() => fetchCreateUser()}>
+            <form className={classes.form} onSubmit={fetchCreateUser}>
                 <Paper className={classes.paper}>
                     <Avatar className={classes.avatar}>
                         <HowToRegOutlinedIcon/>
@@ -101,6 +102,7 @@ const CreateUser = props => {
                             type={"text"}
                             onChange={updateInput}
                             value={input.phoneNumber}
+                            required
                         />
                         <InputSelect
                             id={"poleId"}
