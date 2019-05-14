@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import {Card, CssBaseline, Grid} from "@material-ui/core";
-import {getBreakingLimit} from "../../../utils/cssUtils";
+import {getBreakingLimit} from "../../utils/cssUtils";
 import withStyles from "@material-ui/core/styles/withStyles";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
@@ -11,7 +11,7 @@ import Button from "@material-ui/core/Button";
 
 const md5 = require('md5');
 
-const Profil = props => {
+const Accueil = props => {
 
     const {classes, profil, fetchProfil} = props;
 
@@ -72,7 +72,7 @@ const Profil = props => {
     )
 };
 
-Profil.propTypes = {
+Accueil.propTypes = {
     classes: PropTypes.object,
     profil: PropTypes.object,
     fetchProfil: PropTypes.func
@@ -108,4 +108,4 @@ export default withStyles(theme => ({
         paddingLeft: theme.spacing.unit,
         paddingBottom: theme.spacing.unit,
     }
-}))(Profil);
+}))(Accueil);

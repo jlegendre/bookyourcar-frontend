@@ -1,7 +1,7 @@
 import {connect} from "react-redux"
-import Profil from './Profil.jsx'
-import {getProfil} from "../../../redux/reducers/user";
-import {fetchUserProfil} from "../../../redux/actions/user";
+import Accueil from './Accueil.jsx'
+import {getProfil} from "../../redux/reducers/user";
+import {fetchUserProfil} from "../../redux/actions/user";
 
 
 const mapStateToProps = state => {
@@ -16,4 +16,4 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profil)
+export default connect(mapStateToProps, mapDispatchToProps)(Accueil)
