@@ -20,7 +20,7 @@ const BlocNextLocation = props => {
                         {
                             rnd === 1 ? (
                                 <Typography component="h5" variant="h5">
-                                    Pas de réservation prévue
+                                    Pas de location prévue
                                 </Typography>
                             ) : (
                                 <React.Fragment>
