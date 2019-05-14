@@ -6,10 +6,12 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import InputText from "../../Input/InputText";
 import InputSelect from "../../Input/InputSelect";
+import _ from 'lodash';
+
 
 const ValidateReservation = props => {
 
-    const {classes, match, fetchGetLocation} = props;
+    const {classes, match, fetchGetLocation, fetchValidateLocation, fetchDeleteLocation} = props;
     const [input, setInput] = useState({
         locationState: '',
         availableVehicle: [],
@@ -30,7 +32,11 @@ const ValidateReservation = props => {
             setInput(
                 locationDet
             );
+            if (input.locationState === 'Terminée') {
+                disabled = true;
+            }
         });
+
     }, [match.params.locationId, fetchGetLocation]);
 
     const updateSelect = event => {
@@ -40,83 +46,56 @@ const ValidateReservation = props => {
         })
     };
 
-    const update = () => {
 
+    const getVehicleForSelect = () => {
+        return _.map(input.availableVehicle, (vehicle) => {
+            return {value: vehicle.vehId, label: vehicle.vehBrand + ' ' + vehicle.vehModel}
+        })
     };
 
+    const validateReservation = () => {
+        fetchValidateLocation(input.locationStateId, input);
+    };
+    const deleteReservation = () => {
+        fetchDeleteLocation(input.locationStateId);
+    };
 
     return (
         <div>
             <Paper className={classes.paper}>
-                <Grid>
-                    <InputText id='vehModel' name='vehModel' label='Début' value={input.dateDebutResa}
-                               onChange={(event) => update(event, 'vehModel')}/>
-                    <InputText id='vehModel' name='vehModel' label='Fin' value={input.dateFinResa}
-                               onChange={(event) => update(event, 'vehModel')}/>
-                    <InputText id='vehModel' name='vehModel' label='Pole de départ' value={input.poleDepart}
-                               onChange={(event) => update(event, 'vehModel')}/>
-                    <InputText id='vehModel' name='vehModel' label='Pole de destination' value={input.poleDestination}
-                               onChange={(event) => update(event, 'vehModel')}/>
-                    <InputText id='vehModel' name='vehModel' label='Etat de la réservation' value={input.locationState}
-                               onChange={(event) => update(event, 'vehModel')}/>
-                    <InputSelect
-                        id={"vehicule"}
-                        name={"vehicule"}
-                        onChange={updateSelect}
-                        label={"Vehicule à attribuer"}
-                        data={input.availableVehicle}
-                        value={input.availableVehicle}
-                    />
-                </Grid>
-                {/*<Grid container direction={"column"}>
-                    <Grid container direction={"row"}>
-                        <Icon fontSize={"large"}>directions_car</Icon>
-                        <Grid id="plop" direction={"column"}>
-                            <Grid container direction={"row"}>
-                                <InputText id='vehBrand' name='vehBrand' label='Marque' value={input.vehBrand}
-                                           onChange={(event) => update(event, 'vehBrand')}/>
-                                <InputText id='vehModel' name='vehModel' label='Modèle' value={input.vehModel}
-                                           onChange={(event) => update(event, 'vehModel')}/>
-                            </Grid>
-                            <Grid container direction={"column"}>
-                                <InputText id='vehRegistration' name='vehRegistration' label='Immatriculation' value={input.vehRegistration}
-                                           onChange={(event) => update(event, 'vehRegistration')}/>
-                                <InputText id='vehColor' name='vehColor' label='Couleur' value={input.vehColor}
-                                           onChange={(event) => update(event, 'vehColor')}/>
-                            </Grid>
-                        </Grid>
+                <Grid direction={'column'}>
+
+                    <Grid direction={'row'}>
+                        <InputText disabled={true} id='deb' name='deb' label='Début' value={input.dateDebutResa}/>
+                        <InputText disabled={true} id='fin' name='fin' label='Fin' value={input.dateFinResa}/>
+                        <InputText disabled={true} id='poleDeb' name='poleDeb' label='Pole de départ'
+                                   value={input.poleDepart}/>
+                        <InputText disabled={true} id='poleFin' name='poleFin' label='Pole de destination'
+                                   value={input.poleDestination}/>
+                        <InputText disabled={true} id='etat' name='etat' label='Etat de la réservation'
+                                   value={input.locationState}/>
+                        <InputSelect
+                            id={"vehicule"}
+                            name={"selectedVehicle"}
+                            onChange={updateSelect}
+                            label={"Vehicule à attribuer"}
+                            data={getVehicleForSelect()}
+                            value={input.selectedVehicle}
+                        />
                     </Grid>
-                    <InputText id='vehNumberplace' name='vehNumberplace' label='Nombre de places' type={'number'} value={input.vehNumberplace}
-                               onChange={(event) => update(event, 'vehNumberplace')}/>
-                    <InputSelect
-                        id={"vehTypeEssence"}
-                        name={"vehTypeEssence"}
-                        onChange={updateSelect}
-                        label={"Carburant"}
-                        data={carburants}
-                        value={input.vehTypeEssence}
-                    />
-                    <InputSelect
-                        id={"poleName"}
-                        name={"poleName"}
-                        onChange={updateSelect}
-                        label={"Pole"}
-                        data={poles}
-                        value={input.poleName}
-                    />
-                </Grid>*/}
-                <Grid container direction={"row"}>
-                    <Button variant="contained" color="primary" className={classes.button}
-                    >
-                        Mise à jour
-                    </Button>
-
-                    <Button disabled={disabled} variant="contained" color="secondary" className={classes.button}
-                    >Supprimer
-                    </Button>
+                    <Grid container direction={"row"}>
+                        <Button disabled={input.locationState === 'Terminée' || input.selectedVehicle === null}
+                                variant="contained" color="primary" className={classes.button}
+                                onClick={() => validateReservation()}>
+                            Valider
+                        </Button>
+                        <Button disabled={input.locationState === 'Terminée'} variant="contained" color="secondary"
+                                className={classes.button}
+                                onClick={() => deleteReservation()}>
+                            Refuser
+                        </Button>
+                    </Grid>
                 </Grid>
-                }
-
             </Paper>
         </div>
     )
