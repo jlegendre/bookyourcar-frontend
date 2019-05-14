@@ -1,7 +1,6 @@
 import NewPole from "./NewPole.jsx";
 import {connect} from "react-redux";
 import { fetchAddPole } from "../../../redux/actions/datapage";
-import { getDetailPoles } from "../../../redux/reducers/datapage";
 import { getToken } from "../../../redux/reducers/auth";
 
 
