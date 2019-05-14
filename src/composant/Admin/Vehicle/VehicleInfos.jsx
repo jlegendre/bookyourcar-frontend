@@ -86,17 +86,17 @@ const VehicleInfos = props => {
     return (
         <div>
             <Paper className={classes.paper}>
-                <Grid direction={"column"}>
-                    <Grid direction={"row"}>
+                <Grid container direction={"column"}>
+                    <Grid container direction={"row"}>
                         <Icon fontSize={"large"}>directions_car</Icon>
                         <Grid id="plop" direction={"column"}>
-                            <Grid direction={"row"}>
+                            <Grid container direction={"row"}>
                                 <InputText id='vehBrand' name='vehBrand' label='Marque' value={input.vehBrand}
                                            onChange={(event) => update(event, 'vehBrand')}/>
                                 <InputText id='vehModel' name='vehModel' label='Modèle' value={input.vehModel}
                                            onChange={(event) => update(event, 'vehModel')}/>
                             </Grid>
-                            <Grid direction={"column"}>
+                            <Grid container direction={"column"}>
                                 <InputText id='vehRegistration' name='vehRegistration' label='Immatriculation' value={input.vehRegistration}
                                            onChange={(event) => update(event, 'vehRegistration')}/>
                                 <InputText id='vehColor' name='vehColor' label='Couleur' value={input.vehColor}
@@ -123,7 +123,7 @@ const VehicleInfos = props => {
                         value={input.poleName}
                     />
                 </Grid>
-                <Grid direction={"row"}>
+                <Grid container direction={"row"}>
                     <Button variant="contained" color="primary" className={classes.button}
                             onClick={() => updateVehicle()}
                     >

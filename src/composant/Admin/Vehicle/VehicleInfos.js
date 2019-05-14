@@ -2,7 +2,7 @@ import VehicleInfos from "./VehicleInfos.jsx";
 import {connect} from "react-redux";
 import {fetchPoles, fetchVehicleInfos} from "../../../redux/actions/datapage";
 import {fetchUpdateVehicle, fetchDeleteVehicle} from "../../../redux/actions/admin";
-import {getDetailVehicle, getListPolesForSelectByName} from "../../../redux/reducers/datapage";
+import {getDetailLocation, getDetailVehicle, getListPolesForSelectByName} from "../../../redux/reducers/datapage";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
@@ -14,6 +14,7 @@ const mapDispatchToProps = dispatch => {
             dispatch(fetchDeleteVehicle(id))},
         fetchPoles: () => dispatch(fetchPoles())
 
+
     }
 };
 
@@ -21,7 +22,7 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         detailVehicle: getDetailVehicle(state),
-        poles: getListPolesForSelectByName(state)
+        poles: getListPolesForSelectByName(state),
     }
 };
 
