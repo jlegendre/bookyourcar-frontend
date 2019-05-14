@@ -1,8 +1,7 @@
-import ValidateReservation from './ValidateReservation.jsx';
+import ValidateReservationList from './ValidateReservationList.jsx';
 import {connect} from 'react-redux';
 import {getLocation} from "../../../redux/reducers/user";
 import {fetchUserLocation} from "../../../redux/actions/user";
-import {fetchVehicles} from '../../../redux/actions/datapage';
 import {getListVehiclesForSelectByBrandAndModel} from "../../../redux/reducers/datapage";
 
 const mapStateToProps = state => {
@@ -15,10 +14,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         fetchUserLocation : () => dispatch(fetchUserLocation()),
-        fetchVehicles: () => dispatch(fetchVehicles())
-
     }
 };
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(ValidateReservation);
+export default connect(mapStateToProps, mapDispatchToProps)(ValidateReservationList);

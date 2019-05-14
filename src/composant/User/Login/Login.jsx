@@ -15,6 +15,7 @@ import Typography from '@material-ui/core/Typography';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {Link} from "react-router-dom";
 import {getBreakingLimit} from "../../../utils/cssUtils";
+import {Hidden} from "@material-ui/core";
 
 /**
  * Formulaire de Login
@@ -69,6 +70,12 @@ const Login = (props) => {
             <CssBaseline/>
             <form onSubmit={fetchUser} className={classes.form}>
                 <Paper className={classes.paper}>
+
+                    <Hidden xsDown implementation={"css"}>
+                        <img alt={"logo"} height={256}
+                             src={"https://a5d-dotnet.mvinet.fr/images/logo_transparent.png"}/>
+                    </Hidden>
+
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon/>
                     </Avatar>
@@ -132,51 +139,51 @@ Login.propTypes = {
 };
 
 export default withStyles((theme) => ({
-    main: {
-        width: 'auto',
-        display: 'block', // Fix IE 11 issue.
-        marginLeft: theme.spacing.unit * 3,
-        marginRight: theme.spacing.unit * 3,
-        [theme.breakpoints.up(getBreakingLimit(theme))]: {
-            width: 400,
-            marginLeft: 'auto',
-            marginRight: 'auto',
+        main: {
+            width: 'auto',
+            display: 'block', // Fix IE 11 issue.
+            marginLeft: theme.spacing.unit * 3,
+            marginRight: theme.spacing.unit * 3,
+            [theme.breakpoints.up(getBreakingLimit(theme))]: {
+                width: 400,
+                marginLeft: 'auto',
+                marginRight: 'auto',
+            },
+            [theme.breakpoints.down(getBreakingLimit(theme))]: {
+                margin: 0,
+                height: '100%'
+            }
         },
-        [theme.breakpoints.down(getBreakingLimit(theme))]: {
-            margin: 0,
-            height: '100%'
+        paper: {
+            marginTop: theme.spacing.unit * 8,
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+            [theme.breakpoints.down(getBreakingLimit(theme))]: {
+                height: '100%',
+                margin: 0
+            }
+        },
+        avatar: {
+            margin: theme.spacing.unit,
+            backgroundColor: theme.palette.secondary.main,
+        },
+        form: {
+            [theme.breakpoints.down(getBreakingLimit(theme))]: {
+                height: '100%'
+            }
+        },
+        formInput: {
+            width: '100%', // Fix IE 11 issue.
+            marginTop: theme.spacing.unit
+        },
+        submit: {
+            marginTop: theme.spacing.unit * 3,
+        },
+        link: {
+            float: 'right',
+            marginTop: theme.spacing.unit * 2
         }
-    },
-    paper: {
-        marginTop: theme.spacing.unit * 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-        [theme.breakpoints.down(getBreakingLimit(theme))]: {
-            height: '100%',
-            margin: 0
-        }
-    },
-    avatar: {
-        margin: theme.spacing.unit,
-        backgroundColor: theme.palette.secondary.main,
-    },
-    form: {
-        [theme.breakpoints.down(getBreakingLimit(theme))]: {
-            height: '100%'
-        }
-    },
-    formInput: {
-        width: '100%', // Fix IE 11 issue.
-        marginTop: theme.spacing.unit
-    },
-    submit: {
-        marginTop: theme.spacing.unit * 3,
-    },
-    link: {
-        float: 'right',
-        marginTop: theme.spacing.unit * 2
-    }
     })
 )(Login)

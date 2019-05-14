@@ -30,7 +30,6 @@ const Accueil = props => {
                         <BlocLocation user={profil}/>
                     </Grid>
 
-                    {/** Bloc prochaine location */}
                     <Grid item xs={12} md={6}>
                         <BlocNextLocation user={profil}/>
                     </Grid>
