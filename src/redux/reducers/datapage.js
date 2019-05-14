@@ -74,7 +74,7 @@ export const getListPolesForSelectByName = state => {
 };
 
 /**
- * Fonction qui permet de construire une liste de pôle pour l'objet InputSelect
+ * Fonction qui permet de construire une liste de véhicule pour l'objet InputSelect
  * @param state
  * @return {Array}
  */
