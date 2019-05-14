@@ -20,7 +20,8 @@ import NewLocation from "./composant/User/NewLocation/NewLocation.js";
 import MyLocation from './composant/User/MyLocation/MyLocation.js';
 import {getBreakingLimit} from "./utils/cssUtils";
 import VehicleCreate from "./composant/Admin/CreateVehicle/VehicleCreate";
-import ValidateReservation from "./composant/Admin/ValidateReservation/ValidateReservation";
+import ValidateReservationList from "./composant/Admin/ValidateReservationList/ValidateReservationList.js";
+import ValidateReservation from "./composant/Admin/ValidateReservation/ValidateReservation.js";
 
 const App = props => {
 
@@ -129,6 +130,8 @@ const App = props => {
                         <Route path={"/poleList"}
                                component={params => requireAdminLogin(<PoleList {...params} />)}/>
                         <Route path={"/validateReservation"}
+                               component={params => requireAdminLogin(<ValidateReservationList {...params} />)}/>
+                        <Route path={"/reservation/:locationId"}
                                component={params => requireAdminLogin(<ValidateReservation {...params} />)}/>
                         <Route exact path={"/poleInfos/:poleId"}
                                component={params => requireAdminLogin(<PoleInfos {...params} />)}/>

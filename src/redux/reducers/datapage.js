@@ -1,11 +1,12 @@
 import _ from 'lodash';
 
 import {
+    SET_DATAPAGE_DETAILLOCATION,
     SET_DATAPAGE_DETAILPOLE,
     SET_DATAPAGE_DETAILVEHICLE,
     SET_DATAPAGE_LISTPOLES,
     SET_DATAPAGE_LISTVEHICLE,
-    SET_DATAPAGE_USERINWAITING
+    SET_DATAPAGE_USERINWAITING,
 } from "../actions/datapage";
 
 const initialState = {
@@ -13,7 +14,8 @@ const initialState = {
     listVehicle: [],
     detailVehicle: undefined,
     listPoles: [],
-    detailPole: undefined
+    detailPole: undefined,
+    detailLocation: undefined,
 };
 
 
@@ -29,6 +31,8 @@ export default function (state = initialState, action) {
             return {...state, listPoles: action.poles};
         case SET_DATAPAGE_DETAILPOLE:
             return {...state, detailPole: action.detailPole};
+        case SET_DATAPAGE_DETAILLOCATION:
+            return {...state, detailLocation: action.location};
         default:
             return state
     }
@@ -43,6 +47,7 @@ export const getListVehicles = state => getDataPage(state).listVehicle;
 export const getDetailVehicle = state => getDataPage(state).detailVehicle;
 export const getListPoles = state => getDataPage(state).listPoles;
 export const getDetailPoles = state => getDataPage(state).detailPole;
+export const getDetailLocation = state => getDataPage(state).detailLocation;
 
 /**
  * Fonction qui permet de construire une liste de pôle pour l'objet InputSelect
@@ -73,9 +78,9 @@ export const getListPolesForSelectByName = state => {
  * @param state
  * @return {Array}
  */
-export const getListVehiclesForSelectByBrandAndModel= state => {
+export const getListVehiclesForSelectByBrandAndModel = state => {
     return _.map(getListVehicles(state), vehicle => {
-        return {value: vehicle.vehId, label: vehicle.vehBrand + ' ' +vehicle.vehModel}
+        return {value: vehicle.vehId, label: vehicle.vehBrand + ' ' + vehicle.vehModel}
     });
 
 };

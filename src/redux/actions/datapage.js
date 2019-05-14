@@ -11,6 +11,8 @@ export const SET_DATAPAGE_DETAILPOLE = 'SET_DATAPAGE_DETAILPOLE';
 
 export const SET_DATAPAGE_RESERVATIONINWAITING = 'SET_DATAPAGE_RESERVATIONINWAITING';
 
+export const SET_DATAPAGE_DETAILLOCATION = 'SET_DATAPAGE_DETAILLOCATION';
+
 /**
  * Call /User/userInWaiting Url, pour récupérer tous les utilisateurs en attente de validation
  * @returns {Function}
@@ -120,6 +122,19 @@ export const fetchReservationInWaiting = () => {
 };
 
 
+export const fetchGetLocation = (id, success) => {
+    return dispatch => {
+        httpClient.request({
+            url:  `/Location/${id}`,
+            method: 'GET',
+        }).then(response => {
+            dispatch(setLocationDetail(response.data));
+            success && success(response.data);
+        })
+    }
+}
+
+
 export const setUserInWaiting = users => {
     return {type: SET_DATAPAGE_USERINWAITING, users}
 };
@@ -142,4 +157,8 @@ export const setDetailPole = detailPole => {
 
 export const setReservationInWaiting = reservations => {
     return {type: SET_DATAPAGE_RESERVATIONINWAITING, reservations}
+};
+
+export const setLocationDetail= location => {
+   return {type: SET_DATAPAGE_DETAILLOCATION, location}
 };

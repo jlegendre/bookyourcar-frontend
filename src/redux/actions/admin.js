@@ -61,7 +61,7 @@ export const fetchDeletePole = id => {
 export const fetchDeleteReservation = id => {
     return dispatch => {
         httpClient.request({
-            url: `/Reservation/${id}`,
+            url: `/Location/${id}`,
             method: 'DELETE',
         }).then(() => {
             dispatch(fetchReservationInWaiting())
@@ -77,13 +77,14 @@ export const fetchDeleteReservation = id => {
 export const fetchValidateReservation = id => {
     return dispatch => {
         httpClient.request({
-            url: `/Reservation/${id}`,
+            url: `/Location/${id}`,
             method: 'POST',
         }).then(() => {
             dispatch(fetchReservationInWaiting())
         })
     }
 };
+
 
 
 /**
