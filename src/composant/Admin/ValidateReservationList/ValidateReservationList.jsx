@@ -4,17 +4,16 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import {getBreakingLimit} from "../../../utils/cssUtils";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
-import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
-import InputSelect from "../../Input/InputSelect";
+import {Icon, IconButton, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import {Link} from "react-router-dom";
 
-const ValidateReservation = props => {
+const ValidateReservationList = props => {
 
-    const {classes, location, fetchUserLocation, fetchVehicles, listVehicle} = props;
+    const {classes, location, fetchUserLocation} = props;
 
     useEffect(() => {
         fetchUserLocation();
-        fetchVehicles();
-    }, [fetchUserLocation, fetchVehicles]);
+    }, [fetchUserLocation, ]);
 
     const updateSelect = event => {
         /*setInput({
@@ -24,7 +23,6 @@ const ValidateReservation = props => {
     };
 
     console.log(location);
-    console.log(listVehicle);
 
     return (
         <div className={classes.main}>
@@ -38,7 +36,7 @@ const ValidateReservation = props => {
                             <TableCell>Date début</TableCell>
                             <TableCell>Date de fin</TableCell>
                             <TableCell>Véhicule</TableCell>
-                            <TableCell>Vehicule à attribuer</TableCell>
+                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -49,14 +47,13 @@ const ValidateReservation = props => {
                                 <TableCell>{item.dateDebutResa}</TableCell>
                                 <TableCell>{item.dateFinResa}</TableCell>
                                 <TableCell>{item.vehicleFriendlyName}</TableCell>
-                                <TableCell><InputSelect
-                                    id={"poleName"}
-                                    name={"poleName"}
-                                    onChange={updateSelect}
-                                    label={"Vehicule"}
-                                    data={listVehicle}
-                                    value={listVehicle.vehBrand}
-                                /></TableCell>
+                                <TableCell>
+                                    <Link to={`/reservation/${item.locationId}`}>
+                                        <IconButton>
+                                            <Icon>pageview</Icon>
+                                        </IconButton>
+                                    </Link>
+                                </TableCell>
                             </TableRow>
                         )}
                     </TableBody>
@@ -66,7 +63,7 @@ const ValidateReservation = props => {
     )
 };
 
-ValidateReservation.propTypes = {
+ValidateReservationList.propTypes = {
     classes: PropTypes.object,
     location: PropTypes.array,
     fetchUserLocation: PropTypes.func
@@ -103,4 +100,4 @@ export default withStyles(theme => ({
             backgroundColor: theme.palette.background.default,
         }
     }
-}))(ValidateReservation)
+}))(ValidateReservationList)
