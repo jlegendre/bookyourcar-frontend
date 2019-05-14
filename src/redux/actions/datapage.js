@@ -76,6 +76,10 @@ export const fetchPoleInfos = (id, success) => {
     }
 };
 
+/**
+ * Call /Pole/{i} Url, pour modifier toutes les informations sur un pole donné
+ * @returns {Function}
+ */
 export const fetchUpdatePole = ({ poleId, poleName, poleCity, poleAddress, poleCp }) => {
     return dispatch => {
         httpClient.request({
@@ -84,6 +88,24 @@ export const fetchUpdatePole = ({ poleId, poleName, poleCity, poleAddress, poleC
             data: { poleId, poleName, poleCity, poleAddress, poleCp},
         }).then(() => {
             dispatch(fetchPoleInfos(poleId))
+        })
+    }
+
+};
+
+
+/**
+ * Call /Pole/{i} Url, pour ajouter un pole
+ * @returns {Function}
+ */
+export const fetchAddPole = ({ poleName, poleCity, poleAddress, poleCp }) => {
+    return dispatch => {
+        httpClient.request({
+            url: `/Pole/`,
+            method: 'POST',
+            data: { poleName, poleCity, poleAddress, poleCp },
+        }).then(() => {
+            
         })
     }
 

@@ -10,7 +10,7 @@ import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import _ from 'lodash';
 
-const md5 = require('md5');
+const md5= require('md5');
 
 const BlocProfil = props => {
 
