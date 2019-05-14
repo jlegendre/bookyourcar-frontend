@@ -67,7 +67,7 @@ const Login = (props) => {
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <form onSubmit={event => fetchUser(event)} className={classes.form}>
+            <form onSubmit={fetchUser} className={classes.form}>
                 <Paper className={classes.paper}>
                     <Avatar className={classes.avatar}>
                         <LockOutlinedIcon/>

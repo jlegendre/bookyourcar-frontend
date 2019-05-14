@@ -8,7 +8,7 @@ import {Menu as MenuIcon} from "@material-ui/icons"
 //Page
 import Login from "./composant/User/Login/Login.js";
 import CreateUser from './composant/User/CreateUser/CreateUser.js'
-import Acceuil from "./composant/Acceuil/Acceuil.js";
+import Accueil from "./composant/Accueil/Accueil.js";
 import ValidUser from "./composant/Admin/ValidateUser/ValidateUser.js";
 import Message from "./composant/Message/Message.js";
 import VehicleList from "./composant/Admin/VehicleList/VehicleList.js";
@@ -18,7 +18,6 @@ import PoleInfos from "./composant/Admin/Pole/PoleInfos.js";
 import MenuAppBar from "./composant/MenuAppBar/MenuAppBar.js";
 import NewLocation from "./composant/User/NewLocation/NewLocation.js";
 import MyLocation from './composant/User/MyLocation/MyLocation.js';
-import Profil from "./composant/User/Profil/Profil.js";
 import {getBreakingLimit} from "./utils/cssUtils";
 import VehicleCreate from "./composant/Admin/CreateVehicle/VehicleCreate";
 import ValidateReservation from "./composant/Admin/ValidateReservation/ValidateReservation";
@@ -111,12 +110,12 @@ const App = props => {
                         <Route path={"/newAccount"} component={CreateUser}/>
 
                         {/* Route user */}
-                        <Route exact path={"/"} component={params => requireUserLogin(<Acceuil {...params}/>)}/>
+                        <Route exact path={"/"} component={params => requireUserLogin(<Accueil {...params}/>)}/>
+                        <Route exact path={"/home"} component={params => requireUserLogin(<Accueil {...params}/>)}/>
                         <Route exact path={"/booking"}
                                component={params => requireUserLogin(<NewLocation {...params}/>)}/>
                         <Route exact path={"/booking/me"}
                                component={params => requireUserLogin(<MyLocation {...params}/>)}/>
-                        <Route exact path={"/profil"} component={params => requireUserLogin(<Profil {...params}/>)}/>
 
                         {/* Route admin */}
                         <Route path={"/validUser"}
