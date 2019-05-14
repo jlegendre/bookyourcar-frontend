@@ -14,7 +14,7 @@ import {FormControl, TextField} from "@material-ui/core";
  */
 const InputText = (props) => {
 
-    const {id, name, onChange, message, fullWidth, required, label, type, InputLabelProps, value} = props;
+    const {id, name, onChange, message, fullWidth, required, label, type, InputLabelProps, value, disabled} = props;
 
 
     return (
@@ -29,6 +29,7 @@ const InputText = (props) => {
                 label={label}
                 type={type}
                 value={value}
+                disabled={disabled}
                 InputLabelProps={InputLabelProps}
             />
         </FormControl>
@@ -48,7 +49,8 @@ InputText.propTypes = {
     label: PropTypes.string,
     type: PropTypes.string,
     InputLabelProps: PropTypes.object,
-    value: PropTypes.string
+    value: PropTypes.string,
+    disabled: PropTypes.bool,
 };
 
 export default InputText
