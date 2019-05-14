@@ -1,24 +1,26 @@
-import React, {useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {CssBaseline, Paper, Table, TableBody, TableCell, TableRow, Typography} from "@material-ui/core";
+import {
+    CssBaseline,
+    Icon,
+    IconButton,
+    Paper,
+    Table,
+    TableBody,
+    TableCell,
+    TableHead,
+    TableRow,
+    Typography
+} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Input/InputText";
 
-const PoleInfos = props => {
+const NewPole = props => {
 
-    const {classes, fetchPoleInfos, fetchUpdatePole, detailPole, match} = props;
-    const [input, setInput] = useState(detailPole);
+    const { classes, fetchAddPole, datapage, token } = props;
 
-    useEffect(() => {
-        fetchPoleInfos(match.params.poleId, (pole) => {
-            console.log(pole);
-            setInput(pole);
-        });
-
-    }, [fetchPoleInfos, match.params.poleId]);
-
+    const [input, setInput] = useState({poleName: '', poleCity: '', poleAddress: '', poleCp: ''});
 
     const update = ((event, type) => {
         setInput({
@@ -27,23 +29,13 @@ const PoleInfos = props => {
         });
     });
 
-    const updatepole = (() => {
-        fetchUpdatePole(input);
-
-    })
-
-
-    if (!detailPole) {
-        return (
-            <div>
-                <CircularProgress className={classes.progress}/>
-            </div>
-        )
-    }
+    const createPole = () => {
+        fetchAddPole(input)
+    };
 
     return (
         <div className={classes.main}>
-            <CssBaseline/>
+            <CssBaseline />
             <Paper className={classes.paper}>
                 <Typography variant="h4" gutterBottom>Pole</Typography>
                 <Table className={classes.table}>
@@ -51,26 +43,20 @@ const PoleInfos = props => {
 
                         <TableRow>
                             <TableCell className={classes.cell}>Nom : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleName' name='poleName' value={detailPole.poleName}
-                                                                           onChange={(event) => update(event, 'poleName')}/></TableCell>
+                            <TableCell className={classes.cell}><InputText  onChange={(event) => update(event, 'poleName')} /></TableCell>
 
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Adresse : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleAdress' name='poleAddress' value={detailPole.poleAddress}
-                                                                           onChange={(event) => update(event, 'poleAddress')}/>
-                            </TableCell>
+                            <TableCell className={classes.cell}><InputText onChange={(event) => update(event, 'poleAddress')} /> </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Code postal : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleCp' name='poleCp' value={detailPole.poleCp}
-                                                                           onChange={(event) => update(event, 'poleCp')}/>
-                            </TableCell>
+                            <TableCell className={classes.cell}><InputText onChange={(event) => update(event, 'poleCp')} />  </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Ville : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleCity' name='poleCity' value={detailPole.poleCity}
-                                                                           onChange={(event) => update(event, 'poleCity')}/></TableCell>
+                            <TableCell className={classes.cell}><InputText  onChange={(event) => update(event, 'poleCity')} /></TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -79,20 +65,19 @@ const PoleInfos = props => {
                     variant="contained"
                     color="primary"
                     className={classes.button}
-                    onClick={() => updatepole()}
+                    onClick={() => createPole()}
                 >
-                    Valider
-                </Button>
+                    Créer le pole
+                        </Button>
             </Paper>
         </div>
     )
 };
 
-
-PoleInfos.propTypes = {
+NewPole.propTypes = {
     classes: PropTypes.object,
-    fetchPoleInfos: PropTypes.func,
-    detailPole: PropTypes.object
+    fetchVehicles: PropTypes.func,
+    datapage: PropTypes.array
 };
 
 export default withStyles(theme => ({
@@ -119,17 +104,13 @@ export default withStyles(theme => ({
         }
     },
 
+
     table: {
         minWidth: 700,
-    },
-    cell: {
-        border: 'none',
-
     },
     row: {
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.background.default,
         },
-        border: 'none',
     }
-}))(PoleInfos);
+}))(NewPole);

@@ -15,6 +15,7 @@ import {
 } from "@material-ui/core";
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 
 const PoleList = props => {
 
@@ -33,6 +34,13 @@ const PoleList = props => {
             <CssBaseline />
             <Paper className={classes.paper}>
                 <Typography variant="h4" gutterBottom>Liste des Poles</Typography>
+                <Link to={`/poleCreate`}>
+                    <Button variant="contained"
+                        color="primary"
+                        className={classes.button}>
+                        Nouveau vehicule
+                                </Button>
+                </Link>
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
@@ -111,5 +119,10 @@ export default withStyles(theme => ({
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.background.default,
         },
-    }
+    },
+    button: {
+        marginTop: theme.spacing.unit * 3,
+        marginRight: theme.spacing.unit * 3,
+        alignSelf: 'end'
+    },
 }))(PoleList);
