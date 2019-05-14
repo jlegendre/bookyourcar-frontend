@@ -7,6 +7,8 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import _ from 'lodash';
 
 const md5 = require('md5');
 
@@ -24,7 +26,31 @@ const BlocProfil = props => {
             email = user.userEmail.trim();
         }
 
-        return `https://www.gravatar.com/avatar/${md5(email)}?s=64`;
+        return `https://www.gravatar.com/avatar/${md5(email)}?s=165`;
+    };
+
+
+    const getPhoneNumer = () => {
+        let str = '';
+        if(user && user.userPhone) {
+            _.each(user.userPhone, (char, i) => {
+                str += char;
+                if(i % 2 === 1) {
+                    str += ' ';
+                }
+            })
+        }
+        return str;
+    };
+
+    const getNumeroPermis = () => {
+        let str = 'Aucun numéro de permis';
+
+        if(user && user.userNumpermis) {
+            str = user.userNumpermis;
+        }
+
+        return str;
     };
 
     return (
@@ -40,9 +66,29 @@ const BlocProfil = props => {
                         <Typography component="h5" variant="h5">
                             {user.userName} {user.userFirstname}
                         </Typography>
-                        <Typography variant="subtitle1" color="textSecondary">
-                            {user.userEmail}
-                        </Typography>
+
+                        <Grid container>
+                            <Grid item xs={12} md={6}>
+                                <Typography variant="subtitle1" color="textSecondary">
+                                    {user.userEmail}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <Typography variant="subtitle1" color="textSecondary">
+                                    {user.poleName}
+                                </Typography>
+                            </Grid>
+                            <Grid item xs={12} md={6}>
+                                <Typography variant="subtitle1" color="textSecondary">
+                                    {getPhoneNumer()}
+                                </Typography>
+                            </Grid>
+                            <Grid itex xs={12} md={6}>
+                                <Typography variant="subtitle1" color="textSecondary">
+                                    {getNumeroPermis()}
+                                </Typography>
+                            </Grid>
+                        </Grid>
                     </CardContent>
                     <CardActions>
                         <Button size="small" color="primary">
@@ -70,11 +116,12 @@ export default withStyles(theme => ({
     details: {
         display: 'flex',
         flexDirection: 'column',
+        width: '100%'
     },
     content: {
         flex: '1 0 auto'
     },
     cover: {
-        width: 151,
+        width: 208,
     }
 }))(BlocProfil);

@@ -10,38 +10,22 @@ const BlocNextLocation = props => {
 
     const {classes} = props;
 
-    const rnd = Math.floor(Math.random() * Math.floor(2));
-
     return (
         <React.Fragment>
             <Card className={classes.card}>
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
-                        {
-                            rnd === 1 ? (
-                                <Typography component="h5" variant="h5">
-                                    Pas de location prévue
-                                </Typography>
-                            ) : (
-                                <React.Fragment>
-                                    <Typography variant="subtitle1" color="textSecondary">
-                                        Votre prochaine location prévue est le
-                                    </Typography>
-                                    <Typography component="h3" variant="h3">
-                                        18/10/1996
-                                    </Typography>
-                                </React.Fragment>
-                            )
-                        }
+                        <Typography variant="subtitle1" color="textSecondary">
+                            Votre prochaine location prévue est le
+                        </Typography>
+                        <Typography component="h3" variant="h3">
+                            18/10/1996
+                        </Typography>
                     </CardContent>
                     <CardActions className={classes.action}>
-                        {
-                            rnd === 0 && (
-                                <Button size="small" color="primary">
-                                    Voir ma location
-                                </Button>
-                            )
-                        }
+                        <Button size="small" color="primary">
+                            Voir ma location
+                        </Button>
                     </CardActions>
                 </div>
             </Card>
