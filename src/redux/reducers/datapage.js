@@ -69,6 +69,18 @@ export const getListPolesForSelectByName = state => {
 };
 
 /**
+ * Fonction qui permet de construire une liste de pôle pour l'objet InputSelect
+ * @param state
+ * @return {Array}
+ */
+export const getListVehiclesForSelectByBrandAndModel= state => {
+    return _.map(getListVehicles(state), vehicle => {
+        return {value: vehicle.vehId, label: vehicle.vehBrand + ' ' +vehicle.vehModel}
+    });
+
+};
+
+/**
  * Fonction qui permet de récupérer dans le state le pole par rapport a sont identifiant
  * @param state
  * @param identifiant identifiant du pole a récuperer
