@@ -9,7 +9,7 @@ import InputSelect from "../../Input/InputSelect";
 
 const ValidateReservation = props => {
 
-    const {classes, match, fetchGetLocation, location} = props;
+    const {classes, match, fetchGetLocation} = props;
     const [input, setInput] = useState({
         locationState: '',
         availableVehicle: [],
@@ -29,13 +29,7 @@ const ValidateReservation = props => {
         fetchGetLocation(match.params.locationId, (locationDet) => {
             setInput(
                 locationDet
-            )
-            console.log(locationDet.locationState)
-            if (input.locationState !== 'Terminée'){
-                disabled = true;
-            } else {
-                disabled = false;
-            }
+            );
         });
     }, [match.params.locationId, fetchGetLocation]);
 
@@ -46,28 +40,10 @@ const ValidateReservation = props => {
         })
     };
 
-    const update = event => {
+    const update = () => {
 
-    }
+    };
 
-    const carburants = [
-        {
-            value: 'Essence',
-            label: 'Essence',
-        },
-        {
-            value: 'Diesel',
-            label: 'Diesel',
-        },
-        {
-            value: 'Electrique',
-            label: 'Electrique',
-        },
-    ];
-
-    console.log(location);
-    console.log(input);
-    console.log(disabled)
 
     return (
         <div>

@@ -15,15 +15,6 @@ const ValidateReservationList = props => {
         fetchUserLocation();
     }, [fetchUserLocation, ]);
 
-    const updateSelect = event => {
-        /*setInput({
-            ...input,
-            [event.target.name]: event.target.value
-        })*/
-    };
-
-    console.log(location);
-
     return (
         <div className={classes.main}>
             <CssBaseline/>
@@ -36,7 +27,6 @@ const ValidateReservationList = props => {
                             <TableCell>Date début</TableCell>
                             <TableCell>Date de fin</TableCell>
                             <TableCell>Véhicule</TableCell>
-                            <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
