@@ -10,25 +10,27 @@ const InputDate = props => {
     const {value, onChange, label, message, name} = props;
 
     return (
-        <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker
-                label={label}
-                value={value}
-                onChange={onChange}
-            />
+        <React.Fragment>
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                <DatePicker
+                    label={label}
+                    value={value}
+                    onChange={onChange}
+                />
+            </MuiPickersUtilsProvider>
             {message && message[name] &&
             <FormHelperText>{message[name][0]}</FormHelperText>
             }
-        </MuiPickersUtilsProvider>
+        </React.Fragment>
     );
 
 };
 
 InputDate.propTypes = {
-    value: PropTypes.string,
+    value: PropTypes.instanceOf(Date),
     onChange: PropTypes.func,
     label: PropTypes.string,
-    message: PropTypes.array,
+    message: PropTypes.any,
     name: PropTypes.string
 }
 
