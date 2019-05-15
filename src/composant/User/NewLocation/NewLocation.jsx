@@ -27,8 +27,8 @@ const NewLocation = (props) => {
     const [activeStep, setActiveStep] = useState(0);
     const [redirect, setRedirect] = useState(false);
     const [formulaire, setFormulaire] = useState({
-        dateDebutResa: '',
-        dateFinResa: '',
+        dateDebutResa: new Date(),
+        dateFinResa: new Date(),
         poleIdDepart: '',
         poleIdDestination: '',
         comments: ''
