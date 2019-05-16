@@ -25,16 +25,12 @@ const ValidateReservation = props => {
         userId: 0,
     });
 
-    let disabled = false;
 
     useEffect(() => {
         fetchGetLocation(match.params.locationId, (locationDet) => {
             setInput(
                 locationDet
             );
-            if (input.locationState === 'Terminée') {
-                disabled = true;
-            }
         });
 
     }, [match.params.locationId, fetchGetLocation]);
@@ -66,13 +62,13 @@ const ValidateReservation = props => {
                 <Grid direction={'column'}>
 
                     <Grid direction={'row'}>
-                        <InputText disabled={true} id='deb' name='deb' label='Début' value={input.dateDebutResa}/>
-                        <InputText disabled={true} id='fin' name='fin' label='Fin' value={input.dateFinResa}/>
-                        <InputText disabled={true} id='poleDeb' name='poleDeb' label='Pole de départ'
+                        <InputText disabled id='deb' name='deb' label='Début' value={input.dateDebutResa}/>
+                        <InputText disabled id='fin' name='fin' label='Fin' value={input.dateFinResa}/>
+                        <InputText disabled id='poleDeb' name='poleDeb' label='Pole de départ'
                                    value={input.poleDepart}/>
-                        <InputText disabled={true} id='poleFin' name='poleFin' label='Pole de destination'
+                        <InputText disabled id='poleFin' name='poleFin' label='Pole de destination'
                                    value={input.poleDestination}/>
-                        <InputText disabled={true} id='etat' name='etat' label='Etat de la réservation'
+                        <InputText disabled id='etat' name='etat' label='Etat de la réservation'
                                    value={input.locationState}/>
                         <InputSelect
                             id={"vehicule"}
