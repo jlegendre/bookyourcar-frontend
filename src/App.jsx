@@ -100,11 +100,11 @@ const App = props => {
                         </Hidden>
 
                         <Typography variant="h6" color="inherit" noWrap style={{flexGrow: 1}}>
-                            Book Your Car
+                            BookYourCar
                         </Typography>
 
                         {user && (
-                            <Typography color={"inherit"}>
+                            <Typography color={"inherit"} variant={"h6"}>
                                 {`${user.firstName} ${user.lastName}`}
                             </Typography>
                         )}

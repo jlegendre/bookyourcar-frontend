@@ -13,10 +13,13 @@ const MessageFragment = withSnackbar(props => {
 
     useEffect(() => {
         _.each(message, (text, type) => {
-            enqueueSnackbar(text, {
-                variant: type.toLowerCase()
-            })
-        })
+            if (type === "Success" || type === "Info" || type === "Warning" || type === "Error") {
+                enqueueSnackbar(text, {
+                    variant: type.toLowerCase()
+                })
+            }
+        });
+
     }, [message, enqueueSnackbar]);
 
     return (
