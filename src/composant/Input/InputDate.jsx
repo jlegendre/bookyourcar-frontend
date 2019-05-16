@@ -1,4 +1,5 @@
 import 'date-fns';
+import frLocale from 'date-fns/locale/fr';
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import DateFnsUtils from '@date-io/date-fns';
@@ -11,7 +12,7 @@ const InputDate = props => {
 
     return (
         <React.Fragment>
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils} locale={frLocale}>
                 <DatePicker
                     label={label}
                     value={value}
