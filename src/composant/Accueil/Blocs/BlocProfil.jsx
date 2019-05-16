@@ -63,18 +63,18 @@ const BlocProfil = props => {
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
                         <Typography component="h5" variant="h5">
-                            {user.firstName} {user.lastName}
+                            {user && user.firstName} {user && user.lastName}
                         </Typography>
 
                         <Grid container>
                             <Grid item xs={12} md={6}>
                                 <Typography variant="subtitle1" color="textSecondary">
-                                    {user.email}
+                                    {user && user.email}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <Typography variant="subtitle1" color="textSecondary">
-                                    {user.pole}
+                                    {user && user.pole}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} md={6}>

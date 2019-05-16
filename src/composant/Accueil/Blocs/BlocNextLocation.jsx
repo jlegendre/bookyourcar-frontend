@@ -11,7 +11,7 @@ const BlocNextLocation = props => {
 
     const {classes, user} = props;
 
-    let haveNextLocation = user.nextLocation;
+    let haveNextLocation = user && user.nextLocation;
 
     return (
         <React.Fragment>
@@ -24,7 +24,7 @@ const BlocNextLocation = props => {
 
                         {haveNextLocation ? (
                             <Typography component={"h3"} variant={"h3"}>
-                                {formatDate(user.nextLocation)}
+                                {user && formatDate(user.nextLocation)}
                             </Typography>
                         ) : (
                             <Typography component={"h5"} variant={"h5"}>

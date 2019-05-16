@@ -12,7 +12,7 @@ const BlocLocation = props => {
 
     const {classes, user} = props;
 
-    let multipleLocations = user.locationsCount > 1;
+    let multipleLocations = user && user.locationsCount > 1;
 
     return (
         <React.Fragment>
@@ -20,7 +20,7 @@ const BlocLocation = props => {
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
                         <Typography component="h3" variant="h3">
-                            {user.locationsCount}
+                            {user && user.locationsCount}
                         </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
                             Location{multipleLocations && "s"}
