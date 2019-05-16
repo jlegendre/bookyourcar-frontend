@@ -1,3 +1,4 @@
 {
-	"backend" : "https://a5d-dotnet.mvinet.fr/api"
+	"backend" : "https://a5d-dotnet.mvinet.fr/api",
+	"images": "https://a5d-dotnet.mvinet.fr/images"
 }
