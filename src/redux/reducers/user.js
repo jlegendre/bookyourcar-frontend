@@ -3,7 +3,7 @@ import {SET_USER_LOCATION, SET_USER_PROFIL} from './../actions/user';
 
 const initialState = {
     location: [],
-    profil: {}
+    profil: undefined
 };
 
 
