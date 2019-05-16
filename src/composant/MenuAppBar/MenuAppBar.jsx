@@ -40,7 +40,7 @@ const MenuAppBar = props => {
                 <MenuItem label={"Deconnexion"} iconName={"exit_to_app"} onClick={() => logout()}/>
             </List>
             <List style={{bottom: 0, position: 'absolute'}}>
-                <Image name={"logo.png"} width={240}/>
+                <Image name={"logo_transparent.png"} width={240}/>
             </List>
         </div>
     );
