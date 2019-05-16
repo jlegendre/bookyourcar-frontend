@@ -14,28 +14,36 @@ const StepFinish = props => {
             <Typography variant="h6" gutterBottom>
                 Résumé de la demande de location
             </Typography>
-            <Typography>
-                <Grid container spacing={24}>
-                    <Grid item xs={12} md={6}>
+            <Grid container spacing={24}>
+                <Grid item xs={12} md={6}>
+                    <Typography>
                         Date début de location : <span
                         className={classes.donnee}>{formatDate(formulaire.dateDebutResa)}</span>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
+                    </Typography>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Typography>
                         Date de fin de location : <span
                         className={classes.donnee}>{formatDate(formulaire.dateFinResa)}</span>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
+                    </Typography>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Typography>
                         Départ : <span className={classes.donnee}>{getPole(formulaire.poleIdDepart).poleName}</span>
-                    </Grid>
-                    <Grid item xs={12} md={6}>
+                    </Typography>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                    <Typography>
                         Arrivée : <span
                         className={classes.donnee}>{getPole(formulaire.poleIdDestination).poleName}</span>
-                    </Grid>
-                    <Grid item xs={12}>
-                        Commentaire : <span className={classes.donnee}>{formulaire.comments}</span>
-                    </Grid>
+                    </Typography>
                 </Grid>
-            </Typography>
+                <Grid item xs={12}>
+                    <Typography>
+                        Commentaire : <span className={classes.donnee}>{formulaire.comments} </span>
+                    </Typography>
+                </Grid>
+            </Grid>
         </React.Fragment>
     )
 };
