@@ -104,6 +104,7 @@ const App = props => {
                 <main className={classes.content}>
 
                     <div className={classes.toolbar}/>
+
                     <Message/>
 
                     <Switch>
@@ -129,9 +130,9 @@ const App = props => {
                         <Route path={"/vehicleCreate"}
                                component={params => requireAdminLogin(<VehicleCreate {...params} />)}/>
                         <Route path={"/poleList"}
-                            component={params => requireAdminLogin(<PoleList {...params} />)} />
+                               component={params => requireAdminLogin(<PoleList {...params} />)}/>
                         <Route path={"/poleCreate"}
-                            component={params => requireAdminLogin(<NewPole {...params} />)} />
+                               component={params => requireAdminLogin(<NewPole {...params} />)}/>
                         <Route path={"/validateReservation"}
                                component={params => requireAdminLogin(<ValidateReservationList {...params} />)}/>
                         <Route path={"/reservation/:locationId"}
