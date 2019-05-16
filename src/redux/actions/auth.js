@@ -69,7 +69,7 @@ export const setToken = token => {
     return {type: SET_USER_TOKEN, token}
 };
 
-export const setUserEmpty = () => {
+export const setAuthEmpty = () => {
     return {type: SET_USER_EMPTY}
 };
 

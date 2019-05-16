@@ -1,5 +1,5 @@
 
-import {SET_USER_LOCATION, SET_USER_PROFIL} from './../actions/user';
+import {SET_USER_LOCATION, SET_USER_PROFIL, SET_NO_PROFIL} from './../actions/user';
 
 const initialState = {
     location: [],
@@ -13,6 +13,8 @@ export default function (state = initialState, action) {
             return {...state, location: action.location};
         case SET_USER_PROFIL:
             return {...state, profil: action.profil};
+        case SET_NO_PROFIL:
+            return {...state, profil: initialState.profil};
         default:
             return state
     }

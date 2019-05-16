@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import store from './../index'
 import {setMessage} from "../redux/actions/message";
-import {setUserEmpty} from "../redux/actions/auth";
+import {setAuthEmpty} from "../redux/actions/auth";
 
 const httpClient = axios.create({
     baseURL: config.backend
@@ -35,7 +35,7 @@ const handleError = error => {
 
         //Si il y a une erreur 401, on déconnecte l'utilisateur, car il n'a pas le droit d'acceder a la page
         if (error.response.status === 401) {
-            store.dispatch(setUserEmpty())
+            store.dispatch(setAuthEmpty())
         }
 
     } else {

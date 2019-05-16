@@ -3,6 +3,7 @@ import {setMessage} from "./message";
 
 export const SET_USER_LOCATION = 'SET_USER_LOCATION';
 export const SET_USER_PROFIL = 'SET_USER_PROFIL';
+export const SET_NO_PROFIL = 'SET_NO_PROFIL';
 
 /**
  * Créer une noubelle réservation
@@ -61,4 +62,8 @@ export const setUserLocation = location => {
 
 export const setUserProfil = profil => {
     return {type: SET_USER_PROFIL, profil}
-}
+};
+
+export const setNoProfil = () => {
+    return {type: SET_NO_PROFIL}
+};
