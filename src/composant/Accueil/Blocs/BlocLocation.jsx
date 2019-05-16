@@ -10,7 +10,9 @@ import {Link} from "react-router-dom";
 
 const BlocLocation = props => {
 
-    const {classes} = props;
+    const {classes, user} = props;
+
+    let multipleLocations = user.locationsCount > 1;
 
     return (
         <React.Fragment>
@@ -18,10 +20,10 @@ const BlocLocation = props => {
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
                         <Typography component="h3" variant="h3">
-                            8
+                            {user.locationsCount}
                         </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
-                            Locations
+                            Location{multipleLocations && "s"}
                         </Typography>
                     </CardContent>
                     <CardActions className={classes.action}>

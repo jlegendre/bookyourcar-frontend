@@ -22,8 +22,8 @@ const BlocProfil = props => {
      */
     const getImage = () => {
         let email = "";
-        if (user && user.userEmail) {
-            email = user.userEmail.trim();
+        if (user && user.email) {
+            email = user.email.trim();
         }
 
         return `https://www.gravatar.com/avatar/${md5(email)}?s=165`;
@@ -32,8 +32,8 @@ const BlocProfil = props => {
 
     const getPhoneNumer = () => {
         let str = '';
-        if(user && user.userPhone) {
-            _.each(user.userPhone, (char, i) => {
+        if(user && user.phoneNumber) {
+            _.each(user.phoneNumber, (char, i) => {
                 str += char;
                 if(i % 2 === 1) {
                     str += ' ';
@@ -45,9 +45,8 @@ const BlocProfil = props => {
 
     const getNumeroPermis = () => {
         let str = 'Aucun numéro de permis';
-
-        if(user && user.userNumpermis) {
-            str = user.userNumpermis;
+        if(user && user.drivingLicence) {
+            str = user.drivingLicence;
         }
 
         return str;
@@ -64,18 +63,18 @@ const BlocProfil = props => {
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
                         <Typography component="h5" variant="h5">
-                            {user.userName} {user.userFirstname}
+                            {user.firstName} {user.lastName}
                         </Typography>
 
                         <Grid container>
                             <Grid item xs={12} md={6}>
                                 <Typography variant="subtitle1" color="textSecondary">
-                                    {user.userEmail}
+                                    {user.email}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} md={6}>
                                 <Typography variant="subtitle1" color="textSecondary">
-                                    {user.poleName}
+                                    {user.pole}
                                 </Typography>
                             </Grid>
                             <Grid item xs={12} md={6}>

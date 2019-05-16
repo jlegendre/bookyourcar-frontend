@@ -12,7 +12,7 @@ const StepFinish = props => {
     return (
         <React.Fragment>
             <Typography variant="h6" gutterBottom>
-                Résumer de la demande de location
+                Résumé de la demande de location
             </Typography>
             <Grid container spacing={24}>
                 <Grid item xs={12} md={6}>
