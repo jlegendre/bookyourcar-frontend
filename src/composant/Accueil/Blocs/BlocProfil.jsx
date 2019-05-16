@@ -82,7 +82,7 @@ const BlocProfil = props => {
                                     {getPhoneNumer()}
                                 </Typography>
                             </Grid>
-                            <Grid itex xs={12} md={6}>
+                            <Grid item xs={12} md={6}>
                                 <Typography variant="subtitle1" color="textSecondary">
                                     {getNumeroPermis()}
                                 </Typography>

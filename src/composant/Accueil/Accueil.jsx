@@ -13,8 +13,8 @@ const Accueil = props => {
     const {classes, profil, fetchProfil} = props;
 
     useEffect(() => {
-        fetchProfil()
-    }, [fetchProfil]);
+        !profil && fetchProfil()
+    }, [fetchProfil, profil]);
 
     return (
         <React.Fragment>

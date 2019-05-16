@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {ConnectedRouter} from 'connected-react-router';
 import * as PropTypes from 'prop-types';
 
@@ -26,9 +26,15 @@ import NewPole from "./composant/Admin/Pole/NewPole.js";
 
 const App = props => {
 
-    const {classes, token, role} = props;
+    const {classes, token, role, user, fetchUser} = props;
 
     const [openMobile, setOpenMobile] = useState(false);
+
+    useEffect(() => {
+        if (token) {
+            fetchUser();
+        }
+    }, [fetchUser, token]);
 
     /**
      * Détect si l'utilisateur est connecté
@@ -83,6 +89,7 @@ const App = props => {
                         <Hidden smUp implementation={"css"}>
                             {token &&
                             <IconButton
+                                className={{flexGrow: 1}}
                                 color={"inherit"}
                                 aria-label={"Open drawer"}
                                 onClick={() => setOpenMobile(!openMobile)}
@@ -92,9 +99,16 @@ const App = props => {
                             }
                         </Hidden>
 
-                        <Typography variant="h6" color="inherit" noWrap>
+                        <Typography variant="h6" color="inherit" noWrap style={{flexGrow: 1}}>
                             Book Your Car
                         </Typography>
+
+                        {user && (
+                            <Typography color={"inherit"}>
+                                {`${user.firstName} ${user.lastName}`}
+                            </Typography>
+                        )}
+
                     </Toolbar>
                 </AppBar>
 
@@ -152,12 +166,15 @@ App.propTypes = {
     classes: PropTypes.object,
     history: PropTypes.object,
     token: PropTypes.string,
-    role: PropTypes.string
+    role: PropTypes.string,
+    user: PropTypes.object,
+    fetchUser: PropTypes.func
 };
 
 export default withStyles(theme => ({
     root: {
         display: 'flex',
+        flexGrow: 1,
         [theme.breakpoints.down(getBreakingLimit(theme))]: {
             height: '100%'
         }
