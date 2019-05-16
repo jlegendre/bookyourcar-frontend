@@ -26,12 +26,13 @@ const ValidateReservation = props => {
         userId: 0,
     });
 
-
-    useEffect(() => {
+    const [user, setUser] = useState('');
+        useEffect(() => {
         fetchGetLocation(match.params.locationId, (locationDet) => {
             setInput(
                 locationDet
             );
+            setUser(locationDet.commentsList[0].friendlyName);
         });
 
     }, [match.params.locationId, fetchGetLocation]);
@@ -64,11 +65,41 @@ const ValidateReservation = props => {
         return <Redirect push to="/validateReservation"/>;
     }
 
+    console.log(input)
+
     return (
         <div>
             <Paper className={classes.paper}>
                 <div className={classes.container}>
-                    <InputText marginLeft={10} fullWidth={false} disabled id='deb' name='deb' label='Début'
+                    <span className={classes.labelTitle}>Réservation de {user}</span>
+                    <span className={classes.label}> Début: {input.dateDebutResa}</span>
+                    <span className={classes.label}> Fin: {input.dateFinResa}</span>
+                    <span className={classes.label}> Pole de départ: {input.poleDepart}</span>
+                    <span className={classes.label}> Pole d'arrivé{input.poleDestination}</span>
+                    <span className={classes.label}> Etat: {input.locationState}</span>
+                    <InputSelect
+                        id={"vehicule"}
+                        name={"selectedVehicle"}
+                        onChange={updateSelect}
+                        label={"Vehicule à attribuer"}
+                        data={getVehicleForSelect()}
+                        value={input.selectedVehicle}
+                        className={classes.input}
+                        fullWidth={false}/>
+                    <div>
+                        <Button disabled={input.locationState === 'Terminée' || input.selectedVehicle === null}
+                                variant="contained" color="primary" className={classes.button}
+                                onClick={() => validateReservation()} classeName={classes.button}>
+                            Valider
+                        </Button>
+                        <Button disabled={input.locationState === 'Terminée'} variant="contained" color="secondary"
+                                className={classes.button}
+                                onClick={() => deleteReservation()} classes={classes.button}>
+                            Refuser
+                        </Button>
+                    </div>
+
+                    {/*<InputText marginLeft={10} fullWidth={false} disabled id='deb' name='deb' label='Début'
                                value={input.dateDebutResa} className={classes.input}/>
                     <InputText marginLeft={10} fullWidth={false} disabled id='fin' name='fin' label='Fin'
                                value={input.dateFinResa} className={classes.input}/>
@@ -99,47 +130,8 @@ const ValidateReservation = props => {
                             className={classes.button}
                             onClick={() => deleteReservation()} classes={classes.button}>
                         Refuser
-                    </Button>
+                    </Button>*/}
                 </div>
-
-
-                {/*<Grid direction={"row"}>
-                    <Grid direction={'column'}>
-                        <InputText disabled id='deb' name='deb' label='Début' value={input.dateDebutResa}/>
-                        <InputText disabled id='fin' name='fin' label='Fin' value={input.dateFinResa}/>
-                    </Grid>
-                    <Grid direction={'row'}>
-                        <InputText disabled id='poleDeb' name='poleDeb' label='Pole de départ'
-                                   value={input.poleDepart}/>
-                        <InputText disabled id='poleFin' name='poleFin' label='Pole de destination'
-                                   value={input.poleDestination}/>
-                    </Grid>
-                    <Grid direction={'column'}>
-                        <InputText disabled id='etat' name='etat' label='Etat de la réservation'
-                                   value={input.locationState}/>
-                        <InputSelect
-                            id={"vehicule"}
-                            name={"selectedVehicle"}
-                            onChange={updateSelect}
-                            label={"Vehicule à attribuer"}
-                            data={getVehicleForSelect()}
-                            value={input.selectedVehicle}
-                        />
-                    </Grid>
-
-                    <Grid container direction={"column"}>
-                        <Button disabled={input.locationState === 'Terminée' || input.selectedVehicle === null}
-                                variant="contained" color="primary" className={classes.button}
-                                onClick={() => validateReservation()}>
-                            Valider
-                        </Button>
-                        <Button disabled={input.locationState === 'Terminée'} variant="contained" color="secondary"
-                                className={classes.button}
-                                onClick={() => deleteReservation()}>
-                            Refuser
-                        </Button>
-                    </Grid>
-                </Grid>*/}
             </Paper>
         </div>
     )
@@ -170,8 +162,9 @@ export default withStyles(theme => ({
         alignItems: 'center',
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
         [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-            width: '100%',
-            padding: 0
+            width: '50%',
+            padding: 0,
+            marginLeft: '25%'
         }
     },
 
@@ -187,17 +180,32 @@ export default withStyles(theme => ({
 
     container: {
         display: 'flex',
-        width: 340,
-        'flex-wrap': 'wrap',
+        width: 350,
+        flexDirection: 'column',
+        alignItems: 'center'
     },
 
     input: {
-        width: 160,
+        width: 200,
         marginRight: 10,
+    },
+    inputContainer: {
+        display: 'flex',
     },
 
     button: {
         width: 160,
         marginRight: 10,
-    }
+    },
+    label: {
+        fontSize: 'large',
+        textAlign: 'center',
+        marginTop: 10,
+    },
+    labelTitle: {
+        fontSize: 'xx-large',
+        textAlign: 'center',
+        marginBottom: 10
+
+    },
 }))(ValidateReservation);

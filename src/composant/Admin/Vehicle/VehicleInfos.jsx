@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {Icon, Paper,} from "@material-ui/core";
+import {Paper,} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import InputText from "../../Commun/Input/InputText";
 import InputSelect from "../../Commun/Input/InputSelect";
+import Image from "../../Commun/Input/Image";
 
 const VehicleInfos = props => {
 
@@ -31,7 +30,7 @@ const VehicleInfos = props => {
             console.log(vehicle);
             setInput(vehicle);
         });
-       fetchPoles();
+        fetchPoles();
     }, [fetchVehicleInfos, match.params.vehId, fetchPoles]);
 
     if (!detailVehicle) {
@@ -41,14 +40,6 @@ const VehicleInfos = props => {
             </div>
         )
     }
-    const update = ((event, type) => {
-        console.log(input);
-
-        setInput({
-            ...input,
-            [type]: event.target.value
-        });
-    });
 
     const updateVehicle = (() => {
         fetchUpdateVehicle(input);
@@ -82,59 +73,56 @@ const VehicleInfos = props => {
         },
     ];
 
-
     return (
         <div>
             <Paper className={classes.paper}>
-                <Grid container direction={"column"}>
-                    <Grid container direction={"row"}>
-                        <Icon fontSize={"large"}>directions_car</Icon>
-                        <Grid id="plop" direction={"column"}>
-                            <Grid container direction={"row"}>
-                                <InputText id='vehBrand' name='vehBrand' label='Marque' value={input.vehBrand}
-                                           onChange={(event) => update(event, 'vehBrand')}/>
-                                <InputText id='vehModel' name='vehModel' label='Modèle' value={input.vehModel}
-                                           onChange={(event) => update(event, 'vehModel')}/>
-                            </Grid>
-                            <Grid container direction={"column"}>
-                                <InputText id='vehRegistration' name='vehRegistration' label='Immatriculation' value={input.vehRegistration}
-                                           onChange={(event) => update(event, 'vehRegistration')}/>
-                                <InputText id='vehColor' name='vehColor' label='Couleur' value={input.vehColor}
-                                           onChange={(event) => update(event, 'vehColor')}/>
-                            </Grid>
-                        </Grid>
-                    </Grid>
-                    <InputText id='vehNumberplace' name='vehNumberplace' label='Nombre de places' type={'number'} value={input.vehNumberplace}
-                               onChange={(event) => update(event, 'vehNumberplace')}/>
-                    <InputSelect
-                        id={"vehTypeEssence"}
-                        name={"vehTypeEssence"}
-                        onChange={updateSelect}
-                        label={"Carburant"}
-                        data={carburants}
-                        value={input.vehTypeEssence}
-                    />
-                    <InputSelect
-                        id={"poleName"}
-                        name={"poleName"}
-                        onChange={updateSelect}
-                        label={"Pole"}
-                        data={poles}
-                        value={input.poleName}
-                    />
-                </Grid>
-                <Grid container direction={"row"}>
-                    <Button variant="contained" color="primary" className={classes.button}
-                            onClick={() => updateVehicle()}
-                    >
-                        Mise à jour
-                    </Button>
-                    <Button variant="contained" color="secondary" className={classes.button}
-                            onClick={() => deleteVehicle()}
-                    >Supprimer
-                    </Button>
-                </Grid>
-
+                <div className={classes.globalFlexContainer}>
+                    <div className={classes.containerImage}>
+                        <Image name={'car.svg'} width={680} height={480}/>
+                    </div>
+                    <div className={classes.container}>
+                        <div className={classes.containerV}>
+                            <span className={classes.labelTitle}>{input.vehBrand} - {input.vehModel}</span>
+                            <span className={classes.label}>{input.vehColor}</span>
+                            <span className={classes.label}> Nombres de places : {input.vehNumberplace}</span>
+                            <div>
+                                <div className={classes.divText}> Immatriculation : {input.vehRegistration}</div>
+                                <div className={classes.divText}> Mise en circulation : {input.vehDatemec}</div>
+                                <InputSelect
+                                    fullWidth={false}
+                                    className={classes.input}
+                                    id={"vehTypeEssence"}
+                                    name={"vehTypeEssence"}
+                                    onChange={updateSelect}
+                                    label={"Carburant"}
+                                    data={carburants}
+                                    value={input.vehTypeEssence}
+                                />
+                                <InputSelect
+                                    fullWidth={false}
+                                    className={classes.input}
+                                    id={"poleName"}
+                                    name={"poleName"}
+                                    onChange={updateSelect}
+                                    label={"Pole"}
+                                    data={poles}
+                                    value={input.poleName}
+                                />
+                            </div>
+                            <div className={classes.globalFlexContainer}>
+                                <Button variant="contained" color="primary" className={classes.button}
+                                        onClick={() => updateVehicle()}
+                                >
+                                    Mise à jour
+                                </Button>
+                                <Button variant="contained" color="secondary" className={classes.button}
+                                        onClick={() => deleteVehicle()}
+                                >Supprimer
+                                </Button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </Paper>
         </div>
     )
@@ -165,8 +153,9 @@ export default withStyles(theme => ({
         alignItems: 'center',
         padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
         [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
-            width: '100%',
-            padding: 0
+            width: '50%',
+            padding: 0,
+            marginLeft: '25%'
         }
     },
 
@@ -178,5 +167,51 @@ export default withStyles(theme => ({
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.background.default,
         },
+    },
+
+    container: {
+        display: 'flex',
+        width: 320,
+        'flex-wrap': 'wrap',
+    },
+    containerV: {
+        display: 'flex',
+        flexDirection: 'column',
+        width: 320,
+        alignItems: 'center',
+        justifyContent: 'space-evenly'
+    },
+    containerImage: {
+        display: 'flex',
+        width: 200,
+        marginRight: 200,
+    },
+    globalFlexContainer: {
+        display: 'flex',
+    },
+
+    input: {
+        width: 250,
+        marginRight: 10,
+    },
+
+    label: {
+        fontSize: 'large',
+        textAlign: 'center'
+    },
+    labelTitle: {
+        fontSize: 'xx-large',
+        textAlign: 'center'
+
+    },
+
+    divText: {
+        fontSize: 'large',
+    },
+
+    button: {
+        width: 150,
+        height: 40,
+        marginRight: 10,
     }
 }))(VehicleInfos);
