@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
+import {Redirect} from "react-router";
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {Paper,} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
 import InputText from "../../Input/InputText";
 import InputSelect from "../../Input/InputSelect";
 import _ from 'lodash';
@@ -11,7 +11,8 @@ import _ from 'lodash';
 
 const ValidateReservation = props => {
 
-    const {classes, match, fetchGetLocation, fetchValidateLocation, fetchDeleteLocation} = props;
+    const {classes, match, fetchGetLocation, fetchValidateLocation, fetchDeleteLocation, fetchUserLocation} = props;
+    const [redirect, setRedirect] = useState(false);
     const [input, setInput] = useState({
         locationState: '',
         availableVehicle: [],
@@ -51,23 +52,69 @@ const ValidateReservation = props => {
 
     const validateReservation = () => {
         fetchValidateLocation(input.locationStateId, input);
+        setRedirect(true);
+
     };
     const deleteReservation = () => {
         fetchDeleteLocation(input.locationStateId);
     };
 
+    if (redirect) {
+        fetchUserLocation();
+        return <Redirect push to="/validateReservation"/>;
+    }
+
     return (
         <div>
             <Paper className={classes.paper}>
-                <Grid direction={'column'}>
+                <div className={classes.container}>
+                    <InputText marginLeft={10} fullWidth={false} disabled id='deb' name='deb' label='Début'
+                               value={input.dateDebutResa} className={classes.input}/>
+                    <InputText marginLeft={10} fullWidth={false} disabled id='fin' name='fin' label='Fin'
+                               value={input.dateFinResa} className={classes.input}/>
+                    <InputText marginLeft={10} fullWidth={false} disabled id='poleDeb' name='poleDeb'
+                               label='Pole de départ'
+                               value={input.poleDepart} className={classes.input}/>
+                    <InputText marginLeft={10} fullWidth={false} disabled id='poleFin' name='poleFin'
+                               label='Pole de destination'
+                               value={input.poleDestination} className={classes.input}/>
+                    <InputText marginLeft={10} fullWidth={false} disabled id='etat' name='etat'
+                               label='Etat de la réservation'
+                               value={input.locationState} className={classes.input}/>
+                    <InputSelect
+                        id={"vehicule"}
+                        name={"selectedVehicle"}
+                        onChange={updateSelect}
+                        label={"Vehicule à attribuer"}
+                        data={getVehicleForSelect()}
+                        value={input.selectedVehicle}
+                        className={classes.input}
+                        fullWidth={false} width={150}/>
+                    <Button disabled={input.locationState === 'Terminée' || input.selectedVehicle === null}
+                            variant="contained" color="primary" className={classes.button}
+                            onClick={() => validateReservation()} classeName={classes.button}>
+                        Valider
+                    </Button>
+                    <Button disabled={input.locationState === 'Terminée'} variant="contained" color="secondary"
+                            className={classes.button}
+                            onClick={() => deleteReservation()} classes={classes.button}>
+                        Refuser
+                    </Button>
+                </div>
 
-                    <Grid direction={'row'}>
+
+                {/*<Grid direction={"row"}>
+                    <Grid direction={'column'}>
                         <InputText disabled id='deb' name='deb' label='Début' value={input.dateDebutResa}/>
                         <InputText disabled id='fin' name='fin' label='Fin' value={input.dateFinResa}/>
+                    </Grid>
+                    <Grid direction={'row'}>
                         <InputText disabled id='poleDeb' name='poleDeb' label='Pole de départ'
                                    value={input.poleDepart}/>
                         <InputText disabled id='poleFin' name='poleFin' label='Pole de destination'
                                    value={input.poleDestination}/>
+                    </Grid>
+                    <Grid direction={'column'}>
                         <InputText disabled id='etat' name='etat' label='Etat de la réservation'
                                    value={input.locationState}/>
                         <InputSelect
@@ -79,7 +126,8 @@ const ValidateReservation = props => {
                             value={input.selectedVehicle}
                         />
                     </Grid>
-                    <Grid container direction={"row"}>
+
+                    <Grid container direction={"column"}>
                         <Button disabled={input.locationState === 'Terminée' || input.selectedVehicle === null}
                                 variant="contained" color="primary" className={classes.button}
                                 onClick={() => validateReservation()}>
@@ -91,7 +139,7 @@ const ValidateReservation = props => {
                             Refuser
                         </Button>
                     </Grid>
-                </Grid>
+                </Grid>*/}
             </Paper>
         </div>
     )
@@ -135,5 +183,21 @@ export default withStyles(theme => ({
         '&:nth-of-type(odd)': {
             backgroundColor: theme.palette.background.default,
         },
+    },
+
+    container: {
+        display: 'flex',
+        width: 340,
+        'flex-wrap': 'wrap',
+    },
+
+    input: {
+        width: 160,
+        marginRight: 10,
+    },
+
+    button: {
+        width: 160,
+        marginRight: 10,
     }
 }))(ValidateReservation);
