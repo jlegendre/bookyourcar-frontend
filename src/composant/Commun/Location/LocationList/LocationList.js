@@ -5,6 +5,12 @@ const mapStateToProps = state => {
     return {
 
     }
-}
+};
 
-export default connect(mapStateToProps)(LocationList);
+const mapDispatchToProps = dispatch => {
+    return {
+
+    }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LocationList);

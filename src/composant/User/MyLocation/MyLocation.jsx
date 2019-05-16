@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import {getBreakingLimit} from "../../../utils/cssUtils";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
-import {Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
+import LocationList from "../../Commun/Location/LocationList/LocationList.js";
 
 const MyLocation = props => {
 
@@ -18,26 +18,7 @@ const MyLocation = props => {
         <div className={classes.main}>
             <CssBaseline/>
             <Paper className={classes.paper}>
-                <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Etat</TableCell>
-                            <TableCell>Date début</TableCell>
-                            <TableCell>Date de fin</TableCell>
-                            <TableCell>Véhicule</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {location && location.map((item, i) =>
-                            <TableRow key={i} className={classes.row}>
-                                <TableCell>{item.locationState}</TableCell>
-                                <TableCell>{item.dateDebutResa}</TableCell>
-                                <TableCell>{item.dateFinResa}</TableCell>
-                                <TableCell>{item.vehicleFriendlyName}</TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
+                <LocationList locations={location}/>
             </Paper>
         </div>
     )
@@ -70,14 +51,6 @@ export default withStyles(theme => ({
         [theme.breakpoints.up(getBreakingLimit(theme))]: {
             width: '100%',
             padding: 0
-        }
-    },
-    table: {
-        minWidth: 700,
-    },
-    row: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.background.default,
         }
     }
 }))(MyLocation)

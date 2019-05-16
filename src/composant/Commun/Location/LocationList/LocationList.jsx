@@ -5,12 +5,14 @@ import withStyles from "@material-ui/core/styles/withStyles";
 const LocationList = props => {
 
     return (
-        <React.Fragment/>
+        <React.Fragment>
+
+        </React.Fragment>
     )
 };
 
 LocationList.propTypes = {
-    obj: PropTypes.object
+    locations: PropTypes.array.isRequired
 };
 
 export default withStyles(theme => ({}))(LocationList);

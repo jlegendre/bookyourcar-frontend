@@ -1,4 +1,4 @@
-import 'date-fns/typings';
+import 'date-fns';
 import frLocale from 'date-fns/locale/fr';
 import React from 'react';
 import * as PropTypes from 'prop-types';
@@ -33,6 +33,6 @@ InputDate.propTypes = {
     label: PropTypes.string,
     message: PropTypes.any,
     name: PropTypes.string
-}
+};
 
 export default InputDate;

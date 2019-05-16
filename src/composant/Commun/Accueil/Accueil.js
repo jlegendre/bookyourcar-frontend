@@ -1,7 +1,7 @@
 import {connect} from "react-redux"
 import Accueil from './Accueil.jsx'
-import {getProfil} from "../../redux/reducers/user";
-import {fetchUserProfil} from "../../redux/actions/user";
+import {getProfil} from "../../../redux/reducers/user";
+import {fetchUserProfil} from "../../../redux/actions/user";
 
 
 const mapStateToProps = state => {
