@@ -89,7 +89,7 @@ const App = props => {
                         <Hidden smUp implementation={"css"}>
                             {token &&
                             <IconButton
-                                className={{flexGrow: 1}}
+                                style={{flexGrow: 1}}
                                 color={"inherit"}
                                 aria-label={"Open drawer"}
                                 onClick={() => setOpenMobile(!openMobile)}
