@@ -21,12 +21,16 @@ const BlocNextLocation = props => {
                         <Typography variant="subtitle1" color="textSecondary">
                             {haveNextLocation && "Votre prochaine location prévue est le"}
                         </Typography>
-                        <Typography component="h3" variant="h3">
-                            {haveNextLocation && formatDate(user.nextLocation)}
-                            {!haveNextLocation && (
-                                "Pas de location prévue"
-                            )}
-                        </Typography>
+
+                        {haveNextLocation ? (
+                            <Typography component={"h3"} variant={"h3"}>
+                                {formatDate(user.nextLocation)}
+                            </Typography>
+                        ) : (
+                            <Typography component={"h5"} variant={"h5"}>
+                                Pas de location prévue
+                            </Typography>
+                        )}
                     </CardContent>
                     <CardActions className={classes.action}>
                         {
