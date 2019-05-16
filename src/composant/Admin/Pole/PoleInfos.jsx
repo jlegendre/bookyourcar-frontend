@@ -5,15 +5,16 @@ import {CssBaseline, Paper, Table, TableBody, TableCell, TableRow, Typography} f
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Input/InputText";
+import { Redirect } from "react-router";
 
 const PoleInfos = props => {
 
-    const {classes, fetchPoleInfos, fetchUpdatePole, detailPole, match} = props;
+    const { classes, fetchPoleInfos, fetchUpdatePole, detailPole, match, fetchPoles } = props;
     const [input, setInput] = useState({ poleId: 0, poleName: '', poleCity: '', poleAddress: '', poleCp: '' });
+    const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
         fetchPoleInfos(match.params.poleId, (pole) => {
-            console.log(pole);
             setInput(pole);
         });
 
@@ -29,9 +30,13 @@ const PoleInfos = props => {
 
     const updatepole = (() => {
         fetchUpdatePole(input);
-
+        setRedirect(true);
     })
 
+    if (redirect) {
+        fetchPoles();
+        return <Redirect push to="/poleList" />
+    }
 
     if (!detailPole) {
         return (

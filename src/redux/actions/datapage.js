@@ -107,7 +107,7 @@ export const fetchAddPole = ({ poleName, poleCity, poleAddress, poleCp }) => {
             method: 'POST',
             data: { poleName, poleCity, poleAddress, poleCp },
         }).then(() => {
-            
+            dispatch(fetchPoles())
         })
     }
 
