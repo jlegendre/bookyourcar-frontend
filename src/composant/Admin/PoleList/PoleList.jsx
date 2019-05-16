@@ -34,7 +34,7 @@ const PoleList = props => {
             <CssBaseline />
             <Paper className={classes.paper}>
                 <Typography variant="h4" gutterBottom>Liste des Poles</Typography>
-                <Link to={`/poleCreate`}>
+                <Link to={`/poleCreate`} className={classes.link}>
                     <Button variant="contained"
                         color="primary"
                         className={classes.button}>
@@ -60,7 +60,7 @@ const PoleList = props => {
                                 <TableCell>{row.poleCp}</TableCell>
                                 <TableCell>{row.poleCity}</TableCell>
                                 <TableCell>
-                                    <Link to={`/poleInfos/${row.poleId}`}>
+                                    <Link to={`/poleInfos/${row.poleId}`} className={classes.link}>
                                         <IconButton>
                                             <Icon>pageview</Icon>
                                         </IconButton>
@@ -121,8 +121,10 @@ export default withStyles(theme => ({
         },
     },
     button: {
-        marginTop: theme.spacing.unit * 3,
         marginRight: theme.spacing.unit * 3,
-        alignSelf: 'end'
+    },
+    link: {
+        textDecoration: 'none',
+        alignSelf: 'flex-end',
     },
 }))(PoleList);

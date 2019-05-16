@@ -10,14 +10,16 @@ import {
     TableRow,
     Typography
 } from "@material-ui/core";
+import { Redirect } from "react-router";
 import Button from "@material-ui/core/Button";
 import InputText from "../../Input/InputText";
 
 const NewPole = props => {
 
-    const { classes, fetchAddPole } = props;
+    const { classes, fetchAddPole, fetchPoles } = props;
 
-    const [input, setInput] = useState({poleName: '', poleCity: '', poleAddress: '', poleCp: ''});
+    const [input, setInput] = useState({ poleName: '', poleCity: '', poleAddress: '', poleCp: '' });
+    const [redirect, setRedirect] = useState(false);
 
     const update = ((event, type) => {
         setInput({
@@ -26,9 +28,19 @@ const NewPole = props => {
         });
     });
 
+
     const createPole = () => {
-        fetchAddPole(input)
+        fetchAddPole(input);
+        setRedirect(true);
     };
+
+    if (redirect) {
+        fetchPoles();
+        return <Redirect push to="/poleList" />
+    }
+
+    
+
 
     return (
         <div className={classes.main}>

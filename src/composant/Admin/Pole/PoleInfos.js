@@ -1,7 +1,7 @@
 import PoleInfos from "./PoleInfos.jsx";
 import {connect} from "react-redux";
 import { fetchPoleInfos } from "../../../redux/actions/datapage";
-import { fetchUpdatePole } from "../../../redux/actions/datapage";
+import { fetchUpdatePole, fetchPoles } from "../../../redux/actions/datapage";
 import { getDetailPoles } from "../../../redux/reducers/datapage";
 
 
@@ -10,6 +10,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchPoleInfos: (id, success) => dispatch(fetchPoleInfos(id, success)),
         fetchUpdatePole: (input) => dispatch(fetchUpdatePole(input)),
+        fetchPoles: () => dispatch(fetchPoles())
     }
 };
 
