@@ -16,7 +16,7 @@ import {getBreakingLimit} from "../../../utils/cssUtils";
 
 const CreateUser = props => {
 
-    const {classes, registerUser, token, fetchPoles, poles} = props;
+    const {classes, registerUser, token, fetchPoles, poles, setMessage} = props;
 
     useEffect(() => {
         fetchPoles()
@@ -57,6 +57,7 @@ const CreateUser = props => {
     const fetchCreateUser = event => {
         event.preventDefault();
         registerUser(input, () => {
+            setMessage({"Success" : ["Votre compte a bien été créer, veuillez attendre la validation par un administrateur"]});
             setAccountSuccess(true);
         })
     };
@@ -160,6 +161,8 @@ const CreateUser = props => {
 };
 
 CreateUser.propTypes = {
+    //set a message
+    setMessage: PropTypes.func,
 
     //classe css du composant
     classes: PropTypes.object,

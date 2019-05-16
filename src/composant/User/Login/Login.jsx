@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
 
 import {Redirect} from "react-router";
@@ -21,13 +21,9 @@ import {Hidden} from "@material-ui/core";
  * Formulaire de Login
  */
 const Login = (props) => {
-    const {classes, loginUser, token, clearMessage} = props;
+    const {classes, loginUser, token} = props;
 
     const [input, setInput] = useState({email: "", password: ""});
-
-    useEffect(() => {
-        clearMessage();
-    }, [clearMessage]);
 
     /**
      * Update email input
@@ -125,8 +121,6 @@ const Login = (props) => {
 };
 
 Login.propTypes = {
-    //Clear les messages
-    clearMessage: PropTypes.func,
 
     //classe css du composant
     classes: PropTypes.object.isRequired,

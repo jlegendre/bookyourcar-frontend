@@ -47,7 +47,7 @@ export const fetchUserLocation = () => {
 export const fetchUserProfil = () => {
     return dispatch => {
         httpClient.request({
-            url: '/User/50',
+            url: '/User/UserInfos',
             method: 'GET'
         }).then(response => {
             dispatch(setUserProfil(response.data))
