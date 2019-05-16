@@ -20,7 +20,6 @@ const Accueil = props => {
         <React.Fragment>
             <CssBaseline/>
             <main className={classes.layout}>
-
                 <Grid container spacing={24}>
                     <Grid item xs={12}>
                         <BlocProfil user={profil}/>
@@ -50,10 +49,10 @@ export default withStyles(theme => ({
         width: 'auto',
         marginLeft: theme.spacing.unit * 2,
         marginRight: theme.spacing.unit * 2,
+        height: '100%',
         [theme.breakpoints.up(getBreakingLimit(theme))]: {
-            width: 800,
-            marginLeft: 'auto',
-            marginRight: 'auto',
+            width: 1000,
+            margin: 'auto'
         }
     }
 }))(Accueil);

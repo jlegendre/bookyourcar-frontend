@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
-import InputText from "../../../Input/InputText.js";
 import InputSelect from "../../../Input/InputSelect.js";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import InputSwitch from "../../../Input/InputSwitch";
+import InputDate from "../../../Input/InputDate.js";
 
 const StepInformation = props => {
 
@@ -24,7 +24,7 @@ const StepInformation = props => {
     const handleChangeSamePole = event => {
         setSamePole(event.target.checked);
 
-        if(event.target.checked) {
+        if (event.target.checked) {
             setFormulaire({...formulaire, poleIdDestination: formulaire.poleIdDepart})
         }
     }
@@ -35,7 +35,7 @@ const StepInformation = props => {
      */
     const handlePoleDepart = event => {
         let id = event.target.value;
-        if(samePole) {
+        if (samePole) {
             setFormulaire({...formulaire, poleIdDepart: id, poleIdDestination: id})
         } else {
             setFormulaire({...formulaire, poleIdDepart: id})
@@ -49,31 +49,21 @@ const StepInformation = props => {
             </Typography>
             <Grid container spacing={24}>
                 <Grid item xs={12} md={6}>
-                    <InputText
+                    <InputDate
+                        label={"Date début"}
                         id={"dateDebut"}
                         name={"dateDebutResa"}
-                        label={"Date début"}
-                        type={"date"}
                         value={formulaire.dateDebutResa}
-                        onChange={event => setFormulaire({...formulaire, dateDebutResa: event.target.value})}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        required
+                        onChange={date => setFormulaire({...formulaire, dateDebutResa: date})}
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    <InputText
+                    <InputDate
+                        label={"Date fin"}
                         id={"dateFin"}
                         name={"dateFinResa"}
-                        label={"Date fin"}
-                        type={"date"}
                         value={formulaire.dateFinResa}
-                        onChange={event => setFormulaire({...formulaire, dateFinResa: event.target.value})}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        required
+                        onChange={date => setFormulaire({...formulaire, dateFinResa: date})}
                     />
                 </Grid>
                 <Grid item xs={12} md={6}>
@@ -87,13 +77,13 @@ const StepInformation = props => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     {!samePole &&
-                        <InputSelect
-                            label={"Pole Fin"}
-                            name={"poleIdDestination"}
-                            value={formulaire.poleIdDestination}
-                            onChange={event => setFormulaire({...formulaire, poleIdDestination: event.target.value})}
-                            data={poles}
-                        />
+                    <InputSelect
+                        label={"Pole Fin"}
+                        name={"poleIdDestination"}
+                        value={formulaire.poleIdDestination}
+                        onChange={event => setFormulaire({...formulaire, poleIdDestination: event.target.value})}
+                        data={poles}
+                    />
                     }
                 </Grid>
                 <Grid item xs={12}>

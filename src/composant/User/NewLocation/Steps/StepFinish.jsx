@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import withStyles from '@material-ui/core/styles/withStyles';
+import {formatDate} from "../../../../utils/dateUtils";
 
 const StepFinish = props => {
 
@@ -15,10 +16,10 @@ const StepFinish = props => {
             </Typography>
             <Grid container spacing={24}>
                 <Grid item xs={12} md={6}>
-                    Date début de location : <span className={classes.donnee}>{formulaire.dateDebutResa}</span>
+                    Date début de location : <span className={classes.donnee}>{formatDate(formulaire.dateDebutResa)}</span>
                 </Grid>
                 <Grid item xs={12} md={6}>
-                    Date de fin de location : <span className={classes.donnee}>{formulaire.dateFinResa}</span>
+                    Date de fin de location : <span className={classes.donnee}>{formatDate(formulaire.dateFinResa)}</span>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     Départ : <span className={classes.donnee}>{getPole(formulaire.poleIdDepart).poleName}</span>
