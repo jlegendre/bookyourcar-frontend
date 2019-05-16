@@ -4,12 +4,14 @@ import {fetchRegisterUser} from "../../../redux/actions/auth";
 import {getToken} from "../../../redux/reducers/auth";
 import {fetchPoles} from "../../../redux/actions/datapage";
 import {getListPolesForSelect} from "../../../redux/reducers/datapage";
+import {setMessage} from "../../../redux/actions/message";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = (dispatch) => {
     return {
         registerUser: (input, success) => dispatch(fetchRegisterUser(input, success)),
+        setMessage: (message) => dispatch(setMessage(message)),
         fetchPoles: () => dispatch(fetchPoles())
     }
 };
