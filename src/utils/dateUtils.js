@@ -14,6 +14,13 @@ export const isValidDate = d => {
 
 export const formatDate = d => {
     if (isValidDate(d)) {
+
+        if(d instanceof Object) {
+            return format(d, 'dd/MM/YYYY', {
+                awareOfUnicodeTokens: true
+            })
+        }
+
         return format(parseISO(d), 'dd/MM/YYYY', {
             awareOfUnicodeTokens: true
         })
