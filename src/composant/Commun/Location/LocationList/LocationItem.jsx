@@ -106,7 +106,7 @@ export default withStyles({
         verticalAlign: 'middle'
     },
     bigIcon: {
-        fontSize: '4em',
+        fontSize: '3em',
         verticalAlign: 'middle'
     }
 })(LocationItem);
