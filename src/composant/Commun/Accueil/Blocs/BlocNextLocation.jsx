@@ -1,11 +1,11 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/es/styles/withStyles";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+import CardContent from "@material-ui/core/CardContent/index";
+import Typography from "@material-ui/core/Typography/index";
 import {Card, CardActions} from "@material-ui/core";
-import Button from "@material-ui/core/Button";
-import {formatDate} from "../../../utils/dateUtils";
+import Button from "@material-ui/core/Button/index";
+import {formatDate} from "../../../../utils/dateUtils";
 
 const BlocNextLocation = props => {
 

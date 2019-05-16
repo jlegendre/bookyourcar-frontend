@@ -1,9 +1,9 @@
 import React from 'react';
 import * as ProTypes from 'prop-types';
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import Icon from "@material-ui/core/Icon";
-import ListItemText from "@material-ui/core/ListItemText";
+import ListItem from "@material-ui/core/ListItem/index";
+import ListItemIcon from "@material-ui/core/ListItemIcon/index";
+import Icon from "@material-ui/core/Icon/index";
+import ListItemText from "@material-ui/core/ListItemText/index";
 import {Link} from "react-router-dom";
 import {withStyles} from "@material-ui/core";
 

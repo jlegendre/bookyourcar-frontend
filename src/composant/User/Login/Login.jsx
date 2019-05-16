@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
 
 import {Redirect} from "react-router";
-import InputText from "../../Input/InputText.js";
+import InputText from "../../Commun/Input/InputText.js";
 //Material UI Componant
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';

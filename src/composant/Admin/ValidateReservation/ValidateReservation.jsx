@@ -4,8 +4,8 @@ import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {Paper,} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import InputText from "../../Input/InputText";
-import InputSelect from "../../Input/InputSelect";
+import InputText from "../../Commun/Input/InputText";
+import InputSelect from "../../Commun/Input/InputSelect";
 import _ from 'lodash';
 
 

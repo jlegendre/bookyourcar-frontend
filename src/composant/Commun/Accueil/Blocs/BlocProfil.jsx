@@ -2,12 +2,12 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import {Card} from "@material-ui/core";
-import CardMedia from "@material-ui/core/CardMedia";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
-import Grid from "@material-ui/core/Grid";
+import CardMedia from "@material-ui/core/CardMedia/index";
+import CardContent from "@material-ui/core/CardContent/index";
+import Typography from "@material-ui/core/Typography/index";
+import CardActions from "@material-ui/core/CardActions/index";
+import Button from "@material-ui/core/Button/index";
+import Grid from "@material-ui/core/Grid/index";
 import _ from 'lodash';
 
 const md5= require('md5');

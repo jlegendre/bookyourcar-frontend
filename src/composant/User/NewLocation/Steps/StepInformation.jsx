@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
-import InputSelect from "../../../Input/InputSelect.js";
+import InputSelect from "../../../Commun/Input/InputSelect.js";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import InputSwitch from "../../../Input/InputSwitch";
-import InputDate from "../../../Input/InputDate.js";
+import InputSwitch from "../../../Commun/Input/InputSwitch";
+import InputDate from "../../../Commun/Input/InputDate.js";
 
 const StepInformation = props => {
 

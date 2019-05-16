@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import {CssBaseline, Grid} from "@material-ui/core";
-import {getBreakingLimit} from "../../utils/cssUtils";
+import {getBreakingLimit} from "../../../utils/cssUtils";
 import withStyles from "@material-ui/core/styles/withStyles";
 import BlocProfil from "./Blocs/BlocProfil";
 import BlocLocation from "./Blocs/BlocLocation";

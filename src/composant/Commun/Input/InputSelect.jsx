@@ -1,9 +1,9 @@
 import React from 'react';
 import * as PropTpyes from 'prop-types';
 import {FormControl, Select} from "@material-ui/core";
-import MenuItem from "@material-ui/core/MenuItem";
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
+import MenuItem from "@material-ui/core/MenuItem/index";
+import InputLabel from "@material-ui/core/InputLabel/index";
+import FormHelperText from "@material-ui/core/FormHelperText/index";
 
 const InputSelect = props => {
 

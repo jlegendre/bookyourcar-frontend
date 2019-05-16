@@ -1,8 +1,8 @@
 import React from "react";
 import * as PropTypes from 'prop-types';
-import List from "@material-ui/core/List";
-import Drawer from "@material-ui/core/Drawer";
-import Divider from "@material-ui/core/Divider";
+import List from "@material-ui/core/List/index";
+import Drawer from "@material-ui/core/Drawer/index";
+import Divider from "@material-ui/core/Divider/index";
 import {Hidden, withStyles} from "@material-ui/core";
 import MenuItem from "./MenuItem.js";
 import Image from "../Input/Image";

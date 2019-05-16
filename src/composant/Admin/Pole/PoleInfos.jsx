@@ -4,7 +4,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import {CssBaseline, Paper, Table, TableBody, TableCell, TableRow, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import InputText from "../../Input/InputText";
+import InputText from "../../Commun/Input/InputText";
 import { Redirect } from "react-router";
 
 const PoleInfos = props => {

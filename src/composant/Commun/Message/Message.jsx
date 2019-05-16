@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import _ from 'lodash';
 
-import {SnackbarProvider, withSnackbar} from "notistack";
+import {SnackbarProvider, withSnackbar} from "notistack/build/index";
 
 /**
  * Composant qui permet de gerer l'aparition des message

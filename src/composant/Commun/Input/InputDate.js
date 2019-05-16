@@ -1,6 +1,7 @@
-import InputText from './InputText.jsx'
+import InputDate from './InputDate.jsx';
 import {connect} from "react-redux";
-import {getMessage} from "../../redux/reducers/message";
+import {getMessage} from "../../../redux/reducers/message";
+
 
 //pour envoyer des objets du store de redux
 const mapStateToProps = (state) => {
@@ -9,4 +10,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, undefined)(InputText)
+export default connect(mapStateToProps)(InputDate);

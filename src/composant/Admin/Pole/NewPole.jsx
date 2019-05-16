@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { Redirect } from "react-router";
 import Button from "@material-ui/core/Button";
-import InputText from "../../Input/InputText";
+import InputText from "../../Commun/Input/InputText";
 
 const NewPole = props => {
 
@@ -76,7 +76,7 @@ const NewPole = props => {
                     className={classes.button}
                     onClick={() => createPole()}
                 >
-                    Créer le pole
+                    Crï¿½er le pole
                         </Button>
             </Paper>
         </div>

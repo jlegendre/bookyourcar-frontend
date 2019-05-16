@@ -1,4 +1,4 @@
-import 'date-fns';
+import 'date-fns/typings';
 import frLocale from 'date-fns/locale/fr';
 import React from 'react';
 import * as PropTypes from 'prop-types';

@@ -1,7 +1,7 @@
 import MenuAppBar from './MenuAppBar.jsx'
 import {connect} from "react-redux";
-import {setUserEmpty} from "../../redux/actions/auth";
-import {getRole} from "../../redux/reducers/auth";
+import {setUserEmpty} from "../../../redux/actions/auth";
+import {getRole} from "../../../redux/reducers/auth";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)

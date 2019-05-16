@@ -9,9 +9,9 @@ import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
 import {HowToRegOutlined as HowToRegOutlinedIcon} from "@material-ui/icons";
 import Button from "@material-ui/core/Button";
-import InputText from "../../Input/InputText";
+import InputText from "../../Commun/Input/InputText";
 import {Redirect} from "react-router";
-import InputSelect from "../../Input/InputSelect";
+import InputSelect from "../../Commun/Input/InputSelect";
 import {getBreakingLimit} from "../../../utils/cssUtils";
 
 const CreateUser = props => {

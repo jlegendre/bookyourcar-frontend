@@ -1,10 +1,10 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/es/styles/withStyles";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
-import CardActions from "@material-ui/core/CardActions";
-import Button from "@material-ui/core/Button";
+import CardContent from "@material-ui/core/CardContent/index";
+import Typography from "@material-ui/core/Typography/index";
+import CardActions from "@material-ui/core/CardActions/index";
+import Button from "@material-ui/core/Button/index";
 import {Card} from "@material-ui/core";
 import {Link} from "react-router-dom";
 

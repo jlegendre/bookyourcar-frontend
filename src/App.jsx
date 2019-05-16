@@ -8,14 +8,14 @@ import {Menu as MenuIcon} from "@material-ui/icons"
 //Page
 import Login from "./composant/User/Login/Login.js";
 import CreateUser from './composant/User/CreateUser/CreateUser.js'
-import Accueil from "./composant/Accueil/Accueil.js";
+import Accueil from "./composant/Commun/Accueil/Accueil.js";
 import ValidUser from "./composant/Admin/ValidateUser/ValidateUser.js";
-import Message from "./composant/Message/Message.js";
+import Message from "./composant/Commun/Message/Message.js";
 import VehicleList from "./composant/Admin/VehicleList/VehicleList.js";
 import PoleList from "./composant/Admin/PoleList/PoleList.js";
 import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos.js";
 import PoleInfos from "./composant/Admin/Pole/PoleInfos.js";
-import MenuAppBar from "./composant/MenuAppBar/MenuAppBar.js";
+import MenuAppBar from "./composant/Commun/MenuAppBar/MenuAppBar.js";
 import NewLocation from "./composant/User/NewLocation/NewLocation.js";
 import MyLocation from './composant/User/MyLocation/MyLocation.js';
 import {getBreakingLimit} from "./utils/cssUtils";

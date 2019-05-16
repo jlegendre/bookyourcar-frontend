@@ -5,8 +5,8 @@ import {Icon, Paper,} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import CircularProgress from "@material-ui/core/CircularProgress";
-import InputText from "../../Input/InputText";
-import InputSelect from "../../Input/InputSelect";
+import InputText from "../../Commun/Input/InputText";
+import InputSelect from "../../Commun/Input/InputSelect";
 
 const VehicleInfos = props => {
 

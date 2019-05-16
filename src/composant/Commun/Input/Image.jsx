@@ -1,7 +1,7 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
 
-import config from './../../config';
+import config from '../../../config';
 
 /**
  * Composant image qui va chercher les images sur le serveur
