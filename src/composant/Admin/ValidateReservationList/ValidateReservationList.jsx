@@ -7,11 +7,11 @@ import LocationList from "../../Commun/Location/LocationList/LocationList";
 
 const ValidateReservationList = props => {
 
-    const {classes, location, fetchUserLocation} = props;
+    const {classes, location, fetchAdminLocation} = props;
 
     useEffect(() => {
-        fetchUserLocation();
-    }, [fetchUserLocation]);
+        fetchAdminLocation();
+    }, [fetchAdminLocation]);
 
     return (
         <div className={classes.main}>
@@ -24,7 +24,7 @@ const ValidateReservationList = props => {
 ValidateReservationList.propTypes = {
     classes: PropTypes.object,
     location: PropTypes.array,
-    fetchUserLocation: PropTypes.func
+    fetchAdminLocation: PropTypes.func
 };
 
 export default withStyles(theme => ({
