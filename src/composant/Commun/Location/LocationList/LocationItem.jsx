@@ -103,12 +103,14 @@ export default withStyles({
         marginBottom: '1em'
     },
     column: {
-        flexDirection: 'column'
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        width: 250
     },
     item: {
         flex: 1,
         padding: '0.5em',
-        textAlign: 'center',
+        // textAlign: 'center',
         margin: 'auto'
     },
     span: {
