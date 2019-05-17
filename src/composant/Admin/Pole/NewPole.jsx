@@ -76,7 +76,7 @@ const NewPole = props => {
                     className={classes.button}
                     onClick={() => createPole()}
                 >
-                    Cr�er le pole
+                    Créer le pole
                         </Button>
             </Paper>
         </div>
