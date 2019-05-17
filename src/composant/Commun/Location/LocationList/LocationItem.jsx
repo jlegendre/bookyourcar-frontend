@@ -46,38 +46,49 @@ const LocationItem = props => {
         }
     };
 
-    return (
-        <Link to={`/reservation/${data.locationId}`} className={classes.link}>
-            <Paper className={classes.wrapper}>
-                <div className={classes.column}>
-                    <div className={classes.item}>
-                        <Icon color={"primary"} className={classes.littleIcon}>access_time</Icon>
-                        <span className={classes.span}>{formatDate(data.dateDebutResa)} - {data.poleDepart}</span>
-                    </div>
-                    <div className={classes.item}>
-                        <Icon color={"error"} className={classes.littleIcon}>access_time</Icon>
-                        <span className={classes.span}>{formatDate(data.dateFinResa)} - {data.poleDestination}</span>
-                    </div>
-                </div>
-                {
-                    completeView && (
-                        <div className={classes.item}>
-                            <Icon className={classes.bigIcon}>account_circle</Icon>
-                            <span className={classes.span}>{data.userFriendlyName}</span>
-                        </div>
-                    )
-                }
+
+    const item = (
+        <Paper className={classes.wrapper}>
+            <div className={classes.column}>
                 <div className={classes.item}>
-                    <Icon className={classes.bigIcon}>directions_car</Icon>
-                    <span className={classes.span}>{data.vehicleFriendlyName}</span>
+                    <Icon color={"primary"} className={classes.littleIcon}>access_time</Icon>
+                    <span className={classes.span}>{formatDate(data.dateDebutResa)} - {data.poleDepart}</span>
                 </div>
                 <div className={classes.item}>
-                    <Icon className={classes.bigIcon}>{getIconEtatLocation()}</Icon>
-                    <span className={classes.span}>{data.locationState}</span>
+                    <Icon color={"error"} className={classes.littleIcon}>access_time</Icon>
+                    <span className={classes.span}>{formatDate(data.dateFinResa)} - {data.poleDestination}</span>
                 </div>
-            </Paper>
-        </Link>
+            </div>
+            {
+                completeView && (
+                    <div className={classes.item}>
+                        <Icon className={classes.bigIcon}>account_circle</Icon>
+                        <span className={classes.span}>{data.userFriendlyName}</span>
+                    </div>
+                )
+            }
+            <div className={classes.item}>
+                <Icon className={classes.bigIcon}>directions_car</Icon>
+                <span className={classes.span}>{data.vehicleFriendlyName}</span>
+            </div>
+            <div className={classes.item}>
+                <Icon className={classes.bigIcon}>{getIconEtatLocation()}</Icon>
+                <span className={classes.span}>{data.locationState}</span>
+            </div>
+        </Paper>
     )
+
+
+    if(completeView) {
+        return (
+            <Link to={`/reservation/${data.locationId}`} className={classes.link}>
+                {item}
+            </Link>
+        )
+    }
+
+    return item;
+
 };
 
 LocationItem.propTypes = {
