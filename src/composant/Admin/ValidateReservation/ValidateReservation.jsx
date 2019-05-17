@@ -32,6 +32,7 @@ const ValidateReservation = props => {
             setInput(
                 locationDet
             );
+            console.log(locationDet)
             setUser(locationDet.commentsList[0].friendlyName);
         });
 
@@ -52,7 +53,7 @@ const ValidateReservation = props => {
     };
 
     const validateReservation = () => {
-        fetchValidateLocation(input.locationStateId, input);
+        fetchValidateLocation(match.params.locationId, {vehicleId: input.selectedVehicle});
         setRedirect(true);
 
     };

@@ -76,12 +76,12 @@ export const fetchDeleteLocation = id => {
  * @param location réservation de l'utilisateur
  * @return {Function}
  */
-export const fetchValidateLocation = (id, location) => {
+export const fetchValidateLocation = (id, vehicleId) => {
     return dispatch => {
         httpClient.request({
             url: `/Location/${id}`,
             method: 'PUT',
-            data: location
+            data: vehicleId
         }).then(() => {
             dispatch(fetchUserLocation());
         })
