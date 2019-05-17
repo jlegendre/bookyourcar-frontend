@@ -9,7 +9,11 @@ const LocationList = props => {
     return (
         <React.Fragment>
             {locations && locations.map(item =>
-                <LocationItem key={item.locationId} data={item} completeView={completeView}/>
+                <LocationItem
+                    key={item.locationId}
+                    data={item}
+                    completeView={completeView}
+                />
             )}
         </React.Fragment>
     )
