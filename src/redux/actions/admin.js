@@ -1,6 +1,6 @@
 import httpClient from './../../utils/httpClient'
 import {fetchPoles, fetchUserInValidation, fetchVehicleInfos} from "./datapage";
-import {fetchUserLocation} from './user';
+import {fetchUserLocation, setUserLocation} from './user';
 
 
 /**
@@ -156,6 +156,17 @@ export const fetchCreateVehicle = ({vehId, vehRegistration, vehBrand, vehModel, 
                 poleName
             }
         }).then(() => {
+        })
+    }
+};
+
+export const fetchAdminLocation = () => {
+    return dispatch => {
+        httpClient.request({
+            url: 'Location/ManageLocations',
+            method: 'GET'
+        }).then(response => {
+            dispatch(setUserLocation(response.data))
         })
     }
 };

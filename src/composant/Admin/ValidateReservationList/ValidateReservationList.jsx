@@ -3,52 +3,20 @@ import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {getBreakingLimit} from "../../../utils/cssUtils";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import Paper from "@material-ui/core/Paper";
-import {Icon, IconButton, Table, TableBody, TableCell, TableHead, TableRow} from "@material-ui/core";
-import {Link} from "react-router-dom";
+import LocationList from "../../Commun/Location/LocationList/LocationList";
 
 const ValidateReservationList = props => {
 
-    const {classes, location, fetchUserLocation} = props;
+    const {classes, location, fetchAdminLocation} = props;
 
     useEffect(() => {
-        fetchUserLocation();
-    }, [fetchUserLocation, ]);
+        fetchAdminLocation();
+    }, [fetchAdminLocation]);
 
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <Paper className={classes.paper}>
-                <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Etat</TableCell>
-                            <TableCell>Utilisateur</TableCell>
-                            <TableCell>Date début</TableCell>
-                            <TableCell>Date de fin</TableCell>
-                            <TableCell>Véhicule</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {location && location.map((item, i) =>
-                            <TableRow key={i} className={classes.row}>
-                                <TableCell>{item.locationState}</TableCell>
-                                <TableCell>{item.userFriendlyName}</TableCell>
-                                <TableCell>{item.dateDebutResa}</TableCell>
-                                <TableCell>{item.dateFinResa}</TableCell>
-                                <TableCell>{item.vehicleFriendlyName}</TableCell>
-                                <TableCell>
-                                    <Link to={`/reservation/${item.locationId}`}>
-                                        <IconButton>
-                                            <Icon>pageview</Icon>
-                                        </IconButton>
-                                    </Link>
-                                </TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
-            </Paper>
+            <LocationList locations={location} completeView />
         </div>
     )
 };
@@ -56,7 +24,7 @@ const ValidateReservationList = props => {
 ValidateReservationList.propTypes = {
     classes: PropTypes.object,
     location: PropTypes.array,
-    fetchUserLocation: PropTypes.func
+    fetchAdminLocation: PropTypes.func
 };
 
 export default withStyles(theme => ({
@@ -71,23 +39,4 @@ export default withStyles(theme => ({
             marginRight: 'auto',
         }
     },
-    paper: {
-        marginTop: theme.spacing.unit * 8,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-        [theme.breakpoints.up(getBreakingLimit(theme))]: {
-            width: '100%',
-            padding: 0
-        }
-    },
-    table: {
-        minWidth: 700,
-    },
-    row: {
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.background.default,
-        }
-    }
 }))(ValidateReservationList)

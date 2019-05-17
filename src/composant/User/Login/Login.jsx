@@ -16,6 +16,7 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import {Link} from "react-router-dom";
 import {getBreakingLimit} from "../../../utils/cssUtils";
 import {Hidden} from "@material-ui/core";
+import Image from "../../Commun/Input/Image";
 
 /**
  * Formulaire de Login
@@ -68,8 +69,7 @@ const Login = (props) => {
                 <Paper className={classes.paper}>
 
                     <Hidden xsDown implementation={"css"}>
-                        <img alt={"logo"} height={256}
-                             src={"https://a5d-dotnet.mvinet.fr/images/logo_transparent.png"}/>
+                        <Image name={"logo_transparent.png"} height={256} />
                     </Hidden>
 
                     <Avatar className={classes.avatar}>

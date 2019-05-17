@@ -9,18 +9,19 @@ import {SnackbarProvider, withSnackbar} from "notistack/build/index";
  */
 const MessageFragment = withSnackbar(props => {
 
-    const {message, enqueueSnackbar} = props;
+    const {message, enqueueSnackbar, setNoMessageFor} = props;
 
     useEffect(() => {
         _.each(message, (text, type) => {
             if (type === "Success" || type === "Info" || type === "Warning" || type === "Error") {
                 enqueueSnackbar(text, {
                     variant: type.toLowerCase()
-                })
+                });
+                setNoMessageFor(type);
             }
         });
 
-    }, [message, enqueueSnackbar]);
+    }, [message, enqueueSnackbar, setNoMessageFor]);
 
     return (
         <React.Fragment/>

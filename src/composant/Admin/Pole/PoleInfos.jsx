@@ -56,25 +56,25 @@ const PoleInfos = props => {
 
                         <TableRow>
                             <TableCell className={classes.cell}>Nom : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleName' name='poleName' value={input.poleName}
+                            <TableCell className={classes.cell}><InputText id='poleName' name='poleName' type='text' required value={input.poleName}
                                                                            onChange={(event) => update(event, 'poleName')}/></TableCell>
 
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Adresse : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleAdress' name='poleAddress' value={input.poleAddress}
+                            <TableCell className={classes.cell}><InputText id='poleAdress' name='poleAddress' type='text' required value={input.poleAddress}
                                                                            onChange={(event) => update(event, 'poleAddress')}/>
                             </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Code postal : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleCp' name='poleCp' value={input.poleCp}
+                            <TableCell className={classes.cell}><InputText id='poleCp' name='poleCp' type='number' required value={input.poleCp}
                                                                            onChange={(event) => update(event, 'poleCp')}/>
                             </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Ville : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleCity' name='poleCity' value={input.poleCity}
+                            <TableCell className={classes.cell}><InputText id='poleCity' name='poleCity' type='text' required value={input.poleCity}
                                                                            onChange={(event) => update(event, 'poleCity')}/></TableCell>
                         </TableRow>
                     </TableBody>
