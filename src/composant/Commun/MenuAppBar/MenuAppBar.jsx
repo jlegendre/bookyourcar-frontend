@@ -24,9 +24,12 @@ const MenuAppBar = props => {
             <Divider/>
             {role && role === 'Admin' &&
             <List>
-                <MenuItem label={"Validation d'utilisateurs"} url={"validUser"} iconName={"how_to_reg"} onClick={onClose} />
-                <MenuItem label={"Validation des réservations"} url={"validateReservation"} iconName={"how_to_reg"} onClick={onClose} />
-                <MenuItem label={"Liste de véhicules"} url={"vehicleList"} iconName={"directions_car"} onClick={onClose}/>
+                <MenuItem label={"Validation d'utilisateurs"} url={"validUser"} iconName={"how_to_reg"}
+                          onClick={onClose}/>
+                <MenuItem label={"Validation des réservations"} url={"validateReservation"} iconName={"how_to_reg"}
+                          onClick={onClose}/>
+                <MenuItem label={"Liste de véhicules"} url={"vehicleList"} iconName={"directions_car"}
+                          onClick={onClose}/>
                 <MenuItem label={"Liste des pôles"} url={"poleList"} iconName={"location_city"} onClick={onClose}/>
             </List>
             }
@@ -39,9 +42,11 @@ const MenuAppBar = props => {
             <List>
                 <MenuItem label={"Déconnexion"} iconName={"exit_to_app"} onClick={() => logout()}/>
             </List>
-            <List style={{bottom: 0, position: 'absolute'}}>
-                <Image name={"logo_transparent.png"} width={240}/>
-            </List>
+            <Hidden implementation={"css"} xsDown>
+                <List style={{bottom: 0, position: 'absolute'}}>
+                    <Image name={"logo_transparent.png"} width={240}/>
+                </List>
+            </Hidden>
         </div>
     );
 

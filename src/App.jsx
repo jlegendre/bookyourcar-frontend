@@ -104,9 +104,11 @@ const App = props => {
                         </Typography>
 
                         {user && (
-                            <Typography color={"inherit"} variant={"h6"}>
-                                {`${user.firstName} ${user.lastName}`}
-                            </Typography>
+                            <Hidden implementation={"css"} xsDown>
+                                <Typography color={"inherit"} variant={"h6"}>
+                                    {`${user.firstName} ${user.lastName}`}
+                                </Typography>
+                            </Hidden>
                         )}
 
                     </Toolbar>
