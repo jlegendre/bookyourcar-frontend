@@ -10,7 +10,7 @@ import _ from 'lodash';
 
 const ValidateReservation = props => {
 
-    const {classes, match, fetchGetLocation, fetchValidateLocation, fetchDeleteLocation, fetchUserLocation} = props;
+    const {classes, match, fetchGetLocation, fetchValidateLocation, fetchDeleteLocation} = props;
     const [redirect, setRedirect] = useState(false);
     const [input, setInput] = useState({
         locationState: '',
@@ -60,7 +60,6 @@ const ValidateReservation = props => {
     };
 
     if (redirect) {
-        fetchUserLocation();
         return <Redirect push to="/validateReservation"/>;
     }
 

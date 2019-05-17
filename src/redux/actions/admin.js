@@ -73,7 +73,7 @@ export const fetchDeleteLocation = id => {
 /**
  * Call /User/:id, Url pour supprimer un utilisateur
  * @param id identifiant de l'utilisateur
- * @param location réservation de l'utilisateur
+ * @param vehicleId véhicule attribué à l'utilisateur
  * @return {Function}
  */
 export const fetchValidateLocation = (id, vehicleId) => {
@@ -83,7 +83,7 @@ export const fetchValidateLocation = (id, vehicleId) => {
             method: 'PUT',
             data: vehicleId
         }).then(() => {
-            dispatch(fetchUserLocation());
+            dispatch(fetchAdminLocation());
         })
     }
 };
