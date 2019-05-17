@@ -9,7 +9,7 @@ import {fetchUserLocation} from "../../../redux/actions/user";
 const mapDispatchToProps = dispatch => {
     return {
         fetchGetLocation: (id, success) => dispatch(fetchGetLocation(id, success)),
-        fetchValidateLocation: (id, location) => dispatch(fetchValidateLocation(id, location)),
+        fetchValidateLocation: (id, vehicleId) => dispatch(fetchValidateLocation(id, vehicleId)),
         fetchDeleteLocation: (id) => dispatch(fetchDeleteLocation(id)),
         fetchUserLocation: () => dispatch(fetchUserLocation())
     }
