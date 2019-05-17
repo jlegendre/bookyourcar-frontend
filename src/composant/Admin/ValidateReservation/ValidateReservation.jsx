@@ -31,7 +31,6 @@ const ValidateReservation = props => {
             setInput(
                 locationDet
             );
-            console.log(locationDet)
             setUser(locationDet.commentsList[0].friendlyName);
         });
 
@@ -65,8 +64,6 @@ const ValidateReservation = props => {
         return <Redirect push to="/validateReservation"/>;
     }
 
-    console.log(input)
-
     return (
         <div>
             <Paper className={classes.paper}>
@@ -98,39 +95,6 @@ const ValidateReservation = props => {
                             Refuser
                         </Button>
                     </div>
-
-                    {/*<InputText marginLeft={10} fullWidth={false} disabled id='deb' name='deb' label='Début'
-                               value={input.dateDebutResa} className={classes.input}/>
-                    <InputText marginLeft={10} fullWidth={false} disabled id='fin' name='fin' label='Fin'
-                               value={input.dateFinResa} className={classes.input}/>
-                    <InputText marginLeft={10} fullWidth={false} disabled id='poleDeb' name='poleDeb'
-                               label='Pole de départ'
-                               value={input.poleDepart} className={classes.input}/>
-                    <InputText marginLeft={10} fullWidth={false} disabled id='poleFin' name='poleFin'
-                               label='Pole de destination'
-                               value={input.poleDestination} className={classes.input}/>
-                    <InputText marginLeft={10} fullWidth={false} disabled id='etat' name='etat'
-                               label='Etat de la réservation'
-                               value={input.locationState} className={classes.input}/>
-                    <InputSelect
-                        id={"vehicule"}
-                        name={"selectedVehicle"}
-                        onChange={updateSelect}
-                        label={"Vehicule à attribuer"}
-                        data={getVehicleForSelect()}
-                        value={input.selectedVehicle}
-                        className={classes.input}
-                        fullWidth={false} width={150}/>
-                    <Button disabled={input.locationState === 'Terminée' || input.selectedVehicle === null}
-                            variant="contained" color="primary" className={classes.button}
-                            onClick={() => validateReservation()} classeName={classes.button}>
-                        Valider
-                    </Button>
-                    <Button disabled={input.locationState === 'Terminée'} variant="contained" color="secondary"
-                            className={classes.button}
-                            onClick={() => deleteReservation()} classes={classes.button}>
-                        Refuser
-                    </Button>*/}
                 </div>
             </Paper>
         </div>
