@@ -141,7 +141,7 @@ const App = props => {
                                component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
                         <Route exact path={"/vehicleList"}
                                component={params => requireAdminLogin(<VehicleList {...params}/>)}/>
-                        <Route exact path={"/vehicleInfos/:vehId"}
+                        <Route exact path={"/vehicle/:vehId"}
                                component={params => requireAdminLogin(<VehicleInfos {...params} />)}/>
                         <Route path={"/vehicleCreate"}
                                component={params => requireAdminLogin(<VehicleCreate {...params} />)}/>
