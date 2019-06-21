@@ -47,7 +47,7 @@ const VehicleListItem = props => {
                     <span className={classes.span}>{data.vehNumberplace} places</span>
                 </div>
                 <div className={classes.item}>
-                    <Icon fontSize={'3em'} color={data.vehIsactive ? "primary" : "error"}>fiber_manual_record</Icon>
+                    <Icon style={{'fontSize':'3em'}} color={data.vehIsactive ? "primary" : "error"}>fiber_manual_record</Icon>
                 </div>
             </Paper>
         </Link>
