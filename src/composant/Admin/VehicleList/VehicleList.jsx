@@ -1,9 +1,27 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {CssBaseline} from "@material-ui/core";
+import {Button, CssBaseline} from "@material-ui/core";
 import {getBreakingLimit} from "../../../utils/cssUtils";
 import VehicleListItem from "./VehicleListItem";
+import {Redirect} from "react-router";
+
+const MenuVehicule = () => {
+
+    const [newVehicule, setNewVehicule] = useState(false);
+
+    if(newVehicule) {
+        return <Redirect to={"vehicleCreate"} />
+    }
+
+    return (
+        <div style={{marginBottom: 10}}>
+            <Button variant={"contained"} color={"primary"} onClick={() => setNewVehicule(true)}>
+                Ajouter véhicule
+            </Button>
+        </div>
+    )
+};
 
 const VehicleList = props => {
 
@@ -17,10 +35,11 @@ const VehicleList = props => {
         <div className={classes.main}>
             <CssBaseline/>
 
-            {listVehicle && listVehicle.map(item =>
-                <VehicleListItem key={item.vehId} data={item} />
-            )}
+            <MenuVehicule/>
 
+            {listVehicle && listVehicle.map(item =>
+                <VehicleListItem key={item.vehId} data={item}/>
+            )}
         </div>
     )
 };
