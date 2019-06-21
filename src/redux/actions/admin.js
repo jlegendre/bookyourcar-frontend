@@ -30,8 +30,8 @@ export const fetchValidateUser = id => {
 export const fetchDeleteUser = id => {
     return dispatch => {
         httpClient.request({
-            url: `/User/${id}`,
-            method: 'DELETE',
+            url: `/User/RefuseUserInWaiting/${id}`,
+            method: 'POST',
         }).then(() => {
             dispatch(fetchUserInValidation())
         })
