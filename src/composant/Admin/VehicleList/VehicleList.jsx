@@ -40,9 +40,6 @@ const VehicleList = props => {
             {listVehicle && listVehicle.map(item =>
                 <VehicleListItem key={item.vehId} data={item}/>
             )}
-
-            <MenuVehicule/>
-
         </div>
     )
 };

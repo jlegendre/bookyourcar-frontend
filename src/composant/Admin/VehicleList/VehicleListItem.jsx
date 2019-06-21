@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
-import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
 import {Link} from "react-router-dom";
-import {Icon} from "@material-ui/core";
+import {Icon, Popover, Typography} from "@material-ui/core";
+import {withStyles} from "@material-ui/styles";
 
 /**
  * Répresente un item d'une liste de véhicule
@@ -15,6 +15,9 @@ const VehicleListItem = props => {
 
     const {classes, data} = props;
 
+    const [popupEtat, setPopupEtat] = useState(null);
+
+    const open = Boolean(popupEtat);
 
     if (!data) {
         return <React.Fragment/>
@@ -47,7 +50,32 @@ const VehicleListItem = props => {
                     <span className={classes.span}>{data.vehNumberplace} places</span>
                 </div>
                 <div className={classes.item}>
-                    <Icon style={{'fontSize':'3em'}} color={data.vehIsactive ? "primary" : "error"}>fiber_manual_record</Icon>
+                    <Typography
+                        aria-owns={open ? `mouse-open-popup-etat-${data.vehId}` : undefined}
+                        aria-haspopup={"true"}
+                        onMouseEnter={event => setPopupEtat(event.currentTarget)}
+                        onMouseLeave={() => setPopupEtat(null)}
+                    >
+                        <Icon
+                            style={{'fontSize': '3em'}}
+                            color={data.vehIsactive ? "primary" : "error"}
+                        >
+                            fiber_manual_record
+                        </Icon>
+                    </Typography>
+                    <Popover
+                        id={`mouse-open-popup-etat-${data.vehId}`}
+                        anchorEl={popupEtat}
+                        anchorOrigin={{vertical: 'top', horizontal: 'center'}}
+                        transformOrigin={{vertical: 'center', horizontal: 'center'}}
+                        open={open}
+                        className={classes.popover}
+                        classes={{paper: classes.paper}}
+                        onClose={() => setPopupEtat(null)}
+                        disableRestoreFocus
+                    >
+                        <Typography>{data.vehIsactive ? "Activé" : "Désactivé"}</Typography>
+                    </Popover>
                 </div>
             </Paper>
         </Link>
@@ -59,7 +87,7 @@ VehicleListItem.propTypes = {
     data: PropTypes.object.isRequired
 };
 
-export default withStyles({
+export default withStyles(theme => ({
     wrapper: {
         display: 'flex',
         marginBottom: '0.5em'
@@ -87,5 +115,11 @@ export default withStyles({
     link: {
         textDecoration: 'none',
         color: 'black'
+    },
+    popover: {
+        pointerEvents: 'none'
+    },
+    paper: {
+        padding: 10
     }
-})(VehicleListItem);
+}))(VehicleListItem);
