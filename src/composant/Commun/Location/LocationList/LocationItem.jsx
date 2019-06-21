@@ -76,7 +76,7 @@ const LocationItem = props => {
                 <span className={classes.span}>{data.locationState}</span>
             </div>
         </Paper>
-    )
+    );
 
 
     if(completeView) {

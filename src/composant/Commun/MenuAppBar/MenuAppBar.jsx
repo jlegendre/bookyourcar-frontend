@@ -5,7 +5,6 @@ import Drawer from "@material-ui/core/Drawer/index";
 import Divider from "@material-ui/core/Divider/index";
 import {Hidden, withStyles} from "@material-ui/core";
 import MenuItem from "./MenuItem.js";
-import Image from "../Input/Image";
 
 const MenuAppBar = props => {
 
@@ -42,11 +41,6 @@ const MenuAppBar = props => {
             <List>
                 <MenuItem label={"Déconnexion"} iconName={"exit_to_app"} onClick={() => logout()}/>
             </List>
-            <Hidden implementation={"css"} xsDown>
-                <List style={{bottom: 0, position: 'absolute'}}>
-                    <Image name={"logo_transparent.png"} width={240}/>
-                </List>
-            </Hidden>
         </div>
     );
 
