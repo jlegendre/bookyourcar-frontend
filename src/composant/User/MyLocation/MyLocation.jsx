@@ -13,12 +13,20 @@ const MyLocation = props => {
         fetchUserLocation();
     }, [fetchUserLocation]);
 
-    return (
-        <div className={classes.main}>
-            <CssBaseline/>
-            <LocationList locations={location}/>
-        </div>
-    )
+    if (location.length !== 0) {
+        return (
+            <div className={classes.main}>
+                <CssBaseline/>
+                <LocationList locations={location}/>
+            </div>
+        )
+    } else {
+        return (
+            <div className={classes.noLocDiv}>
+                <h1 className={classes.noLocText}>Aucune location enregistrée</h1>
+            </div>
+        )
+    }
 };
 
 MyLocation.propTypes = {
@@ -38,5 +46,12 @@ export default withStyles(theme => ({
             marginLeft: 'auto',
             marginRight: 'auto',
         }
-    }
+    },
+    noLocDiv: {
+        display: 'flex',
+        justifyContent: 'center'
+    },
+    noLocText: {
+        color: 'dimgray'
+    },
 }))(MyLocation)
