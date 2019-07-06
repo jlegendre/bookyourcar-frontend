@@ -9,8 +9,9 @@ import CardActions from "@material-ui/core/CardActions/index";
 import Button from "@material-ui/core/Button/index";
 import Grid from "@material-ui/core/Grid/index";
 import _ from 'lodash';
+import PopupUpdateProfil from "./PopupUpdateProfil";
 
-const md5= require('md5');
+const md5 = require('md5');
 
 const BlocProfil = props => {
 
@@ -32,10 +33,10 @@ const BlocProfil = props => {
 
     const getPhoneNumer = () => {
         let str = '';
-        if(user && user.phoneNumber) {
+        if (user && user.phoneNumber) {
             _.each(user.phoneNumber, (char, i) => {
                 str += char;
-                if(i % 2 === 1) {
+                if (i % 2 === 1) {
                     str += ' ';
                 }
             })
@@ -45,7 +46,7 @@ const BlocProfil = props => {
 
     const getNumeroPermis = () => {
         let str = 'Aucun numéro de permis';
-        if(user && user.drivingLicence) {
+        if (user && user.drivingLicence) {
             str = user.drivingLicence;
         }
 
@@ -54,6 +55,7 @@ const BlocProfil = props => {
 
     return (
         <React.Fragment>
+            <PopupUpdateProfil open={true} data={user}/>
             <Card className={classes.card}>
                 <CardMedia
                     className={classes.cover}

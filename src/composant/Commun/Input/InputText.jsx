@@ -14,31 +14,33 @@ import {FormControl, TextField} from "@material-ui/core";
  */
 const InputText = (props) => {
 
-    const {id, name, onChange, message, fullWidth, required, label, type, InputLabelProps, value, disabled, className} = props;
+    const {name, dispatch, onChange, message, value, max, fullWidth, ...others} = props;
+
+    const checkRequired = (event) => {
+        if(max && event.target.value > max) {
+           return;
+        }
+
+        onChange && onChange(event);
+    };
 
 
     return (
         <FormControl margin={"normal"} fullWidth={fullWidth}>
             <TextField
-                id={id}
                 name={name}
-                onChange={(event) => onChange && onChange(event)}
+                value={value}
+                onChange={(event) => checkRequired(event)}
                 error={message && !!message[name]}
                 helperText={message && message[name] && message[name][0]}
-                required={required}
-                label={label}
-                type={type}
-                value={value}
-                disabled={disabled}
-                InputLabelProps={InputLabelProps}
-                className={className}
+                {...others}
             />
         </FormControl>
     )
 };
 
 InputText.defaultProps = {
-    fullWidth: true
+    fullWidth: true,
 };
 
 InputText.propTypes = {
@@ -46,12 +48,9 @@ InputText.propTypes = {
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     message: PropTypes.any,
-    required: PropTypes.bool,
-    label: PropTypes.string,
-    type: PropTypes.string,
     InputLabelProps: PropTypes.object,
     value: PropTypes.string,
-    disabled: PropTypes.bool,
+    max: PropTypes.number
 };
 
 export default InputText
