@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import {Card} from "@material-ui/core";
@@ -15,7 +15,9 @@ const md5 = require('md5');
 
 const BlocProfil = props => {
 
-    const {classes, user} = props;
+    const {classes, user, updateProfil} = props;
+
+    const [openPopupProfil, setOpenPopupProfil] = useState(false);
 
     /**
      * Fonction temporaire le temps d'avoir une vrais image de profil
@@ -55,7 +57,14 @@ const BlocProfil = props => {
 
     return (
         <React.Fragment>
-            <PopupUpdateProfil open={true} data={user}/>
+
+            <PopupUpdateProfil
+                open={openPopupProfil}
+                onClose={() => setOpenPopupProfil(false)}
+                data={user}
+                onAccept={(user) => {setOpenPopupProfil(false); updateProfil(user)}}
+            />
+
             <Card className={classes.card}>
                 <CardMedia
                     className={classes.cover}
@@ -92,7 +101,7 @@ const BlocProfil = props => {
                         </Grid>
                     </CardContent>
                     <CardActions>
-                        <Button size="small" color="primary">
+                        <Button size="small" color="primary" onClick={() => setOpenPopupProfil(true)}>
                             Modifier
                         </Button>
                         <Button size="small" color="primary">
@@ -107,7 +116,8 @@ const BlocProfil = props => {
 
 BlocProfil.propTypes = {
     classes: PropTypes.object,
-    user: PropTypes.object
+    user: PropTypes.object,
+    updateProfil: PropTypes.func
 };
 
 export default withStyles(theme => ({

@@ -8,7 +8,7 @@ import {getBreakingLimit} from "../../../../utils/cssUtils";
 
 const PopupUpdateProfil = props => {
 
-    const {classes, data} = props;
+    const {classes, data, open, onClose, onAccept} = props;
 
     const [user, setUser] = useState({
         userName: data && data.lastName ? data.lastName : "",
@@ -19,10 +19,13 @@ const PopupUpdateProfil = props => {
 
     return (
         <Popup
-            open={false}
+            open={open}
+            onClose={onClose}
             title={"Modifier le profil"}
             okActionTxt={"Modifier"}
+            okActionFunc={() => onAccept(user)}
             cancelActionTxt={"Annuler"}
+            cancelActionFunc={() => onClose && onClose()}
         >
             {data && (
                 <div className={classes.main}>
@@ -34,19 +37,21 @@ const PopupUpdateProfil = props => {
                                 name={"userName"}
                                 label={"Nom"}
                                 value={user.userName}
-                                onChange={(event) => console.log(event.target.value) && setUser({userName: event.target.value, ...user})}
+                                onChange={(event) => setUser({...user, userName: event.target.value})}
                             />
                             <InputText
                                 id={"userFirstname"}
                                 name={"userFirstname"}
                                 label={"Prénom"}
                                 value={user.userFirstname}
+                                onChange={(event) => setUser({...user, userFirstname: event.target.value})}
                             />
                             <InputText
                                 id={"userNumpermis"}
                                 name={"userNumpermis"}
                                 label={"Numéro de permis"}
                                 value={user.userNumpermis}
+                                onChange={(event) => setUser({...user, userNumpermis: event.target.value})}
                             />
                             <InputText
                                 id={"userPhone"}
@@ -54,6 +59,8 @@ const PopupUpdateProfil = props => {
                                 label={"Numéro de téléhpone"}
                                 value={user.userPhone}
                                 max={10}
+                                format={"phone"}
+                                onChange={(event) => setUser({...user, userPhone: event.target.value})}
                             />
                         </div>
                     </form>
@@ -65,7 +72,9 @@ const PopupUpdateProfil = props => {
 
 PopupUpdateProfil.propTypes = {
     open: PropTypes.bool,
-    data: PropTypes.object
+    data: PropTypes.object,
+    onClose: PropTypes.func,
+    onAccept: PropTypes.func
 };
 
 export default withStyles((theme) => ({

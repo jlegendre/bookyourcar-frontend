@@ -14,11 +14,17 @@ import {FormControl, TextField} from "@material-ui/core";
  */
 const InputText = (props) => {
 
-    const {name, dispatch, onChange, message, value, max, fullWidth, ...others} = props;
+    const {name, dispatch, onChange, message, value, max, fullWidth, format, ...others} = props;
 
     const checkRequired = (event) => {
-        if(max && event.target.value > max) {
+        //vérification de la longeueur
+        if(max && event.target.value.length > max) {
            return;
+        }
+
+        //vérification du format telephone
+        if("phone" === format && isNaN(event.target.value)) {
+            return;
         }
 
         onChange && onChange(event);
@@ -50,7 +56,8 @@ InputText.propTypes = {
     message: PropTypes.any,
     InputLabelProps: PropTypes.object,
     value: PropTypes.string,
-    max: PropTypes.number
+    max: PropTypes.number,
+    format: PropTypes.string
 };
 
 export default InputText

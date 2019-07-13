@@ -54,6 +54,23 @@ export const fetchUserProfil = () => {
             dispatch(setUserProfil(response.data))
         })
     }
+};
+
+/**
+ * Modifie les informations de l'utilisateur
+ * @param user modification a modifier
+ * @return {Function}
+ */
+export const fetchUpdateProfil = (user) => {
+    return dispatch => {
+        httpClient.request({
+            url: '/User/EditInfoUser',
+            method: 'POST',
+            data: user
+        }).then(() => {
+            dispatch(fetchUserProfil())
+        })
+    }
 }
 
 export const setUserLocation = location => {

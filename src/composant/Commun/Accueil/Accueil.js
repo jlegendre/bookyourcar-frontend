@@ -1,7 +1,7 @@
 import {connect} from "react-redux"
 import Accueil from './Accueil.jsx'
 import {getProfil} from "../../../redux/reducers/user";
-import {fetchUserProfil} from "../../../redux/actions/user";
+import {fetchUserProfil, fetchUpdateProfil} from "../../../redux/actions/user";
 
 
 const mapStateToProps = state => {
@@ -12,7 +12,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchProfil : () => dispatch(fetchUserProfil())
+        fetchProfil : () => dispatch(fetchUserProfil()),
+        fetchUpdateProfil : user => dispatch(fetchUpdateProfil(user))
     }
 }
 

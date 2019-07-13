@@ -10,7 +10,7 @@ import BlocNextLocation from "./Blocs/BlocNextLocation";
 
 const Accueil = props => {
 
-    const {classes, profil, fetchProfil} = props;
+    const {classes, profil, fetchProfil, fetchUpdateProfil} = props;
 
     useEffect(() => {
         !profil && fetchProfil()
@@ -22,7 +22,10 @@ const Accueil = props => {
             <main className={classes.layout}>
                 <Grid container spacing={24}>
                     <Grid item xs={12}>
-                        <BlocProfil user={profil}/>
+                        <BlocProfil
+                            user={profil}
+                            updateProfil={(user) => fetchUpdateProfil(user)}
+                        />
                     </Grid>
 
                     <Grid item xs={12} md={6}>
@@ -41,7 +44,8 @@ const Accueil = props => {
 Accueil.propTypes = {
     classes: PropTypes.object,
     profil: PropTypes.object,
-    fetchProfil: PropTypes.func
+    fetchProfil: PropTypes.func,
+    fetchUpdateProfil: PropTypes.func
 };
 
 export default withStyles(theme => ({
