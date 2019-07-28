@@ -9,7 +9,7 @@ import CardActions from "@material-ui/core/CardActions/index";
 import Button from "@material-ui/core/Button/index";
 import Grid from "@material-ui/core/Grid/index";
 import _ from 'lodash';
-import PopupUpdateProfil from "./PopupUpdateProfil";
+import PopupUpdateProfil from "./Popup/PopupUpdateProfil";
 
 const md5 = require('md5');
 

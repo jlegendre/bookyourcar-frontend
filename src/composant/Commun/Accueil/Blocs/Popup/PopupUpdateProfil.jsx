@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
-import Popup from "../../Popup/Popup";
+import Popup from "../../../Popup/Popup";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import InputText from "../../Input/InputText";
+import InputText from "../../../Input/InputText";
 import withStyles from "@material-ui/core/styles/withStyles";
-import {getBreakingLimit} from "../../../../utils/cssUtils";
+import {getBreakingLimit} from "../../../../../utils/cssUtils";
 
 const PopupUpdateProfil = props => {
 
