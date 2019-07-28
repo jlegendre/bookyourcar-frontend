@@ -10,14 +10,16 @@ import Button from "@material-ui/core/Button/index";
 import Grid from "@material-ui/core/Grid/index";
 import _ from 'lodash';
 import PopupUpdateProfil from "./Popup/PopupUpdateProfil";
+import PopupUpdatePwd from "./Popup/PopupUpdatePwd";
 
 const md5 = require('md5');
 
 const BlocProfil = props => {
 
-    const {classes, user, updateProfil} = props;
+    const {classes, user, updateProfil, updatePassword} = props;
 
     const [openPopupProfil, setOpenPopupProfil] = useState(false);
+    const [openPopupPassword, setOpenPopupPassword] = useState(false);
 
     /**
      * Fonction temporaire le temps d'avoir une vrais image de profil
@@ -62,7 +64,18 @@ const BlocProfil = props => {
                 open={openPopupProfil}
                 onClose={() => setOpenPopupProfil(false)}
                 data={user}
-                onAccept={(user) => {setOpenPopupProfil(false); updateProfil(user)}}
+                onAccept={(user) => {
+                    setOpenPopupProfil(false);
+                    updateProfil(user)
+                }}
+            />
+
+            <PopupUpdatePwd
+                open={openPopupPassword}
+                onClose={() => setOpenPopupPassword(false)}
+                onAccept={(password) => updatePassword(password, success => {
+                    setOpenPopupPassword(!success)
+                })}
             />
 
             <Card className={classes.card}>
@@ -104,7 +117,7 @@ const BlocProfil = props => {
                         <Button size="small" color="primary" onClick={() => setOpenPopupProfil(true)}>
                             Modifier
                         </Button>
-                        <Button size="small" color="primary">
+                        <Button size="small" color="primary" onClick={() => setOpenPopupPassword(true)}>
                             Changer mot de passe
                         </Button>
                     </CardActions>
@@ -117,7 +130,8 @@ const BlocProfil = props => {
 BlocProfil.propTypes = {
     classes: PropTypes.object,
     user: PropTypes.object,
-    updateProfil: PropTypes.func
+    updateProfil: PropTypes.func,
+    updatePassword: PropTypes.func
 };
 
 export default withStyles(theme => ({

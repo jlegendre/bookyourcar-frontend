@@ -1,5 +1,5 @@
 import httpClient from './../../utils/httpClient'
-import {setMessage} from "./message";
+import {setMessage, setNoMessageFor} from "./message";
 
 export const SET_USER_LOCATION = 'SET_USER_LOCATION';
 export const SET_USER_PROFIL = 'SET_USER_PROFIL';
@@ -71,7 +71,37 @@ export const fetchUpdateProfil = (user) => {
             dispatch(fetchUserProfil())
         })
     }
-}
+};
+
+export const fetchUpdatePassword = (password, success) => {
+    return (dispatch, getState) => {
+        if(password.password !== password.passwordConfirmation) {
+            dispatch(setMessage({"Error": ["Les mots de passe sont différents"]}));
+            success(false);
+        } else {
+            httpClient.request({
+                url: '/Auth/login',
+                method: 'POST',
+                data: {email: getState().auth.username, password: password.oldPassword, rememberMe: false}
+            }).then(() => {
+                dispatch(setNoMessageFor("OldPassword"));
+                httpClient.request({
+                    url: '/Auth/SaveChangePassword',
+                    method: 'POST',
+                    data: {password: password.password, passwordConfirmation: password.passwordConfirmation}
+                }).then(() => {
+                    dispatch(setMessage({"Success" : ["Mot de passe modifié"]}));
+                    success(true);
+                }).catch(() => {
+                    success(false);
+                })
+            }).catch(() => {
+                dispatch(setMessage({"OldPassword": ["Ancien mot de passe non correcte"]}));
+                success(false);
+            })
+        }
+    }
+};
 
 export const setUserLocation = location => {
     return {type: SET_USER_LOCATION, location}
