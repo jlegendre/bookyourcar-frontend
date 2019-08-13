@@ -154,7 +154,7 @@ export const fetchGetLocation = (id, success) => {
             success && success(response.data);
         })
     }
-}
+};
 
 
 export const setUserInWaiting = users => {

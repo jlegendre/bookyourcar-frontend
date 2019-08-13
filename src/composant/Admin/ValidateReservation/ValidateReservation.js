@@ -1,21 +1,23 @@
-import ValidateReservation from "./ValidateReservation.jsx";
-import {connect} from "react-redux";
+import ValidateReservation from './ValidateReservation.jsx';
+import {connect} from 'react-redux';
+import {getLocation} from "../../../redux/reducers/user";
+import {fetchAdminLocation} from "../../../redux/actions/admin";
 import {fetchGetLocation} from "../../../redux/actions/datapage";
-import {fetchDeleteLocation, fetchValidateLocation} from "../../../redux/actions/admin";
+import {getListVehiclesForSelectByBrandAndModel} from "../../../redux/reducers/datapage";
 
-
-//Pour recuperer des fonctions de redux (les actions ...)
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = state => {
     return {
-        fetchGetLocation: (id, success) => dispatch(fetchGetLocation(id, success)),
-        fetchValidateLocation: (id, vehicleId) => dispatch(fetchValidateLocation(id, vehicleId)),
-        fetchDeleteLocation: (id) => dispatch(fetchDeleteLocation(id)),
+        location: getLocation(state),
+        listVehicle: getListVehiclesForSelectByBrandAndModel(state)
     }
 };
 
-//pour envoyer des objets du store de redux
-const mapStateToProps = () => {
-    return {}
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchAdminLocation : () => dispatch(fetchAdminLocation()),
+        fetchDetailLocation: (locationId, success) => dispatch(fetchGetLocation(locationId, success))
+    }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ValidateReservation)
+
+export default connect(mapStateToProps, mapDispatchToProps)(ValidateReservation);

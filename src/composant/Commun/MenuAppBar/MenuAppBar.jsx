@@ -25,7 +25,7 @@ const MenuAppBar = props => {
             <List>
                 <MenuItem label={"Validation d'utilisateurs"} url={"validUser"} iconName={"how_to_reg"}
                           onClick={onClose}/>
-                <MenuItem label={"Gestion des réservations"} url={"validateReservation"} iconName={"how_to_reg"}
+                <MenuItem label={"Gestion des réservations"} url={"reservation"} iconName={"how_to_reg"}
                           onClick={onClose}/>
                 <MenuItem label={"Liste de véhicules"} url={"vehicleList"} iconName={"directions_car"}
                           onClick={onClose}/>

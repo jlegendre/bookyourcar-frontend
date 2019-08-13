@@ -4,7 +4,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import Paper from "@material-ui/core/Paper";
 import {formatDate} from "../../../../utils/dateUtils";
 import {Icon} from "@material-ui/core";
-import {Link} from "react-router-dom";
 
 /**
  * Répresente un item d'une liste de location
@@ -48,7 +47,7 @@ const LocationItem = props => {
 
 
     const item = (
-        <Paper className={classes.wrapper}>
+        <Paper className={classes.wrapper} onClick={props.onClick}>
             <div className={classes.column}>
                 <div className={classes.item}>
                     <Icon color={"primary"} className={classes.littleIcon}>access_time</Icon>
@@ -77,15 +76,6 @@ const LocationItem = props => {
             </div>
         </Paper>
     );
-
-
-    if(completeView) {
-        return (
-            <Link to={`/reservation/${data.locationId}`} className={classes.link}>
-                {item}
-            </Link>
-        )
-    }
 
     return item;
 
@@ -124,7 +114,7 @@ export default withStyles({
         fontSize: '3em',
         verticalAlign: 'middle',
     },
-    link : {
+    link: {
         textDecoration: 'none',
         color: 'black'
     }
