@@ -46,7 +46,7 @@ const LocationItem = props => {
     };
 
 
-    const item = (
+    return (
         <Paper className={classes.wrapper} onClick={props.onClick}>
             <div className={classes.column}>
                 <div className={classes.item}>
@@ -77,8 +77,6 @@ const LocationItem = props => {
         </Paper>
     );
 
-    return item;
-
 };
 
 LocationItem.propTypes = {
@@ -90,7 +88,8 @@ LocationItem.propTypes = {
 export default withStyles({
     wrapper: {
         display: 'flex',
-        marginBottom: '1em'
+        marginBottom: '1em',
+        cursor: 'pointer'
     },
     column: {
         flexDirection: 'column',
