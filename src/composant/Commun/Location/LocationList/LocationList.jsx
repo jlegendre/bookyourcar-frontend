@@ -20,7 +20,7 @@ const LocationList = props => {
             })
         }
 
-    }, [popupOpen, fetchDetailLocation, setDataCurrentLocation]);
+    }, [popupOpen, fetchDetailLocation, setDataCurrentLocation, completeView, currentLocation]);
 
     return (
         <React.Fragment>

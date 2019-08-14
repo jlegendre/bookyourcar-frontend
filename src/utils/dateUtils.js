@@ -27,4 +27,4 @@ export const formatDate = d => {
     }
 
     return 'Not a date';
-}
+};

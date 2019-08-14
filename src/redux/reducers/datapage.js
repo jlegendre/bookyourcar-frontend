@@ -12,6 +12,7 @@ import {
 const initialState = {
     userInWaiting: [],
     listVehicle: [],
+    listVehicleAvailable: [],
     detailVehicle: undefined,
     listPoles: [],
     detailPole: undefined,

@@ -5,6 +5,7 @@ export const SET_DATAPAGE_USERINWAITING = 'SET_DATAPAGE_USERINWAITING';
 
 export const SET_DATAPAGE_LISTVEHICLE = 'SET_DATAPAGE_LISTVEHICLE';
 export const SET_DATAPAGE_DETAILVEHICLE = 'SET_DATAPAGE_DETAILVEHICLE';
+export const SET_DATAPAGE_LITVEHICLEAVAILABLE = 'SET_DATAPAGE_VEHICULE_AVAILABLE';
 
 export const SET_DATAPAGE_LISTPOLES = 'SET_DATAPAGE_LISTPOLES';
 export const SET_DATAPAGE_DETAILPOLE = 'SET_DATAPAGE_DETAILPOLE';
@@ -127,22 +128,6 @@ export const fetchVehicles = () => {
         })
     }
 };
-
-/**
- * Retourne les réservations en attente
- * @return {Function}
- */
-export const fetchReservationInWaiting = () => {
-    return dispatch => {
-        httpClient.request({
-            url: '/Reservation/reservationInWaiting',
-            method: 'GET',
-        }).then(response => {
-            dispatch(setReservationInWaiting(response.data));
-        })
-    }
-};
-
 
 export const fetchGetLocation = (id, success) => {
     return dispatch => {

@@ -3,13 +3,31 @@ import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CssBaseline from "@material-ui/core/CssBaseline";
 import {getBreakingLimit} from "../../../../../utils/cssUtils";
+import {formatDate} from "../../../../../utils/dateUtils";
 import Popup from "../../../Popup/Popup";
+import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart";
 
 const PopupValidateReservation = props => {
 
     const {classes, data, open, onClose} = props;
 
-    if(!data) {
+    const createOKButton = () => {
+        if(data.locStateId === 0) {
+            return ["Accepter", () => alert('todo')]
+        } else if(data.locStateId === 2) {
+            return ["Démarrer la location", () => alert('todo')]
+        }
+    };
+
+    const createKOButton = () => {
+        if(data.locStateId === 0) {
+            return ["Refuser", () => alert('todo')]
+        } else if(data.locStateId === 1) {
+            return ["Terminer la location", () => alert('todo')]
+        }
+    }
+
+    if (!data) {
         return (<React.Fragment/>)
     }
 
@@ -17,18 +35,43 @@ const PopupValidateReservation = props => {
         <Popup
             open={open}
             onClose={onClose}
-            title={"Status : Location"}
-            okActionTxt={"Modifier"}
-            okActionFunc={() => console.log("ok")}
-            cancelActionTxt={"Annuler"}
+            title={`Location N°${data.locId} - Status : Location`}
+            okActionTxt={createOKButton() && createOKButton()[0]}
+            okActionFunc={createOKButton() && createOKButton()[1]}
+            cancelActionTxt={createKOButton() && createKOButton()[0]}
             cancelActionFunc={() => onClose && onClose()}
+            fullWidth
         >
             {data && (
                 <div className={classes.main}>
                     <CssBaseline/>
-                    <form className={classes.form}>
-                        <div className={classes.formInput}>
-                            Location N°{data.locationId}
+                    <form>
+                        <div className={classes.form}>
+                            <div className={classes.formLeft}>
+                                <div>
+                                    Demandeur : {data.user}
+                                </div>
+                                <div>
+                                    Début: {formatDate(data.dateStart)}
+                                </div>
+                                <div>
+                                    Fin: {formatDate(data.dateEnd)}
+                                </div>
+                                <div>
+                                    Pôle de départ: {data.poleStart}
+                                </div>
+                                <div>
+                                    Pôle de fin: {data.poleEnd}
+                                </div>
+                                <div style={{lineHeight: '1em'}}>
+                                    Commentaire: {data.comment}
+                                </div>
+                            </div>
+                            <div className={classes.formRight}>
+                                <PopupValidateReservationLeftPart
+                                    data={data}
+                                />
+                            </div>
                         </div>
                     </form>
                 </div>
@@ -47,11 +90,12 @@ PopupValidateReservation.propTypes = {
 export default withStyles((theme) => ({
         main: {
             width: 'auto',
-            display: 'block', // Fix IE 11 issue.
+            display: 'flex', // Fix IE 11 issue.
+            flexDirection: 'column',
             marginLeft: theme.spacing.unit * 3,
             marginRight: theme.spacing.unit * 3,
             [theme.breakpoints.up(getBreakingLimit(theme))]: {
-                width: 400,
+                width: 500,
                 marginLeft: 'auto',
                 marginRight: 'auto',
             },
@@ -61,15 +105,20 @@ export default withStyles((theme) => ({
             }
         },
         form: {
+            display: 'flex',
+            lineHeight: '1.5em',
             [theme.breakpoints.down(getBreakingLimit(theme))]: {
                 height: '100%'
             }
         },
-        formInput: {
+        formLeft: {
             display: 'flex',
             flexDirection: 'column',
-            alignItems: 'center',
-            padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+            textAlign: 'justify',
+            maxWidth: 300
+        },
+        formRight: {
+            paddingLeft: 20
         },
         submit: {
             marginTop: theme.spacing.unit * 3,
