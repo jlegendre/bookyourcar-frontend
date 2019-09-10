@@ -3,7 +3,7 @@ import Paper from "@material-ui/core/Paper";
 
 export const Ligne = props => {
 
-    const {children, autre} = props;
+    const {children, ...autre} = props;
 
     return (
         <Paper
@@ -21,7 +21,7 @@ export const Ligne = props => {
 };
 
 export const Colonne = props => {
-    const {children, autre} = props;
+    const {children, ...autre} = props;
     return <div
         style={{
             flexDirection: 'column',
@@ -35,7 +35,7 @@ export const Colonne = props => {
 };
 
 export const Element = props => {
-    const {children, autre} = props;
+    const {children, ...autre} = props;
     return (<div
             style={{
                 flex: 1,

@@ -1,10 +1,12 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import UserItem from "./UserItem";
+import {getBreakingLimit} from "../../../utils/cssUtils";
+import withStyles from "@material-ui/core/styles/withStyles";
 
 const ValidateUser = props => {
 
-    const {fetchUserInValidation, userInWaiting, fetchValidateUser, fetchDeleteUser} = props;
+    const {classes, fetchUserInValidation, userInWaiting, fetchValidateUser, fetchDeleteUser} = props;
 
 
     useEffect(() => {
@@ -29,16 +31,16 @@ const ValidateUser = props => {
     };
 
     return (
-        <React.Fragment>
+        <div className={classes.main}>
             {userInWaiting && userInWaiting.map(item =>
                 <UserItem
                     key={item.userId}
                     data={item}
                     onRefuse={refuseUser}
-                    onAccet={acceptUser}
+                    onAccept={acceptUser}
                 />
             )}
-        </React.Fragment>
+        </div>
     )
 };
 
@@ -49,4 +51,16 @@ ValidateUser.propTypes = {
     fetchDeleteUser: PropTypes.func
 };
 
-export default ValidateUser;
+export default withStyles(theme => ({
+    main: {
+        width: 'auto',
+        display: 'block', // Fix IE 11 issue.
+        marginLeft: theme.spacing.unit * 3,
+        marginRight: theme.spacing.unit * 3,
+        [theme.breakpoints.up(getBreakingLimit(theme))]: {
+            width: 1000,
+            marginLeft: 'auto',
+            marginRight: 'auto',
+        }
+    },
+}))(ValidateUser)
