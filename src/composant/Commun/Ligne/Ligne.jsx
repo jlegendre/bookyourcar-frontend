@@ -11,7 +11,7 @@ export const Ligne = props => {
                 display: 'flex',
                 marginBottom: '1em',
                 cursor: 'pointer',
-                height: 80
+                height: 100
             }}
             {...autre}
         >
