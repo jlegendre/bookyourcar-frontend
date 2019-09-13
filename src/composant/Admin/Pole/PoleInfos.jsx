@@ -6,10 +6,12 @@ import Button from "@material-ui/core/Button";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Commun/Input/InputText";
 import { Redirect } from "react-router";
+import { Element, Ligne } from "../../Commun/Ligne/Ligne";
+import Popup from "../../../Popup/Popup";
 
 const PoleInfos = props => {
 
-    const { classes, fetchPoleInfos, fetchUpdatePole, detailPole, match, fetchPoles } = props;
+    const { classes, fetchPoleInfos, fetchUpdatePole, detailPole, match, fetchPoles, fetchDeletePole } = props;
     const [input, setInput] = useState({ poleId: 0, poleName: '', poleCity: '', poleAddress: '', poleCp: '' });
     const [redirect, setRedirect] = useState(false);
 
@@ -20,6 +22,9 @@ const PoleInfos = props => {
 
     }, [fetchPoleInfos, match.params.poleId]);
 
+    const deletePole = poleId => {
+        fetchDeletePole(poleId);
+    }
 
     const update = ((event, type) => {
         setInput({
@@ -39,15 +44,70 @@ const PoleInfos = props => {
     }
 
     if (!detailPole) {
-        return (
-            <div>
-                <CircularProgress className={classes.progress}/>
-            </div>
-        )
+            return (<React.Fragment />)
     }
 
     return (
-        <div className={classes.main}>
+        <Popup
+            open={open}
+            onClose={onClose}
+            title={`Pole N°${input.poleId}`}
+            cancelActionFunc={() => onClose && onClose()}
+            fullWidth
+        >
+        <React.Fragment>
+            <Ligne>
+                <Element>
+                    <InputText id='poleName' name='poleName' type='text' required value={input.poleName}
+                        onChange={(event) => update(event, 'poleName')} />
+                </Element>
+            </Ligne>
+            <Ligne>
+                <Element>
+                    <InputText id='poleAdress' name='poleAddress' type='text' required value={input.poleAddress}
+                        onChange={(event) => update(event, 'poleAddress')} />
+                </Element>
+            </Ligne>
+            <Ligne>
+                <Element>
+                    <InputText id='poleCp' name='poleCp' type='number' required value={input.poleCp}
+                        onChange={(event) => update(event, 'poleCp')} />
+                </Element>
+            </Ligne>
+            <Ligne>
+                <Element>
+                    <InputText id='poleCity' name='poleCity' type='text' required value={input.poleCity}
+                        onChange={(event) => update(event, 'poleCity')} />
+                </Element>
+            </Ligne>
+            <Ligne>
+                <Element>
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={() => updatepole()}
+                    >
+                        Valider
+                    </Button>
+                </Element>
+                <Element>
+                    <Button
+                        fullWidth
+                        variant="contained"
+                        color="primary"
+                        className={classes.button}
+                        onClick={() => deletePole(input.poleId)}
+                    >
+                        Supprimer
+                    </Button>
+                </Element>
+            </Ligne>
+
+            </React.Fragment>
+        </Popup>
+       /* <div className={classes.main}>
             <CssBaseline/>
             <Paper className={classes.paper}>
                 <Typography variant="h4" gutterBottom>Pole</Typography>
@@ -89,7 +149,7 @@ const PoleInfos = props => {
                     Valider
                 </Button>
             </Paper>
-        </div>
+        </div>*/
     )
 };
 

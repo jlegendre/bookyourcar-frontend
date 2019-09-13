@@ -73,7 +73,6 @@ export const fetchPoleInfos = (id, success) => {
             method: 'GET',
         }).then(response => {
             dispatch(setDetailPole(response.data));
-            dispatch(setNoMessage());
             success && success(response.data);
         })
     }

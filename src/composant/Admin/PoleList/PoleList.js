@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { fetchPoles } from "../../../redux/actions/datapage";
 import { getListPoles } from "../../../redux/reducers/datapage";
 import { fetchDeletePole } from "../../../redux/actions/admin";
+import {fetchPoleInfos} from "../../../redux/actions/datapage"
 
 
 
@@ -11,6 +12,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchPoles: () => dispatch(fetchPoles()),
         fetchDeletePole: poleId => dispatch(fetchDeletePole(poleId)),
+        fetchPoleInfos: (poleId, success) => dispatch(fetchPoleInfos(poleId, success))
     }
 };
 
