@@ -5,18 +5,16 @@ import {Button, CssBaseline} from "@material-ui/core";
 import {getBreakingLimit} from "../../../utils/cssUtils";
 import VehicleListItem from "./VehicleListItem";
 import {Redirect} from "react-router";
-import PopupPlanning from "./PopupPlanning.js";
 
 const VehicleList = props => {
 
     const {classes, fetchVehicles, listVehicle} = props;
 
     const [newVehicule, setNewVehicule] = useState(false);
-    const [openPopup, setOpenPopup] = useState(false);
 
     useEffect(() => {
         fetchVehicles();
-    }, [fetchVehicles, openPopup]);
+    }, [fetchVehicles]);
 
     if (newVehicule) {
         return <Redirect to={"vehicleCreate"}/>
@@ -30,14 +28,6 @@ const VehicleList = props => {
                 <Button variant={"contained"} color={"primary"} onClick={() => setNewVehicule(true)}>
                     Ajouter véhicule
                 </Button>
-                <Button variant={"contained"} color={"primary"} onClick={() => setOpenPopup(true)}>
-                    Planning
-                </Button>
-
-                <PopupPlanning
-                    open={openPopup}
-                    onClose={() => setOpenPopup(false)}
-                />
             </div>
 
             {listVehicle && listVehicle.map(item =>

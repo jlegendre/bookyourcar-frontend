@@ -30,6 +30,7 @@ const MenuAppBar = props => {
                 <MenuItem label={"Liste de véhicules"} url={"vehicleList"} iconName={"directions_car"}
                           onClick={onClose}/>
                 <MenuItem label={"Liste des pôles"} url={"poleList"} iconName={"location_city"} onClick={onClose}/>
+                <MenuItem label={"Planning"} url={"planning"} iconName={"event"} onClick={onClose}/>
             </List>
             }
             <Divider/>

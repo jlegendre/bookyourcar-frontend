@@ -4,7 +4,7 @@ import Paper from "@material-ui/core/Paper";
 import {Link} from "react-router-dom";
 import {Icon, Popover, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/styles";
-import {Ligne, Colonne} from "../../Commun/Ligne/Ligne";
+import {Ligne, Colonne, Element} from "../../Commun/Ligne/Ligne";
 
 /**
  * Répresente un item d'une liste de véhicule
@@ -27,39 +27,37 @@ const VehicleListItem = props => {
     return (
         <Link to={`/vehicle/${data.vehId}`} className={classes.link}>
             <Ligne>
-                <Colonne>
-                    <div className={classes.column}>
-                        <div className={classes.item}>
-                            <span className={classes.span}>{data.vehBrand}</span>
-                        </div>
-                        <div className={classes.item}>
-                            <span className={classes.span}>{data.vehModel}</span>
-                        </div>
-                    </div>
+                <Colonne style={{flex: 1, padding: '0.5em', margin: 'auto'}}>
+                        <Element>
+                            {/*<span className={classes.span}>{data.vehBrand}</span>*/}
+                            {data.vehBrand}
+                        </Element>
+                        <Element>
+                            {/*<span className={classes.span}>{data.vehModel}</span>*/}
+                            {data.vehModel}
+                        </Element>
                 </Colonne>
-                <Colonne>
-                    <div className={classes.item}>
-                        <span className={classes.span}>{data.vehColor}</span>
-                    </div>
-                    <div className={classes.item}>
-                        <span className={classes.span}>{data.vehRegistration}</span>
-                    </div>
+                <Colonne style={{flex: 1, padding: '0.5em', margin: 'auto'}}>
+                    <Element >
+                       {data.vehColor}
+                    </Element>
+                    <Element >
+                        {data.vehRegistration}
+                    </Element>
                 </Colonne>
-                <Colonne>
-                    <div className={classes.item}>
-                        <span className={classes.span}>{data.vehTypeEssence}</span>
-                    </div>
-                    <div className={classes.item}>
-                        <span className={classes.span}>{data.vehColor}</span>
-                    </div>
+                <Colonne style={{flex: 1, padding: '0.5em', margin: 'auto'}}>
+                    <Element >
+                        {data.vehTypeEssence}
+                    </Element>
+                    <Element >
+                        {data.vehColor}
+                    </Element>
                 </Colonne>
-                <Colonne>
-                    <div className={classes.item}>
-                        <span className={classes.span}>{data.vehNumberplace} places</span>
-                    </div>
-                </Colonne>
-                <Colonne>
-                    <div className={classes.item}>
+                    <Element >
+                        {data.vehNumberplace} places
+                    </Element>
+                <Colonne style={{flex: 1, padding: '0.5em', margin: 'auto'}}>
+                    <Element >
                         <Typography
                             aria-owns={open ? `mouse-open-popup-etat-${data.vehId}` : undefined}
                             aria-haspopup={"true"}
@@ -86,7 +84,7 @@ const VehicleListItem = props => {
                         >
                             <Typography>{data.vehIsactive ? "Activé" : "Désactivé"}</Typography>
                         </Popover>
-                    </div>
+                    </Element>
                 </Colonne>
             </Ligne>
         </Link>
@@ -132,5 +130,8 @@ export default withStyles(theme => ({
     },
     paper: {
         padding: 10
+    },
+    colonne: {
+        flex: 1
     }
 }))(VehicleListItem);

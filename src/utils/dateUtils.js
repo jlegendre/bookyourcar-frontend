@@ -1,4 +1,4 @@
-import {addDays, format, isDate, isValid, isWithinInterval, parseISO, startOfWeek} from 'date-fns';
+import {addDays, format, isDate, isWithinInterval, isValid, parseISO, startOfWeek} from 'date-fns';
 
 /**
  * Check if is valid date
@@ -44,6 +44,5 @@ export const getLibelleOfDayWeek = d => {
 };
 
 export const isIn = (currentDate, numberOfDay, dateDebut, dateFin) => {
-    let date = addDays(parseISO(currentDate), numberOfDay);
-    return isWithinInterval(date, {start: parseISO(dateDebut), end: parseISO(dateFin)})
+    return isWithinInterval(addDays(parseISO(currentDate), numberOfDay), {start: parseISO(dateDebut), end: parseISO(dateFin)})
 };
