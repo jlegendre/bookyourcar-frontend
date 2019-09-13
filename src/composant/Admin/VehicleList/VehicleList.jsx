@@ -5,37 +5,40 @@ import {Button, CssBaseline} from "@material-ui/core";
 import {getBreakingLimit} from "../../../utils/cssUtils";
 import VehicleListItem from "./VehicleListItem";
 import {Redirect} from "react-router";
-
-const MenuVehicule = () => {
-
-    const [newVehicule, setNewVehicule] = useState(false);
-
-    if(newVehicule) {
-        return <Redirect to={"vehicleCreate"} />
-    }
-
-    return (
-        <div style={{marginBottom: 10}}>
-            <Button variant={"contained"} color={"primary"} onClick={() => setNewVehicule(true)}>
-                Ajouter véhicule
-            </Button>
-        </div>
-    )
-};
+import PopupPlanning from "./PopupPlanning.js";
 
 const VehicleList = props => {
 
     const {classes, fetchVehicles, listVehicle} = props;
 
+    const [newVehicule, setNewVehicule] = useState(false);
+    const [openPopup, setOpenPopup] = useState(false);
+
     useEffect(() => {
         fetchVehicles();
-    }, [fetchVehicles]);
+    }, [fetchVehicles, openPopup]);
+
+    if (newVehicule) {
+        return <Redirect to={"vehicleCreate"}/>
+    }
 
     return (
         <div className={classes.main}>
             <CssBaseline/>
 
-            <MenuVehicule/>
+            <div style={{marginBottom: 10}}>
+                <Button variant={"contained"} color={"primary"} onClick={() => setNewVehicule(true)}>
+                    Ajouter véhicule
+                </Button>
+                <Button variant={"contained"} color={"primary"} onClick={() => setOpenPopup(true)}>
+                    Planning
+                </Button>
+
+                <PopupPlanning
+                    open={openPopup}
+                    onClose={() => setOpenPopup(false)}
+                />
+            </div>
 
             {listVehicle && listVehicle.map(item =>
                 <VehicleListItem key={item.vehId} data={item}/>
