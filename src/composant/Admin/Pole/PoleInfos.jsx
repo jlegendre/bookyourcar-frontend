@@ -7,24 +7,24 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Commun/Input/InputText";
 import { Redirect } from "react-router";
 import { Element, Ligne } from "../../Commun/Ligne/Ligne";
-//import Popup from "../../../Popup/Popup";
+import Popup from "../../Commun/Popup/Popup";
 
 const PoleInfos = props => {
 
-    const { classes, fetchPoleInfos, fetchUpdatePole, detailPole, match, fetchPoles, fetchDeletePole } = props;
+    const { classes, fetchPoleInfos, fetchUpdatePole, detailPole, match, fetchPoles, fetchDeletePole, open, onClose, data } = props;
     const [input, setInput] = useState({ poleId: 0, poleName: '', poleCity: '', poleAddress: '', poleCp: '' });
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
-        fetchPoleInfos(match.params.poleId, (pole) => {
+        fetchPoleInfos(data.poleId, (pole) => {
             setInput(pole);
         });
 
-    }, [fetchPoleInfos, match.params.poleId]);
+    }, [fetchPoleInfos, data.poleId]);
 
-    const deletePole = poleId => {
-        fetchDeletePole(poleId);
-    }
+    const deletePole = (() => {
+        fetchDeletePole(data.poleId);
+    })
 
     const update = ((event, type) => {
         setInput({
@@ -43,18 +43,17 @@ const PoleInfos = props => {
         return <Redirect push to="/poleList" />
     }
 
-    if (!detailPole) {
+    if (!data) {
             return (<React.Fragment />)
     }
 
     return (
-     /*   <Popup
+     /*  <Popup
             open={open}
             onClose={onClose}
             title={`Pole N°${input.poleId}`}
-            cancelActionFunc={() => onClose && onClose()}
             fullWidth
-        >*/
+       >
         <React.Fragment>
             <Ligne>
                 <Element>
@@ -106,8 +105,8 @@ const PoleInfos = props => {
             </Ligne>
 
             </React.Fragment>
-       // </Popup>
-       /* <div className={classes.main}>
+       </Popup>*/
+       <div className={classes.main}>
             <CssBaseline/>
             <Paper className={classes.paper}>
                 <Typography variant="h4" gutterBottom>Pole</Typography>
@@ -149,7 +148,7 @@ const PoleInfos = props => {
                     Valider
                 </Button>
             </Paper>
-        </div>*/
+        </div>
     )
 };
 
@@ -157,7 +156,9 @@ const PoleInfos = props => {
 PoleInfos.propTypes = {
     classes: PropTypes.object,
     fetchPoleInfos: PropTypes.func,
-    detailPole: PropTypes.object
+    detailPole: PropTypes.object,
+    open: PropTypes.bool,
+    onClose: PropTypes.func
 };
 
 export default withStyles(theme => ({
