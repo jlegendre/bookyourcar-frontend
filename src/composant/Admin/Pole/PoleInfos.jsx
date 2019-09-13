@@ -7,7 +7,7 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Commun/Input/InputText";
 import { Redirect } from "react-router";
 import { Element, Ligne } from "../../Commun/Ligne/Ligne";
-import Popup from "../../../Popup/Popup";
+//import Popup from "../../../Popup/Popup";
 
 const PoleInfos = props => {
 
@@ -48,13 +48,13 @@ const PoleInfos = props => {
     }
 
     return (
-        <Popup
+     /*   <Popup
             open={open}
             onClose={onClose}
             title={`Pole N°${input.poleId}`}
             cancelActionFunc={() => onClose && onClose()}
             fullWidth
-        >
+        >*/
         <React.Fragment>
             <Ligne>
                 <Element>
@@ -106,7 +106,7 @@ const PoleInfos = props => {
             </Ligne>
 
             </React.Fragment>
-        </Popup>
+       // </Popup>
        /* <div className={classes.main}>
             <CssBaseline/>
             <Paper className={classes.paper}>
