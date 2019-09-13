@@ -6,7 +6,7 @@ import InputText from "../../../Input/InputText";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {getBreakingLimit} from "../../../../../utils/cssUtils";
 
-const PopupUpdateProfil = props => {
+const PopupUpdateUser = props => {
 
     const {classes, data, open, onClose, onAccept} = props;
 
@@ -70,7 +70,7 @@ const PopupUpdateProfil = props => {
     );
 };
 
-PopupUpdateProfil.propTypes = {
+PopupUpdateUser.propTypes = {
     open: PropTypes.bool,
     data: PropTypes.object,
     onClose: PropTypes.func,
@@ -112,4 +112,4 @@ export default withStyles((theme) => ({
             marginTop: theme.spacing.unit * 2
         }
     })
-)(PopupUpdateProfil);
+)(PopupUpdateUser);

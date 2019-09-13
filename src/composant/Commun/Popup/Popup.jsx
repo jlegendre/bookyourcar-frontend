@@ -4,7 +4,7 @@ import {Dialog, DialogTitle, DialogContentText, DialogActions, Button} from "@ma
 
 const Popup = props => {
 
-    const {title, text, okActionFunc, okActionTxt, cancelActionFunc, cancelActionTxt, children, ...others} = props;
+    const {title, text, okActionFunc, okActionTxt, annulerActionFunc, annulerActionTxt, cancelActionFunc, cancelActionTxt, children, ...others} = props;
 
     return (
         <Dialog
@@ -20,13 +20,18 @@ const Popup = props => {
                         <Button onClick={event => cancelActionFunc && cancelActionFunc(event)}>
                             {cancelActionTxt}
                         </Button>
-
                 }
                 {
                     okActionTxt &&
                         <Button onClick={event => okActionFunc && okActionFunc(event)}>
                             {okActionTxt}
                         </Button>
+                }
+                {
+                    annulerActionTxt &&
+                    <Button onClick={event => annulerActionFunc && annulerActionFunc(event)}>
+                        {annulerActionTxt}
+                    </Button>
                 }
             </DialogActions>
         </Dialog>
@@ -40,6 +45,8 @@ Popup.propTypes = {
     okActionFunc: PropTypes.func,
     cancelActionTxt: PropTypes.string,
     cancelActionFunc: PropTypes.func,
+    annulerActionTxt: PropTypes.string,
+    annulerActionFunc: PropTypes.func,
     children: PropTypes.any
 };
 
