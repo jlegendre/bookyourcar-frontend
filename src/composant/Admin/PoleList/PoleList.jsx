@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as PropTypes from 'prop-types';
+import PoleListItem from "./PoleListItem";
 import withStyles from '@material-ui/core/styles/withStyles';
 import {
     CssBaseline,
@@ -16,20 +17,51 @@ import {
 import DeleteIcon from '@material-ui/icons/Delete';
 import { Link } from "react-router-dom";
 import Button from "@material-ui/core/Button";
+import PolePopUp from "../Pole/PoleInfos.jsx"
 
 const PoleList = props => {
 
-    const { classes, fetchPoles, listPoles, fetchDeletePole } = props;
+    const { classes, fetchPoles, listPoles,fetchPoleInfos } = props;
+
+
+    const [popupOpen, setPopupOpen] = useState(false);
+    const [currentPole, setCurrentPole] = useState(null);
+    const [dataCurrentPole, setDataCurrentPole] = useState(null);
+ 
     useEffect(() => {
         fetchPoles();
-    }, [fetchPoles]);
 
-    const deletePole = id => {
-        fetchDeletePole(id);
-    }
+        if (currentPole != null && popupOpen) {
+            fetchPoleInfos(currentPole, success => {
+                setPopupOpen(true);
+                setDataCurrentPole(success);
+            })
+        }
+    }, [fetchPoles, fetchPoleInfos, popupOpen, setDataCurrentPole, currentPole]);
+
+    return (
+        <React.Fragment>
+            {listPoles && listPoles.map(item =>
+                <PoleListItem
+                    onClick={() => { setPopupOpen(true); setCurrentPole(item.poleId) }}
+                    key={item.poleId}
+                    data={item}
+                />
+            )}
+
+            <PolePopUp
+                open={popupOpen}
+                onClose={() => setPopupOpen(false)}
+                data={dataCurrentPole}
+            />
+        </React.Fragment>
+
+       
+    )
+};
 
   
-    return (
+   /* return (
         <div className={classes.main}>
             <CssBaseline />
             <Paper className={classes.paper}>
@@ -79,12 +111,13 @@ const PoleList = props => {
             </Paper>
         </div>
     )
-};
+};*/
 
 PoleList.propTypes = {
     classes: PropTypes.object,
-    fetchVehicles: PropTypes.func,
-    listPoles: PropTypes.array
+    fetchPoles: PropTypes.func,
+    listPoles: PropTypes.array,
+    fetchDeletePole: PropTypes.func
 };
 
 export default withStyles(theme => ({
