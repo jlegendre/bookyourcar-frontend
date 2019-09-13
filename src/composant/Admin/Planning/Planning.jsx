@@ -1,34 +1,26 @@
 import React, {useEffect, useState} from "react";
 import * as PropTypes from 'prop-types';
-import Popup from "../../Commun/Popup/Popup";
 import withStyles from "@material-ui/core/styles/withStyles";
 import {getBreakingLimit} from "../../../utils/cssUtils";
 import {Element} from "../../Commun/Ligne/Ligne";
 import {getLibelleOfDayWeek, isIn} from "../../../utils/dateUtils";
 
-const PopupPlanning = props => {
+const Planning = props => {
 
-    const {classes, open, onClose, planning, fetchPlanning} = props;
+    const {classes, planning, fetchPlanning} = props;
 
-    const [date, setDate] = useState(new Date('2019-05-18'));
+    const [date, setDate] = useState(new Date('2019-05-20'));
 
     useEffect(() => {
         fetchPlanning(date)
     }, [fetchPlanning, date]);
 
     return (
-        <Popup
-            open={open}
-            onClose={onClose}
-            title={"Planning"}
-            fullWidth={true}
-            maxWidth={'lg'}
-        >
-            <div className={classes.main}>
-                <HeadPlanning classes={classes} date={date}/>
-                <BodyPlanning classes={classes} planning={planning}/>
-            </div>
-        </Popup>
+
+        <div className={classes.main}>
+            <HeadPlanning classes={classes} date={date}/>
+            <BodyPlanning classes={classes} planning={planning}/>
+        </div>
     )
 };
 
@@ -58,20 +50,13 @@ const BodyPlanning = props => {
                     <Element>
                         {item.vehName}
                     </Element>
-                    <BodyCell day={0} dateDebutSemaine={planning.startWeek} dateFinSemaine={planning.endWeek}
-                              vehicule={item.weeklyReservation}/>
-                    <BodyCell day={1} dateDebutSemaine={planning.startWeek} dateFinSemaine={planning.endWeek}
-                              vehicule={item.weeklyReservation}/>
-                    <BodyCell day={2} dateDebutSemaine={planning.startWeek} dateFinSemaine={planning.endWeek}
-                              vehicule={item.weeklyReservation}/>
-                    <BodyCell day={3} dateDebutSemaine={planning.startWeek} dateFinSemaine={planning.endWeek}
-                              vehicule={item.weeklyReservation}/>
-                    <BodyCell day={4} dateDebutSemaine={planning.startWeek} dateFinSemaine={planning.endWeek}
-                              vehicule={item.weeklyReservation}/>
-                    <BodyCell day={5} dateDebutSemaine={planning.startWeek} dateFinSemaine={planning.endWeek}
-                              vehicule={item.weeklyReservation}/>
-                    <BodyCell day={6} dateDebutSemaine={planning.startWeek} dateFinSemaine={planning.endWeek}
-                              vehicule={item.weeklyReservation}/>
+                    <BodyCell day={0} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
+                    <BodyCell day={1} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
+                    <BodyCell day={2} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
+                    <BodyCell day={3} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
+                    <BodyCell day={4} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
+                    <BodyCell day={5} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
+                    <BodyCell day={6} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
                 </div>
             )}
         </React.Fragment>
@@ -79,15 +64,14 @@ const BodyPlanning = props => {
 };
 
 const BodyCell = props => {
-    const {day, vehicule, dateDebutSemaine, dateFinSemaine} = props;
+    const {day, vehicule, dateDebutSemaine} = props;
 
     let found = false;
 
     if (vehicule && vehicule.length > 0) {
         vehicule.forEach(v => {
             if (!found) {
-                console.log(dateDebutSemaine, v.startDate, day, dateFinSemaine);
-                found = isIn(v.startDate, day, dateDebutSemaine, dateFinSemaine);
+                found = isIn(dateDebutSemaine, day, v.startDate, v.endDate);
             }
         });
     }
@@ -100,7 +84,7 @@ const BodyCell = props => {
 
 };
 
-PopupPlanning.propTypes = {
+Planning.propTypes = {
     open: PropTypes.bool,
     onClose: PropTypes.func
 };
@@ -126,4 +110,4 @@ export default withStyles((theme) => ({
             marginBottom: '1em'
         }
     })
-)(PopupPlanning);
+)(Planning);

@@ -1,7 +1,7 @@
 import {connect} from "react-redux";
 import {getPlanning} from "../../../redux/reducers/datapage";
 import {fetchPlanningVehicule} from '../../../redux/actions/admin'
-import PopupPlanning from "./PopupPlanning.jsx";
+import PopupPlanning from "./Planning.jsx";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
