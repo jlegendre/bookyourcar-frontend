@@ -1,4 +1,4 @@
-import {format, isDate, isValid, parseISO} from 'date-fns';
+import {addDays, format, isDate, isValid, isWithinInterval, parseISO, startOfWeek} from 'date-fns';
 
 /**
  * Check if is valid date
@@ -12,19 +12,38 @@ export const isValidDate = d => {
     return !isNaN(parseISO(d).getTime());
 };
 
-export const formatDate = d => {
+export const formatDate = (d, formatDate) => {
     if (isValidDate(d)) {
 
-        if(d instanceof Object) {
-            return format(d, 'dd/MM/YYYY', {
+        if (d instanceof Object) {
+            return format(d, formatDate || 'dd/MM/YYYY', {
                 awareOfUnicodeTokens: true
             })
         }
 
-        return format(parseISO(d), 'dd/MM/YYYY', {
+        return format(parseISO(d), formatDate || 'dd/MM/YYYY', {
             awareOfUnicodeTokens: true
         })
     }
 
     return 'Not a date';
+};
+
+export const getLibelleOfDayWeek = d => {
+    let startDate = startOfWeek(d, {weekStartsOn: 1});
+
+    return [
+        format(startDate, 'E dd', {awareOfUnicodeTokens: true}),
+        format(addDays(startDate, 1), 'E dd', {awareOfUnicodeTokens: true}),
+        format(addDays(startDate, 2), 'E dd', {awareOfUnicodeTokens: true}),
+        format(addDays(startDate, 3), 'E dd', {awareOfUnicodeTokens: true}),
+        format(addDays(startDate, 4), 'E dd', {awareOfUnicodeTokens: true}),
+        format(addDays(startDate, 5), 'E dd', {awareOfUnicodeTokens: true}),
+        format(addDays(startDate, 6), 'E dd', {awareOfUnicodeTokens: true})
+    ]
+};
+
+export const isIn = (currentDate, numberOfDay, dateDebut, dateFin) => {
+    let date = addDays(parseISO(currentDate), numberOfDay);
+    return isWithinInterval(date, {start: parseISO(dateDebut), end: parseISO(dateFin)})
 };

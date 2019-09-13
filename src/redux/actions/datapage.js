@@ -2,18 +2,14 @@ import httpClient from './../../utils/httpClient';
 import {setNoMessage} from "./message";
 
 export const SET_DATAPAGE_USERINWAITING = 'SET_DATAPAGE_USERINWAITING';
-
 export const SET_DATAPAGE_LISTVEHICLE = 'SET_DATAPAGE_LISTVEHICLE';
 export const SET_DATAPAGE_DETAILVEHICLE = 'SET_DATAPAGE_DETAILVEHICLE';
 export const SET_DATAPAGE_LITVEHICLEAVAILABLE = 'SET_DATAPAGE_VEHICULE_AVAILABLE';
-
 export const SET_DATAPAGE_LISTPOLES = 'SET_DATAPAGE_LISTPOLES';
 export const SET_DATAPAGE_DETAILPOLE = 'SET_DATAPAGE_DETAILPOLE';
-
 export const SET_DATAPAGE_RESERVATIONINWAITING = 'SET_DATAPAGE_RESERVATIONINWAITING';
-
 export const SET_DATAPAGE_DETAILLOCATION = 'SET_DATAPAGE_DETAILLOCATION';
-
+export const SET_PLANNING = 'SET_PLANNING';
 /**
  * Call /User/userInWaiting Url, pour récupérer tous les utilisateurs en attente de validation
  * @returns {Function}
@@ -83,12 +79,12 @@ export const fetchPoleInfos = (id, success) => {
  * Call /Pole/{i} Url, pour modifier toutes les informations sur un pole donné
  * @returns {Function}
  */
-export const fetchUpdatePole = ({ poleId, poleName, poleCity, poleAddress, poleCp }) => {
+export const fetchUpdatePole = ({poleId, poleName, poleCity, poleAddress, poleCp}) => {
     return dispatch => {
         httpClient.request({
             url: `/Pole/${poleId}`,
             method: 'PUT',
-            data: { poleId, poleName, poleCity, poleAddress, poleCp},
+            data: {poleId, poleName, poleCity, poleAddress, poleCp},
         }).then(() => {
             dispatch(fetchPoleInfos(poleId))
         })
@@ -101,12 +97,12 @@ export const fetchUpdatePole = ({ poleId, poleName, poleCity, poleAddress, poleC
  * Call /Pole/{i} Url, pour ajouter un pole
  * @returns {Function}
  */
-export const fetchAddPole = ({ poleName, poleCity, poleAddress, poleCp }) => {
+export const fetchAddPole = ({poleName, poleCity, poleAddress, poleCp}) => {
     return dispatch => {
         httpClient.request({
             url: `/Pole/`,
             method: 'POST',
-            data: { poleName, poleCity, poleAddress, poleCp },
+            data: {poleName, poleCity, poleAddress, poleCp},
         }).then(() => {
             dispatch(fetchPoles())
         })
@@ -132,7 +128,7 @@ export const fetchVehicles = () => {
 export const fetchGetLocation = (id, success) => {
     return dispatch => {
         httpClient.request({
-            url:  `/Location/${id}`,
+            url: `/Location/${id}`,
             method: 'GET',
         }).then(response => {
             dispatch(setLocationDetail(response.data));
@@ -166,6 +162,10 @@ export const setReservationInWaiting = reservations => {
     return {type: SET_DATAPAGE_RESERVATIONINWAITING, reservations}
 };
 
-export const setLocationDetail= location => {
-   return {type: SET_DATAPAGE_DETAILLOCATION, location}
+export const setLocationDetail = location => {
+    return {type: SET_DATAPAGE_DETAILLOCATION, location}
 };
+
+export const setPlanning = planning => {
+    return {type: SET_PLANNING, planning}
+}

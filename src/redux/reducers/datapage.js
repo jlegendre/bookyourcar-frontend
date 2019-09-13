@@ -7,6 +7,7 @@ import {
     SET_DATAPAGE_LISTPOLES,
     SET_DATAPAGE_LISTVEHICLE,
     SET_DATAPAGE_USERINWAITING,
+    SET_PLANNING
 } from "../actions/datapage";
 
 const initialState = {
@@ -17,6 +18,7 @@ const initialState = {
     listPoles: [],
     detailPole: undefined,
     detailLocation: undefined,
+    planning: []
 };
 
 
@@ -34,6 +36,8 @@ export default function (state = initialState, action) {
             return {...state, detailPole: action.detailPole};
         case SET_DATAPAGE_DETAILLOCATION:
             return {...state, detailLocation: action.location};
+        case SET_PLANNING:
+            return {...state, planning: action.planning};
         default:
             return state
     }
@@ -49,6 +53,7 @@ export const getDetailVehicle = state => getDataPage(state).detailVehicle;
 export const getListPoles = state => getDataPage(state).listPoles;
 export const getDetailPoles = state => getDataPage(state).detailPole;
 export const getDetailLocation = state => getDataPage(state).detailLocation;
+export const getPlanning = state => getDataPage(state).planning;
 
 /**
  * Fonction qui permet de construire une liste de pôle pour l'objet InputSelect

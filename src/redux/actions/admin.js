@@ -1,6 +1,7 @@
 import httpClient from './../../utils/httpClient'
-import {fetchPoles, fetchUserInValidation, fetchVehicleInfos} from "./datapage";
-import {fetchUserLocation, setUserLocation} from './user';
+import {fetchPoles, fetchUserInValidation, fetchVehicleInfos, setPlanning} from "./datapage";
+import {setUserLocation} from './user';
+import {formatDate} from "../../utils/dateUtils";
 
 
 /**
@@ -53,45 +54,19 @@ export const fetchDeletePole = id => {
         })
     }
 };
-
-/**
- * Call /Location/:id, Url pour supprimer une location
- * @param id identifiant de l'utilisateur
- * @return {Function}
- */
-export const fetchDeleteLocation = id => {
-    return dispatch => {
-        httpClient.request({
-            url: `/Location/${id}`,
-            method: 'DELETE',
-        }).then(() => {
-            dispatch(fetchUserLocation());
-        })
-    }
-};
-
-/**
- * Call /Location/:id, Url pour valider une location
- * @param id identifiant de l'utilisateur
- * @param vehicleId véhicule attribué à l'utilisateur
- * @return {Function}
- */
-export const fetchValidateLocation = (id, vehicleId) => {
-    return dispatch => {
-        httpClient.request({
-            url: `/Location/${id}`,
-            method: 'PUT',
-            data: vehicleId
-        }).then(() => {
-            dispatch(fetchAdminLocation());
-        })
-    }
-};
-
-
 /**
  * Call /Vehicle/:id, Url pour modifier un v�hicule
  * @param vehId identifiant du v�hicule
+ * @param vehRegistration
+ * @param vehBrand
+ * @param vehModel
+ * @param vehKm
+ * @param vehDatemec
+ * @param vehTypeEssence
+ * @param vehColor
+ * @param vehNumberplace
+ * @param vehIsactive
+ * @param poleName
  * @return {Function}
  */
 export const fetchUpdateVehicle = ({vehId, vehRegistration, vehBrand, vehModel, vehKm, vehDatemec, vehTypeEssence, vehColor, vehNumberplace, vehIsactive, poleName}) => {
@@ -170,3 +145,14 @@ export const fetchAdminLocation = () => {
         })
     }
 };
+
+export const fetchPlanningVehicule = date => {
+    return dispatch => {
+        httpClient.request({
+            url: `Planning/${formatDate(date, 'YYYY-MM-dd')}`,
+            method: 'GET'
+        }).then(response => {
+            dispatch(setPlanning(response.data))
+        })
+    }
+}
