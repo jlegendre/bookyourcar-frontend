@@ -105,7 +105,7 @@ const BodyCell = props => {
     }
 
     if (found) {
-        return <Element>X</Element>
+        return <Element style={{backgroundColor: '#49AAB3'}}/>
     }
 
     return <Element/>
