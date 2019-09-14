@@ -13,12 +13,14 @@ const PoleListItem = props => {
     }
 
     return (
-
         <Ligne>
-            <Element><Icon>apartment</Icon>{data.poleName}</Element>
-            <Element><Icon>where_to_vote</Icon>{data.poleAddress} {data.poleCp} {data.poleCity}</Element>
+            <Element>
+                <Icon>apartment</Icon>{data.poleName}
+            </Element>
+            <Element>
+                <Icon>where_to_vote</Icon>{data.poleAddress} {data.poleCp} {data.poleCity}
+            </Element>
         </Ligne>
-
     );
 
 };

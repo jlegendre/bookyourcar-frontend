@@ -2,44 +2,39 @@ import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import PoleListItem from "./PoleListItem";
 import withStyles from '@material-ui/core/styles/withStyles';
-import PolePopUp from "../Pole/PoleInfos.jsx"
+import UpdatePole from "../Pole/UpdatePole.jsx"
 
 const PoleList = props => {
 
-    const {fetchPoles, listPoles, fetchPoleInfos} = props;
+    const {classes, fetchPoles, listPoles, fetchPoleInfos} = props;
 
 
-    const [popupOpen, setPopupOpen] = useState(false);
     const [currentPole, setCurrentPole] = useState(null);
+    const [openPopup, setOpenPopup] = useState(false);
     const [dataCurrentPole, setDataCurrentPole] = useState(null);
 
     useEffect(() => {
         fetchPoles();
 
-        if (currentPole != null && popupOpen) {
+        if (currentPole != null && openPopup) {
             fetchPoleInfos(currentPole, success => {
-                setPopupOpen(true);
+                setOpenPopup(true);
                 setDataCurrentPole(success);
             })
         }
-    }, [fetchPoles, fetchPoleInfos, popupOpen, setDataCurrentPole, currentPole]);
+    }, [fetchPoles, fetchPoleInfos, openPopup, setDataCurrentPole, currentPole]);
 
     return (
         <React.Fragment>
             {listPoles && listPoles.map(item =>
                 <PoleListItem
-                    onClick={() => {
-                        setPopupOpen(true);
-                        setCurrentPole(item.poleId)
-                    }}
-                    key={item.poleId}
-                    data={item}
+                    key={item.poleId} data={item}
                 />
             )}
 
-            <PolePopUp
-                open={popupOpen}
-                onClose={() => setPopupOpen(false)}
+            <UpdatePole
+                open={openPopup}
+                onClose={() => setOpenPopup(false)}
                 data={dataCurrentPole}
             />
         </React.Fragment>
