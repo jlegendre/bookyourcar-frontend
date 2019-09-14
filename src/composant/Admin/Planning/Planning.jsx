@@ -3,7 +3,7 @@ import * as PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/styles/withStyles";
 import {getBreakingLimit} from "../../../utils/cssUtils";
 import {Element} from "../../Commun/Ligne/Ligne";
-import {getLibelleOfDayWeek, isIn} from "../../../utils/dateUtils";
+import {formatDate, getLibelleOfDayWeek, isIn, nextWeek, previusWeek} from "../../../utils/dateUtils";
 import Paper from "@material-ui/core/Paper";
 import {CssBaseline, Grid} from "@material-ui/core";
 
@@ -11,7 +11,7 @@ const Planning = props => {
 
     const {classes, planning, fetchPlanning} = props;
 
-    const [date, setDate] = useState(new Date('2019-05-20'));
+    const [date, setDate] = useState(new Date('2019-05-17'));
 
     useEffect(() => {
         fetchPlanning(date)
@@ -29,7 +29,7 @@ const Planning = props => {
 
                     <Grid item xs={12} md={9}>
                         <Paper>
-                            <HeadPlanning classes={classes} date={date}  />
+                            <HeadPlanning classes={classes} date={date} updateDate={setDate} planning={planning} />
                             <BodyPlanning classes={classes} planning={planning}/>
                         </Paper>
                     </Grid>
@@ -41,11 +41,20 @@ const Planning = props => {
 
 
 const HeadPlanning = props => {
-    const {classes, date} = props;
+    const {classes, date, planning, updateDate} = props;
 
     return (
         <React.Fragment>
             <div className={classes.ligne}>
+                <Element style={{textAlign: 'right', cursor: 'pointer'}} onClick={() => updateDate(previusWeek(date))}>
+                    &lt;
+                </Element>
+                <Element style={{textAlign: 'center'}}>
+                    {formatDate(planning.startWeek, 'dd/MM/YYYY') + ' - ' + formatDate(planning.endWeek, 'dd/MM/YYYY')}
+                </Element>
+                <Element style={{textAlign: 'left', cursor: 'pointer'}} onClick={() => updateDate(nextWeek(date))}>
+                    &gt;
+                </Element>
 
             </div>
             <div className={classes.ligne}>
@@ -62,7 +71,6 @@ const HeadPlanning = props => {
 
 const BodyPlanning = props => {
     const {classes, planning} = props;
-
     return (
         <React.Fragment>
             {planning.listOfReservationsByVehicule && planning.listOfReservationsByVehicule.map((item, i) =>
