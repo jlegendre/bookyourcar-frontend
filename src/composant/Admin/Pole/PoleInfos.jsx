@@ -1,18 +1,16 @@
 import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
-import {CssBaseline, Paper, Table, TableBody, TableCell, TableRow, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Commun/Input/InputText";
-import { Redirect } from "react-router";
-import { Element, Ligne } from "../../Commun/Ligne/Ligne";
+import {Redirect} from "react-router";
+import {Element, Ligne} from "../../Commun/Ligne/Ligne";
 //import Popup from "../../../Popup/Popup";
 
 const PoleInfos = props => {
 
-    const { classes, fetchPoleInfos, fetchUpdatePole, detailPole, match, fetchPoles, fetchDeletePole } = props;
-    const [input, setInput] = useState({ poleId: 0, poleName: '', poleCity: '', poleAddress: '', poleCp: '' });
+    const {classes, fetchPoleInfos, fetchUpdatePole, detailPole, match, fetchPoles, fetchDeletePole} = props;
+    const [input, setInput] = useState({poleId: 0, poleName: '', poleCity: '', poleAddress: '', poleCp: ''});
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
@@ -40,44 +38,44 @@ const PoleInfos = props => {
 
     if (redirect) {
         fetchPoles();
-        return <Redirect push to="/poleList" />
+        return <Redirect push to="/poleList"/>
     }
 
     if (!detailPole) {
-            return (<React.Fragment />)
+        return (<React.Fragment/>)
     }
 
     return (
-     /*   <Popup
-            open={open}
-            onClose={onClose}
-            title={`Pole N°${input.poleId}`}
-            cancelActionFunc={() => onClose && onClose()}
-            fullWidth
-        >*/
+        /*   <Popup
+               open={open}
+               onClose={onClose}
+               title={`Pole Nï¿½${input.poleId}`}
+               cancelActionFunc={() => onClose && onClose()}
+               fullWidth
+           >*/
         <React.Fragment>
             <Ligne>
                 <Element>
                     <InputText id='poleName' name='poleName' type='text' required value={input.poleName}
-                        onChange={(event) => update(event, 'poleName')} />
+                               onChange={(event) => update(event, 'poleName')}/>
                 </Element>
             </Ligne>
             <Ligne>
                 <Element>
                     <InputText id='poleAdress' name='poleAddress' type='text' required value={input.poleAddress}
-                        onChange={(event) => update(event, 'poleAddress')} />
+                               onChange={(event) => update(event, 'poleAddress')}/>
                 </Element>
             </Ligne>
             <Ligne>
                 <Element>
                     <InputText id='poleCp' name='poleCp' type='number' required value={input.poleCp}
-                        onChange={(event) => update(event, 'poleCp')} />
+                               onChange={(event) => update(event, 'poleCp')}/>
                 </Element>
             </Ligne>
             <Ligne>
                 <Element>
                     <InputText id='poleCity' name='poleCity' type='text' required value={input.poleCity}
-                        onChange={(event) => update(event, 'poleCity')} />
+                               onChange={(event) => update(event, 'poleCity')}/>
                 </Element>
             </Ligne>
             <Ligne>
@@ -105,51 +103,51 @@ const PoleInfos = props => {
                 </Element>
             </Ligne>
 
-            </React.Fragment>
-       // </Popup>
-       /* <div className={classes.main}>
-            <CssBaseline/>
-            <Paper className={classes.paper}>
-                <Typography variant="h4" gutterBottom>Pole</Typography>
-                <Table className={classes.table}>
-                    <TableBody>
+        </React.Fragment>
+        // </Popup>
+        /* <div className={classes.main}>
+             <CssBaseline/>
+             <Paper className={classes.paper}>
+                 <Typography variant="h4" gutterBottom>Pole</Typography>
+                 <Table className={classes.table}>
+                     <TableBody>
 
-                        <TableRow>
-                            <TableCell className={classes.cell}>Nom : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleName' name='poleName' type='text' required value={input.poleName}
-                                                                           onChange={(event) => update(event, 'poleName')}/></TableCell>
+                         <TableRow>
+                             <TableCell className={classes.cell}>Nom : </TableCell>
+                             <TableCell className={classes.cell}><InputText id='poleName' name='poleName' type='text' required value={input.poleName}
+                                                                            onChange={(event) => update(event, 'poleName')}/></TableCell>
 
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className={classes.cell}>Adresse : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleAdress' name='poleAddress' type='text' required value={input.poleAddress}
-                                                                           onChange={(event) => update(event, 'poleAddress')}/>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className={classes.cell}>Code postal : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleCp' name='poleCp' type='number' required value={input.poleCp}
-                                                                           onChange={(event) => update(event, 'poleCp')}/>
-                            </TableCell>
-                        </TableRow>
-                        <TableRow>
-                            <TableCell className={classes.cell}>Ville : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleCity' name='poleCity' type='text' required value={input.poleCity}
-                                                                           onChange={(event) => update(event, 'poleCity')}/></TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-                <Button
-                    fullWidth
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                    onClick={() => updatepole()}
-                >
-                    Valider
-                </Button>
-            </Paper>
-        </div>*/
+                         </TableRow>
+                         <TableRow>
+                             <TableCell className={classes.cell}>Adresse : </TableCell>
+                             <TableCell className={classes.cell}><InputText id='poleAdress' name='poleAddress' type='text' required value={input.poleAddress}
+                                                                            onChange={(event) => update(event, 'poleAddress')}/>
+                             </TableCell>
+                         </TableRow>
+                         <TableRow>
+                             <TableCell className={classes.cell}>Code postal : </TableCell>
+                             <TableCell className={classes.cell}><InputText id='poleCp' name='poleCp' type='number' required value={input.poleCp}
+                                                                            onChange={(event) => update(event, 'poleCp')}/>
+                             </TableCell>
+                         </TableRow>
+                         <TableRow>
+                             <TableCell className={classes.cell}>Ville : </TableCell>
+                             <TableCell className={classes.cell}><InputText id='poleCity' name='poleCity' type='text' required value={input.poleCity}
+                                                                            onChange={(event) => update(event, 'poleCity')}/></TableCell>
+                         </TableRow>
+                     </TableBody>
+                 </Table>
+                 <Button
+                     fullWidth
+                     variant="contained"
+                     color="primary"
+                     className={classes.button}
+                     onClick={() => updatepole()}
+                 >
+                     Valider
+                 </Button>
+             </Paper>
+         </div>*/
     )
 };
 

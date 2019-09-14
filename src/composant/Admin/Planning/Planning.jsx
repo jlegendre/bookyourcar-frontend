@@ -4,6 +4,8 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import {getBreakingLimit} from "../../../utils/cssUtils";
 import {Element} from "../../Commun/Ligne/Ligne";
 import {getLibelleOfDayWeek, isIn} from "../../../utils/dateUtils";
+import Paper from "@material-ui/core/Paper";
+import {CssBaseline, Grid} from "@material-ui/core";
 
 const Planning = props => {
 
@@ -16,11 +18,24 @@ const Planning = props => {
     }, [fetchPlanning, date]);
 
     return (
+        <React.Fragment>
+            <CssBaseline/>
+            <main className={classes.layout}>
+                <Grid container spacing={24}>
 
-        <div className={classes.main}>
-            <HeadPlanning classes={classes} date={date}/>
-            <BodyPlanning classes={classes} planning={planning}/>
-        </div>
+                    <Grid item xs={12} md={3}>
+                        <div>Stats</div>
+                    </Grid>
+
+                    <Grid item xs={12} md={9}>
+                        <Paper>
+                            <HeadPlanning classes={classes} date={date}  />
+                            <BodyPlanning classes={classes} planning={planning}/>
+                        </Paper>
+                    </Grid>
+                </Grid>
+            </main>
+        </React.Fragment>
     )
 };
 
@@ -29,14 +44,19 @@ const HeadPlanning = props => {
     const {classes, date} = props;
 
     return (
-        <div className={classes.ligne}>
-            <Element/>
-            {getLibelleOfDayWeek(date).map((item, i) =>
-                <Element key={i}>
-                    {item}
-                </Element>
-            )}
-        </div>
+        <React.Fragment>
+            <div className={classes.ligne}>
+
+            </div>
+            <div className={classes.ligne}>
+                <Element/>
+                {getLibelleOfDayWeek(date).map((item, i) =>
+                    <Element key={i}>
+                        {item}
+                    </Element>
+                )}
+            </div>
+        </React.Fragment>
     )
 };
 
@@ -89,25 +109,21 @@ Planning.propTypes = {
     onClose: PropTypes.func
 };
 
-export default withStyles((theme) => ({
-        main: {
+export default withStyles((theme) => (
+    {
+        layout: {
             width: 'auto',
-            display: 'block', // Fix IE 11 issue.
-            marginLeft: theme.spacing.unit * 3,
-            marginRight: theme.spacing.unit * 3,
+            marginLeft: theme.spacing.unit * 2,
+            marginRight: theme.spacing.unit * 2,
+            height: '100%',
             [theme.breakpoints.up(getBreakingLimit(theme))]: {
-                width: 700,
-                marginLeft: 'auto',
-                marginRight: 'auto',
-            },
-            [theme.breakpoints.down(getBreakingLimit(theme))]: {
-                margin: 0,
-                height: '100%'
+                width: 1000,
+                margin: 'auto'
             }
         },
         ligne: {
             display: 'flex',
             marginBottom: '1em'
         }
-    })
-)(Planning);
+    }
+))(Planning);
