@@ -5,13 +5,13 @@ import {getBreakingLimit} from "../../../utils/cssUtils";
 import {Element} from "../../Commun/Ligne/Ligne";
 import {formatDate, getLibelleOfDayWeek, isIn, nextWeek, previusWeek} from "../../../utils/dateUtils";
 import Paper from "@material-ui/core/Paper";
-import {CssBaseline, Grid} from "@material-ui/core";
+import {CssBaseline, Grid, Typography} from "@material-ui/core";
 
 const Planning = props => {
 
     const {classes, planning, fetchPlanning} = props;
 
-    const [date, setDate] = useState(new Date('2019-05-17'));
+    const [date, setDate] = useState(new Date());
 
     useEffect(() => {
         fetchPlanning(date)
@@ -23,11 +23,29 @@ const Planning = props => {
             <main className={classes.layout}>
                 <Grid container spacing={24}>
 
-                    <Grid item xs={12} md={3}>
-                        <div>Stats</div>
+                    <Grid item xs={12} md={4}>
+                        <Paper style={{marginBottom: 24}}>
+                            Graph
+                        </Paper>
+                        <Paper style={{marginBottom: 24, textAlign: 'center'}}>
+                            <Typography>
+                                Début des locations cette semaine
+                            </Typography>
+                            <Typography gutterBottom variant={"h3"} component={"h3"} color={'primary'}>
+                                {planning.startReservationCount}
+                            </Typography>
+                        </Paper>
+                        <Paper style={{textAlign: 'center'}}>
+                            <Typography>
+                                Début des locations cette semaine
+                            </Typography>
+                            <Typography gutterBottom variant={"h3"} component={"h3"} color={"error"}>
+                                {planning.endReservationCount}
+                            </Typography>
+                        </Paper>
                     </Grid>
 
-                    <Grid item xs={12} md={9}>
+                    <Grid item xs={12} md={8}>
                         <Paper>
                             <HeadPlanning classes={classes} date={date} updateDate={setDate} planning={planning} />
                             <BodyPlanning classes={classes} planning={planning}/>
@@ -125,7 +143,7 @@ export default withStyles((theme) => (
             marginRight: theme.spacing.unit * 2,
             height: '100%',
             [theme.breakpoints.up(getBreakingLimit(theme))]: {
-                width: 1000,
+                width: 1400,
                 margin: 'auto'
             }
         },
