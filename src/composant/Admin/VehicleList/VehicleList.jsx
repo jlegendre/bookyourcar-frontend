@@ -6,6 +6,9 @@ import {getBreakingLimit} from "../../../utils/cssUtils";
 import VehicleListItem from "./VehicleListItem";
 import {Redirect} from "react-router";
 import PopupPlanning from "./PopupPlanning.js";
+import PopupCreateVehicle from "./Popup/PopupCreateVehicle";
+import PopupValidateReservation
+    from "../../Commun/Location/LocationList/PopupValidateReservation/PopupValidateReservation";
 
 const VehicleList = props => {
 
@@ -14,13 +17,26 @@ const VehicleList = props => {
     const [newVehicule, setNewVehicule] = useState(false);
     const [openPopup, setOpenPopup] = useState(false);
 
+    let vehiculeInitialize =  {vehId: 0,
+        vehRegistration: '',
+        vehBrand: '',
+        vehModel: '',
+        vehKm: 0,
+        vehDatemec: '',
+        vehTypeEssence: '',
+        vehColor: '',
+        vehNumberplace: '',
+        vehIsactive: true,
+        poleName: ''};
+
     useEffect(() => {
         fetchVehicles();
     }, [fetchVehicles, openPopup]);
 
-    if (newVehicule) {
-        return <Redirect to={"vehicleCreate"}/>
-    }
+  /*  if (newVehicule) {
+        console.log('worked')
+        // return <Redirect to={"vehicleCreate"}/>
+    }*/
 
     return (
         <div className={classes.main}>
@@ -38,14 +54,38 @@ const VehicleList = props => {
                     open={openPopup}
                     onClose={() => setOpenPopup(false)}
                 />
+                <PopupCreateVehicle
+                    open={newVehicule}
+                    onClose={() => setNewVehicule(false)}
+                data={vehiculeInitialize}/>
             </div>
+            {listVehicle && listVehicle.map(item =>
+            <VehicleListItem key={item.vehId} data={item}/>)}
+            {/*<MenuVehicule/>
 
             {listVehicle && listVehicle.map(item =>
                 <VehicleListItem key={item.vehId} data={item}/>
-            )}
+            )}*/}
         </div>
     )
 };
+
+/*const VehicleList = props => {
+
+    const {classes, fetchVehicles, listVehicle} = props;
+
+    useEffect(() => {
+        fetchVehicles();
+    }, [fetchVehicles]);
+
+    return (
+        <div className={classes.main}>
+            <CssBaseline/>
+
+
+        </div>
+    )
+};*/
 
 VehicleList.propTypes = {
     classes: PropTypes.object,
