@@ -3,28 +3,25 @@ import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {CssBaseline, Paper, Table, TableBody, TableCell, TableRow, Typography} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import InputText from "../../Commun/Input/InputText";
-import { Redirect } from "react-router";
-import { Element, Ligne } from "../../Commun/Ligne/Ligne";
-//import Popup from "../../../Popup/Popup";
+import {Redirect} from "react-router";
 
 const PoleInfos = props => {
 
-    const { classes, fetchPoleInfos, fetchUpdatePole, detailPole, match, fetchPoles, fetchDeletePole } = props;
-    const [input, setInput] = useState({ poleId: 0, poleName: '', poleCity: '', poleAddress: '', poleCp: '' });
+    const {classes, fetchPoleInfos, fetchUpdatePole, detailPole, match, fetchPoles, fetchDeletePole, open, onClose, data} = props;
+    const [input, setInput] = useState({poleId: 0, poleName: '', poleCity: '', poleAddress: '', poleCp: ''});
     const [redirect, setRedirect] = useState(false);
 
     useEffect(() => {
-        fetchPoleInfos(match.params.poleId, (pole) => {
+        fetchPoleInfos(data.poleId, (pole) => {
             setInput(pole);
         });
 
-    }, [fetchPoleInfos, match.params.poleId]);
+    }, [fetchPoleInfos, data.poleId]);
 
-    const deletePole = poleId => {
-        fetchDeletePole(poleId);
-    }
+    const deletePole = (() => {
+        fetchDeletePole(data.poleId);
+    })
 
     const update = ((event, type) => {
         setInput({
@@ -40,74 +37,73 @@ const PoleInfos = props => {
 
     if (redirect) {
         fetchPoles();
-        return <Redirect push to="/poleList" />
+        return <Redirect push to="/poleList"/>
     }
 
-    if (!detailPole) {
-            return (<React.Fragment />)
+    if (!data) {
+        return (<React.Fragment/>)
     }
 
     return (
-     /*   <Popup
-            open={open}
-            onClose={onClose}
-            title={`Pole N°${input.poleId}`}
-            cancelActionFunc={() => onClose && onClose()}
-            fullWidth
-        >*/
-        <React.Fragment>
-            <Ligne>
-                <Element>
-                    <InputText id='poleName' name='poleName' type='text' required value={input.poleName}
-                        onChange={(event) => update(event, 'poleName')} />
-                </Element>
-            </Ligne>
-            <Ligne>
-                <Element>
-                    <InputText id='poleAdress' name='poleAddress' type='text' required value={input.poleAddress}
-                        onChange={(event) => update(event, 'poleAddress')} />
-                </Element>
-            </Ligne>
-            <Ligne>
-                <Element>
-                    <InputText id='poleCp' name='poleCp' type='number' required value={input.poleCp}
-                        onChange={(event) => update(event, 'poleCp')} />
-                </Element>
-            </Ligne>
-            <Ligne>
-                <Element>
-                    <InputText id='poleCity' name='poleCity' type='text' required value={input.poleCity}
-                        onChange={(event) => update(event, 'poleCity')} />
-                </Element>
-            </Ligne>
-            <Ligne>
-                <Element>
-                    <Button
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                        onClick={() => updatepole()}
-                    >
-                        Valider
-                    </Button>
-                </Element>
-                <Element>
-                    <Button
-                        fullWidth
-                        variant="contained"
-                        color="primary"
-                        className={classes.button}
-                        onClick={() => deletePole(input.poleId)}
-                    >
-                        Supprimer
-                    </Button>
-                </Element>
-            </Ligne>
+        /*  <Popup
+               open={open}
+               onClose={onClose}
+               title={`Pole N${input.poleId}`}
+               fullWidth
+          >
+           <React.Fragment>
+               <Ligne>
+                   <Element>
+                       <InputText id='poleName' name='poleName' type='text' required value={input.poleName}
+                           onChange={(event) => update(event, 'poleName')} />
+                   </Element>
+               </Ligne>
+               <Ligne>
+                   <Element>
+                       <InputText id='poleAdress' name='poleAddress' type='text' required value={input.poleAddress}
+                           onChange={(event) => update(event, 'poleAddress')} />
+                   </Element>
+               </Ligne>
+               <Ligne>
+                   <Element>
+                       <InputText id='poleCp' name='poleCp' type='number' required value={input.poleCp}
+                           onChange={(event) => update(event, 'poleCp')} />
+                   </Element>
+               </Ligne>
+               <Ligne>
+                   <Element>
+                       <InputText id='poleCity' name='poleCity' type='text' required value={input.poleCity}
+                           onChange={(event) => update(event, 'poleCity')} />
+                   </Element>
+               </Ligne>
+               <Ligne>
+                   <Element>
+                       <Button
+                           fullWidth
+                           variant="contained"
+                           color="primary"
+                           className={classes.button}
+                           onClick={() => updatepole()}
+                       >
+                           Valider
+                       </Button>
+                   </Element>
+                   <Element>
+                       <Button
+                           fullWidth
+                           variant="contained"
+                           color="primary"
+                           className={classes.button}
+                           onClick={() => deletePole(input.poleId)}
+                       >
+                           Supprimer
+                       </Button>
+                   </Element>
+               </Ligne>
 
-            </React.Fragment>
-       // </Popup>
-       /* <div className={classes.main}>
+               </React.Fragment>
+          </Popup>*/
+        <div className={classes.main}>
             <CssBaseline/>
             <Paper className={classes.paper}>
                 <Typography variant="h4" gutterBottom>Pole</Typography>
@@ -116,25 +112,30 @@ const PoleInfos = props => {
 
                         <TableRow>
                             <TableCell className={classes.cell}>Nom : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleName' name='poleName' type='text' required value={input.poleName}
+                            <TableCell className={classes.cell}><InputText id='poleName' name='poleName' type='text'
+                                                                           required value={input.poleName}
                                                                            onChange={(event) => update(event, 'poleName')}/></TableCell>
 
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Adresse : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleAdress' name='poleAddress' type='text' required value={input.poleAddress}
+                            <TableCell className={classes.cell}><InputText id='poleAdress' name='poleAddress'
+                                                                           type='text' required
+                                                                           value={input.poleAddress}
                                                                            onChange={(event) => update(event, 'poleAddress')}/>
                             </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Code postal : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleCp' name='poleCp' type='number' required value={input.poleCp}
+                            <TableCell className={classes.cell}><InputText id='poleCp' name='poleCp' type='number'
+                                                                           required value={input.poleCp}
                                                                            onChange={(event) => update(event, 'poleCp')}/>
                             </TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell className={classes.cell}>Ville : </TableCell>
-                            <TableCell className={classes.cell}><InputText id='poleCity' name='poleCity' type='text' required value={input.poleCity}
+                            <TableCell className={classes.cell}><InputText id='poleCity' name='poleCity' type='text'
+                                                                           required value={input.poleCity}
                                                                            onChange={(event) => update(event, 'poleCity')}/></TableCell>
                         </TableRow>
                     </TableBody>
@@ -149,7 +150,7 @@ const PoleInfos = props => {
                     Valider
                 </Button>
             </Paper>
-        </div>*/
+        </div>
     )
 };
 
@@ -157,7 +158,9 @@ const PoleInfos = props => {
 PoleInfos.propTypes = {
     classes: PropTypes.object,
     fetchPoleInfos: PropTypes.func,
-    detailPole: PropTypes.object
+    detailPole: PropTypes.object,
+    open: PropTypes.bool,
+    onClose: PropTypes.func
 };
 
 export default withStyles(theme => ({

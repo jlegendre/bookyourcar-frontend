@@ -4,18 +4,13 @@ import withStyles from '@material-ui/core/styles/withStyles';
 import {Button, CssBaseline} from "@material-ui/core";
 import {getBreakingLimit} from "../../../utils/cssUtils";
 import VehicleListItem from "./VehicleListItem";
-import {Redirect} from "react-router";
-import PopupPlanning from "./PopupPlanning.js";
 import PopupCreateVehicle from "./Popup/PopupCreateVehicle";
-import PopupValidateReservation
-    from "../../Commun/Location/LocationList/PopupValidateReservation/PopupValidateReservation";
 
 const VehicleList = props => {
 
     const {classes, fetchVehicles, listVehicle} = props;
 
     const [newVehicule, setNewVehicule] = useState(false);
-    const [openPopup, setOpenPopup] = useState(false);
 
     let vehiculeInitialize =  {vehId: 0,
         vehRegistration: '',
@@ -31,12 +26,8 @@ const VehicleList = props => {
 
     useEffect(() => {
         fetchVehicles();
-    }, [fetchVehicles, openPopup]);
+    }, [fetchVehicles]);
 
-  /*  if (newVehicule) {
-        console.log('worked')
-        // return <Redirect to={"vehicleCreate"}/>
-    }*/
 
     return (
         <div className={classes.main}>
@@ -46,14 +37,6 @@ const VehicleList = props => {
                 <Button variant={"contained"} color={"primary"} onClick={() => setNewVehicule(true)}>
                     Ajouter véhicule
                 </Button>
-                <Button variant={"contained"} color={"primary"} onClick={() => setOpenPopup(true)}>
-                    Planning
-                </Button>
-
-                <PopupPlanning
-                    open={openPopup}
-                    onClose={() => setOpenPopup(false)}
-                />
                 <PopupCreateVehicle
                     open={newVehicule}
                     onClose={() => setNewVehicule(false)}
@@ -61,31 +44,10 @@ const VehicleList = props => {
             </div>
             {listVehicle && listVehicle.map(item =>
             <VehicleListItem key={item.vehId} data={item}/>)}
-            {/*<MenuVehicule/>
-
-            {listVehicle && listVehicle.map(item =>
-                <VehicleListItem key={item.vehId} data={item}/>
-            )}*/}
         </div>
     )
 };
 
-/*const VehicleList = props => {
-
-    const {classes, fetchVehicles, listVehicle} = props;
-
-    useEffect(() => {
-        fetchVehicles();
-    }, [fetchVehicles]);
-
-    return (
-        <div className={classes.main}>
-            <CssBaseline/>
-
-
-        </div>
-    )
-};*/
 
 VehicleList.propTypes = {
     classes: PropTypes.object,

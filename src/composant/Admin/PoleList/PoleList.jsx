@@ -1,116 +1,99 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import PoleListItem from "./PoleListItem";
 import withStyles from '@material-ui/core/styles/withStyles';
-import {
-    CssBaseline,
-    Paper,
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow,
-    IconButton,
-    Icon,
-    Typography
-} from "@material-ui/core";
-import DeleteIcon from '@material-ui/icons/Delete';
-import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
-import PolePopUp from "../Pole/PoleInfos.jsx"
+import UpdatePole from "../Pole/UpdatePole.jsx"
 
 const PoleList = props => {
 
-    const { classes, fetchPoles, listPoles,fetchPoleInfos } = props;
+    const {classes, fetchPoles, listPoles, fetchPoleInfos} = props;
 
 
-    const [popupOpen, setPopupOpen] = useState(false);
     const [currentPole, setCurrentPole] = useState(null);
+    const [openPopup, setOpenPopup] = useState(false);
     const [dataCurrentPole, setDataCurrentPole] = useState(null);
- 
+
     useEffect(() => {
         fetchPoles();
 
-        if (currentPole != null && popupOpen) {
+        if (currentPole != null && openPopup) {
             fetchPoleInfos(currentPole, success => {
-                setPopupOpen(true);
+                setOpenPopup(true);
                 setDataCurrentPole(success);
             })
         }
-    }, [fetchPoles, fetchPoleInfos, popupOpen, setDataCurrentPole, currentPole]);
+    }, [fetchPoles, fetchPoleInfos, openPopup, setDataCurrentPole, currentPole]);
 
     return (
         <React.Fragment>
             {listPoles && listPoles.map(item =>
                 <PoleListItem
-                    onClick={() => { setPopupOpen(true); setCurrentPole(item.poleId) }}
-                    key={item.poleId}
-                    data={item}
+                    key={item.poleId} data={item}
                 />
             )}
 
-            <PolePopUp
-                open={popupOpen}
-                onClose={() => setPopupOpen(false)}
+            <UpdatePole
+                open={openPopup}
+                onClose={() => setOpenPopup(false)}
                 data={dataCurrentPole}
             />
         </React.Fragment>
 
-       
+
     )
 };
 
-  
-   /* return (
-        <div className={classes.main}>
-            <CssBaseline />
-            <Paper className={classes.paper}>
-                <Typography variant="h4" gutterBottom>Liste des Poles</Typography>
-                <Link to={`/poleCreate`} className={classes.link}>
-                    <Button variant="contained"
-                        color="primary"
-                        className={classes.button}>
-                        Nouveau Pole
-                                </Button>
-                </Link>
-                <Table className={classes.table}>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Nom</TableCell>
-                            <TableCell>Adresse</TableCell>
-                            <TableCell>CodePostal</TableCell>
-                            <TableCell>Ville</TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {listPoles && listPoles.map((row, i) =>
-                            <TableRow key={i}>
-                                <TableCell>{row.poleName}</TableCell>
-                                <TableCell>{row.poleAddress}</TableCell>
-                                <TableCell>{row.poleCp}</TableCell>
-                                <TableCell>{row.poleCity}</TableCell>
-                                <TableCell>
-                                    <Link to={`/poleInfos/${row.poleId}`} className={classes.link}>
-                                        <IconButton>
-                                            <Icon>pageview</Icon>
-                                        </IconButton>
-                                    </Link>
-                                </TableCell>
-                                <TableCell>
-                                    <IconButton onClick={() => deletePole(row.poleId)}>
-                                            <DeleteIcon />
-                                    </IconButton>
-                                </TableCell>
-                            </TableRow>
-                        )}
-                    </TableBody>
-                </Table>
-             
-            </Paper>
-        </div>
-    )
+
+/* return (
+     <div className={classes.main}>
+         <CssBaseline />
+         <Paper className={classes.paper}>
+             <Typography variant="h4" gutterBottom>Liste des Poles</Typography>
+             <Link to={`/poleCreate`} className={classes.link}>
+                 <Button variant="contained"
+                     color="primary"
+                     className={classes.button}>
+                     Nouveau Pole
+                             </Button>
+             </Link>
+             <Table className={classes.table}>
+                 <TableHead>
+                     <TableRow>
+                         <TableCell>Nom</TableCell>
+                         <TableCell>Adresse</TableCell>
+                         <TableCell>CodePostal</TableCell>
+                         <TableCell>Ville</TableCell>
+                         <TableCell></TableCell>
+                         <TableCell></TableCell>
+                     </TableRow>
+                 </TableHead>
+                 <TableBody>
+                     {listPoles && listPoles.map((row, i) =>
+                         <TableRow key={i}>
+                             <TableCell>{row.poleName}</TableCell>
+                             <TableCell>{row.poleAddress}</TableCell>
+                             <TableCell>{row.poleCp}</TableCell>
+                             <TableCell>{row.poleCity}</TableCell>
+                             <TableCell>
+                                 <Link to={`/poleInfos/${row.poleId}`} className={classes.link}>
+                                     <IconButton>
+                                         <Icon>pageview</Icon>
+                                     </IconButton>
+                                 </Link>
+                             </TableCell>
+                             <TableCell>
+                                 <IconButton onClick={() => deletePole(row.poleId)}>
+                                         <DeleteIcon />
+                                 </IconButton>
+                             </TableCell>
+                         </TableRow>
+                     )}
+                 </TableBody>
+             </Table>
+
+         </Paper>
+     </div>
+ )
 };*/
 
 PoleList.propTypes = {

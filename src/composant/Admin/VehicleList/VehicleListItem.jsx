@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
-import Paper from "@material-ui/core/Paper";
 import {Link} from "react-router-dom";
 import {Icon, Popover, Typography} from "@material-ui/core";
 import {withStyles} from "@material-ui/styles";
-import {Ligne, Colonne, Element} from "../../Commun/Ligne/Ligne";
+import {Colonne, Element, Ligne} from "../../Commun/Ligne/Ligne";
 
 /**
  * Répresente un item d'une liste de véhicule
@@ -28,36 +27,36 @@ const VehicleListItem = props => {
         <Link to={`/vehicle/${data.vehId}`} className={classes.link}>
             <Ligne>
                 <Colonne style={{flex: 1, padding: '0.5em', margin: 'auto'}}>
-                        <Element>
-                            {/*<span className={classes.span}>{data.vehBrand}</span>*/}
-                            {data.vehBrand}
-                        </Element>
-                        <Element>
-                            {/*<span className={classes.span}>{data.vehModel}</span>*/}
-                            {data.vehModel}
-                        </Element>
+                    <Element>
+                        {/*<span className={classes.span}>{data.vehBrand}</span>*/}
+                        {data.vehBrand}
+                    </Element>
+                    <Element>
+                        {/*<span className={classes.span}>{data.vehModel}</span>*/}
+                        {data.vehModel}
+                    </Element>
                 </Colonne>
                 <Colonne style={{flex: 1, padding: '0.5em', margin: 'auto'}}>
-                    <Element >
-                       {data.vehColor}
+                    <Element>
+                        {data.vehColor}
                     </Element>
-                    <Element >
+                    <Element>
                         {data.vehRegistration}
                     </Element>
                 </Colonne>
                 <Colonne style={{flex: 1, padding: '0.5em', margin: 'auto'}}>
-                    <Element >
+                    <Element>
                         {data.vehTypeEssence}
                     </Element>
-                    <Element >
+                    <Element>
                         {data.vehColor}
                     </Element>
                 </Colonne>
-                    <Element >
-                        {data.vehNumberplace} places
-                    </Element>
+                <Element>
+                    {data.vehNumberplace} places
+                </Element>
                 <Colonne style={{flex: 1, padding: '0.5em', margin: 'auto'}}>
-                    <Element >
+                    <Element>
                         <Typography
                             aria-owns={open ? `mouse-open-popup-etat-${data.vehId}` : undefined}
                             aria-haspopup={"true"}
