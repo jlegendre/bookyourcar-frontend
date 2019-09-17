@@ -57,7 +57,7 @@ const CreateUser = props => {
     const fetchCreateUser = event => {
         event.preventDefault();
         registerUser(input, () => {
-            setMessage({"Success" : ["Votre compte a bien été créer, veuillez attendre la validation par un administrateur"]});
+            setMessage({"Success" : ["Votre compte a bien été créé, veuillez maintenant valider votre email pour que l'administrateur puisse valider votre compte"]});
             setAccountSuccess(true);
         })
     };

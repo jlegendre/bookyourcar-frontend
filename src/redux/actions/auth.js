@@ -34,16 +34,30 @@ export const fetchLoginUser = (email, password) => {
  * @returns {Function}
  */
 export const fetchRegisterUser = (input, success) => {
-    return dispatch => {
+    return () => {
         httpClient.request({
             url: '/Auth/register',
             method: 'POST',
             data: input
-        }).then(response => {
-            success()
-        })
+        }).then(() => success())
     }
 };
+
+/**
+ * Call /Auth/PasswordForget url, pour envoyer une nouvelle demande de mot de passe oublié
+ * @param input l'email a envoyer
+ * @param success fonction a exectuer si la reque^^e a bien fonctionné
+ * @return {Function}
+ */
+export const fetchForgotPassword = (input, success) => {
+    return () => {
+        httpClient.request({
+            url: `/Auth/PasswordForget?emailDestinataire=${input}`,
+            method: 'POST',
+            data: {emailDestinataire: input}
+        }).then(() => success())
+    }
+}
 
 /**
  * Call /User/userRole Url, pour récupérer le role d'un utilisateur connecté

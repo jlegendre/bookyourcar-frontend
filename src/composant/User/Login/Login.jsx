@@ -69,7 +69,7 @@ const Login = (props) => {
                 <Paper className={classes.paper}>
 
                     <Hidden xsDown implementation={"css"}>
-                        <Image name={"logo_transparent.png"} height={256} />
+                        <Image name={"logo_transparent.png"} height={256}/>
                     </Hidden>
 
                     <Avatar className={classes.avatar}>
@@ -113,6 +113,11 @@ const Login = (props) => {
                         >
                             Connexion
                         </Button>
+                        <Typography className={classes.forgotPassword}>
+                            <Link className={classes.link} to={'/forgotPassword'}>
+                                Mot de passe oublié ?
+                            </Link>
+                        </Typography>
                     </div>
                 </Paper>
             </form>
@@ -121,63 +126,66 @@ const Login = (props) => {
 };
 
 Login.propTypes = {
-
     //classe css du composant
     classes: PropTypes.object.isRequired,
-
     //fonction qui permet a l'utilisateur de se connecter
     loginUser: PropTypes.func,
-
     //token de l'utilisateur en cours
     token: PropTypes.string
 };
 
-export default withStyles((theme) => ({
-        main: {
-            width: 'auto',
-            display: 'block', // Fix IE 11 issue.
-            marginLeft: theme.spacing.unit * 3,
-            marginRight: theme.spacing.unit * 3,
-            [theme.breakpoints.up(getBreakingLimit(theme))]: {
-                width: 400,
-                marginLeft: 'auto',
-                marginRight: 'auto',
+export default withStyles((theme) => (
+        {
+            main: {
+                width: 'auto',
+                display: 'block', // Fix IE 11 issue.
+                marginLeft: theme.spacing.unit * 3,
+                marginRight: theme.spacing.unit * 3,
+                [theme.breakpoints.up(getBreakingLimit(theme))]: {
+                    width: 400,
+                    marginLeft: 'auto',
+                    marginRight: 'auto',
+                },
+                [theme.breakpoints.down(getBreakingLimit(theme))]: {
+                    margin: 0,
+                    height: '100%'
+                }
             },
-            [theme.breakpoints.down(getBreakingLimit(theme))]: {
-                margin: 0,
-                height: '100%'
+            paper: {
+                marginTop: theme.spacing.unit * 8,
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+                [theme.breakpoints.down(getBreakingLimit(theme))]: {
+                    height: '100%',
+                    margin: 0
+                }
+            },
+            avatar: {
+                margin: theme.spacing.unit,
+                backgroundColor: theme.palette.secondary.main,
+            },
+            form: {
+                [theme.breakpoints.down(getBreakingLimit(theme))]: {
+                    height: '100%'
+                }
+            },
+            formInput: {
+                width: '100%', // Fix IE 11 issue.
+                marginTop: theme.spacing.unit
+            },
+            submit: {
+                marginTop: theme.spacing.unit * 3,
+            },
+            forgotPassword: {
+                marginTop: theme.spacing.unit * 3,
+                textAlign: 'center'
+            },
+            link: {
+                float: 'right',
+                marginTop: theme.spacing.unit * 2
             }
-        },
-        paper: {
-            marginTop: theme.spacing.unit * 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
-            [theme.breakpoints.down(getBreakingLimit(theme))]: {
-                height: '100%',
-                margin: 0
-            }
-        },
-        avatar: {
-            margin: theme.spacing.unit,
-            backgroundColor: theme.palette.secondary.main,
-        },
-        form: {
-            [theme.breakpoints.down(getBreakingLimit(theme))]: {
-                height: '100%'
-            }
-        },
-        formInput: {
-            width: '100%', // Fix IE 11 issue.
-            marginTop: theme.spacing.unit
-        },
-        submit: {
-            marginTop: theme.spacing.unit * 3,
-        },
-        link: {
-            float: 'right',
-            marginTop: theme.spacing.unit * 2
         }
-    })
+    )
 )(Login)

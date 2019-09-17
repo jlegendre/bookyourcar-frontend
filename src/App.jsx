@@ -22,7 +22,9 @@ import {getBreakingLimit} from "./utils/cssUtils";
 import VehicleCreate from "./composant/Admin/CreateVehicle/VehicleCreate";
 import ValidateReservation from "./composant/Admin/ValidateReservation/ValidateReservation.js";
 import NewPole from "./composant/Admin/Pole/NewPole.js";
-import Planning from "./composant/Admin/Planning/Planning";
+import Planning from "./composant/Admin/Planning/Planning.js";
+import PasswordForgot from "./composant/User/PasswordForgot/PasswordForgot.js";
+import ChangePassword from "./composant/User/ChangePassword/ChangePassword.js";
 
 const App = props => {
 
@@ -127,6 +129,8 @@ const App = props => {
                         {/* Route générique */}
                         <Route path={"/login"} component={Login}/>
                         <Route path={"/newAccount"} component={CreateUser}/>
+                        <Route path={"/forgotPassword"} component={PasswordForgot}/>
+                        <Route path={"/changePassword/:token"} component={params => <ChangePassword {...params}/>}/>
 
                         {/* Route user */}
                         <Route exact path={"/"} component={params => requireUserLogin(<Accueil {...params}/>)}/>
