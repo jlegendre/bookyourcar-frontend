@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,29 +16,38 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 
 const ChangePassword = props => {
 
-    const {classes, forgotPassword, token, setMessage} = props;
+    const {classes, saveChangePassword, setMessage, match, fetchVerifToken} = props;
 
-    const [email, setEmail] = useState("");
+    const [input, setInput] = useState({password: "", passwordConfirmation: ""});
     const [resetSuccess, setResetSuccess] = useState(false);
 
-    console.log(props);
+    const token = match.params.token;
 
-    const fetchPasswordForgot = event => {
+    useEffect(() => {
+        fetchVerifToken(token, (success) => {
+            if (!success) {
+                console.log("invalide token");
+                setResetSuccess(true);
+            }
+        });
+    }, [token, fetchVerifToken]);
+
+    const fetch = event => {
         event.preventDefault();
-        forgotPassword(email, () => {
-            setMessage({"Success": ["Un email vous a été envoyé pour changer votre mot de passe"]});
+        saveChangePassword(input, () => {
+            setMessage({"Success": ["Votre mot de passe a bien été changé"]});
             setResetSuccess(true);
         })
     };
 
-    if (token || resetSuccess) {
+    if (resetSuccess) {
         return <Redirect to={"/"}/>
     }
 
     return (
         <div className={classes.main}>
             <CssBaseline/>
-            <form className={classes.form} onSubmit={fetchPasswordForgot}>
+            <form className={classes.form} onSubmit={fetch}>
                 <Paper className={classes.paper}>
                     <Hidden xsDown implementation={"css"}>
                         <Image name={"logo_transparent.png"} height={256}/>
@@ -51,22 +60,22 @@ const ChangePassword = props => {
                     </Typography>
                     <div className={classes.formInput}>
                         <InputText
-                            id={"email"}
-                            name={"Email"}
+                            id={"password"}
+                            name={"password"}
                             label={"Nouveau mot de passe"}
-                            type={"email"}
+                            type={"password"}
                             required
-                            onChange={e => setEmail(e.target.value)}
-                            value={email}
+                            onChange={e => setInput({...input, password: e.target.value})}
+                            value={input.password}
                         />
                         <InputText
-                            id={"confirmationEmail"}
-                            name={"ConfirmationEmail"}
+                            id={"passwordConfirmation"}
+                            name={"PasswordConfirmation"}
                             label={"Confirmation"}
-                            type={"email"}
+                            type={"password"}
                             required
-                            onChange={e => setEmail(e.target.value)}
-                            value={email}
+                            onChange={e => setInput({...input, passwordConfirmation: e.target.value})}
+                            value={input.passwordConfirmation}
                         />
                         <Button
                             type="submit"
@@ -88,7 +97,8 @@ ChangePassword.propTypes = {
     setMessage: PropTypes.func,
     classes: PropTypes.object,
     token: PropTypes.string,
-    forgotPassword: PropTypes.func
+    fetchVerifToken: PropTypes.func,
+    saveChangePassword: PropTypes.func
 };
 
 export default withStyles(theme => ({

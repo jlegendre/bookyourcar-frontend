@@ -30,34 +30,61 @@ export const fetchLoginUser = (email, password) => {
 /**
  * Call /Auth/register Url, pour enregistrer un nouveau utilisateur
  * @param input formulaire
- * @param success fonction a executer si la requêtes a bien fonctionné
+ * @param callback fonction a executer si la requêtes a bien fonctionné
  * @returns {Function}
  */
-export const fetchRegisterUser = (input, success) => {
-    return () => {
-        httpClient.request({
-            url: '/Auth/register',
-            method: 'POST',
-            data: input
-        }).then(() => success())
-    }
+export const fetchRegisterUser = (input, callback) => () => {
+    httpClient.request({
+        url: '/Auth/register',
+        method: 'POST',
+        data: input
+    }).then(() => callback())
+
 };
 
 /**
  * Call /Auth/PasswordForget url, pour envoyer une nouvelle demande de mot de passe oublié
  * @param input l'email a envoyer
- * @param success fonction a exectuer si la reque^^e a bien fonctionné
+ * @param callback fonction a exectuer si la reque^^e a bien fonctionné
  * @return {Function}
  */
-export const fetchForgotPassword = (input, success) => {
-    return () => {
-        httpClient.request({
-            url: `/Auth/PasswordForget?emailDestinataire=${input}`,
-            method: 'POST',
-            data: {emailDestinataire: input}
-        }).then(() => success())
-    }
-}
+export const fetchForgotPassword = (input, callback) => () => {
+    httpClient.request({
+        url: `/Auth/PasswordForget?emailDestinataire=${input}`,
+        method: 'POST',
+        data: {emailDestinataire: input}
+    }).then(() => callback())
+
+};
+
+/**
+ * Verifie le token
+ * @param token le token
+ * @param callback action a exectuer en cas de réussite
+ * @return {Function}
+ */
+export const fetchVerifToken = (token, callback) => () => {
+    httpClient.request({
+        url: `/Auth/VerifEmail/${token}`,
+        method: 'GET'
+    }).then(() => {
+        callback && callback(true)
+    }).catch(() => callback && callback(false))
+};
+
+/**
+ * Envoie le nouveau mot de passe au server
+ * @param input les données a envoyer
+ * @param callback la fonction a exectuer en cas de réussiteÒ
+ * @return {Function}
+ */
+export const fetchSaveChangePassword = (input, callback) => () => {
+    httpClient.request({
+        url: `Auth/SaveChangePassword`,
+        method: 'POST',
+        data: input
+    }).then(() => callback())
+};
 
 /**
  * Call /User/userRole Url, pour récupérer le role d'un utilisateur connecté

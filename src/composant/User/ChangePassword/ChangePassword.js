@@ -1,6 +1,6 @@
 import ChangePassword from "./ChangePassword.jsx";
 import {connect} from "react-redux";
-import {fetchForgotPassword} from "../../../redux/actions/auth";
+import {fetchSaveChangePassword, fetchVerifToken} from "../../../redux/actions/auth";
 import {getToken} from "../../../redux/reducers/auth";
 import {setMessage} from "../../../redux/actions/message";
 
@@ -8,7 +8,8 @@ import {setMessage} from "../../../redux/actions/message";
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = (dispatch) => {
     return {
-        forgotPassword: (input, success) => dispatch(fetchForgotPassword(input, success)),
+        fetchVerifToken: (input, callback) => dispatch(fetchVerifToken(input, callback)),
+        saveChangePassword: (input, callback) => dispatch(fetchSaveChangePassword(input, callback)),
         setMessage: (message) => dispatch(setMessage(message))
     }
 };
