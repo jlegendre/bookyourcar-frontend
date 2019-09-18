@@ -75,14 +75,16 @@ export const fetchVerifToken = (token, callback) => () => {
 /**
  * Envoie le nouveau mot de passe au server
  * @param input les données a envoyer
+ * @param token le token
  * @param callback la fonction a exectuer en cas de réussiteÒ
  * @return {Function}
  */
-export const fetchSaveChangePassword = (input, callback) => () => {
+export const fetchSaveChangePassword = (input, token, callback) => () => {
     httpClient.request({
         url: `Auth/SaveChangePassword`,
         method: 'POST',
-        data: input
+        data: input,
+        headers: {"Authorization": token}
     }).then(() => callback())
 };
 

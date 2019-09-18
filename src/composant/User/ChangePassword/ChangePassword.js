@@ -9,7 +9,7 @@ import {setMessage} from "../../../redux/actions/message";
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchVerifToken: (input, callback) => dispatch(fetchVerifToken(input, callback)),
-        saveChangePassword: (input, callback) => dispatch(fetchSaveChangePassword(input, callback)),
+        saveChangePassword: (input, token, callback) => dispatch(fetchSaveChangePassword(input, token, callback)),
         setMessage: (message) => dispatch(setMessage(message))
     }
 };

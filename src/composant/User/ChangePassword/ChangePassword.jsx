@@ -34,7 +34,7 @@ const ChangePassword = props => {
 
     const fetch = event => {
         event.preventDefault();
-        saveChangePassword(input, () => {
+        saveChangePassword(input, token, () => {
             setMessage({"Success": ["Votre mot de passe a bien été changé"]});
             setResetSuccess(true);
         })
