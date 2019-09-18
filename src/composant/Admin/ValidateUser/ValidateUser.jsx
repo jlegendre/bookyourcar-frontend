@@ -1,13 +1,16 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
-import UserItem from "./UserItem";
-import {getBreakingLimit} from "../../../utils/cssUtils";
-import withStyles from "@material-ui/core/styles/withStyles";
+import PopupValidateUser from "./PopupValidateUser";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import DataTable from 'react-data-table-component';
 
 const ValidateUser = props => {
 
-    const {classes, fetchUserInValidation, userInWaiting, fetchValidateUser, fetchDeleteUser} = props;
+    const {fetchUserInValidation, userInWaiting, fetchValidateUser, fetchDeleteUser} = props;
 
+    const [popupOpen, setPopupOpen] = useState(false);
+    const [userSelected, setUserSelected] = useState();
 
     useEffect(() => {
         fetchUserInValidation();
@@ -20,6 +23,7 @@ const ValidateUser = props => {
      */
     const acceptUser = id => {
         fetchValidateUser(id);
+        setPopupOpen(false)
     };
 
     /**
@@ -28,19 +32,60 @@ const ValidateUser = props => {
      */
     const refuseUser = id => {
         fetchDeleteUser(id);
+        setPopupOpen(false)
     };
 
+    const openUser = row => {
+        setUserSelected(row);
+        setPopupOpen(true);
+    };
+
+    const colonnes = [
+        {
+            name: <Typography>Nom</Typography>,
+            selector: 'userName',
+            sortable: true,
+            cell: row => <Typography>{row["userName"]}</Typography>
+        },
+        {
+            name: <Typography>Prénom</Typography>,
+            selector: 'userFirstname',
+            sortable: true,
+            cell: row => <Typography>{row["userFirstname"]}</Typography>
+        },
+        {
+            name: <Typography>Email</Typography>,
+            selector: 'userEmail',
+            sortable: true,
+            cell: row => <Typography>{row["userEmail"]}</Typography>
+        },
+        {
+            name: <Typography>Pole</Typography>,
+            selector: 'poleName',
+            sortable: true,
+            cell: row => <Typography>{row["poleName"]}</Typography>
+        }
+    ];
+
     return (
-        <div className={classes.main}>
-            {userInWaiting && userInWaiting.map(item =>
-                <UserItem
-                    key={item.userId}
-                    data={item}
-                    onRefuse={refuseUser}
-                    onAccept={acceptUser}
+        <React.Fragment>
+            <Paper>
+                <DataTable
+                    title={<Typography component={"h4"} variant={"h4"}>Utilisateurs en attente</Typography>}
+                    columns={colonnes}
+                    data={userInWaiting}
+                    onRowClicked={openUser}
+                    highlightOnHover
                 />
-            )}
-        </div>
+            </Paper>
+            <PopupValidateUser
+                open={popupOpen}
+                onAccept={acceptUser}
+                onRefuser={refuseUser}
+                onClose={() => setPopupOpen(false)}
+                data={userSelected}
+            />
+        </React.Fragment>
     )
 };
 
@@ -51,16 +96,4 @@ ValidateUser.propTypes = {
     fetchDeleteUser: PropTypes.func
 };
 
-export default withStyles(theme => ({
-    main: {
-        width: 'auto',
-        display: 'block', // Fix IE 11 issue.
-        marginLeft: theme.spacing.unit * 3,
-        marginRight: theme.spacing.unit * 3,
-        [theme.breakpoints.up(getBreakingLimit(theme))]: {
-            width: 1000,
-            marginLeft: 'auto',
-            marginRight: 'auto',
-        }
-    },
-}))(ValidateUser)
+export default ValidateUser

@@ -2,7 +2,6 @@ import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {getBreakingLimit} from "../../../utils/cssUtils";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import LocationList from "../../Commun/Location/LocationList/LocationList.js";
 
 const MyLocation = props => {
@@ -15,10 +14,7 @@ const MyLocation = props => {
 
     if (location.length !== 0) {
         return (
-            <div className={classes.main}>
-                <CssBaseline/>
-                <LocationList locations={location}/>
-            </div>
+            <LocationList locations={location}/>
         )
     } else {
         return (

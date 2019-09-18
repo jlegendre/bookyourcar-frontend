@@ -46,11 +46,9 @@ const LocationList = props => {
     ];
 
     const openLocation = row => {
-        console.log(row);
         fetchDetailLocation(row.locationId, success => {
             setCurrentLocation(success);
-            setPopupOpen(true)
-            console.log(success);
+            setPopupOpen(true);
         });
     };
 

@@ -15,9 +15,9 @@ const PopupValidateUser = props => {
             onClose={onClose}
             title={"Validation de l'utilisateur"}
             okActionTxt={"Accepter"}
-            okActionFunc={onAccept}
+            okActionFunc={() => onAccept(data.userId)}
             cancelActionTxt={"Refuser"}
-            cancelActionFunc={onRefuser}
+            cancelActionFunc={() => onRefuser(data.userId)}
             annulerActionTxt={"Annuler"}
             annulerActionFunc={onClose}
         >
