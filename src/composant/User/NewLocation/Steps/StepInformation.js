@@ -1,7 +1,7 @@
 import StepInformation from './StepInformation.jsx';
 import {connect} from "react-redux";
-import {fetchPoles} from "../../../../redux/actions/datapage";
 import {getListPolesForSelect} from "../../../../redux/reducers/datapage";
+import {fetchPoles} from "../../../../redux/actions/pole";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)

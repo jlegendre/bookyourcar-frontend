@@ -20,12 +20,14 @@ const PopupValidateReservation = props => {
     });
 
     const createOKButton = () => {
-        return ["Créer", () => alert('todo')]
+     alert('todo')
     };
 
     const createKOButton = () => {
-        return ["Annuler", () => alert('todo')]
-    }
+         alert('todo')
+    };
+
+    console.log(data);
 
     if (!data) {
         return (<React.Fragment/>)
@@ -36,10 +38,10 @@ const PopupValidateReservation = props => {
             open={open}
             onClose={onClose}
             title={`Création d'un véhicule`}
-            okActionTxt={createOKButton()}
-            okActionFunc={createOKButton()}
-            cancelActionTxt={createKOButton}
-            cancelActionFunc={() => onClose && onClose()}
+            okActionTxt={"Créer"}
+            okActionFunc={createOKButton}
+            cancelActionTxt={"Annuler"}
+            cancelActionFunc={createKOButton}
             fullWidth
         >
             {data && (

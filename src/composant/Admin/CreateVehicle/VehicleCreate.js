@@ -1,13 +1,15 @@
 import VehicleInfos from "./VehicleCreate.jsx";
 import {connect} from "react-redux";
-import { fetchCreateVehicle} from "../../../redux/actions/admin";
-import {fetchPoles} from "../../../redux/actions/datapage";
+import {fetchCreateVehicle} from "../../../redux/actions/admin";
 import {getListPolesForSelectByName} from "../../../redux/reducers/datapage";
+import {fetchPoles} from "../../../redux/actions/pole";
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = dispatch => {
     return {
-        fetchCreateVehicle: (input) => {dispatch(fetchCreateVehicle(input))},
+        fetchCreateVehicle: (input) => {
+            dispatch(fetchCreateVehicle(input))
+        },
         fetchPoles: () => dispatch(fetchPoles())
     }
 };

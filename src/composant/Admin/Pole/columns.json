@@ -1,0 +1,22 @@
+[
+	{
+		"name": "Nom",
+		"selector": "poleName",
+		"sortable": true
+	},
+	{
+		"name": "Ville",
+		"selector": "poleCity",
+		"sortable": true
+	},
+	{
+		"name": "Adresse",
+		"selector": "poleAddress",
+		"sortable": true
+	},
+	{
+		"name": "Code Postal",
+		"selector": "poleCp",
+		"sortable": true
+	}
+]

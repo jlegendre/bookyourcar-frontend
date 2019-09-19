@@ -2,9 +2,9 @@ import CreateUser from "./CreateUser.jsx";
 import {connect} from "react-redux";
 import {fetchRegisterUser} from "../../../redux/actions/auth";
 import {getToken} from "../../../redux/reducers/auth";
-import {fetchPoles} from "../../../redux/actions/datapage";
 import {getListPolesForSelect} from "../../../redux/reducers/datapage";
 import {setMessage} from "../../../redux/actions/message";
+import {fetchPoles} from "../../../redux/actions/pole";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)

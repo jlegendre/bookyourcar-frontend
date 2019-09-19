@@ -1,6 +1,6 @@
 import React from 'react';
 import * as PropTypes from 'prop-types';
-import {Dialog, DialogTitle, DialogContentText, DialogActions, Button} from "@material-ui/core";
+import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle} from "@material-ui/core";
 
 const Popup = props => {
 
@@ -11,25 +11,27 @@ const Popup = props => {
             {...others}
         >
             <DialogTitle>{title}</DialogTitle>
-            <DialogContentText>{text}</DialogContentText>
-            {children}
+            <DialogContent>
+                <DialogContentText>{text}</DialogContentText>
+                {children}
+            </DialogContent>
 
             <DialogActions>
                 {
                     cancelActionTxt &&
-                        <Button onClick={event => cancelActionFunc && cancelActionFunc(event)}>
-                            {cancelActionTxt}
-                        </Button>
+                    <Button onClick={event => cancelActionFunc && cancelActionFunc(event)} color={"primary"}>
+                        {cancelActionTxt}
+                    </Button>
                 }
                 {
                     okActionTxt &&
-                        <Button onClick={event => okActionFunc && okActionFunc(event)}>
-                            {okActionTxt}
-                        </Button>
+                    <Button onClick={event => okActionFunc && okActionFunc(event)} color={"primary"}>
+                        {okActionTxt}
+                    </Button>
                 }
                 {
                     annulerActionTxt &&
-                    <Button onClick={event => annulerActionFunc && annulerActionFunc(event)}>
+                    <Button onClick={event => annulerActionFunc && annulerActionFunc(event)} color={"primary"}>
                         {annulerActionTxt}
                     </Button>
                 }

@@ -1,8 +1,9 @@
 import VehicleInfos from "./VehicleInfos.jsx";
 import {connect} from "react-redux";
-import {fetchPoles, fetchVehicleInfos} from "../../../redux/actions/datapage";
+import {fetchVehicleInfos} from "../../../redux/actions/datapage";
 import {fetchDeleteVehicle, fetchUpdateVehicle} from "../../../redux/actions/admin";
 import {getDetailVehicle, getListPolesForSelectByName} from "../../../redux/reducers/datapage";
+import {fetchPoles} from "../../../redux/actions/pole";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)

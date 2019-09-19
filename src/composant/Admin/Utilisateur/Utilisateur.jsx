@@ -5,7 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import DataTable from 'react-data-table-component';
 
-const ValidateUser = props => {
+const Utilisateur = props => {
 
     const {fetchUserInValidation, userInWaiting, fetchValidateUser, fetchDeleteUser} = props;
 
@@ -89,11 +89,11 @@ const ValidateUser = props => {
     )
 };
 
-ValidateUser.propTypes = {
+Utilisateur.propTypes = {
     fetchUserInValidation: PropTypes.func,
     userInWaiting: PropTypes.array,
     fetchValidateUser: PropTypes.func,
     fetchDeleteUser: PropTypes.func
 };
 
-export default ValidateUser
+export default Utilisateur

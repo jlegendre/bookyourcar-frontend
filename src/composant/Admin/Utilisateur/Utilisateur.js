@@ -1,4 +1,4 @@
-import ValidUser from "./ValidateUser.jsx";
+import ValidUser from "./Utilisateur.jsx";
 import {connect} from "react-redux";
 import {fetchUserInValidation} from "../../../redux/actions/datapage";
 import {getUserInWaiting} from "../../../redux/reducers/datapage";

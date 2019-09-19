@@ -1,5 +1,5 @@
 import httpClient from './../../utils/httpClient'
-import {fetchPoles, fetchUserInValidation, fetchVehicleInfos, setPlanning} from "./datapage";
+import {fetchUserInValidation, fetchVehicleInfos, setPlanning} from "./datapage";
 import {setUserLocation} from './user';
 import {formatDate} from "../../utils/dateUtils";
 
@@ -39,21 +39,6 @@ export const fetchDeleteUser = id => {
     }
 };
 
-/**
- * Call /Pole/:id, Url pour supprimer un pole
- * @param id identifiant du pole
- * @return {Function}
- */
-export const fetchDeletePole = id => {
-    return dispatch => {
-        httpClient.request({
-            url: `/Pole/${id}`,
-            method: 'DELETE',
-        }).then(() => {
-            dispatch(fetchPoles())
-        })
-    }
-};
 /**
  * Call /Vehicle/:id, Url pour modifier un v�hicule
  * @param vehId identifiant du v�hicule
@@ -155,4 +140,4 @@ export const fetchPlanningVehicule = date => {
             dispatch(setPlanning(response.data))
         })
     }
-}
+};

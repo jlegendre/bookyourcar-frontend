@@ -9,19 +9,17 @@ import {Menu as MenuIcon} from "@material-ui/icons"
 import Login from "./composant/User/Login/Login.js";
 import CreateUser from './composant/User/CreateUser/CreateUser.js'
 import Accueil from "./composant/Commun/Accueil/Accueil.js";
-import ValidUser from "./composant/Admin/ValidateUser/ValidateUser.js";
+import ValidUser from "./composant/Admin/Utilisateur/Utilisateur.js";
 import Message from "./composant/Commun/Message/Message.js";
-import VehicleList from "./composant/Admin/VehicleList/VehicleList.js";
-import PoleList from "./composant/Admin/PoleList/PoleList.js";
+import VehicleList from "./composant/Admin/Vehicule/VehicleList.js";
+import PoleList from "./composant/Admin/Pole/Pole.js";
 import VehicleInfos from "./composant/Admin/Vehicle/VehicleInfos.js";
-import PoleInfos from "./composant/Admin/Pole/PoleInfos.js";
 import MenuAppBar from "./composant/Commun/MenuAppBar/MenuAppBar.js";
 import NewLocation from "./composant/User/NewLocation/NewLocation.js";
 import MyLocation from './composant/User/MyLocation/MyLocation.js';
 import {getBreakingLimit} from "./utils/cssUtils";
 import VehicleCreate from "./composant/Admin/CreateVehicle/VehicleCreate";
 import ValidateReservation from "./composant/Admin/ValidateReservation/ValidateReservation.js";
-import NewPole from "./composant/Admin/Pole/NewPole.js";
 import Planning from "./composant/Admin/Planning/Planning.js";
 import PasswordForgot from "./composant/User/PasswordForgot/PasswordForgot.js";
 import ChangePassword from "./composant/User/ChangePassword/ChangePassword.js";
@@ -149,20 +147,14 @@ const App = props => {
                                component={params => requireAdminLogin(<VehicleInfos {...params} />)}/>
                         <Route path={"/vehicleCreate"}
                                component={params => requireAdminLogin(<VehicleCreate {...params} />)}/>
-                        <Route path={"/poleList"}
+                        <Route path={"/pole"}
                                component={params => requireAdminLogin(<PoleList {...params} />)}/>
-                        <Route path={"/poleCreate"}
-                               component={params => requireAdminLogin(<NewPole {...params} />)}/>
                         <Route path={"/planning"}
                                component={params => requireAdminLogin(<Planning {...params}/>)}/>
                         <Route path={"/reservation"} exact
                                component={params => requireAdminLogin(<ValidateReservation {...params} />)}/>
                         <Route path={"/reservation/:locationId"}
                                component={params => requireAdminLogin(<ValidateReservation {...params} />)}/>
-
-                        <Route exact path={"/poleInfos/:poleId"}
-                               component={params => requireAdminLogin(<PoleInfos {...params} />)}/>
-
                         <Route component={() => <div>404</div>}/>
                     </Switch>
                 </main>
