@@ -38,10 +38,10 @@ const PopupValidateReservation = props => {
             open={open}
             onClose={onClose}
             title={`Création d'un véhicule`}
-            okActionTxt={"Créer"}
-            okActionFunc={createOKButton}
-            cancelActionTxt={"Annuler"}
-            cancelActionFunc={createKOButton}
+            firstActionTxt={"Créer"}
+            firstActionFunc={createOKButton}
+            secondActionTxt={"Annuler"}
+            secondActionFunc={createKOButton}
             fullWidth
         >
             {data && (

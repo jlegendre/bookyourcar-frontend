@@ -22,10 +22,10 @@ const PopupUpdateUser = props => {
             open={open}
             onClose={onClose}
             title={"Modifier le profil"}
-            okActionTxt={"Modifier"}
-            okActionFunc={() => onAccept(user)}
-            cancelActionTxt={"Annuler"}
-            cancelActionFunc={() => onClose && onClose()}
+            firstActionTxt={"Modifier"}
+            firstActionFunc={() => onAccept(user)}
+            secondActionTxt={"Annuler"}
+            secondActionFunc={() => onClose && onClose()}
         >
             {data && (
                 <div className={classes.main}>

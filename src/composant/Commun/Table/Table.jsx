@@ -10,7 +10,7 @@ import {Button} from "@material-ui/core";
 const Table = props => {
 
     const [selectedRows, setSelectedRows] = useState([]);
-    const [toggleCleared, setToggleCleared] = useState(false);
+    const [toggleCleared, setToggleCleared] = useState(true);
 
     const handleRowSelected = React.useCallback(state => {
         setSelectedRows(state.selectedRows);
@@ -35,7 +35,7 @@ const Table = props => {
         const handleDelete = () => {
             setToggleCleared(!toggleCleared);
             props.onDelete(selectedRows);
-        }
+        };
 
         return <Button onClick={handleDelete}>Supprimer</Button>
     }, [toggleCleared, props, selectedRows]);

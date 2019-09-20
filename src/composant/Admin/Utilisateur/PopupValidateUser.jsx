@@ -14,12 +14,12 @@ const PopupValidateUser = props => {
             open={open}
             onClose={onClose}
             title={"Validation de l'utilisateur"}
-            okActionTxt={"Accepter"}
-            okActionFunc={() => onAccept(data.userId)}
-            cancelActionTxt={"Refuser"}
-            cancelActionFunc={() => onRefuser(data.userId)}
-            annulerActionTxt={"Annuler"}
-            annulerActionFunc={onClose}
+            firstActionTxt={"Accepter"}
+            firstActionFunc={() => onAccept(data.userId)}
+            secondActionTxt={"Refuser"}
+            secondActionFunc={() => onRefuser(data.userId)}
+            thirdActionTxt={"Annuler"}
+            thirdActionFunc={onClose}
         >
             {data && (
                 <div className={classes.main}>

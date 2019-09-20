@@ -22,10 +22,10 @@ const PopupUpdatePwd = props => {
             open={open}
             onClose={onClose}
             title={"Modifier le profil"}
-            okActionTxt={"Modifier"}
-            okActionFunc={() => onAccept(password)}
-            cancelActionTxt={"Annuler"}
-            cancelActionFunc={() => onClose && onClose()}
+            firstActionTxt={"Modifier"}
+            firstActionFunc={() => onAccept(password)}
+            secondActionTxt={"Annuler"}
+            secondActionFunc={() => onClose && onClose()}
         >
             <div className={classes.main}>
                 <CssBaseline/>

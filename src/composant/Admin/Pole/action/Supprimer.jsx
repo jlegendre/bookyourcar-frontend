@@ -9,19 +9,19 @@ const Supprimer = props => {
             open={props.open}
             title={"Suppression Pole"}
             onClose={props.onClose}
-            okActionTxt={"Confirmer"}
-            okActionFunc={props.onAccept}
-            annulerActionTxt={"Annuler"}
-            annulerActionFunc={props.onClose}
+            firstActionTxt={"Confirmer"}
+            firstActionFunc={props.onAccept}
+            thirdActionTxt={"Annuler"}
+            thirdActionFunc={props.onClose}
             text={"êtes vous sur de vouloir supprimer le(s) pôle(s) sélectionné(s)"}
         />
     )
 };
 
 Supprimer.propTypes = {
-    open: PropTypes.bool.isRequired,
-    onClose: PropTypes.func,
-    onAccept: PropTypes.func
+    open: PropTypes.bool,
+    onClose: PropTypes.func.isRequired,
+    onAccept: PropTypes.func.isRequired
 };
 
 export default Supprimer;

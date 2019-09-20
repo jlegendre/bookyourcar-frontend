@@ -36,10 +36,10 @@ const PopupValidateReservation = props => {
             open={open}
             onClose={onClose}
             title={`Location N°${data.locId} - Status : Location`}
-            okActionTxt={createOKButton() && createOKButton()[0]}
-            okActionFunc={createOKButton() && createOKButton()[1]}
-            cancelActionTxt={createKOButton() && createKOButton()[0]}
-            cancelActionFunc={() => onClose && onClose()}
+            firstActionTxt={createOKButton() && createOKButton()[0]}
+            firstActionFunc={createOKButton() && createOKButton()[1]}
+            secondActionTxt={createKOButton() && createKOButton()[0]}
+            secondActionFunc={() => onClose && onClose()}
             fullWidth
         >
             {data && (

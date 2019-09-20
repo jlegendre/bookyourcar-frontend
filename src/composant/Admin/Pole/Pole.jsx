@@ -1,39 +1,57 @@
 import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import Table from "../../Commun/Table/Table";
-import Ajouter from './action/Ajouter';
+import ConsultationModification from './action/ConsultationModification';
 
 import columns from './columns';
 import Supprimer from "./action/Supprimer";
 
 const Pole = props => {
 
-    const {fetchPoles, poleList, fetchNewPole, fetchDeletePole} = props;
-    const [nouveauPole, setNouveauPole] = useState(false);
-    const [supressionPole, setSuppressionPole] = useState();
+    const {fetchPoles, fetchPole, poleList, poleDetail, fetchNewPole, fetchDeletePole, fetchUpdatePole} = props;
+    const [consultationModification, setConsultationModification] = useState({visible: false});
+    const [supressionPole, setSuppressionPole] = useState(false);
+    const [data, setData] = useState(poleDetail || {});
 
     useEffect(() => {
         fetchPoles();
-    }, [fetchPoles]);
+        if (data !== poleDetail) {
+            setData(poleDetail);
+        }
+    }, [fetchPoles, poleDetail]);
 
-    const openPole = row => {
-
-    };
-
-    const ajouterPole = nouveauPole => {
-        fetchNewPole(nouveauPole, success => {
+    const acceptPole = () => {
+        fetchNewPole(data, success => {
             if (success) {
-                setNouveauPole(false);
+                //si la requête est un succes, on ferme la fenetre
+                setConsultationModification({visible: false})
             }
-        });
+        })
     };
 
-    const supprimerPole = () => {
-        supressionPole.forEach(pole => {
-            fetchDeletePole(pole.poleId);
-        })
-        setSuppressionPole(undefined);
+    const modificationPole = () => {
+        fetchUpdatePole(data.poleId, data);
+        setConsultationModification({visible: false})
     };
+
+    const supprimerPole = data => {
+        data.forEach(pole => {
+            fetchDeletePole(pole.poleId);
+        });
+        setSuppressionPole(false);
+    };
+
+    const openConsultationModification = row => {
+        fetchPole(row.poleId);
+        setConsultationModification({visible: true, state: 'view'});
+    };
+
+    const updateField = ((event, type) => {
+        setData({
+            ...data,
+            [type]: event.target.value
+        });
+    });
 
     return (
         <React.Fragment>
@@ -41,15 +59,25 @@ const Pole = props => {
                 title={"Gestion des pôles"}
                 columns={columns}
                 data={poleList}
-                onRowClicked={openPole}
-                onAdd={() => setNouveauPole(true)}
-                onDelete={setSuppressionPole}
+                onClick={openConsultationModification}
+                onDelete={supprimerPole}
+                onAdd={() => {
+                    setData({});
+                    setConsultationModification({visible: true, state: 'new'})}
+                }
             />
 
-            <Ajouter
-                open={nouveauPole}
-                onClose={() => setNouveauPole(false)}
-                onAccept={ajouterPole}
+            <ConsultationModification
+                open={consultationModification.visible}
+                state={consultationModification.state}
+                onClose={() => {
+                    setConsultationModification({visible: false});
+                    setData({});
+                }}
+                data={data}
+                onAccept={acceptPole}
+                onUpdate={() => modificationPole()}
+                onUpdateField={updateField}
             />
 
             <Supprimer
@@ -64,9 +92,12 @@ const Pole = props => {
 
 Pole.propTypes = {
     fetchPoles: PropTypes.func,
+    fetchPole: PropTypes.func,
     poleList: PropTypes.array,
+    poleDetail: PropTypes.object,
     fetchNewPole: PropTypes.func,
-    fetchDeletePole: PropTypes.func
+    fetchDeletePole: PropTypes.func,
+    fetchUpdatePole: PropTypes.func
 };
 
 export default Pole;

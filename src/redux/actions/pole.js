@@ -28,7 +28,6 @@ export const fetchPole = id => dispatch => {
     }).then(response => {
         dispatch(setPole(response.data));
     })
-
 };
 
 /**

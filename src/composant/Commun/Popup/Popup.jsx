@@ -4,7 +4,7 @@ import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogT
 
 const Popup = props => {
 
-    const {title, text, okActionFunc, okActionTxt, annulerActionFunc, annulerActionTxt, cancelActionFunc, cancelActionTxt, children, ...others} = props;
+    const {title, text, firstActionFunc, firstActionTxt, thirdActionFunc, thirdActionTxt, secondActionFunc, secondActionTxt, children, ...others} = props;
 
     return (
         <Dialog
@@ -18,21 +18,21 @@ const Popup = props => {
 
             <DialogActions>
                 {
-                    cancelActionTxt &&
-                    <Button onClick={event => cancelActionFunc && cancelActionFunc(event)} color={"primary"}>
-                        {cancelActionTxt}
+                    firstActionTxt &&
+                    <Button onClick={event => firstActionFunc && firstActionFunc(event)} color={"primary"}>
+                        {firstActionTxt}
                     </Button>
                 }
                 {
-                    okActionTxt &&
-                    <Button onClick={event => okActionFunc && okActionFunc(event)} color={"primary"}>
-                        {okActionTxt}
+                    secondActionTxt &&
+                    <Button onClick={event => secondActionFunc && secondActionFunc(event)} color={"primary"}>
+                        {secondActionTxt}
                     </Button>
                 }
                 {
-                    annulerActionTxt &&
-                    <Button onClick={event => annulerActionFunc && annulerActionFunc(event)} color={"primary"}>
-                        {annulerActionTxt}
+                    thirdActionTxt &&
+                    <Button onClick={event => thirdActionFunc && thirdActionFunc(event)} color={"primary"}>
+                        {thirdActionTxt}
                     </Button>
                 }
             </DialogActions>
@@ -43,12 +43,12 @@ const Popup = props => {
 Popup.propTypes = {
     title: PropTypes.string,
     text: PropTypes.string,
-    okActionTxt: PropTypes.string,
-    okActionFunc: PropTypes.func,
-    cancelActionTxt: PropTypes.string,
-    cancelActionFunc: PropTypes.func,
-    annulerActionTxt: PropTypes.string,
-    annulerActionFunc: PropTypes.func,
+    firstActionTxt: PropTypes.string,
+    firstActionFunc: PropTypes.func,
+    secondActionTxt: PropTypes.string,
+    secondActionFunc: PropTypes.func,
+    thirdActionTxt: PropTypes.string,
+    thirdActionFunc: PropTypes.func,
     children: PropTypes.any
 };
 
