@@ -1,6 +1,6 @@
 import React from "react";
 import * as PropTypes from 'prop-types';
-import Popup from "../../../Commun/Popup/Popup";
+import Popup from "../../Commun/Popup/Popup";
 
 const Supprimer = props => {
 

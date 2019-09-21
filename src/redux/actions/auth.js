@@ -60,7 +60,7 @@ export const fetchForgotPassword = (input, callback) => () => {
 /**
  * Verifie le token
  * @param token le token
- * @param callback action a exectuer en cas de réussite
+ * @param callback Action a exectuer en cas de réussite
  * @return {Function}
  */
 export const fetchVerifToken = (token, callback) => () => {
