@@ -7,7 +7,7 @@ import {getPoleDetail, getPoleList} from "../../../redux/reducers/datapage";
 const mapDispatchToProps = dispatch => {
     return {
         fetchPoles: () => dispatch(fetchPoles()),
-        fetchPole: id => dispatch(fetchPole(id)),
+        fetchPole: (id, callback) => dispatch(fetchPole(id, callback)),
         fetchNewPole: (pole, callback) => dispatch(fetchNewPole(pole, callback)),
         fetchDeletePole: id => dispatch(fetchDeletePole(id)),
         fetchUpdatePole: (id, pole) => dispatch(fetchUpdatePole(id, pole))

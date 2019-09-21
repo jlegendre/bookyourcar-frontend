@@ -21,12 +21,13 @@ export const fetchPoles = () => dispatch => {
  * Call /Pole/{i} Url, pour récupérer toutes les informations sur un pole donné
  * @returns {Function}
  */
-export const fetchPole = id => dispatch => {
+export const fetchPole = (id, callback) => dispatch => {
     httpClient.request({
         url: `/Pole/${id}`,
         method: 'GET',
     }).then(response => {
         dispatch(setPole(response.data));
+        callback(response.data);
     })
 };
 

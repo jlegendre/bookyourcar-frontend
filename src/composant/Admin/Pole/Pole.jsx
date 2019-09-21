@@ -15,9 +15,6 @@ const Pole = props => {
 
     useEffect(() => {
         fetchPoles();
-        if (data !== poleDetail) {
-            setData(poleDetail);
-        }
     }, [fetchPoles, poleDetail]);
 
     const acceptPole = () => {
@@ -42,7 +39,10 @@ const Pole = props => {
     };
 
     const openConsultationModification = row => {
-        fetchPole(row.poleId);
+        fetchPole(row.poleId, data => {
+            setData(data)
+
+        });
         setConsultationModification({visible: true, state: 'view'});
     };
 
@@ -63,7 +63,8 @@ const Pole = props => {
                 onDelete={supprimerPole}
                 onAdd={() => {
                     setData({});
-                    setConsultationModification({visible: true, state: 'new'})}
+                    setConsultationModification({visible: true, state: 'new'})
+                }
                 }
             />
 
