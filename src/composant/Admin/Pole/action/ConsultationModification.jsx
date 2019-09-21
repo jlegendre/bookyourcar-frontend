@@ -3,32 +3,49 @@ import * as PropTypes from 'prop-types';
 import Popup from "../../../Commun/Popup/Popup";
 import InputText from "../../../Commun/Input/InputText";
 
+const VIEW = "view";
+const NEW = "new";
+const UPDATE = "update";
+
 const ConsultationModification = props => {
 
     const [state, setState] = useState(props.state);
 
     useEffect(() => {
-        if (props.state !== state) {
+        if (props.state !== state && state !== UPDATE) {
             setState(props.state);
         }
-    }, [props.state]);
+    }, [props.state, state]);
 
     const getButtonName = () => {
-        return state === "new" ? "Ajouter" : state === "view" ? "Modifier" : "Enregistrer"
+        return state === NEW ? "Ajouter" : state === VIEW ? "Modifier" : "Enregistrer"
     };
 
     const getButtonFunction = () => {
-        return state === "new" ? props.onAccept() : state === "view" ? setState("update") : props.onUpdate()
+        if(state === NEW) {
+            setState(VIEW);
+            props.onAccept()
+        } else if(state === VIEW) {
+            setState(UPDATE)
+        } else {
+            setState(VIEW);
+            props.onUpdate()
+        }
+    };
+
+    const onClose = event => {
+        setState(VIEW);
+        props.onClose(event);
     };
 
     return (
         <Popup
             open={props.open}
             title={"Pôle"}
-            onClose={props.onClose}
+            onClose={onClose}
             firstActionTxt={getButtonName()}
             firstActionFunc={getButtonFunction}
-            thirdActionFunc={props.onClose}
+            thirdActionFunc={onClose}
         >
             <InputText
                 id="poleName"
