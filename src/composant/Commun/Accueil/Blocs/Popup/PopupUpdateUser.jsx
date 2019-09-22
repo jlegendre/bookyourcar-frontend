@@ -56,7 +56,7 @@ const PopupUpdateUser = props => {
                             <InputText
                                 id={"userPhone"}
                                 name={"userPhone"}
-                                label={"Numéro de téléhpone"}
+                                label={"Numéro de téléphone"}
                                 value={user.userPhone}
                                 max={10}
                                 format={"phone"}
