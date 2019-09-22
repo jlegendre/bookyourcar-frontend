@@ -6,6 +6,8 @@ import {Element} from "../../Commun/Ligne/Ligne";
 import {formatDate, getLibelleOfDayWeek, isIn, nextWeek, previusWeek} from "../../../utils/dateUtils";
 import Paper from "@material-ui/core/Paper";
 import {CssBaseline, Grid, Typography} from "@material-ui/core";
+import {PieChart} from 'react-charts-d3';
+
 
 const Planning = props => {
 
@@ -13,8 +15,11 @@ const Planning = props => {
 
     const [date, setDate] = useState(new Date());
 
+    const [dataGraph, setDataGraph]=useState(  [{label: 'reservations démarée', value: planning.startReservationCount},
+        {label: 'reservations finies', value: planning.endReservationCount},]);
+
     useEffect(() => {
-        fetchPlanning(date)
+        fetchPlanning(date);
     }, [fetchPlanning, date]);
 
     return (
@@ -24,8 +29,15 @@ const Planning = props => {
                 <Grid container spacing={24}>
 
                     <Grid item xs={12} md={4}>
-                        <Paper style={{marginBottom: 24}}>
-                            Graph
+                        <Paper style={{marginBottom: 24, textAlign: 'center'}}>
+                            <Typography>Ensemble des réservations cette semaine</Typography>
+                            <PieChart data={dataGraph}
+                                      width={400}
+                                      height={400}
+                                      innerRadius={20}
+                                      fluid={true}
+                                      labelOffset={160}
+                                      noDataMessage={'Aucune réservation n\'a été trouvée'}/>
                         </Paper>
                         <Paper style={{marginBottom: 24, textAlign: 'center'}}>
                             <Typography>
@@ -47,7 +59,7 @@ const Planning = props => {
 
                     <Grid item xs={12} md={8}>
                         <Paper>
-                            <HeadPlanning classes={classes} date={date} updateDate={setDate} planning={planning} />
+                            <HeadPlanning classes={classes} date={date} updateDate={setDate} planning={planning}/>
                             <BodyPlanning classes={classes} planning={planning}/>
                         </Paper>
                     </Grid>
@@ -138,6 +150,7 @@ Planning.propTypes = {
 export default withStyles((theme) => (
     {
         layout: {
+            fontFamily: 'Roboto',
             width: 'auto',
             marginLeft: theme.spacing.unit * 2,
             marginRight: theme.spacing.unit * 2,
@@ -148,6 +161,8 @@ export default withStyles((theme) => (
             }
         },
         ligne: {
+            fontFamily: 'Roboto',
+
             display: 'flex',
             marginBottom: '1em'
         }
