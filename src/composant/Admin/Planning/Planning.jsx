@@ -37,7 +37,7 @@ const Planning = props => {
                         </Paper>
                         <Paper style={{textAlign: 'center'}}>
                             <Typography>
-                                Début des locations cette semaine
+                                Fin des locations cette semaine
                             </Typography>
                             <Typography gutterBottom variant={"h3"} component={"h3"} color={"error"}>
                                 {planning.endReservationCount}
