@@ -32,7 +32,7 @@ const ConsultationModification = props => {
     return (
         <Popup
             open={props.open}
-            title={"Pôle"}
+            title={props.title}
             onClose={onClose}
             firstActionTxt={getButtonName()}
             firstActionFunc={getButtonFunction}
@@ -48,6 +48,7 @@ ConsultationModification.defaultProps = {
 };
 
 ConsultationModification.propTypes = {
+    title: PropTypes.string.isRequired,
     open: PropTypes.bool.isRequired,
     state: PropTypes.string,
     data: PropTypes.object,

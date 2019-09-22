@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import Table from "../../Commun/Table/Table";
-import ConsultationModification from '../Action/ConsultationModification';
-
-import {VIEW} from "../Action/ConsultationModification";
+import ConsultationModification, {VIEW} from '../Action/ConsultationModification';
 
 import columns from './columns';
 import Supprimer from "../Action/Supprimer";
@@ -13,12 +11,13 @@ const Pole = props => {
 
     const {fetchPoles, fetchPole, poleList, poleDetail, fetchNewPole, fetchDeletePole, fetchUpdatePole} = props;
     const [consultationModification, setConsultationModification] = useState({visible: false, state: VIEW});
-    const [supressionPole, setSuppressionPole] = useState(false);
+    const [supressionPole, setSupressionPole] = useState(false);
     const [data, setData] = useState(poleDetail || {});
+    const [deletedData, setDeletedData] = useState(undefined);
 
     useEffect(() => {
         fetchPoles();
-    }, [fetchPoles, poleDetail]);
+    }, [fetchPoles]);
 
     const acceptPole = () => {
         fetchNewPole(data, success => {
@@ -34,17 +33,16 @@ const Pole = props => {
         setConsultationModification({visible: false})
     };
 
-    const supprimerPole = data => {
-        data.forEach(pole => {
+    const supprimerPole = () => {
+        deletedData.forEach(pole => {
             fetchDeletePole(pole.poleId);
         });
-        setSuppressionPole(false);
+        setSupressionPole(false);
     };
 
     const openConsultationModification = row => {
         fetchPole(row.poleId, data => {
             setData(data)
-
         });
         setConsultationModification({visible: true, state: VIEW});
     };
@@ -63,7 +61,10 @@ const Pole = props => {
                 columns={columns}
                 data={poleList}
                 onClick={openConsultationModification}
-                onDelete={supprimerPole}
+                onDelete={data => {
+                    setDeletedData(data);
+                    setSupressionPole(true)
+                }}
                 onAdd={() => {
                     setData({});
                     setConsultationModification({visible: true, state: 'new'})
@@ -71,6 +72,7 @@ const Pole = props => {
             />
 
             <ConsultationModification
+                title={"Pôle"}
                 open={consultationModification.visible}
                 state={consultationModification.state}
                 onClose={() => {
@@ -119,9 +121,11 @@ const Pole = props => {
             </ConsultationModification>
 
             <Supprimer
+                title={"Suppression Pole"}
                 open={supressionPole}
-                onClose={() => setSuppressionPole(undefined)}
+                onClose={() => setSupressionPole(undefined)}
                 onAccept={supprimerPole}
+                text={"êtes vous sur de vouloir supprimer le(s) pôle(s) sélectionné(s) ?"}
             />
 
         </React.Fragment>

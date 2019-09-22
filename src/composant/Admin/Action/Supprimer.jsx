@@ -7,18 +7,20 @@ const Supprimer = props => {
     return (
         <Popup
             open={props.open}
-            title={"Suppression Pole"}
+            title={props.title}
             onClose={props.onClose}
             firstActionTxt={"Confirmer"}
             firstActionFunc={props.onAccept}
             thirdActionTxt={"Annuler"}
             thirdActionFunc={props.onClose}
-            text={"êtes vous sur de vouloir supprimer le(s) pôle(s) sélectionné(s)"}
+            text={props.text}
         />
     )
 };
 
 Supprimer.propTypes = {
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired,
     open: PropTypes.bool,
     onClose: PropTypes.func.isRequired,
     onAccept: PropTypes.func.isRequired

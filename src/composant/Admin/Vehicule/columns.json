@@ -1,0 +1,37 @@
+[
+    {
+        "name": "Marque",
+        "selector": "vehBrand",
+        "sortable": true
+    },
+    {
+        "name": "Model",
+        "selector": "vehModel",
+        "sortable": true
+    },
+    {
+        "name": "Couleur",
+        "selector": "vehColor",
+        "sortable": true
+    },
+    {
+        "name": "Immatriculation",
+        "selector": "vehRegistration",
+        "sortable": true
+    },
+    {
+        "name": "Type Essence",
+        "selector": "vehTypeEssence",
+        "sortable": true
+    },
+    {
+        "name": "Nombre de place",
+        "selector": "vehNumberplace",
+        "sortable": true
+    },
+    {
+        "name": "Etat",
+        "selector": "vehState",
+        "sortable": true
+    }
+]
