@@ -6,21 +6,25 @@ import {Element} from "../../Commun/Ligne/Ligne";
 import {formatDate, getLibelleOfDayWeek, isIn, nextWeek, previusWeek} from "../../../utils/dateUtils";
 import Paper from "@material-ui/core/Paper";
 import {CssBaseline, Grid, Typography} from "@material-ui/core";
-import {PieChart} from 'react-charts-d3';
+import {PieClass} from '../../Commun/PieChart/PieChartClass';
 
 
 const Planning = props => {
+
 
     const {classes, planning, fetchPlanning} = props;
 
     const [date, setDate] = useState(new Date());
 
-    const [dataGraph, setDataGraph]=useState(  [{label: 'reservations démarée', value: planning.startReservationCount},
-        {label: 'reservations finies', value: planning.endReservationCount},]);
+
+    const [dataGraph, setDataGraph]=useState([]);
 
     useEffect(() => {
         fetchPlanning(date);
-    }, [fetchPlanning, date]);
+       setDataGraph([{date: 'Début des locations cette semaine', value: planning.startReservationCount},
+                {date: 'fin des locations cette semaine', value: planning.endReservationCount}]);
+
+    }, [fetchPlanning, date, setDataGraph]);
 
     return (
         <React.Fragment>
@@ -31,13 +35,13 @@ const Planning = props => {
                     <Grid item xs={12} md={4}>
                         <Paper style={{marginBottom: 24, textAlign: 'center'}}>
                             <Typography>Ensemble des réservations cette semaine</Typography>
-                            <PieChart data={dataGraph}
-                                      width={400}
-                                      height={400}
-                                      innerRadius={20}
-                                      fluid={true}
-                                      labelOffset={160}
-                                      noDataMessage={'Aucune réservation n\'a été trouvée'}/>
+                            <PieClass
+                                data={dataGraph}
+                                width={200}
+                                height={200}
+                                innerRadius={60}
+                                outerRadius={100}
+                            />
                         </Paper>
                         <Paper style={{marginBottom: 24, textAlign: 'center'}}>
                             <Typography>
@@ -76,7 +80,7 @@ const HeadPlanning = props => {
     return (
         <React.Fragment>
             <div className={classes.ligne}>
-                <Element style={{textAlign: 'right', cursor: 'pointer'}} onClick={() => updateDate(previusWeek(date))}>
+                <Element style={{textAlign: 'right', cursor: 'pointer'}} onClick={() =>  updateDate(previusWeek(date))}>
                     &lt;
                 </Element>
                 <Element style={{textAlign: 'center'}}>
