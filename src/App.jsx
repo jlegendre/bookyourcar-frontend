@@ -11,14 +11,11 @@ import CreateUser from './composant/User/CreateUser/CreateUser.js'
 import Accueil from "./composant/Commun/Accueil/Accueil.js";
 import ValidUser from "./composant/Admin/Utilisateur/Utilisateur.js";
 import Message from "./composant/Commun/Message/Message.js";
-import VehicleList from "./composant/Admin/VehiculeOld/VehicleList.js";
 import Pole from "./composant/Admin/Pole/Pole.js";
-import VehicleInfos from "./composant/Admin/VehicleOld/VehicleInfos.js";
 import MenuAppBar from "./composant/Commun/MenuAppBar/MenuAppBar.js";
 import NewLocation from "./composant/User/NewLocation/NewLocation.js";
 import MyLocation from './composant/User/MyLocation/MyLocation.js';
 import {getBreakingLimit} from "./utils/cssUtils";
-import VehicleCreate from "./composant/Admin/CreateVehicle/VehicleCreate";
 import ValidateReservation from "./composant/Admin/ValidateReservation/ValidateReservation.js";
 import Vehicule from './composant/Admin/Vehicule/Vehicule.js';
 import Planning from "./composant/Admin/Planning/Planning.js";
@@ -142,12 +139,6 @@ const App = props => {
                         {/* Route admin */}
                         <Route path={"/validUser"}
                                component={params => requireAdminLogin(<ValidUser {...params}/>)}/>
-                        <Route exact path={"/vehicleList"}
-                               component={params => requireAdminLogin(<VehicleList {...params}/>)}/>
-                        <Route exact path={"/vehicle/:vehId"}
-                               component={params => requireAdminLogin(<VehicleInfos {...params} />)}/>
-                        <Route path={"/vehicleCreate"}
-                               component={params => requireAdminLogin(<VehicleCreate {...params} />)}/>
                         <Route path={"/pole"} component={params => requireAdminLogin(<Pole {...params} />)}/>
                         <Route path={"/vehicule"} component={params => requireAdminLogin(<Vehicule {...params}/>)}/>
                         <Route path={"/planning"}
