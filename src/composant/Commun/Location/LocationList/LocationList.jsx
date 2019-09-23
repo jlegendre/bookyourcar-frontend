@@ -59,7 +59,7 @@ const LocationList = props => {
 
             <Paper>
                 <DataTable
-                    title={<Typography component={"h4"} variant={"h4"}>Location</Typography>}
+                    title={<Typography component={"h4"} variant={"h4"}>Locations</Typography>}
                     columns={colonnes}
                     data={locations}
                     onRowClicked={openLocation}
