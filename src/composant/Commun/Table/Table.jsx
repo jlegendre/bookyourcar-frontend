@@ -27,7 +27,8 @@ const Table = props => {
     };
 
     const boutonAjouter = () => {
-        let button = <Button onClick={props.onAdd}>Ajouter</Button>;
+        let button = <Button variant="contained"
+            color="primary" onClick={props.onAdd} >Ajouter</Button>;
         return props.onAdd ? button : undefined
     };
 

@@ -3,7 +3,8 @@ import Paper from "@material-ui/core/Paper";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 export const Ligne = withStyles({
-    ligne: {display: 'flex', marginBottom: '1em', cursor: 'pointer', height: 100}
+    ligne: {
+        display: 'flex', marginBottom: '1em', cursor: 'pointer', height: 100}
 })(props => {
     const {classes, children, ...autre} = props;
     return <Paper className={classes.ligne}{...autre}>{children}</Paper>
