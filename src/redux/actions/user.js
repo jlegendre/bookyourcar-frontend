@@ -19,9 +19,9 @@ export const fetchNewLocation = (input, success) => {
             data: input
         }).then(() => {
             success && success();
-            dispatch(setMessage({"Success" : ["Votre réservation a bien été pris en compte"]}))
+            dispatch(setMessage({"Success" : ["Votre réservation a bien été prise en compte"]}))
         }).catch(() => {
-            dispatch(setMessage({"Error" : ["Votre demande comporte des erreurs, veuillez vérifier vos données saisies"]}))
+            dispatch(setMessage({"Error" : ["Votre demande comporte des erreurs, veuillez vérifier les données saisies"]}))
         })
     }
 };
@@ -96,7 +96,7 @@ export const fetchUpdatePassword = (password, success) => {
                     success(false);
                 })
             }).catch(() => {
-                dispatch(setMessage({"OldPassword": ["Ancien mot de passe non correcte"]}));
+                dispatch(setMessage({"OldPassword": ["Ancien mot de passe incorrect"]}));
                 success(false);
             })
         }

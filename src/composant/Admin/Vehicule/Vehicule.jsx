@@ -99,7 +99,7 @@ const Vehicule = props => {
                 <InputText
                     id={"vehModel"}
                     name={"VehModel"}
-                    label={"Model"}
+                    label={"Modèle"}
                     value={data.vehModel || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehModel")}
@@ -129,7 +129,7 @@ const Vehicule = props => {
                 <InputSelect
                     id={"vehTypeEssence"}
                     name={"VehTypeEssence"}
-                    label={"Type d'essence"}
+                    label={"Type de carburant"}
                     value={data.vehTypeEssence || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehTypeEssence")}
@@ -143,7 +143,7 @@ const Vehicule = props => {
                 <InputText
                     id={"vehNumberplace"}
                     name={"VehNumberplace"}
-                    label={"Nombre de place"}
+                    label={"Nombre de places"}
                     value={data.vehNumberplace || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehNumberplace")}
