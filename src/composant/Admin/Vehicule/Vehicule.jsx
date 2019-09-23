@@ -6,6 +6,7 @@ import ConsultationModification, {VIEW} from '../Action/ConsultationModification
 import columns from './columns';
 import Supprimer from "../Action/Supprimer";
 import InputText from "../../Commun/Input/InputText";
+import InputSelect from '../../Commun/Input/InputSelect';
 
 const Vehicule = props => {
 
@@ -83,6 +84,7 @@ const Vehicule = props => {
                 onAccept={acceptVehicule}
                 onUpdate={() => modificationVehicule()}
                 onChangeState={state => setConsultationModification({...consultationModification, state: state})}
+                style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}
             >
                 <InputText
                     id={"vehBrand"}
@@ -91,6 +93,8 @@ const Vehicule = props => {
                     value={data.vehBrand || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehBrand")}
+                    fullWidth={false}
+                    style={{marginLeft: '10px'}}
                 />
                 <InputText
                     id={"vehModel"}
@@ -99,6 +103,8 @@ const Vehicule = props => {
                     value={data.vehModel || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehModel")}
+                    fullWidth={false}
+                    style={{marginLeft: '10px'}}
                 />
                 <InputText
                     id={"vehColor"}
@@ -107,6 +113,8 @@ const Vehicule = props => {
                     value={data.vehColor || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehColor")}
+                    fullWidth={false}
+                    style={{marginLeft: '10px'}}
                 />
                 <InputText
                     id={"vehRegistration"}
@@ -115,14 +123,22 @@ const Vehicule = props => {
                     value={data.vehRegistration || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehRegistration")}
+                    fullWidth={false}
+                    style={{marginLeft: '10px', marginRight: '10px'}}
                 />
-                <InputText
+                <InputSelect
                     id={"vehTypeEssence"}
                     name={"VehTypeEssence"}
                     label={"Type d'essence"}
                     value={data.vehTypeEssence || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehTypeEssence")}
+                    fullWidth={false}
+                    className={{marginLeft: '10px'}}
+                    data={[{value: 'sans plomb 95', label: 'sans plomb 95'},
+                    {value: 'sans plomb 98', label: 'sans plomb 98'},
+                    {value: 'diesel', label: 'diesel'},
+                    {value: 'electrique', label: 'electrique'}]}
                 />
                 <InputText
                     id={"vehNumberplace"}
@@ -131,6 +147,8 @@ const Vehicule = props => {
                     value={data.vehNumberplace || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehNumberplace")}
+                    fullWidth={false}
+                    style={{marginLeft: '10px'}}
                 />
                 <InputText
                     id={"vehState"}
@@ -139,6 +157,8 @@ const Vehicule = props => {
                     value={data.vehState || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehState")}
+                    fullWidth={false}
+                    style={{marginLeft: '10px'}}
                 />
             </ConsultationModification>
 
