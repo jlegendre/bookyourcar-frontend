@@ -4,6 +4,8 @@ import PopupValidateReservation from "./PopupValidateReservation/PopupValidateRe
 import DataTable from 'react-data-table-component';
 import Paper from "@material-ui/core/Paper";
 import {Typography} from "@material-ui/core";
+import {formatDate} from "../../../../utils/dateUtils";
+
 
 const LocationList = props => {
 
@@ -23,13 +25,13 @@ const LocationList = props => {
             name: <Typography>Date début</Typography>,
             selector: 'dateDebutResa',
             sortable: true,
-            cell: row => <Typography>{row['dateDebutResa']}</Typography>
+            cell: row => <Typography>{ formatDate(new Date(row['dateDebutResa']))}</Typography>
         },
         {
             name: <Typography>Date fin</Typography>,
             selector: 'dateFinResa',
             sortable: true,
-            cell: row => <Typography>{row['dateFinResa']}</Typography>
+            cell: row => <Typography>{ formatDate(new Date(row['dateFinResa']))}</Typography>
         },
         {
             name: <Typography>Véhicule</Typography>,
