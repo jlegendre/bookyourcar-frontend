@@ -1,6 +1,6 @@
 import LocationList from './LocationList.jsx'
 import {connect} from 'react-redux';
-import {fetchGetLocation} from "../../../../redux/actions/datapage";
+import {fetchLocation} from "../../../../redux/actions/location";
 
 const mapStateToProps = state => {
     return {
@@ -10,7 +10,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchDetailLocation: (locationId, success) => dispatch(fetchGetLocation(locationId, success))
+        fetchDetailLocation: (locationId, success) => dispatch(fetchLocation(locationId, success))
     }
 };
 

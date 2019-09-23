@@ -17,12 +17,12 @@ const Planning = props => {
     const [date, setDate] = useState(new Date());
 
 
-    const [dataGraph, setDataGraph]=useState([]);
+    const [dataGraph, setDataGraph] = useState([]);
 
     useEffect(() => {
         fetchPlanning(date);
-       setDataGraph([{date: 'Début des locations cette semaine', value: planning.startReservationCount},
-                {date: 'fin des locations cette semaine', value: planning.endReservationCount}]);
+        setDataGraph([{date: 'Début des locations cette semaine', value: planning.startReservationCount},
+            {date: 'fin des locations cette semaine', value: planning.endReservationCount}]);
 
     }, [fetchPlanning, date, setDataGraph]);
 
@@ -80,7 +80,7 @@ const HeadPlanning = props => {
     return (
         <React.Fragment>
             <div className={classes.ligne}>
-                <Element style={{textAlign: 'right', cursor: 'pointer'}} onClick={() =>  updateDate(previusWeek(date))}>
+                <Element style={{textAlign: 'right', cursor: 'pointer'}} onClick={() => updateDate(previusWeek(date))}>
                     &lt;
                 </Element>
                 <Element style={{textAlign: 'center'}}>

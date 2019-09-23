@@ -1,12 +1,9 @@
 import _ from 'lodash';
 
-import {
-    SET_DATAPAGE_DETAILLOCATION,
-    SET_DATAPAGE_USERINWAITING,
-    SET_PLANNING
-} from "../actions/datapage";
+import {SET_DATAPAGE_USERINWAITING, SET_PLANNING} from "../actions/datapage";
 import {POLE, POLES} from "../actions/pole";
 import {VEHICULE, VEHICULES} from "../actions/vehicule";
+import {LOCATION, LOCATIONS} from '../actions/location';
 
 const initialState = {
     pole: {
@@ -17,10 +14,13 @@ const initialState = {
         list: [],
         detail: undefined
     },
+    location: {
+        list: [],
+        detail: undefined
+    },
     userInWaiting: [],
     listVehicleAvailable: [],
     detailVehicle: undefined,
-    detailLocation: undefined,
     planning: []
 };
 
@@ -38,10 +38,11 @@ export default function (state = initialState, action) {
             return {...state, vehicule: {...state.vehicule, list: action.vehicules}};
         case VEHICULE:
             return {...state, vehicule: {...state.vehicule, detail: action.vehicule}};
+        case LOCATIONS:
+            return {...state, location: {...state.location, list: action.locations}};
+        case LOCATION:
+            return {...state, locations: {...state.location, detail: action.location}};
 
-
-        case SET_DATAPAGE_DETAILLOCATION:
-            return {...state, detailLocation: action.location};
         case SET_PLANNING:
             return {...state, planning: action.planning};
         default:
@@ -50,17 +51,21 @@ export default function (state = initialState, action) {
 }
 
 //Retourne les infos de l'utilisateur
-export const getDataPage = (state) => state.datapage;
+export const getDataPage = state => state.datapage;
 
 //retourne tous les utilisateur en attente
 export const getUserInWaiting = state => getDataPage(state).userInWaiting;
 
-//Véhicule
+//Véhicules
 export const getVehiculeList = state => getDataPage(state).vehicule.list;
 export const getVehiculeDetail = state => getDataPage(state).vehicule.detail;
 //Poles
 export const getPoleList = state => getDataPage(state).pole.list;
 export const getPoleDetail = state => getDataPage(state).pole.detail;
+//Locations
+export const getLocationList = state => getDataPage(state).location.list;
+export const getLocationDetail = state => getDataPage(state).location.detail;
+
 
 export const getPlanning = state => getDataPage(state).planning;
 
@@ -72,18 +77,6 @@ export const getPlanning = state => getDataPage(state).planning;
 export const getListPolesForSelect = state => {
     return _.map(getPoleList(state), pole => {
         return {value: pole.poleId, label: pole.poleName}
-    });
-
-};
-
-/**
- * Fonction qui permet de construire une liste de pôle pour l'objet InputSelect
- * @param state
- * @return {Array}
- */
-export const getListPolesForSelectByName = state => {
-    return _.map(getPoleList(state), pole => {
-        return {value: pole.poleName, label: pole.poleName}
     });
 
 };

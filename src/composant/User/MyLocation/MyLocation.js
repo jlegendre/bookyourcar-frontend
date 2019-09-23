@@ -1,17 +1,17 @@
 import MyLocation from './MyLocation.jsx';
 import {connect} from 'react-redux';
-import {getLocation} from "../../../redux/reducers/user";
-import {fetchUserLocation} from "../../../redux/actions/user";
+import {getLocationList} from "../../../redux/reducers/datapage";
+import {fetchLocations} from "../../../redux/actions/location";
 
 const mapStateToProps = state => {
     return {
-        location: getLocation(state)
+        locations: getLocationList(state)
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUserLocation : () => dispatch(fetchUserLocation())
+        fetchUserLocation: () => dispatch(fetchLocations())
     }
 };
 

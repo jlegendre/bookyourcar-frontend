@@ -1,8 +1,6 @@
 import httpClient from './../../utils/httpClient'
 import {fetchUserInValidation, setPlanning} from "./datapage";
-import {setUserLocation} from './user';
 import {formatDate} from "../../utils/dateUtils";
-
 
 /**
  * Call /User/ValidateUserInWaiting, url pour accepter un utilisateur
@@ -35,17 +33,6 @@ export const fetchDeleteUser = id => {
             method: 'POST',
         }).then(() => {
             dispatch(fetchUserInValidation())
-        })
-    }
-};
-
-export const fetchAdminLocation = () => {
-    return dispatch => {
-        httpClient.request({
-            url: 'Location/ManageLocations',
-            method: 'GET'
-        }).then(response => {
-            dispatch(setUserLocation(response.data))
         })
     }
 };

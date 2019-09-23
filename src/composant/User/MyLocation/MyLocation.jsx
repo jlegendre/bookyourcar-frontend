@@ -6,15 +6,15 @@ import LocationList from "../../Commun/Location/LocationList/LocationList.js";
 
 const MyLocation = props => {
 
-    const {classes, location, fetchUserLocation} = props;
+    const {classes, locations, fetchUserLocation} = props;
 
     useEffect(() => {
         fetchUserLocation();
     }, [fetchUserLocation]);
 
-    if (location.length !== 0) {
+    if (locations.length !== 0) {
         return (
-            <LocationList locations={location}/>
+            <LocationList locations={locations}/>
         )
     } else {
         return (
@@ -27,7 +27,7 @@ const MyLocation = props => {
 
 MyLocation.propTypes = {
     classes: PropTypes.object,
-    location: PropTypes.array,
+    locations: PropTypes.array,
     fetchUserLocation: PropTypes.func
 };
 

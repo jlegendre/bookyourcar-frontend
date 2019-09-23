@@ -27,21 +27,6 @@ export const fetchNewLocation = (input, success) => {
 };
 
 /**
- * Retourne les location de l'utilisateur
- * @return {Function}
- */
-export const fetchUserLocation = () => {
-    return dispatch => {
-        httpClient.request({
-            url: '/Location',
-            method: 'GET'
-        }).then(response => {
-            dispatch(setUserLocation(response.data))
-        })
-    }
-};
-
-/**
  * Retourne le profil de l'utilisateur
  * @return {Function}
  */
