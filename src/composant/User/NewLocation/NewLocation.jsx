@@ -122,8 +122,8 @@ const NewLocation = (props) => {
         if (isValidDate(dateDebut) && isValidDate(dateFin)) {
             if (dateDebut > dateFin) {
                 setMessage({
-                    "dateDebutResa": ["La date doit être avant la date de fin"],
-                    "dateFinResa": ["La date doit être après la date de début"]
+                    "dateDebutResa": ["La date sélectionnée doit être avant la date de fin"],
+                    "dateFinResa": ["La date sélectionnée doit être après la date de début"]
                 });
                 success = false;
             } else {
@@ -142,7 +142,7 @@ const NewLocation = (props) => {
 
         //vérification pour le pole id destination
         if (formulaire.poleIdDestination === '') {
-            setMessage({"poleIdDestination": ["Veuillez choisir une pole de destination"]});
+            setMessage({"poleIdDestination": ["Veuillez choisir un pole de destination"]});
             success = false
         } else {
             setNoMessageFor("poleIdDestination")
@@ -158,7 +158,7 @@ const NewLocation = (props) => {
      */
     const checkStepComments = () => {
         if(formulaire.comments.trim().length <= 10) {
-            setMessage({"comments" : ["Veuillez saisir au moins 10 caracteres"]});
+            setMessage({"comments" : ["Veuillez saisir au moins 10 caractères"]});
             return false;
         } else {
             setNoMessageFor("comments");

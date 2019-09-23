@@ -25,8 +25,8 @@ const PopupValidateUser = props => {
                 <div className={classes.main}>
                     <CssBaseline/>
                     <div className={classes.formInput}>
-                        <div>Nom : {data.userName}</div>
-                        <div> Prenom : {data.userFirstname} </div>
+                        <div> Nom : {data.userName}</div>
+                        <div> Prénom : {data.userFirstname} </div>
                         <div> Téléphone : {data.userPhone} </div>
                         <div> Email : {data.userEmail} </div>
                     </div>
