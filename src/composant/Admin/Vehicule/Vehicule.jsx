@@ -10,7 +10,7 @@ import InputSelect from '../../Commun/Input/InputSelect';
 
 const Vehicule = props => {
 
-    const {fetchVehicules, fetchVehicule, vehiculeList, vehiculeDetail, fetchNewVehicule, fetchDeleteVehicule, fetchUpdateVehicule} = props;
+    const {fetchVehicules, fetchVehicule, vehiculeList, vehiculeDetail, fetchNewVehicule, fetchDeleteVehicule, fetchUpdateVehicule, fetchPoles, poles} = props;
     const [consultationModification, setConsultationModification] = useState({visible: false, state: VIEW});
     const [supressionVehicule, setSupressionVehicule] = useState(false);
     const [data, setData] = useState(vehiculeDetail || {});
@@ -18,7 +18,8 @@ const Vehicule = props => {
 
     useEffect(() => {
         fetchVehicules();
-    }, [fetchVehicules]);
+        fetchPoles();
+    }, [fetchVehicules, fetchPoles]);
 
     const acceptVehicule = () => {
         fetchNewVehicule(data, success => {
@@ -30,8 +31,8 @@ const Vehicule = props => {
     };
 
     const modificationVehicule = () => {
-        fetchUpdateVehicule(data.vehId, data);
         setConsultationModification({visible: false})
+        fetchUpdateVehicule(data.vehId, data);
     };
 
     const supprimerVehicule = () => {
@@ -150,15 +151,16 @@ const Vehicule = props => {
                     fullWidth={false}
                     style={{marginLeft: '10px'}}
                 />
-                <InputText
-                    id={"vehState"}
-                    name={"VehState"}
-                    label={"Etat"}
-                    value={data.vehState || ""}
+                <InputSelect
+                    id={"vehPole"}
+                    name={"VehPole"}
+                    label={"Pole de rattachement"}
+                    value={data.poleId || ""}
                     disabled={consultationModification.state === VIEW}
-                    onChange={event => updateField(event, "vehState")}
+                    onChange={event => updateField(event, "poleId")}
                     fullWidth={false}
-                    style={{marginLeft: '10px'}}
+                    className={{marginLeft: '10px'}}
+                    data={poles}
                 />
             </ConsultationModification>
 

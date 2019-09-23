@@ -1,6 +1,6 @@
 import Vehicule from "./Vehicule.jsx";
 import {connect} from "react-redux";
-import {getVehiculeDetail, getVehiculeList} from "../../../redux/reducers/datapage";
+import {getListPolesForSelect, getVehiculeDetail, getVehiculeList} from "../../../redux/reducers/datapage";
 import {
     fetchDeleteVehicule,
     fetchNewVehicule,
@@ -8,6 +8,7 @@ import {
     fetchVehicule,
     fetchVehicules
 } from "../../../redux/actions/vehicule";
+import {fetchPoles} from "../../../redux/actions/pole";
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = dispatch => {
@@ -16,7 +17,9 @@ const mapDispatchToProps = dispatch => {
         fetchVehicule: (id, callback) => dispatch(fetchVehicule(id, callback)),
         fetchNewVehicule: (pole, callback) => dispatch(fetchNewVehicule(pole, callback)),
         fetchDeleteVehicule: id => dispatch(fetchDeleteVehicule(id)),
-        fetchUpdateVehicule: (id, pole) => dispatch(fetchUpdateVehicule(id, pole))
+        fetchUpdateVehicule: (id, pole) => dispatch(fetchUpdateVehicule(id, pole)),
+        fetchPoles: () => dispatch(fetchPoles())
+
     }
 };
 
@@ -24,7 +27,8 @@ const mapDispatchToProps = dispatch => {
 const mapStateToProps = state => {
     return {
         vehiculeList: getVehiculeList(state),
-        vehiculeDetail: getVehiculeDetail(state)
+        vehiculeDetail: getVehiculeDetail(state),
+        poles: getListPolesForSelect(state)
     }
 };
 
