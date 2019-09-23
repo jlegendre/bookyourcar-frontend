@@ -99,7 +99,7 @@ const CreateUser = props => {
                         <InputText
                             id={"phoneNumber"}
                             name={"PhoneNumber"}
-                            label={"Numero de telephone"}
+                            label={"Numéro de téléphone"}
                             type={"text"}
                             onChange={updateInput}
                             value={input.phoneNumber}

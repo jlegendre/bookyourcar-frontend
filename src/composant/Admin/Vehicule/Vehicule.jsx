@@ -10,7 +10,7 @@ import InputSelect from '../../Commun/Input/InputSelect';
 
 const Vehicule = props => {
 
-    const {fetchVehicules, fetchVehicule, vehiculeList, vehiculeDetail, fetchNewVehicule, fetchDeleteVehicule, fetchUpdateVehicule} = props;
+    const {fetchVehicules, fetchVehicule, vehiculeList, vehiculeDetail, fetchNewVehicule, fetchDeleteVehicule, fetchUpdateVehicule, fetchPoles, poles} = props;
     const [consultationModification, setConsultationModification] = useState({visible: false, state: VIEW});
     const [supressionVehicule, setSupressionVehicule] = useState(false);
     const [data, setData] = useState(vehiculeDetail || {});
@@ -18,7 +18,8 @@ const Vehicule = props => {
 
     useEffect(() => {
         fetchVehicules();
-    }, [fetchVehicules]);
+        fetchPoles();
+    }, [fetchVehicules, fetchPoles]);
 
     const acceptVehicule = () => {
         fetchNewVehicule(data, success => {
@@ -30,8 +31,8 @@ const Vehicule = props => {
     };
 
     const modificationVehicule = () => {
-        fetchUpdateVehicule(data.vehId, data);
         setConsultationModification({visible: false})
+        fetchUpdateVehicule(data.vehId, data);
     };
 
     const supprimerVehicule = () => {
@@ -99,7 +100,7 @@ const Vehicule = props => {
                 <InputText
                     id={"vehModel"}
                     name={"VehModel"}
-                    label={"Model"}
+                    label={"Modèle"}
                     value={data.vehModel || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehModel")}
@@ -129,7 +130,7 @@ const Vehicule = props => {
                 <InputSelect
                     id={"vehTypeEssence"}
                     name={"VehTypeEssence"}
-                    label={"Type d'essence"}
+                    label={"Type de carburant"}
                     value={data.vehTypeEssence || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehTypeEssence")}
@@ -143,22 +144,23 @@ const Vehicule = props => {
                 <InputText
                     id={"vehNumberplace"}
                     name={"VehNumberplace"}
-                    label={"Nombre de place"}
+                    label={"Nombre de places"}
                     value={data.vehNumberplace || ""}
                     disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehNumberplace")}
                     fullWidth={false}
                     style={{marginLeft: '10px'}}
                 />
-                <InputText
-                    id={"vehState"}
-                    name={"VehState"}
-                    label={"Etat"}
-                    value={data.vehState || ""}
+                <InputSelect
+                    id={"vehPole"}
+                    name={"VehPole"}
+                    label={"Pole de rattachement"}
+                    value={data.poleId || ""}
                     disabled={consultationModification.state === VIEW}
-                    onChange={event => updateField(event, "vehState")}
+                    onChange={event => updateField(event, "poleId")}
                     fullWidth={false}
-                    style={{marginLeft: '10px'}}
+                    className={{marginLeft: '10px'}}
+                    data={poles}
                 />
             </ConsultationModification>
 

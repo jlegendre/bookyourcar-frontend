@@ -21,8 +21,8 @@ const Planning = props => {
 
     useEffect(() => {
         fetchPlanning(date);
-        setDataGraph([{date: 'Début des locations cette semaine', value: planning.startReservationCount},
-            {date: 'fin des locations cette semaine', value: planning.endReservationCount}]);
+       setDataGraph([{date: 'Début des locations cette semaine', value: planning.startReservationCount},
+                {date: 'Fin des locations cette semaine', value: planning.endReservationCount}]);
 
     }, [fetchPlanning, date, setDataGraph]);
 

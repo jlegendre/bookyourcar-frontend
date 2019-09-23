@@ -98,7 +98,7 @@ const Login = (props) => {
                         <Typography>
                             <FormControlLabel
                                 control={<Checkbox value="remember" color="primary"/>}
-                                label="Se souvenir de moi?"
+                                label="Se souvenir de moi ?"
                             />
                             <Link className={classes.link} to={"/newAccount"}>
                                 Créer un compte
