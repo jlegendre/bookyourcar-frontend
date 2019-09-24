@@ -9,10 +9,56 @@ import {formatDate} from "../../../../utils/dateUtils";
 
 const LocationList = props => {
 
-    const {locations, fetchDetailLocation} = props;
+    const {locations, fetchDetailLocation, updateFetchLocation} = props;
 
     const [popupOpen, setPopupOpen] = useState(false);
     const [currentLocation, setCurrentLocation] = useState(null);
+
+
+    /**
+     * Accepte la location
+     * @param location location a transmettre
+     */
+    const acceptLocation = (location) => {
+        updateFetchLocation(location.locId, location.vehicleId, 'Validate');
+        setPopupOpen(false);
+    };
+    /**
+     * Mets a jour la location
+     * @param location location a transmettre
+     */
+    const updateLocation = (location) => {
+        updateFetchLocation(location.locId, location.vehicleId, 'Update');
+        setPopupOpen(false);
+    };
+
+    /**
+     * Démarre la location
+     * @param location location a transmettre
+     */
+    const startLocation = location => {
+        updateFetchLocation(location.locId, null, 'Start');
+        setPopupOpen(false);
+    };
+
+    /**
+     * Met fin a la location
+     * @param location location a transmettre
+     */
+    const endLocation = location => {
+        updateFetchLocation(location.locId, null, 'Finish');
+        setPopupOpen(false);
+    };
+
+    /**
+     * Refuse la location
+     * @param location location a transmettre
+     */
+    const refuseLocation = location => {
+        updateFetchLocation(location.locId, null, 'Cancel');
+        setPopupOpen(false)
+    };
+
 
     const colonnes = [
         {
@@ -25,13 +71,13 @@ const LocationList = props => {
             name: <Typography>Date début</Typography>,
             selector: 'dateDebutResa',
             sortable: true,
-            cell: row => <Typography>{ formatDate(new Date(row['dateDebutResa']))}</Typography>
+            cell: row => <Typography>{formatDate(new Date(row['dateDebutResa']))}</Typography>
         },
         {
             name: <Typography>Date fin</Typography>,
             selector: 'dateFinResa',
             sortable: true,
-            cell: row => <Typography>{ formatDate(new Date(row['dateFinResa']))}</Typography>
+            cell: row => <Typography>{formatDate(new Date(row['dateFinResa']))}</Typography>
         },
         {
             name: <Typography>Véhicule</Typography>,
@@ -69,7 +115,11 @@ const LocationList = props => {
 
             <PopupValidateReservation
                 open={popupOpen}
-                onClose={() => setPopupOpen(false)}
+                onAccept={acceptLocation}
+                onRefuser={refuseLocation}
+                onStart={startLocation}
+                onFinish={endLocation}
+                onUpdate={updateLocation}
                 data={currentLocation}
             />
         </React.Fragment>

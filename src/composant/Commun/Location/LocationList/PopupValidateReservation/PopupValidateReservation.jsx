@@ -9,23 +9,23 @@ import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart
 
 const PopupValidateReservation = props => {
 
-    const {classes, data, open, onClose} = props;
+    const {classes, data, open, onClose, onAccept, onRefuser, onStart, onFinish,} = props;
 
     const createOKButton = () => {
         if(data.locStateId === 0) {
-            return ["Accepter", () => alert('todo')]
+            return ["Accepter", () => {onAccept(data)}]
         } else if(data.locStateId === 2) {
-            return ["Démarrer la location", () => alert('todo')]
+            return ["Démarrer la location", () => {onStart(data)}]
         }
     };
 
     const createKOButton = () => {
         if(data.locStateId === 0) {
-            return ["Refuser", () => alert('todo')]
+            return ["Refuser", () => {onRefuser(data)}]
         } else if(data.locStateId === 1) {
-            return ["Terminer la location", () => alert('todo')]
+            return ["Terminer la location", () => {onFinish(data)}]
         }
-    }
+    };
 
     if (!data) {
         return (<React.Fragment/>)
@@ -34,7 +34,6 @@ const PopupValidateReservation = props => {
     return (
         <Popup
             open={open}
-            onClose={onClose}
             title={`Location N°${data.locId} - Status : Location`}
             firstActionTxt={createOKButton() && createOKButton()[0]}
             firstActionFunc={createOKButton() && createOKButton()[1]}
