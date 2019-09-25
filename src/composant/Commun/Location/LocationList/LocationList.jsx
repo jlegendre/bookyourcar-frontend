@@ -20,7 +20,7 @@ const LocationList = props => {
      * @param location location a transmettre
      */
     const acceptLocation = (location) => {
-        updateFetchLocation(location.locId, location.vehicleId, 'Validate');
+        updateFetchLocation(location.locId, location.selectedVehicle, 'Validate');
         setPopupOpen(false);
     };
     /**
@@ -55,7 +55,7 @@ const LocationList = props => {
      * @param location location a transmettre
      */
     const refuseLocation = location => {
-        updateFetchLocation(location.locId, null, 'Cancel');
+        updateFetchLocation(location.locId, 0, 'Cancel');
         setPopupOpen(false)
     };
 
@@ -121,6 +121,8 @@ const LocationList = props => {
                 onFinish={endLocation}
                 onUpdate={updateLocation}
                 data={currentLocation}
+                setData={setCurrentLocation}
+                onClose={() => setPopupOpen(false)}
             />
         </React.Fragment>
     )

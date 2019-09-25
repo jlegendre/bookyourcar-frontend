@@ -1,17 +1,40 @@
 import React, {Fragment} from 'react'
 import {Icon} from "@material-ui/core";
+import InputSelect from '../../../../Commun/Input/InputSelect'
 
 const PopupValidateReservationLeftPart = props => {
 
-    const {data} = props;
+    const {data, setData} = props;
     const {locStateId, selectedVehicle} = data;
 
+
+    const updateVehicle = event => {
+        data.selectedVehicle = event.target.value;
+        setData(data);
+    };
+
     const show = () => {
-        if (locStateId === 1 || !selectedVehicle) {
+        data.availableVehicles.forEach((vehicle) => {
+            vehicle.label = vehicle.vehCommonName;
+            vehicle.value = vehicle.vehId;
+        });
+        if (locStateId === 1) {
             return (
                 <Fragment>
                     {!selectedVehicle ? "Aucune liste disponible" : ""}
                 </Fragment>
+            )
+        } else if (locStateId === 0) {
+            return (
+                <InputSelect
+                    fullWidth={true}
+                    data={data.availableVehicles}
+                    name={'Vehicules disponibles'}
+                    label={'Vehicules disponibles'}
+                    value={data.selectedVehicle}
+                    onChange={(event) => updateVehicle(event)}
+                    id={'vehSelected'}
+                />
             )
         }
 

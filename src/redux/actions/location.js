@@ -57,11 +57,10 @@ export const updateFetchLocation = (locationId, vehicleid, action) => {
         httpClient.request({
             url: `/Location/${locationId}`,
             method: 'PUT',
-            body: {vehicleId: vehicleid,
+            data: {vehicleId: vehicleid,
             action: action}
         }).then(response => {
-            //TODO a voir en fonction du retour du PUT
-            dispatch(setLocation(response.data));
+            fetchLocations()
         })
     }
 };

@@ -9,7 +9,7 @@ import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart
 
 const PopupValidateReservation = props => {
 
-    const {classes, data, open, onClose, onAccept, onRefuser, onStart, onFinish,} = props;
+    const {classes, data, open, onClose, onAccept, onRefuser, onStart, onFinish,setData} = props;
 
     const createOKButton = () => {
         if(data.locStateId === 0) {
@@ -31,6 +31,11 @@ const PopupValidateReservation = props => {
         return (<React.Fragment/>)
     }
 
+    const testData = dataVehUpdated =>{
+        setData(dataVehUpdated);
+    };
+
+
     return (
         <Popup
             open={open}
@@ -38,7 +43,7 @@ const PopupValidateReservation = props => {
             firstActionTxt={createOKButton() && createOKButton()[0]}
             firstActionFunc={createOKButton() && createOKButton()[1]}
             secondActionTxt={createKOButton() && createKOButton()[0]}
-            secondActionFunc={() => onClose && onClose()}
+            secondActionFunc={createKOButton() && createKOButton()[1]}
             fullWidth
         >
             {data && (
@@ -69,6 +74,7 @@ const PopupValidateReservation = props => {
                             <div className={classes.formRight}>
                                 <PopupValidateReservationLeftPart
                                     data={data}
+                                    setData={testData}
                                 />
                             </div>
                         </div>
