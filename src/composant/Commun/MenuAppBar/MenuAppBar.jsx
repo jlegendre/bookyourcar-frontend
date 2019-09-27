@@ -1,19 +1,30 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import * as PropTypes from 'prop-types';
 import List from "@material-ui/core/List/index";
 import Drawer from "@material-ui/core/Drawer/index";
 import Divider from "@material-ui/core/Divider/index";
 import {Hidden, withStyles} from "@material-ui/core";
 import MenuItem from "./MenuItem.js";
+import {useInterval} from "../../../utils/useInterval";
 
 const MenuAppBar = props => {
 
-    const {classes, theme, role, open, onClose} = props;
+    const {classes, theme, role, open, onClose, fetchNumberUserInWaiting} = props;
+
+    const [numberUserActivation, setNumberUserActivation] = useState(undefined);
 
     const logout = () => {
         onClose();
         props.logout();
     };
+
+    useEffect(() => {
+       fetchNumberUserInWaiting(setNumberUserActivation)
+    }, [fetchNumberUserInWaiting]);
+
+    useInterval(() => {
+        fetchNumberUserInWaiting(setNumberUserActivation)
+    }, 12000);
 
     const menu = (
         <div>
@@ -24,7 +35,7 @@ const MenuAppBar = props => {
             {role && role === 'Admin' &&
             <List>
                 <MenuItem label={"Validation d'utilisateurs"} url={"validUser"} iconName={"how_to_reg"}
-                          onClick={onClose}/>
+                          onClick={onClose} number={numberUserActivation}/>
                 <MenuItem label={"Gestion des réservations"} url={"reservation"} iconName={"how_to_reg"}
                           onClick={onClose}/>
                 <MenuItem label={"Gestion des véhicules"} url={"vehicule"} iconName={"directions_car"}
@@ -84,7 +95,9 @@ MenuAppBar.propTypes = {
     role: PropTypes.string,
 
     //fonction qui permet de déconnecter l'utilisateur
-    logout: PropTypes.func
+    logout: PropTypes.func,
+
+    fetchNumberUserInWaiting: PropTypes.func
 };
 
 const drawerWidth = 240;

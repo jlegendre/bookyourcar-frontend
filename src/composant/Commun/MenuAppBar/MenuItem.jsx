@@ -5,7 +5,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon/index";
 import Icon from "@material-ui/core/Icon/index";
 import ListItemText from "@material-ui/core/ListItemText/index";
 import {Link} from "react-router-dom";
-import {withStyles} from "@material-ui/core";
+import {Badge, withStyles} from "@material-ui/core";
 
 /**
  * Composant de MenuItem pour le MenuAppBar
@@ -15,11 +15,17 @@ import {withStyles} from "@material-ui/core";
  */
 const MenuItem = props => {
 
-    const {url, iconName, label, pathname, classes, onClick} = props;
+    const {url, iconName, label, pathname, classes, onClick, number} = props;
+
+    const icon = <Icon>{iconName}</Icon>;
 
     const listItem =
         <ListItem button selected={pathname === `/${url}`} onClick={onClick}>
-            <ListItemIcon><Icon>{iconName}</Icon></ListItemIcon>
+            <ListItemIcon>
+                {
+                    number ? <Badge badgeContent={number} color={"primary"} overlap={"circle"}>{icon}</Badge>: icon
+                }
+            </ListItemIcon>
             <ListItemText primary={label}/>
         </ListItem>;
 
@@ -41,7 +47,8 @@ MenuItem.propTypes = {
     iconName: ProTypes.string,
     label: ProTypes.string.isRequired,
     pathname: ProTypes.string,
-    onClick: ProTypes.func
+    onClick: ProTypes.func,
+    number: ProTypes.number
 };
 
 

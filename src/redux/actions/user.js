@@ -68,12 +68,12 @@ export const fetchUser = (id, callback) => {
     }
 };
 
-export const fetchNumberUserInWaiting = () => {
+export const fetchNumberUserInWaiting = (callback) => {
     return dispatch => {
         httpClient.request({
             url: '/User/CountUserInWaiting'
         }).then(result => {
-            return result.data
+            callback(result.data)
         })
     }
 };
