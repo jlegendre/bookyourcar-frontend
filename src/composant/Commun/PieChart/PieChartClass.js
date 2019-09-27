@@ -48,7 +48,7 @@ export const PieClass = props => {
                 .style("font-size", 10)
                 .text(d => format(d.value));
         },
-        [props.data]
+        [props.data, colors, createArc, createPie, format]
     );
 
     return (

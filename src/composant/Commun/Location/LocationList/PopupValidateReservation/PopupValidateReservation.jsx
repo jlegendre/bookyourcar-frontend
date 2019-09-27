@@ -9,9 +9,8 @@ import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart
 
 const PopupValidateReservation = props => {
 
-    const {classes, data, open, onClose, onAccept, onRefuser, onStart, onFinish,setData} = props;
+    const {classes, data, open, onAccept, onRefuser, onStart, onFinish,setData} = props;
 
-    let dataVehicleChanged = false;
     const createOKButton = () => {
         if(data.locStateId === 0) {
             return ["Accepter", () => {onAccept(data)}]
@@ -35,7 +34,6 @@ const PopupValidateReservation = props => {
     const testData = dataVehUpdated =>{
         setData(dataVehUpdated);
         if(data.locStateId === 2) {
-            dataVehicleChanged = true;
             createOKButton();
         }
     };
