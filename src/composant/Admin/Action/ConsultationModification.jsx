@@ -15,18 +15,18 @@ const ConsultationModification = props => {
     const getButtonFunction = () => {
         if (props.state === NEW) {
             props.onChangeState(VIEW);
-            props.onAccept()
+            props.onAccept && props.onAccept()
         } else if (props.state === VIEW) {
             props.onChangeState(UPDATE)
         } else {
             props.onChangeState(VIEW);
-            props.onUpdate()
+            props.onUpdate && props.onUpdate()
         }
     };
 
     const onClose = event => {
         props.onChangeState(VIEW);
-        props.onClose(event);
+        props.onClose && props.onClose(event);
     };
 
     return (

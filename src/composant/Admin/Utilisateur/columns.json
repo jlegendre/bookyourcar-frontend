@@ -1,0 +1,22 @@
+[
+	{
+		"name": "Nom",
+		"selector": "userName",
+		"sortable": true
+	},
+	{
+		"name":"Prénom",
+		"selector": "userFirstname",
+		"sortable": true
+	},
+	{
+		"name": "Email",
+		"selector": "userEmail",
+		"sortable": true
+	},
+	{
+		"name": "Pole",
+		"selector": "poleName",
+		"sortable": true
+	}
+]

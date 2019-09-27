@@ -1,4 +1,4 @@
-import {USER_IN_WAITING} from "../actions/user";
+import {USER_IN_WAITING, GET_USER} from "../actions/user";
 
 const initialState = {
     list: [],
@@ -7,14 +7,18 @@ const initialState = {
 
 
 export default function (state = initialState, action) {
-    if (action.type === USER_IN_WAITING) {
-        return {...state, list: action.userInWaiting};
-    } else {
-        return state
+    switch (action.type) {
+        case USER_IN_WAITING:
+            return {...state, list: action.userInWaiting};
+        case GET_USER:
+            return {...state, detail: action.user};
+        default:
+            return state
     }
 }
 
 export const getUserInWaiting = state => state.user.list;
+export const getUserDetail = state => state.user.detail;
 
 
 

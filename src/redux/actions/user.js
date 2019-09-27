@@ -3,6 +3,7 @@ import {setNoMessage} from "./message";
 
 
 export const USER_IN_WAITING = "GET_USER_IN_WAITING";
+export const GET_USER = "GET_USER";
 
 /**
  * Call /User/userInWaiting Url, pour récupérer tous les utilisateurs en attente de validation
@@ -55,6 +56,18 @@ export const fetchDeleteUser = id => {
     }
 };
 
+export const fetchUser = (id, callback) => {
+    return dispatch => {
+        httpClient.request({
+            url: `/User/${id}`,
+            method: 'GET',
+        }).then(response => {
+            dispatch(setUser(response.data));
+            callback(response.data);
+        })
+    }
+};
+
 export const fetchNumberUserInWaiting = () => {
     return dispatch => {
         httpClient.request({
@@ -68,3 +81,7 @@ export const fetchNumberUserInWaiting = () => {
 export const setUserInWaiting = userInWaiting => {
     return {type: USER_IN_WAITING, userInWaiting};
 };
+
+export const setUser = user => {
+    return {type: GET_USER, user}
+}
