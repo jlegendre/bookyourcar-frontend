@@ -8,7 +8,7 @@ const initialState = {
 
 export default function (state = initialState, action) {
     if (action.type === USER_IN_WAITING) {
-        return {...state, list: action.users};
+        return {...state, list: action.userInWaiting};
     } else {
         return state
     }

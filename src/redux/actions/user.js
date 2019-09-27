@@ -55,6 +55,16 @@ export const fetchDeleteUser = id => {
     }
 };
 
+export const fetchNumberUserInWaiting = () => {
+    return dispatch => {
+        httpClient.request({
+            url: '/User/CountUserInWaiting'
+        }).then(result => {
+            return result.data
+        })
+    }
+};
+
 export const setUserInWaiting = userInWaiting => {
     return {type: USER_IN_WAITING, userInWaiting};
 };
