@@ -18,13 +18,14 @@ const MenuAppBar = props => {
         props.logout();
     };
 
-    useEffect(() => {
-       fetchNumberUserInWaiting(setNumberUserActivation)
-    }, [fetchNumberUserInWaiting]);
+    const fetchNumber = () => {
+        if (role === 'Admin') {
+            fetchNumberUserInWaiting(setNumberUserActivation)
+        }
+    };
 
-    useInterval(() => {
-        fetchNumberUserInWaiting(setNumberUserActivation)
-    }, 12000);
+    useEffect(fetchNumber);
+    useInterval(fetchNumber, 12000);
 
     const menu = (
         <div>
