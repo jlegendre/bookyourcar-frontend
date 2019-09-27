@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
-import {getPlanning} from "../../../redux/reducers/datapage";
-import {fetchPlanningVehicule} from '../../../redux/actions/admin'
+import {getPlanning} from "../../../redux/reducers/planning";
+import {fetchPlanningVehicule} from '../../../redux/actions/planning'
 import PopupPlanning from "./Planning.jsx";
 
 

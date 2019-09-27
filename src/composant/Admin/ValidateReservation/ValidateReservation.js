@@ -1,7 +1,8 @@
 import ValidateReservation from './ValidateReservation.jsx';
 import {connect} from 'react-redux';
 import {fetchLocation, fetchLocationAdmin} from "../../../redux/actions/location";
-import {getListVehiclesForSelectByBrandAndModel, getLocationList} from "../../../redux/reducers/datapage";
+import {getLocationList} from "../../../redux/reducers/location";
+import {getListVehiclesForSelectByBrandAndModel} from "../../../redux/reducers/vehicule";
 
 const mapStateToProps = state => {
     return {

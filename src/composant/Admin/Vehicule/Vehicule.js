@@ -1,6 +1,6 @@
 import Vehicule from "./Vehicule.jsx";
 import {connect} from "react-redux";
-import {getListPolesForSelect, getVehiculeDetail, getVehiculeList} from "../../../redux/reducers/datapage";
+import {getVehiculeDetail, getVehiculeList} from "../../../redux/reducers/vehicule";
 import {
     fetchDeleteVehicule,
     fetchNewVehicule,
@@ -9,6 +9,7 @@ import {
     fetchVehicules
 } from "../../../redux/actions/vehicule";
 import {fetchPoles} from "../../../redux/actions/pole";
+import {getListPolesForSelect} from "../../../redux/reducers/pole";
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = dispatch => {

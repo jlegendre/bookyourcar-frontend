@@ -2,7 +2,7 @@ import CreateUser from "./CreateUser.jsx";
 import {connect} from "react-redux";
 import {fetchRegisterUser} from "../../../redux/actions/auth";
 import {getToken} from "../../../redux/reducers/auth";
-import {getListPolesForSelect} from "../../../redux/reducers/datapage";
+import {getListPolesForSelect} from "../../../redux/reducers/pole";
 import {setMessage} from "../../../redux/actions/message";
 import {fetchPoles} from "../../../redux/actions/pole";
 

@@ -1,7 +1,7 @@
 import {connect} from "react-redux"
 import Accueil from './Accueil.jsx'
-import {getProfil} from "../../../redux/reducers/user";
-import {fetchUserProfil, fetchUpdateProfil, fetchUpdatePassword} from "../../../redux/actions/user";
+import {getProfil} from "../../../redux/reducers/auth";
+import {fetchUpdatePassword, fetchUpdateProfil, fetchUserProfil} from "../../../redux/actions/auth";
 
 
 const mapStateToProps = state => {
@@ -12,9 +12,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchProfil : () => dispatch(fetchUserProfil()),
-        fetchUpdateProfil : user => dispatch(fetchUpdateProfil(user)),
-        fetchUpdatePassword : (password, success) => dispatch(fetchUpdatePassword(password, success))
+        fetchProfil: () => dispatch(fetchUserProfil()),
+        fetchUpdateProfil: user => dispatch(fetchUpdateProfil(user)),
+        fetchUpdatePassword: (password, success) => dispatch(fetchUpdatePassword(password, success))
     }
 };
 

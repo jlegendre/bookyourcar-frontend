@@ -1,4 +1,5 @@
 import httpClient from "../../utils/httpClient";
+import {setMessage} from "./message";
 
 export const LOCATIONS = "GET_LOCATIONS";
 export const LOCATION = "GET_LOCATION";
@@ -18,6 +19,29 @@ export const fetchLocations = () => {
         })
     }
 };
+
+
+/**
+ * Créer une noubelle réservation
+ * @param input donnée a envoyer
+ * @param success fonction en cas de succes
+ * @return {Function}
+ */
+export const fetchNewLocation = (input, success) => {
+    return dispatch => {
+        httpClient.request({
+            url: '/Location/AskLocation',
+            method: 'POST',
+            data: input
+        }).then(() => {
+            success && success();
+            dispatch(setMessage({"Success" : ["Votre réservation a bien été prise en compte"]}))
+        }).catch(() => {
+            dispatch(setMessage({"Error" : ["Votre demande comporte des erreurs, veuillez vérifier les données saisies"]}))
+        })
+    }
+};
+
 
 /**
  * Retourne les locations pour la partie admin

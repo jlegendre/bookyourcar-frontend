@@ -1,8 +1,8 @@
 import ValidUser from "./Utilisateur.jsx";
 import {connect} from "react-redux";
-import {fetchUserInValidation} from "../../../redux/actions/datapage";
-import {getUserInWaiting} from "../../../redux/reducers/datapage";
-import {fetchDeleteUser, fetchValidateUser} from "../../../redux/actions/admin";
+import {fetchUserInValidation} from "../../../redux/actions/user";
+import {getUserInWaiting} from "../../../redux/reducers/user";
+import {fetchDeleteUser, fetchValidateUser} from "../../../redux/actions/user";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)

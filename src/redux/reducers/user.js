@@ -1,19 +1,20 @@
-import {SET_NO_PROFIL, SET_USER_PROFIL} from './../actions/user';
+import {USER_IN_WAITING} from "../actions/user";
 
 const initialState = {
-    profil: undefined
+    list: [],
+    detail: undefined
 };
 
 
 export default function (state = initialState, action) {
-    switch (action.type) {
-        case SET_USER_PROFIL:
-            return {...state, profil: action.profil};
-        case SET_NO_PROFIL:
-            return {...state, profil: initialState.profil};
-        default:
-            return state
+    if (action.type === USER_IN_WAITING) {
+        return {...state, list: action.users};
+    } else {
+        return state
     }
 }
 
-export const getProfil = state => state.user.profil;
+export const getUserInWaiting = state => state.user.list;
+
+
+

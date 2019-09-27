@@ -2,16 +2,12 @@ import MenuAppBar from './MenuAppBar.jsx'
 import {connect} from "react-redux";
 import {setAuthEmpty} from "../../../redux/actions/auth";
 import {getRole} from "../../../redux/reducers/auth";
-import {setNoProfil} from "../../../redux/actions/user";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = (dispatch) => {
     return {
-        logout: () => {
-            dispatch(setAuthEmpty());
-            dispatch(setNoProfil());
-        }
+        logout: () => dispatch(setAuthEmpty())
     }
 };
 

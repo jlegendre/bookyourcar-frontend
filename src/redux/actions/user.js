@@ -1,101 +1,60 @@
 import httpClient from './../../utils/httpClient'
-import {setMessage, setNoMessageFor} from "./message";
+import {setNoMessage} from "./message";
 
-export const SET_USER_LOCATION = 'SET_USER_LOCATION';
-export const SET_USER_PROFIL = 'SET_USER_PROFIL';
-export const SET_NO_PROFIL = 'SET_NO_PROFIL';
 
-/**
- * Créer une noubelle réservation
- * @param input donnée a envoyer
- * @param success fonction en cas de succes
- * @return {Function}
- */
-export const fetchNewLocation = (input, success) => {
-    return dispatch => {
-        httpClient.request({
-            url: '/Location/AskLocation',
-            method: 'POST',
-            data: input
-        }).then(() => {
-            success && success();
-            dispatch(setMessage({"Success" : ["Votre réservation a bien été prise en compte"]}))
-        }).catch(() => {
-            dispatch(setMessage({"Error" : ["Votre demande comporte des erreurs, veuillez vérifier les données saisies"]}))
-        })
-    }
-};
+export const USER_IN_WAITING = "GET_USER_IN_WAITING";
 
 /**
- * Retourne le profil de l'utilisateur
- * @return {Function}
+ * Call /User/userInWaiting Url, pour récupérer tous les utilisateurs en attente de validation
+ * @returns {Function}
  */
-export const fetchUserProfil = () => {
+export const fetchUserInValidation = () => {
     return dispatch => {
         httpClient.request({
-            url: '/User/UserInfos',
-            method: 'GET'
+            url: '/User/userInWaiting',
+            method: 'GET',
         }).then(response => {
-            dispatch(setUserProfil(response.data))
+            dispatch(setUserInWaiting(response.data));
+            dispatch(setNoMessage());
         })
     }
 };
+
 
 /**
- * Modifie les informations de l'utilisateur
- * @param user modification a modifier
- * @return {Function}
+ * Call /User/ValidateUserInWaiting, url pour accepter un utilisateur
+ * @param id identifiant de l'utilisateur
+ * @returns {Function}
+ *
  */
-export const fetchUpdateProfil = (user) => {
+export const fetchValidateUser = id => {
     return dispatch => {
         httpClient.request({
-            url: '/User/EditInfoUser',
+            url: `/User/ValidateUserInWaiting/${id}`,
             method: 'POST',
-            data: user
         }).then(() => {
-            dispatch(fetchUserProfil())
+            dispatch(fetchUserInValidation())
         })
     }
 };
 
-export const fetchUpdatePassword = (password, success) => {
-    return (dispatch, getState) => {
-        if(password.password !== password.passwordConfirmation) {
-            dispatch(setMessage({"Error": ["Les mots de passe sont différents"]}));
-            success(false);
-        } else {
-            httpClient.request({
-                url: '/Auth/login',
-                method: 'POST',
-                data: {email: getState().auth.username, password: password.oldPassword, rememberMe: false}
-            }).then(() => {
-                dispatch(setNoMessageFor("OldPassword"));
-                httpClient.request({
-                    url: '/Auth/SaveChangePassword',
-                    method: 'POST',
-                    data: {password: password.password, passwordConfirmation: password.passwordConfirmation}
-                }).then(() => {
-                    dispatch(setMessage({"Success" : ["Mot de passe modifié"]}));
-                    success(true);
-                }).catch(() => {
-                    success(false);
-                })
-            }).catch(() => {
-                dispatch(setMessage({"OldPassword": ["Ancien mot de passe incorrect"]}));
-                success(false);
-            })
-        }
+
+/**
+ * Call /User/:id, Url pour supprimer un utilisateur
+ * @param id identifiant de l'utilisateur
+ * @return {Function}
+ */
+export const fetchDeleteUser = id => {
+    return dispatch => {
+        httpClient.request({
+            url: `/User/RefuseUserInWaiting/${id}`,
+            method: 'POST',
+        }).then(() => {
+            dispatch(fetchUserInValidation())
+        })
     }
 };
 
-export const setUserLocation = location => {
-    return {type: SET_USER_LOCATION, location}
-};
-
-export const setUserProfil = profil => {
-    return {type: SET_USER_PROFIL, profil}
-};
-
-export const setNoProfil = () => {
-    return {type: SET_NO_PROFIL}
+export const setUserInWaiting = userInWaiting => {
+    return {type: USER_IN_WAITING, userInWaiting};
 };

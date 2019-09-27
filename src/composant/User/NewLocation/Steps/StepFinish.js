@@ -1,6 +1,6 @@
 import StepFinish from './StepFinish.jsx';
 import {connect} from "react-redux";
-import {getPoleById} from "../../../../redux/reducers/datapage";
+import {getPoleById} from "../../../../redux/reducers/pole";
 
 
 //pour envoyer des objets du store de redux

@@ -1,6 +1,6 @@
 import MyLocation from './MyLocation.jsx';
 import {connect} from 'react-redux';
-import {getLocationList} from "../../../redux/reducers/datapage";
+import {getLocationList} from "../../../redux/reducers/location";
 import {fetchLocations} from "../../../redux/actions/location";
 
 const mapStateToProps = state => {

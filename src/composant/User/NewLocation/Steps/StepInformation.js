@@ -1,6 +1,6 @@
 import StepInformation from './StepInformation.jsx';
 import {connect} from "react-redux";
-import {getListPolesForSelect} from "../../../../redux/reducers/datapage";
+import {getListPolesForSelect} from "../../../../redux/reducers/pole";
 import {fetchPoles} from "../../../../redux/actions/pole";
 
 

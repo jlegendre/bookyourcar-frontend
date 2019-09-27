@@ -1,6 +1,6 @@
 import NewLocation from './NewLocation.jsx'
 import {connect} from "react-redux";
-import {fetchNewLocation} from "../../../redux/actions/user";
+import {fetchNewLocation} from "../../../redux/actions/location";
 import {setMessage, setNoMessageFor} from "../../../redux/actions/message";
 
 
