@@ -14,7 +14,7 @@ const PopupValidateReservationLeftPart = props => {
     };
 
     const show = () => {
-        data.availableVehicles.forEach((vehicle) => {
+        data && data.availableVehicles && data.availableVehicles.forEach((vehicle) => {
             vehicle.label = vehicle.vehCommonName;
             vehicle.value = vehicle.vehId;
         });
