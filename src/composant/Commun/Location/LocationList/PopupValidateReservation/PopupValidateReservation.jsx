@@ -9,7 +9,7 @@ import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart
 
 const PopupValidateReservation = props => {
 
-    const {classes, data, open, onAccept, onRefuser, onStart, onFinish,setData} = props;
+    const {classes, data, open, onAccept, onRefuser, onStart, onFinish,setData, onClose} = props;
 
     const createOKButton = () => {
         if(data.locStateId === 0) {
@@ -48,6 +48,7 @@ const PopupValidateReservation = props => {
             secondActionTxt={createKOButton() && createKOButton()[0]}
             secondActionFunc={createKOButton() && createKOButton()[1]}
             fullWidth
+            onClose={onClose}
         >
             {data && (
                 <div className={classes.main}>
