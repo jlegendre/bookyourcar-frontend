@@ -2,9 +2,9 @@ import React from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CssBaseline from "@material-ui/core/CssBaseline";
-import {getBreakingLimit} from "../../../../../utils/cssUtils";
-import {formatDate} from "../../../../../utils/dateUtils";
-import Popup from "../../../Popup/Popup";
+import {getBreakingLimit} from "../../../../utils/cssUtils";
+import {formatDate} from "../../../../utils/dateUtils";
+import Popup from "../../Popup/Popup";
 import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart";
 
 const PopupValidateReservation = props => {

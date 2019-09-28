@@ -1,6 +1,6 @@
 import LocationList from './LocationList.jsx'
 import {connect} from 'react-redux';
-import {fetchLocation, updateFetchLocation} from "../../../../redux/actions/location";
+import {fetchLocation, updateFetchLocation} from "../../../redux/actions/location";
 
 const mapStateToProps = state => {
     return {

@@ -1,6 +1,6 @@
 import React, {Fragment} from 'react'
 import {Icon} from "@material-ui/core";
-import InputSelect from '../../../../Commun/Input/InputSelect'
+import InputSelect from '../../Input/InputSelect'
 
 const PopupValidateReservationLeftPart = props => {
 

@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import {getBreakingLimit} from "../../../utils/cssUtils";
-import LocationList from "../../Commun/Location/LocationList/LocationList.js";
+import LocationList from "../../Commun/Location/LocationList.js";
 
 const MyLocation = props => {
 

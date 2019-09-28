@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import * as PropTypes from 'prop-types';
-import LocationList from "../../Commun/Location/LocationList/LocationList";
+import LocationList from "../../Commun/Location/LocationList";
 
 const ValidateReservation = props => {
 
