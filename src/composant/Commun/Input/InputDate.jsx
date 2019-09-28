@@ -16,6 +16,7 @@ const InputDate = props => {
                 <DatePicker
                     label={label}
                     value={value}
+                    format="dd/MM/yyyy"
                     onChange={onChange}
                 />
             </MuiPickersUtilsProvider>

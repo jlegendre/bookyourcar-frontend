@@ -2,20 +2,18 @@
   {
     "name": "Utilisateur",
     "selector": "userFriendlyName",
-    "sortable": true,
-    "style": "color : rgb(73,170,179)"
+    "sortable": true
   },
   {
     "name": "Date début",
     "selector": "dateDebutResa",
-    "sortable": true,
-    "style": "color : rgb(73,170,179)"
+    "sortable": true
   },
-	{
-		"name": "Date fin",
-		"selector": "dateFinResa",
-		"sortable": true
-	},
+  {
+    "name": "Date fin",
+    "selector": "dateFinResa",
+    "sortable": true
+  },
 	{
 		"name": "Véhicule",
 		"selector": "vehicleFriendlyName",
