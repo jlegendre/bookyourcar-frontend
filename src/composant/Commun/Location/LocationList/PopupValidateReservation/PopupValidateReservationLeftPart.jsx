@@ -24,7 +24,7 @@ const PopupValidateReservationLeftPart = props => {
                     {!selectedVehicle ? "Aucune liste disponible" : ""}
                 </Fragment>
             )
-        } else if (locStateId === 0 ||locStateId === 2) {
+        } else if (locStateId === 0 || locStateId === 2) {
             return (
                 <InputSelect
                     fullWidth={true}
@@ -40,15 +40,18 @@ const PopupValidateReservationLeftPart = props => {
 
         return (
             <Fragment>
-                <div>
-                    {selectedVehicle.vehCommonName} {selectedVehicle.registration}
-                </div>
-                <div>
-                    <Icon>ev_station</Icon>{selectedVehicle.fuelName}
-                </div>
-                <div>
-                    <Icon>supervisor_account</Icon> {selectedVehicle.seatCount}
-                </div>
+                {selectedVehicle && <Fragment>
+                    <div>{selectedVehicle.vehCommonName} {selectedVehicle.registration}
+
+                    </div>
+                    <div>
+                        <Icon>ev_station</Icon>{selectedVehicle.fuelName}
+                    </div>
+                    <div>
+                        <Icon>supervisor_account</Icon> {selectedVehicle.seatCount}
+                    </div>
+                </Fragment>}
+
             </Fragment>
         )
 
