@@ -1,0 +1,27 @@
+[
+	{
+		"name": "Utilisateur",
+		"selector": "userFriendlyName",
+		"sortable": true
+	},
+	{
+		"name": "Date début",
+		"selector": "dateDebutResa",
+		"sortable": true
+	},
+	{
+		"name": "Date fin",
+		"selector": "dateFinResa",
+		"sortable": true
+	},
+	{
+		"name": "Véhicule",
+		"selector": "vehicleFriendlyName",
+		"sortable": true
+	},
+	{
+		"name": "Etat",
+		"selector": "locationState",
+		"sortable": true
+	}
+];

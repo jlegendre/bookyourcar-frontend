@@ -6,6 +6,7 @@ import Typography from "@material-ui/core/Typography/index";
 import {Card, CardActions} from "@material-ui/core";
 import Button from "@material-ui/core/Button/index";
 import {formatDate} from "../../../../utils/dateUtils";
+import {Link} from "react-router-dom";
 
 const BlocNextLocation = props => {
 
@@ -35,9 +36,11 @@ const BlocNextLocation = props => {
                     <CardActions className={classes.action}>
                         {
                             haveNextLocation &&
-                            <Button size="small" color="primary">
-                                Voir ma location
-                            </Button>
+                            <Link to={"/booking/me"} className={classes.link}>
+                                <Button size="small" color="primary">
+                                    Voir ma location
+                                </Button>
+                            </Link>
                         }
                     </CardActions>
                 </div>
