@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
 import PopupValidateReservation from "./PopupValidateReservation/PopupValidateReservation";
 import Table from "../../Table/Table";
-import columns from "./columns.json";
+import columns from "./columns";
 
 
 const LocationList = props => {
