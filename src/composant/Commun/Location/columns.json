@@ -1,14 +1,16 @@
 [
-	{
-		"name": "Utilisateur",
-		"selector": "userFriendlyName",
-		"sortable": true
-	},
-	{
-		"name": "Date début",
-		"selector": "dateDebutResa",
-		"sortable": true
-	},
+  {
+    "name": "Utilisateur",
+    "selector": "userFriendlyName",
+    "sortable": true,
+    "style": "color : rgb(73,170,179)"
+  },
+  {
+    "name": "Date début",
+    "selector": "dateDebutResa",
+    "sortable": true,
+    "style": "color : rgb(73,170,179)"
+  },
 	{
 		"name": "Date fin",
 		"selector": "dateFinResa",

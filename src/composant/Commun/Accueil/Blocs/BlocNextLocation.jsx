@@ -70,5 +70,8 @@ export default withStyles(() => ({
     content: {
         flex: '1 0 auto',
         textAlign: 'center'
+    },
+    link: {
+        textDecoration: 'none'
     }
 }))(BlocNextLocation)

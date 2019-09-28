@@ -19,7 +19,7 @@ const Table = props => {
 
     const createColonne = ligne => {
         return {
-            name: <Typography>{ligne.name}</Typography>,
+            name: <Typography color="primary">{ligne.name}</Typography>,
             sortable: ligne.sortable,
             selector: ligne.selector,
             cell: row => <Typography>{row[ligne.selector]}</Typography>
