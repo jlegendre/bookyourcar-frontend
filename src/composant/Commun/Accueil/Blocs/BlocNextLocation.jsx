@@ -11,7 +11,6 @@ import {Link} from "react-router-dom";
 const BlocNextLocation = props => {
 
     const {classes, user} = props;
-
     let haveNextLocation = user && user.nextLocation;
 
     return (
@@ -36,7 +35,7 @@ const BlocNextLocation = props => {
                     <CardActions className={classes.action}>
                         {
                             haveNextLocation &&
-                            <Link to={"/booking/me"} className={classes.link}>
+                            <Link to={`/booking/me/${user.nextLocationId}`} className={classes.link}>
                                 <Button size="small" color="primary">
                                     Voir ma location
                                 </Button>

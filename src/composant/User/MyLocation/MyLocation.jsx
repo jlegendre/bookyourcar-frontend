@@ -6,7 +6,7 @@ import LocationList from "../../Commun/Location/LocationList.js";
 
 const MyLocation = props => {
 
-    const {classes, locations, fetchUserLocation} = props;
+    const {classes, locations, fetchUserLocation, match} = props;
 
     useEffect(() => {
         fetchUserLocation();
@@ -14,7 +14,7 @@ const MyLocation = props => {
 
     if (locations.length !== 0) {
         return (
-            <LocationList locations={locations} updateable={false}/>
+            <LocationList locations={locations} updateable={false} id={match.params.locationId}/>
         )
     } else {
         return (

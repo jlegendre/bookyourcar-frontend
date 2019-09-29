@@ -135,6 +135,8 @@ const App = props => {
                                component={params => requireUserLogin(<NewLocation {...params}/>)}/>
                         <Route exact path={"/booking/me"}
                                component={params => requireUserLogin(<MyLocation {...params}/>)}/>
+                        <Route exact path={"/booking/me/:locationId"}
+                               component={params => requireUserLogin(<MyLocation {...params}/>)}/>
 
                         {/* Route admin */}
                         <Route path={"/validUser"}

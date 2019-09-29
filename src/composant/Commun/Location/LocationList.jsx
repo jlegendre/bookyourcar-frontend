@@ -1,23 +1,23 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import PopupValidateReservation from "./PopupValidateReservation/PopupValidateReservation";
 import Table from "../Table/Table";
 import columns from "./columns";
-import {formatDate} from "../../../utils/dateUtils";
 
 
 const LocationList = props => {
 
-    const {locations, fetchDetailLocation, updateFetchLocation, updateable} = props;
+    const {locations, fetchDetailLocation, updateFetchLocation, updateable, id} = props;
 
     const [popupOpen, setPopupOpen] = useState(false);
     const [currentLocation, setCurrentLocation] = useState(null);
 
-
-    locations.forEach((loc) => {
-        loc.dateDebutResa = formatDate(new Date(loc.dateDebutResa));
-        loc.dateFinResa = formatDate(new Date(loc.dateFinResa));
-    });
+    const openLocation = row => {
+        fetchDetailLocation(row.locationId, success => {
+            setCurrentLocation(success);
+            setPopupOpen(true);
+        });
+    };
 
     /**
      * Accepte la location
@@ -63,13 +63,14 @@ const LocationList = props => {
         setPopupOpen(false)
     };
 
-
-    const openLocation = row => {
-        fetchDetailLocation(row.locationId, success => {
-            setCurrentLocation(success);
-            setPopupOpen(true);
-        });
-    };
+    useEffect(() => {
+        if (id) {
+            fetchDetailLocation(id, success => {
+                setCurrentLocation(success);
+                setPopupOpen(true);
+            });
+        }
+    }, [id, fetchDetailLocation]);
 
     return (
         <React.Fragment>
