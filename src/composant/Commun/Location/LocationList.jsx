@@ -3,6 +3,7 @@ import * as PropTypes from 'prop-types';
 import PopupValidateReservation from "./PopupValidateReservation/PopupValidateReservation";
 import Table from "../Table/Table";
 import columns from "./columns";
+import {formatDate} from "../../../utils/dateUtils";
 
 
 const LocationList = props => {
@@ -12,6 +13,11 @@ const LocationList = props => {
     const [popupOpen, setPopupOpen] = useState(false);
     const [currentLocation, setCurrentLocation] = useState(null);
 
+
+    locations.forEach((loc) => {
+        loc.dateDebutResa = formatDate(new Date(loc.dateDebutResa));
+        loc.dateFinResa = formatDate(new Date(loc.dateFinResa));
+    });
 
     /**
      * Accepte la location
