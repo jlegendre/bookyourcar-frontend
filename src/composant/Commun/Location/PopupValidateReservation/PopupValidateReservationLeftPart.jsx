@@ -31,7 +31,7 @@ const PopupValidateReservationLeftPart = props => {
                     data={data.availableVehicles}
                     name={'Vehicules disponibles'}
                     label={'Vehicules disponibles'}
-                    value={data.selectedVehicle.vehId}
+                    value={data.selectedVehicle !== null ? data.selectedVehicle.vehId : ''}
                     onChange={(event) => updateVehicle(event)}
                     id={'vehSelected'}
                 />

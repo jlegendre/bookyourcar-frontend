@@ -10,9 +10,8 @@ const ValidateReservation = props => {
         fetchAdminLocation();
     }, [fetchAdminLocation]);
 
-    console.log(locations);
     return (
-        <LocationList locations={locations} completeView/>
+        <LocationList locations={locations} updateable={true} completeView/>
     )
 };
 

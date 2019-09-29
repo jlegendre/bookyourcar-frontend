@@ -7,7 +7,7 @@ import columns from "./columns";
 
 const LocationList = props => {
 
-    const {locations, fetchDetailLocation, updateFetchLocation} = props;
+    const {locations, fetchDetailLocation, updateFetchLocation, updateable} = props;
 
     const [popupOpen, setPopupOpen] = useState(false);
     const [currentLocation, setCurrentLocation] = useState(null);
@@ -83,6 +83,7 @@ const LocationList = props => {
                 onUpdate={updateLocation}
                 data={currentLocation}
                 setData={setCurrentLocation}
+                updateable={updateable}
                 onClose={() => setPopupOpen(false)}
             />
         </React.Fragment>
@@ -92,7 +93,8 @@ const LocationList = props => {
 LocationList.propTypes = {
     locations: PropTypes.array.isRequired,
     completeView: PropTypes.bool,
-    fetchDetailLocation: PropTypes.func
+    fetchDetailLocation: PropTypes.func,
+    updateable: PropTypes.bool,
 };
 
 export default LocationList;

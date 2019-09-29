@@ -14,7 +14,7 @@ const MyLocation = props => {
 
     if (locations.length !== 0) {
         return (
-            <LocationList locations={locations}/>
+            <LocationList locations={locations} updateable={false}/>
         )
     } else {
         return (

@@ -9,21 +9,29 @@ import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart
 
 const PopupValidateReservation = props => {
 
-    const {classes, data, open, onAccept, onRefuser, onStart, onFinish,setData, onClose} = props;
+    const {classes, data, open, onAccept, onRefuser, onStart, onFinish,setData, onClose, updateable} = props;
 
     const createOKButton = () => {
-        if(data.locStateId === 0) {
-            return ["Accepter", () => {onAccept(data)}]
-        } else if(data.locStateId === 2) {
-            return ["Démarrer la location", () => {onStart(data)}]
+        if(updateable){
+            if(data.locStateId === 0) {
+                return ["Accepter", () => {onAccept(data)}]
+            } else if(data.locStateId === 2) {
+                return ["Démarrer la location", () => {onStart(data)}]
+            }
         }
     };
 
     const createKOButton = () => {
-        if(data.locStateId === 0) {
-            return ["Refuser", () => {onRefuser(data)}]
-        } else if(data.locStateId === 1) {
-            return ["Terminer la location", () => {onFinish(data)}]
+        if(updateable) {
+            if (data.locStateId === 0) {
+                return ["Refuser", () => {
+                    onRefuser(data)
+                }]
+            } else if (data.locStateId === 1) {
+                return ["Terminer la location", () => {
+                    onFinish(data)
+                }]
+            }
         }
     };
 
@@ -93,7 +101,8 @@ PopupValidateReservation.propTypes = {
     open: PropTypes.bool,
     data: PropTypes.object,
     onClose: PropTypes.func,
-    onAccept: PropTypes.func
+    onAccept: PropTypes.func,
+    updateable: PropTypes.bool,
 };
 
 export default withStyles((theme) => ({
