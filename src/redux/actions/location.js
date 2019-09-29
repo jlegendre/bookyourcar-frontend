@@ -1,5 +1,6 @@
 import httpClient from "../../utils/httpClient";
 import {setMessage} from "./message";
+import {formatDate} from "../../utils/dateUtils";
 
 export const LOCATIONS = "GET_LOCATIONS";
 export const LOCATION = "GET_LOCATION";
@@ -15,6 +16,10 @@ export const fetchLocations = () => {
             url: '/Location',
             method: 'GET'
         }).then(response => {
+            response.data.forEach((location) => {
+                location.dateDebutResa = formatDate(new Date(location.dateDebutResa));
+                location.dateFinResa = formatDate(new Date(location.dateFinResa));
+            });
             dispatch(setLocations(response.data))
         })
     }
@@ -53,6 +58,10 @@ export const fetchLocationAdmin = () => {
             url: 'Location/ManageLocations',
             method: 'GET'
         }).then(response => {
+            response.data.forEach((location) => {
+                location.dateDebutResa = formatDate(new Date(location.dateDebutResa));
+                location.dateFinResa = formatDate(new Date(location.dateFinResa));
+            })
             dispatch(setLocations(response.data))
         })
     }
