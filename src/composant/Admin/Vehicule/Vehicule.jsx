@@ -44,6 +44,7 @@ const Vehicule = props => {
 
     const openConsultationModification = row => {
         fetchVehicule(row.vehId, data => {
+            data.vehTypeEssence = data.vehTypeEssence.toLowerCase();
             setData(data)
         });
         setConsultationModification({visible: true, state: VIEW});
