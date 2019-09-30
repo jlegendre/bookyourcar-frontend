@@ -86,11 +86,18 @@ export const fetchLocation = (id, callback) => {
 };
 
 export const updateFetchLocation = (locationId, vehicleid, action) => {
+    let body;
+    if(vehicleid == null){
+        body = {action: action}
+    } else {
+        body = {vehicleId: vehicleid, action: action}
+    }
     return dispatch => {
+
         httpClient.request({
             url: `/Location/${locationId}`,
             method: 'PUT',
-            data: {vehicleId: vehicleid, action: action}
+            data: body
         }).then(() => {
             fetchLocations()
         })
