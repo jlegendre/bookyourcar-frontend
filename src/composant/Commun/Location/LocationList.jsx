@@ -32,7 +32,7 @@ const LocationList = props => {
      * @param location location a transmettre
      */
     const updateLocation = (location) => {
-        updateFetchLocation(location.locId, location.vehicleId, 'Update');
+        updateFetchLocation(location.locId, location.selectedVehicle, 'Update');
         setPopupOpen(false);
     };
 
