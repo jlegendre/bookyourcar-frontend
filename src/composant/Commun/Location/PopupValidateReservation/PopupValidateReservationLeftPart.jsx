@@ -26,15 +26,17 @@ const PopupValidateReservationLeftPart = props => {
             )
         } else if (locStateId === 0 || locStateId === 2) {
             return (
-                <InputSelect
-                    fullWidth={true}
-                    data={data.availableVehicles}
-                    name={'Vehicules disponibles'}
-                    label={'Vehicules disponibles'}
-                    value={data.selectedVehicle !== null ? data.selectedVehicle.vehId : ''}
-                    onChange={(event) => updateVehicle(event)}
-                    id={'vehSelected'}
-                />
+                <div>
+                    <div>{{selectedVehicle}}</div>
+                    <InputSelect
+                        fullWidth={true}
+                        data={data.availableVehicles}
+                        name={'Vehicules disponibles'}
+                        label={'Vehicules disponibles'}
+                        value={''}
+                        onChange={(event) => updateVehicle(event)}
+                        id={'vehSelected'}/>
+                </div>
             )
         }
 
