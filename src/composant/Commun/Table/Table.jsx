@@ -55,6 +55,7 @@ const Table = props => {
                 actions={boutonAjouter()}
                 contextActions={boutonSupprimer}
                 clearSelectedRows={toggleCleared}
+                noDataComponent={<Typography>Aucune donnée n'a été trouvée.</Typography>}
             />
         </Paper>
     )
