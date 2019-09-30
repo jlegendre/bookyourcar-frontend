@@ -27,7 +27,7 @@ const PopupValidateReservationLeftPart = props => {
         } else if (locStateId === 0 || locStateId === 2) {
             return (
                 <div>
-                    {data.selectedVehicle.vehCommonName}
+                    {data.selectedVehicle !== null ? data.selectedVehicle.vehCommonName: ''}
                     <InputSelect
                         fullWidth={true}
                         data={data.availableVehicles}

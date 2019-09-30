@@ -9,7 +9,7 @@ import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart
 
 const PopupValidateReservation = props => {
 
-    const {classes, data, open, onAccept, onRefuser, onStart, onFinish,setData, onClose, updateable} = props;
+    const {classes, data, open, onAccept, onRefuser, onStart, onFinish,setData, onClose, updateable, onUpdate} = props;
 
     const createOKButton = () => {
         if(updateable){
@@ -35,6 +35,15 @@ const PopupValidateReservation = props => {
         }
     };
 
+    const createUpdateButton = () => {
+        if(updateable) {
+            if(data.locStateId === 2){
+                return ["Mettre a jour la location", () => {onUpdate(data)}]
+            }
+        }
+    }
+
+
     if (!data) {
         return (<React.Fragment/>)
     }
@@ -55,6 +64,8 @@ const PopupValidateReservation = props => {
             firstActionFunc={createOKButton() && createOKButton()[1]}
             secondActionTxt={createKOButton() && createKOButton()[0]}
             secondActionFunc={createKOButton() && createKOButton()[1]}
+            thirdActionFunc={createUpdateButton() && createUpdateButton()[1]}
+            thirdActionTxt={createUpdateButton() && createUpdateButton()[0]}
             fullWidth
             onClose={onClose}
         >
