@@ -28,10 +28,6 @@
         "name": "Nombre de place",
         "selector": "vehNumberplace",
         "sortable": true
-    },
-    {
-        "name": "Etat",
-        "selector": "vehState",
-        "sortable": true
     }
+
 ]
