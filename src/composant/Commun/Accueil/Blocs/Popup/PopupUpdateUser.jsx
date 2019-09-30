@@ -37,21 +37,21 @@ const PopupUpdateUser = props => {
                                 name={"userName"}
                                 label={"Nom"}
                                 value={user.userName}
-                                onChange={(event) => setUser({...user, userName: event.target.value})}
+                                onChange={event => setUser({...user, userName: event.target.value})}
                             />
                             <InputText
                                 id={"userFirstname"}
                                 name={"userFirstname"}
                                 label={"Prénom"}
                                 value={user.userFirstname}
-                                onChange={(event) => setUser({...user, userFirstname: event.target.value})}
+                                onChange={event => setUser({...user, userFirstname: event.target.value})}
                             />
                             <InputText
                                 id={"userNumpermis"}
                                 name={"userNumpermis"}
                                 label={"Numéro de permis"}
                                 value={user.userNumpermis}
-                                onChange={(event) => setUser({...user, userNumpermis: event.target.value})}
+                                onChange={event => setUser({...user, userNumpermis: event.target.value})}
                             />
                             <InputText
                                 id={"userPhone"}
@@ -60,7 +60,7 @@ const PopupUpdateUser = props => {
                                 value={user.userPhone}
                                 max={10}
                                 format={"phone"}
-                                onChange={(event) => setUser({...user, userPhone: event.target.value})}
+                                onChange={event => setUser({...user, userPhone: event.target.value})}
                             />
                         </div>
                     </form>

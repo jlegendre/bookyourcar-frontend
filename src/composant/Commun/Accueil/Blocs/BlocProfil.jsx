@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Fragment, useEffect, useRef, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import {Card} from "@material-ui/core";
@@ -12,27 +12,20 @@ import _ from 'lodash';
 import PopupUpdateProfil from "./Popup/PopupUpdateUser";
 import PopupUpdatePwd from "./Popup/PopupUpdatePwd";
 
-const md5 = require('md5');
-
 const BlocProfil = props => {
 
-    const {classes, user, updateProfil, updatePassword} = props;
+    const {classes, user, updateProfil, updatePassword, fetchImageUser, updateImage} = props;
 
     const [openPopupProfil, setOpenPopupProfil] = useState(false);
     const [openPopupPassword, setOpenPopupPassword] = useState(false);
+    const [image, setImage] = useState();
 
-    /**
-     * Fonction temporaire le temps d'avoir une vrais image de profil
-     * @return {string}
-     */
-    const getImage = () => {
-        let email = "";
-        if (user && user.email) {
-            email = user.email.trim();
-        }
 
-        return `https://www.gravatar.com/avatar/${md5(email)}?s=165`;
-    };
+    const fileSelect = useRef(null);
+
+    useEffect(() => {
+        fetchImageUser(setImage)
+    }, [fetchImageUser]);
 
 
     const getPhoneNumer = () => {
@@ -64,9 +57,9 @@ const BlocProfil = props => {
                 open={openPopupProfil}
                 onClose={() => setOpenPopupProfil(false)}
                 data={user}
-                onAccept={(user) => {
+                onAccept={user => {
                     setOpenPopupProfil(false);
-                    updateProfil(user)
+                    updateProfil(user);
                 }}
             />
 
@@ -79,11 +72,27 @@ const BlocProfil = props => {
             />
 
             <Card className={classes.card}>
-                <CardMedia
-                    className={classes.cover}
-                    image={getImage()}
-                    title="Photo de profil"
-                />
+                {image &&
+                <Fragment>
+                    <input
+                        type={"file"}
+                        id={"fileSelect"}
+                        ref={fileSelect}
+                        style={{display: 'none'}}
+                        onChange={event => {
+                            updateImage(event.target.files[0], () => {
+                                fetchImageUser(setImage)
+                            });
+                        }}
+                    />
+                    <CardMedia
+                        className={classes.cover}
+                        image={image}
+                        title="Photo de profil"
+                        onClick={() => fileSelect.current.click()}
+                    />
+                </Fragment>
+                }
                 <div className={classes.details}>
                     <CardContent className={classes.content}>
                         <Typography component="h5" variant="h5">
@@ -131,7 +140,9 @@ BlocProfil.propTypes = {
     classes: PropTypes.object,
     user: PropTypes.object,
     updateProfil: PropTypes.func,
-    updatePassword: PropTypes.func
+    updatePassword: PropTypes.func,
+    fetchImageUser: PropTypes.func,
+    updateImage: PropTypes.func
 };
 
 export default withStyles(theme => ({
@@ -147,6 +158,6 @@ export default withStyles(theme => ({
         flex: '1 0 auto'
     },
     cover: {
-        width: 208,
+        width: 209,
     }
 }))(BlocProfil);

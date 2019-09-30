@@ -9,7 +9,6 @@ const InputSelect = props => {
 
     const {fullWidth, onChange, data, name, label, message, value, id, className, disabled} = props;
 
-
     return (
         <FormControl margin={"normal"} fullWidth={fullWidth} disabled={disabled}>
             <InputLabel>{label}</InputLabel>
