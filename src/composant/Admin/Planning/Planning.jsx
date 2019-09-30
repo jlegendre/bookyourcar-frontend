@@ -21,10 +21,10 @@ const Planning = props => {
 
     useEffect(() => {
         fetchPlanning(date);
-        setDataGraph([{date: 'Début des locations cette semaine', value: planning.startReservationCount},
-            {date: 'Fin des locations cette semaine', value: planning.endReservationCount}]);
+        setDataGraph([{date: 'Véhicules utilisés', value: planning.usedVehiclesCount},
+            {date: 'Total des véhicules disponibles', value: planning.totalVehiclesCount}]);
 
-    }, [fetchPlanning, date, setDataGraph, planning.startReservationCount, planning.endReservationCount]);
+    }, [fetchPlanning, date, setDataGraph, planning.usedVehiclesCount, planning.totalVehiclesCount]);
 
     return (
         <React.Fragment>
