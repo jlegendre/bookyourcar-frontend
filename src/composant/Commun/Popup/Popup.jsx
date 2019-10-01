@@ -35,6 +35,7 @@ const Popup = props => {
                         {thirdActionTxt}
                     </Button>
                 }
+                <Button onClick={props.onClose} color={"primary"}>Fermer</Button>
             </DialogActions>
         </Dialog>
     )
