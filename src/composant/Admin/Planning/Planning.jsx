@@ -21,8 +21,8 @@ const Planning = props => {
 
     useEffect(() => {
         fetchPlanning(date);
-        setDataGraph([{date: 'Véhicules utilisés', value: planning.usedVehiclesCount},
-            {date: 'Total des véhicules disponibles', value: planning.totalVehiclesCount}]);
+        setDataGraph([{data: 'utilisés', value: planning.usedVehiclesCount},
+            {data: 'disponibles', value: planning.totalVehiclesCount}]);
 
     }, [fetchPlanning, date, setDataGraph, planning.usedVehiclesCount, planning.totalVehiclesCount]);
 
@@ -37,10 +37,10 @@ const Planning = props => {
                             <Typography>Ensemble des réservations cette semaine</Typography>
                             <PieClass
                                 data={dataGraph}
-                                width={200}
-                                height={200}
-                                innerRadius={60}
-                                outerRadius={100}
+                                width={300}
+                                height={300}
+                                innerRadius={90}
+                                outerRadius={150}
                             />
                         </Paper>
                         <Paper style={{marginBottom: 24, textAlign: 'center'}}>
