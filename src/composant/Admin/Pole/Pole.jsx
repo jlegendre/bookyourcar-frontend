@@ -1,50 +1,51 @@
 import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import Table from "../../Commun/Table/Table";
-import ConsultationModification, {VIEW} from '../Action/ConsultationModification';
 
 import columns from './columns';
 import Supprimer from "../Action/Supprimer";
 import InputText from "../../Commun/Input/InputText";
+import Popup from "../../Commun/Popup/Popup";
 
 const Pole = props => {
 
-    const {fetchPoles, fetchPole, poleList, poleDetail, fetchNewPole, fetchDeletePole, fetchUpdatePole} = props;
-    const [consultationModification, setConsultationModification] = useState({visible: false, state: VIEW});
+    const {fetchPoles, fetchPole, poleList, poleDetail, fetchNewPole, fetchDeletePole, fetchUpdatePole, setNoMessage} = props;
+
+    const [consultationModification, setConsultationModification] = useState(false);
+    const [state, setState] = useState("consult");
     const [supressionPole, setSupressionPole] = useState(false);
     const [data, setData] = useState(poleDetail || {});
-    const [deletedData, setDeletedData] = useState(undefined);
 
     useEffect(() => {
         fetchPoles();
     }, [fetchPoles]);
 
-    const acceptPole = () => {
+    const savePole = () => {
         fetchNewPole(data, success => {
             if (success) {
                 //si la requête est un succes, on ferme la fenetre
-                setConsultationModification({visible: false})
+                setConsultationModification(false);
+                setState("consult")
             }
         })
     };
 
     const modificationPole = () => {
         fetchUpdatePole(data.poleId, data);
-        setConsultationModification({visible: false})
+        setConsultationModification(false)
     };
 
     const supprimerPole = () => {
-        deletedData.forEach(pole => {
-            fetchDeletePole(pole.poleId);
-        });
+        fetchDeletePole(data.poleId);
         setSupressionPole(false);
+        setConsultationModification(false);
     };
 
     const openConsultationModification = row => {
         fetchPole(row.poleId, data => {
             setData(data)
         });
-        setConsultationModification({visible: true, state: VIEW});
+        setConsultationModification(true);
     };
 
     const updateField = ((event, type) => {
@@ -54,6 +55,12 @@ const Pole = props => {
         });
     });
 
+    const closePopup = () => {
+        setNoMessage();
+        setConsultationModification(false);
+        setData({})
+    };
+
     return (
         <React.Fragment>
             <Table
@@ -61,35 +68,31 @@ const Pole = props => {
                 columns={columns}
                 data={poleList}
                 onClick={openConsultationModification}
-                onDelete={data => {
-                    setDeletedData(data);
-                    setSupressionPole(true)
-                }}
                 onAdd={() => {
                     setData({});
-                    setConsultationModification({visible: true, state: 'new'})
+                    setConsultationModification(true);
+                    setState("new");
                 }}
             />
 
-            <ConsultationModification
+            <Popup
                 title={"Pôle"}
-                open={consultationModification.visible}
-                state={consultationModification.state}
-                onClose={() => {
-                    setConsultationModification({visible: false});
-                    setData({});
+                open={consultationModification}
+                onClose={closePopup}
+                firstActionTxt={state === "consult" && "Supprimer"}
+                firstActionFunc={() => {
+                    setSupressionPole(true)
                 }}
-                data={data}
-                onAccept={acceptPole}
-                onUpdate={() => modificationPole()}
-                onChangeState={state => setConsultationModification({...consultationModification, state: state})}
+                secondActionTxt={state === "consult" && "Modifier"}
+                secondActionFunc={() => modificationPole()}
+                thirdActionTxt={state === "new" && "Enregistrer"}
+                thirdActionFunc={savePole}
             >
                 <InputText
                     id="poleName"
                     name={"PoleName"}
                     label="Nom"
                     value={data.poleName || ""}
-                    disabled={consultationModification.state === VIEW}
                     onChange={(event => updateField(event, "poleName"))}
                 />
                 <InputText
@@ -97,7 +100,6 @@ const Pole = props => {
                     name={"PoleCity"}
                     label={"Ville"}
                     value={data.poleCity || ""}
-                    disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "poleCity")}
                 />
                 <InputText
@@ -105,7 +107,6 @@ const Pole = props => {
                     name={"PoleAddress"}
                     label={"Adresse"}
                     value={data.poleAddress || ""}
-                    disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "poleAddress")}
                 />
                 <InputText
@@ -114,11 +115,10 @@ const Pole = props => {
                     label={"Code Postal"}
                     type={"number"}
                     value={data.poleCp || ""}
-                    disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "poleCp")}
                 />
 
-            </ConsultationModification>
+            </Popup>
 
             <Supprimer
                 title={"Suppression Pole"}
@@ -139,7 +139,8 @@ Pole.propTypes = {
     poleDetail: PropTypes.object,
     fetchNewPole: PropTypes.func,
     fetchDeletePole: PropTypes.func,
-    fetchUpdatePole: PropTypes.func
+    fetchUpdatePole: PropTypes.func,
+    setNoMessage: PropTypes.func
 };
 
 export default Pole;

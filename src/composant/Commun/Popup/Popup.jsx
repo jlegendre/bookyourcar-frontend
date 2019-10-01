@@ -4,7 +4,7 @@ import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogT
 
 const Popup = props => {
 
-    const {title, text, firstActionFunc, firstActionTxt, thirdActionFunc, thirdActionTxt, secondActionFunc, secondActionTxt, children, ...others} = props;
+    const {title, text, firstActionFunc, firstActionTxt, thirdActionFunc, thirdActionTxt, secondActionFunc, secondActionTxt, children, closeActionTxt, ...others} = props;
 
     return (
         <Dialog
@@ -35,10 +35,14 @@ const Popup = props => {
                         {thirdActionTxt}
                     </Button>
                 }
-                <Button onClick={props.onClose} color={"primary"}>Fermer</Button>
+                <Button onClick={props.onClose} color={"primary"}>{closeActionTxt}</Button>
             </DialogActions>
         </Dialog>
     )
+};
+
+Popup.defaultProps = {
+    closeActionTxt: 'Fermer'
 };
 
 Popup.propTypes = {
@@ -50,6 +54,7 @@ Popup.propTypes = {
     secondActionFunc: PropTypes.func,
     thirdActionTxt: PropTypes.string,
     thirdActionFunc: PropTypes.func,
+    closeActionTxt: PropTypes.string,
     children: PropTypes.any
 };
 

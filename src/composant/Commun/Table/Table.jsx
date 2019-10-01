@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React from "react";
 import * as PropTypes from 'prop-types';
 import Paper from "@material-ui/core/Paper";
 import DataTable from "react-data-table-component"
@@ -8,14 +8,6 @@ import {Button} from "@material-ui/core";
 
 
 const Table = props => {
-
-    const [selectedRows, setSelectedRows] = useState([]);
-    const [toggleCleared, setToggleCleared] = useState(true);
-
-    const handleRowSelected = React.useCallback(state => {
-        setSelectedRows(state.selectedRows);
-    }, []);
-
 
     const createColonne = ligne => {
         return {
@@ -27,19 +19,15 @@ const Table = props => {
     };
 
     const boutonAjouter = () => {
-        let button = <Button variant="contained"
-            color="primary" onClick={props.onAdd} >Ajouter</Button>;
+        let button = <Button
+            variant="contained"
+            color="primary"
+            onClick={props.onAdd}
+        >
+            Ajouter
+        </Button>;
         return props.onAdd ? button : undefined
     };
-
-    const boutonSupprimer = useMemo(() => {
-        const handleDelete = () => {
-            setToggleCleared(!toggleCleared);
-            props.onDelete(selectedRows);
-        };
-
-        return <Button onClick={handleDelete}>Supprimer</Button>
-    }, [toggleCleared, props, selectedRows]);
 
 
     return (
@@ -48,13 +36,9 @@ const Table = props => {
                 title={<Typography component={"h4"} variant={"h4"}>{props.title}</Typography>}
                 columns={_.map(props.columns, createColonne)}
                 data={props.data}
-                selectableRows
                 onRowClicked={props.onClick}
-                onRowSelected={handleRowSelected}
                 highlightOnHover
                 actions={boutonAjouter()}
-                contextActions={boutonSupprimer}
-                clearSelectedRows={toggleCleared}
                 noDataComponent={<Typography>Aucune donnée n'a été trouvée.</Typography>}
             />
         </Paper>
@@ -66,8 +50,7 @@ Table.propTypes = {
     columns: PropTypes.array.isRequired,
     data: PropTypes.array,
     onClick: PropTypes.func,
-    onAdd: PropTypes.func,
-    onDelete: PropTypes.func
+    onAdd: PropTypes.func
 };
 
 export default Table;
