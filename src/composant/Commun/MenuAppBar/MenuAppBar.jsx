@@ -18,14 +18,19 @@ const MenuAppBar = props => {
         props.logout();
     };
 
-    const fetchNumber = () => {
+
+    useEffect(() => {
         if (role === 'Admin') {
             fetchNumberUserInWaiting(setNumber)
         }
-    };
+    }, [fetchNumberUserInWaiting, role]);
 
-    useEffect(fetchNumber);
-    useInterval(fetchNumber, 12000);
+    //duplication du code car sinon react appelle toutes les millisecondes l'api
+    useInterval(() => {
+        if (role === 'Admin') {
+            fetchNumberUserInWaiting(setNumber)
+        }
+    }, 12000);
 
     const menu = (
         <div>

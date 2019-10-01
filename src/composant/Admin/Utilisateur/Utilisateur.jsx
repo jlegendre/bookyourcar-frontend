@@ -135,7 +135,7 @@ const Utilisateur = props => {
 Utilisateur.propTypes = {
     fetchUsers: PropTypes.func,
     fetchUser: PropTypes.func,
-    userList: PropTypes.array,
+    userList: PropTypes.object,
     userDetail: PropTypes.object,
     fetchNewPole: PropTypes.func,
     fetchRefuserUtilisateur: PropTypes.func,
