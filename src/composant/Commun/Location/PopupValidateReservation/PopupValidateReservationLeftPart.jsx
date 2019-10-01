@@ -15,14 +15,14 @@ const PopupValidateReservationLeftPart = props => {
 
     const detailVeh =( <Fragment>
         {selectedVehicle && <Fragment>
-            <div>{selectedVehicle.vehCommonName} {selectedVehicle.registration}
+            <div><Typography>{selectedVehicle.vehCommonName} {selectedVehicle.registration}</Typography>
 
             </div>
             <div>
-                <Icon>ev_station</Icon>{selectedVehicle.fuelName}
+                <Typography><Icon>ev_station</Icon>{selectedVehicle.fuelName}</Typography>
             </div>
             <div>
-                <Icon>supervisor_account</Icon> {selectedVehicle.seatCount}
+                <Typography>  <Icon>supervisor_account</Icon>{selectedVehicle.seatCount}</Typography>
             </div>
         </Fragment>}
 

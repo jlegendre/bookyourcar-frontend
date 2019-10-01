@@ -6,6 +6,7 @@ import {getBreakingLimit} from "../../../../utils/cssUtils";
 import {formatDate} from "../../../../utils/dateUtils";
 import Popup from "../../Popup/Popup";
 import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart";
+import Typography from "@material-ui/core/Typography";
 
 const PopupValidateReservation = props => {
 
@@ -84,22 +85,22 @@ const PopupValidateReservation = props => {
                         <div className={classes.form}>
                             <div className={classes.formLeft}>
                                 <div>
-                                    Demandeur : {data.user}
+                                    <Typography>Demandeur : {data.user}</Typography>
                                 </div>
                                 <div>
-                                    Début: {formatDate(data.dateStart)}
+                                    <Typography> Début: {formatDate(data.dateStart)}</Typography>
                                 </div>
                                 <div>
-                                    Fin: {formatDate(data.dateEnd)}
+                                    <Typography>Fin: {formatDate(data.dateEnd)}</Typography>
                                 </div>
                                 <div>
-                                    Pôle de départ: {data.poleStart}
+                                    <Typography>Pôle de départ: {data.poleStart}</Typography>
                                 </div>
                                 <div>
-                                    Pôle de fin: {data.poleEnd}
+                                    <Typography>Pôle de fin: {data.poleEnd}</Typography>
                                 </div>
                                 <div style={{lineHeight: '1em'}}>
-                                    Commentaire: {data.comment}
+                                    <Typography>Commentaire: {data.comment}</Typography>
                                 </div>
                             </div>
                             <div className={classes.formRight}>
