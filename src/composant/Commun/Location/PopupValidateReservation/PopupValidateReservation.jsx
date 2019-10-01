@@ -85,22 +85,22 @@ const PopupValidateReservation = props => {
                         <div className={classes.form}>
                             <div className={classes.formLeft}>
                                 <div>
-                                    <Typography>Demandeur : {data.user}</Typography>
+                                    <Typography color={"secondary"}>Demandeur : {data.user}</Typography>
                                 </div>
                                 <div>
-                                    <Typography> Début: {formatDate(data.dateStart)}</Typography>
+                                    <Typography color={"secondary"}> Début: {formatDate(data.dateStart)}</Typography>
                                 </div>
                                 <div>
-                                    <Typography>Fin: {formatDate(data.dateEnd)}</Typography>
+                                    <Typography color={"secondary"}>Fin: {formatDate(data.dateEnd)}</Typography>
                                 </div>
                                 <div>
-                                    <Typography>Pôle de départ: {data.poleStart}</Typography>
+                                    <Typography color={"secondary"}>Pôle de départ: {data.poleStart}</Typography>
                                 </div>
                                 <div>
-                                    <Typography>Pôle de fin: {data.poleEnd}</Typography>
+                                    <Typography color={"secondary"}>Pôle de fin: {data.poleEnd}</Typography>
                                 </div>
                                 <div style={{lineHeight: '1em'}}>
-                                    <Typography>Commentaire: {data.comment}</Typography>
+                                    <Typography color={"secondary"}>Commentaire: {data.comment}</Typography>
                                 </div>
                             </div>
                             <div className={classes.formRight}>

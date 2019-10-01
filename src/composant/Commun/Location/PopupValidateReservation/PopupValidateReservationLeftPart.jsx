@@ -14,14 +14,14 @@ const PopupValidateReservationLeftPart = props => {
 
     const detailVeh =( <Fragment>
         {selectedVehicle && <Fragment>
-            <div><Typography>{selectedVehicle.vehCommonName} {selectedVehicle.registration}</Typography>
+            <div><Typography color={"secondary"}>{selectedVehicle.vehCommonName} {selectedVehicle.registration}</Typography>
 
             </div>
             <div>
-                <Typography><Icon>ev_station</Icon>{selectedVehicle.fuelName}</Typography>
+                <Typography color={"secondary"}><Icon>ev_station</Icon>{selectedVehicle.fuelName}</Typography>
             </div>
             <div>
-                <Typography>  <Icon>supervisor_account</Icon>{selectedVehicle.seatCount}</Typography>
+                <Typography color={"secondary"}>  <Icon>supervisor_account</Icon>{selectedVehicle.seatCount}</Typography>
             </div>
         </Fragment>}
 
@@ -53,9 +53,9 @@ const PopupValidateReservationLeftPart = props => {
             return (
                 <Fragment>
                     {selectedVehicle &&
-                    <Typography style={{marginTop: 20, color: "red"}}>Aucun autre véhicule n'est disponible à ces dates</Typography>}
+                    <Typography style={{marginTop: 20, color: "red"}} color={"secondary"}>Aucun autre véhicule n'est disponible à ces dates</Typography>}
                     {!selectedVehicle &&
-                    <Typography style={{marginTop: 20, color: "red"}}>Aucun véhicule n'est disponible à ces dates</Typography>}
+                    <Typography style={{marginTop: 20, color: "red"}} color={"secondary"}>Aucun véhicule n'est disponible à ces dates</Typography>}
                 </Fragment>
             )
         }
@@ -66,7 +66,7 @@ const PopupValidateReservationLeftPart = props => {
     return (
         <Fragment>
             <div>
-                Véhicule associé : {data.selectedVehicle !== null ? '': "Aucun"}
+                <Typography color={"secondary"}> Véhicule associé : {data.selectedVehicle !== null ? '': "Aucun"}</Typography>
             </div>
             <div>
                 {selectedVehicle && detailVeh}
