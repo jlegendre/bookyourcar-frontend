@@ -21,8 +21,8 @@ const Planning = props => {
 
     useEffect(() => {
         fetchPlanning(date);
-        setDataGraph([{data: 'utilisés', value: planning.usedVehiclesCount},
-            {data: 'disponibles', value: planning.totalVehiclesCount}]);
+        setDataGraph([{ data: 'utilisés', value: planning.usedVehiclesCount },
+        { data: 'disponibles', value: planning.totalVehiclesCount - planning.usedVehiclesCount }]);
 
     }, [fetchPlanning, date, setDataGraph, planning.usedVehiclesCount, planning.totalVehiclesCount]);
 
@@ -34,17 +34,22 @@ const Planning = props => {
 
                     <Grid item xs={12} md={4}>
                         <Paper style={{marginBottom: 24, textAlign: 'center'}}>
-                            <Typography>Ensemble des réservations cette semaine</Typography>
+                            <Typography gutterBottom variant={"h6"} component={"h6"} color={'secondary'}>
+                                Véhicules en cours d'utilisation  aujourd'hui
+                            </Typography>
+
+                            <br />
                             <PieClass
                                 data={dataGraph}
                                 width={300}
                                 height={300}
-                                innerRadius={90}
+                                innerRadius={0}
                                 outerRadius={150}
                             />
+                            <br/>
                         </Paper>
                         <Paper style={{marginBottom: 24, textAlign: 'center'}}>
-                            <Typography>
+                            <Typography gutterBottom variant={"h6"} component={"h6"} color={'secondary'}>
                                 Début des locations cette semaine
                             </Typography>
                             <Typography gutterBottom variant={"h3"} component={"h3"} color={'primary'}>
@@ -52,7 +57,7 @@ const Planning = props => {
                             </Typography>
                         </Paper>
                         <Paper style={{textAlign: 'center'}}>
-                            <Typography>
+                            <Typography gutterBottom variant={"h6"} component={"h6"} color={'secondary'}>
                                 Fin des locations cette semaine
                             </Typography>
                             <Typography gutterBottom variant={"h3"} component={"h3"} color={"error"}>
