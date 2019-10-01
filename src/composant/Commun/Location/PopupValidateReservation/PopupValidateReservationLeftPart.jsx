@@ -7,7 +7,6 @@ const PopupValidateReservationLeftPart = props => {
     const {data, updateable, setDataToUpdate, dataToUpdate} = props;
     const {locStateId, selectedVehicle} = data;
 
-
     const updateVehicle = event => {
         const locUpdate = {locId: data.locId, vehId: event.target.value};
         setDataToUpdate(locUpdate);
@@ -50,7 +49,7 @@ const PopupValidateReservationLeftPart = props => {
                         onChange={(event) => updateVehicle(event)}
                         id={'vehSelected'}/>
             )
-        } else if(vehList.length === 0){
+        } else if(vehList.length === 0 && locStateId !==4){
             return (
                 <Fragment>
                     {selectedVehicle &&
