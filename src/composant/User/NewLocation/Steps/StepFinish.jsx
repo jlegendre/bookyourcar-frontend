@@ -17,13 +17,13 @@ const StepFinish = props => {
             <Grid container spacing={24}>
                 <Grid item xs={12} md={6}>
                     <Typography>
-                        Date début de location : <span
+                        Date de début : <span
                         className={classes.donnee}>{formatDate(formulaire.dateDebutResa)}</span>
                     </Typography>
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <Typography>
-                        Date de fin de location : <span
+                        Date de fin : <span
                         className={classes.donnee}>{formatDate(formulaire.dateFinResa)}</span>
                     </Typography>
                 </Grid>
