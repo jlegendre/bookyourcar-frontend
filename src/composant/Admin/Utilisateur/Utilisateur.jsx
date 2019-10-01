@@ -1,21 +1,20 @@
-import React, {useEffect, useState} from 'react';
+import React, {Fragment, useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import ConsultationModification, {UPDATE} from '../Action/ConsultationModification';
 import Supprimer from "../Action/Supprimer";
 import InputText from "../../Commun/Input/InputText";
-import UtilisateurAttente from "./Tableau/UtilisateurAttente";
-import UtilisateurValide from "./Tableau/UtilisateurValide";
+import columns from "./columns";
+import Table from "../../Commun/Table/Table";
 
 const Utilisateur = props => {
 
-    const {fetchUsersInValidation, fetchUser, userListInWaiting, userList, fetchUsers, userDetail, fetchRefuserUtilisateur, fetchAccepterUtilisateur} = props;
+    const {fetchUsersInValidation, fetchUser, userList, fetchUsers, userDetail, fetchRefuserUtilisateur, fetchAccepterUtilisateur} = props;
     const [consultationModification, setConsultationModification] = useState({visible: false, state: UPDATE});
     const [refuserUtilisateur, setRefuserUtilisateur] = useState(false);
     const [data, setData] = useState(userDetail || {});
     const [deletedData, setDeletedData] = useState(undefined);
 
     useEffect(() => {
-        fetchUsersInValidation();
         fetchUsers();
     }, [fetchUsersInValidation, fetchUsers]);
 
@@ -46,20 +45,33 @@ const Utilisateur = props => {
     });
 
     return (
-        <React.Fragment>
+        <Fragment>
 
-            <UtilisateurAttente
-                userList={userListInWaiting}
-                setDeletedData={setDeletedData}
-                setRefuserUtilisateur={setRefuserUtilisateur}
-                openConsultationModification={openConsultationModification}
-            />
+            {userList && userList.usersInWaiting && userList.usersInWaiting.length > 0 &&
+            <Fragment>
+                <Table
+                    title={"Utilisateurs en attente"}
+                    columns={columns}
+                    data={userList.usersInWaiting}
+                    onClick={openConsultationModification}
+                    onDelete={data => {
+                        setDeletedData(data);
+                        setRefuserUtilisateur(true)
+                    }}
+                />
+                <div style={{marginBottom: 30}}/>
+            </Fragment>
+            }
 
-            <UtilisateurValide
-                userList={userList}
-                setDeletedData={setDeletedData}
-                setRefuserUtilisateur={setRefuserUtilisateur}
-                openConsultationModification={openConsultationModification}
+            <Table
+                title={"Gestion des utilisateurs"}
+                columns={columns}
+                data={userList.allUsers}
+                onClick={openConsultationModification}
+                onDelete={data => {
+                    setDeletedData(data);
+                    setRefuserUtilisateur(true)
+                }}
             />
 
             <ConsultationModification
@@ -116,16 +128,14 @@ const Utilisateur = props => {
                 text={"êtes vous sur de vouloir refuser le(s) utilisateur(s) sélectionné(s) ?"}
             />
 
-        </React.Fragment>
+        </Fragment>
     )
 };
 
 Utilisateur.propTypes = {
     fetchUsers: PropTypes.func,
-    fetchUsersInWaiting: PropTypes.func,
     fetchUser: PropTypes.func,
-    userList: PropTypes.array,
-    userListInWaiting: PropTypes.array,
+    userList: PropTypes.object,
     userDetail: PropTypes.object,
     fetchNewPole: PropTypes.func,
     fetchRefuserUtilisateur: PropTypes.func,

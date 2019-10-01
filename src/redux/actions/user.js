@@ -1,26 +1,7 @@
 import httpClient from './../../utils/httpClient'
-import {setNoMessage} from "./message";
 
-
-export const USER_IN_WAITING = "GET_USER_IN_WAITING";
 export const GET_USER = "GET_USER";
 export const USERS = 'USERS';
-
-/**
- * Call /User/userInWaiting Url, pour récupérer tous les utilisateurs en attente de validation
- * @returns {Function}
- */
-export const fetchUserInValidation = () => {
-    return dispatch => {
-        httpClient.request({
-            url: '/User/userInWaiting',
-            method: 'GET',
-        }).then(response => {
-            dispatch(setUserInWaiting(response.data));
-            dispatch(setNoMessage());
-        })
-    }
-};
 
 /**
  * Call /User/ValidateUserInWaiting, url pour accepter un utilisateur
@@ -34,7 +15,7 @@ export const fetchValidateUser = id => {
             url: `/User/ValidateUserInWaiting/${id}`,
             method: 'POST',
         }).then(() => {
-            dispatch(fetchUserInValidation())
+            dispatch(fetchUsers())
         })
     }
 };
@@ -50,7 +31,7 @@ export const fetchDeleteUser = id => {
             url: `/User/RefuseUserInWaiting/${id}`,
             method: 'POST',
         }).then(() => {
-            dispatch(fetchUserInValidation())
+            dispatch(fetchUsers())
         })
     }
 };
@@ -67,10 +48,10 @@ export const fetchUser = (id, callback) => {
     }
 };
 
-export const fetchNumberUserInWaiting = (callback) => {
-    return dispatch => {
+export const fetchNumberUser = (callback) => {
+    return () => {
         httpClient.request({
-            url: '/User/CountUserInWaiting'
+            url: '/User/CountUserInWaitingAndLocationAsked'
         }).then(result => {
             callback(result.data)
         })
@@ -80,16 +61,13 @@ export const fetchNumberUserInWaiting = (callback) => {
 export const fetchUsers = () => {
     return dispatch => {
         httpClient.request({
-            url: '/User'
+            url: '/User/GetUsers'
         }).then(result => {
             dispatch(setUsers(result.data))
         })
     }
 };
 
-export const setUserInWaiting = userInWaiting => {
-    return {type: USER_IN_WAITING, userInWaiting};
-};
 
 export const setUser = user => {
     return {type: GET_USER, user}
@@ -97,4 +75,4 @@ export const setUser = user => {
 
 export const setUsers = users => {
     return {type: USERS, users}
-}
+};

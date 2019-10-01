@@ -9,20 +9,24 @@ import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart
 
 const PopupValidateReservation = props => {
 
-    const {classes, data, open, onAccept, onRefuser, onStart, onFinish,setData, onClose, updateable, onUpdate} = props;
+    const {classes, data, open, onAccept, onRefuser, onStart, onFinish, setData, onClose, updateable, onUpdate} = props;
 
     const createOKButton = () => {
-        if(updateable){
-            if(data.locStateId === 0) {
-                return ["Accepter", () => {onAccept(data)}]
-            } else if(data.locStateId === 2) {
-                return ["Démarrer la location", () => {onStart(data)}]
+        if (updateable) {
+            if (data.locStateId === 0) {
+                return ["Accepter", () => {
+                    onAccept(data)
+                }]
+            } else if (data.locStateId === 2) {
+                return ["Démarrer la location", () => {
+                    onStart(data)
+                }]
             }
         }
     };
 
     const createKOButton = () => {
-        if(updateable) {
+        if (updateable) {
             if (data.locStateId === 0) {
                 return ["Refuser", () => {
                     onRefuser(data)
@@ -36,9 +40,11 @@ const PopupValidateReservation = props => {
     };
 
     const createUpdateButton = () => {
-        if(updateable) {
-            if(data.locStateId === 2){
-                return ["Mettre a jour la location", () => {onUpdate(data)}]
+        if (updateable) {
+            if (data.locStateId === 2) {
+                return ["Mettre a jour la location", () => {
+                    onUpdate(data)
+                }]
             }
         }
     }
@@ -48,9 +54,9 @@ const PopupValidateReservation = props => {
         return (<React.Fragment/>)
     }
 
-    const testData = dataVehUpdated =>{
+    const testData = dataVehUpdated => {
         setData(dataVehUpdated);
-        if(data.locStateId === 2) {
+        if (data.locStateId === 2) {
             createOKButton();
         }
     };

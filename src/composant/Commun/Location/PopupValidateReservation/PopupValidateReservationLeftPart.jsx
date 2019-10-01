@@ -9,6 +9,7 @@ const PopupValidateReservationLeftPart = props => {
 
     const updateVehicle = event => {
         data.selectedVehicle = event.target.value;
+        console.log(data);
         setData(data);
     };
 
