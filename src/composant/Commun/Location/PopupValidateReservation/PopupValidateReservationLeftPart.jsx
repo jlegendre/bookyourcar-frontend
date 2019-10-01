@@ -1,5 +1,5 @@
 import React, {Fragment} from 'react'
-import {Icon} from "@material-ui/core";
+import {Icon, Typography} from "@material-ui/core";
 import InputSelect from '../../Input/InputSelect'
 
 const PopupValidateReservationLeftPart = props => {
@@ -13,7 +13,20 @@ const PopupValidateReservationLeftPart = props => {
         setDataToUpdate(locUpdate);
     };
 
-    // data.availableVehicles = [];
+    const detailVeh =( <Fragment>
+        {selectedVehicle && <Fragment>
+            <div>{selectedVehicle.vehCommonName} {selectedVehicle.registration}
+
+            </div>
+            <div>
+                <Icon>ev_station</Icon>{selectedVehicle.fuelName}
+            </div>
+            <div>
+                <Icon>supervisor_account</Icon> {selectedVehicle.seatCount}
+            </div>
+        </Fragment>}
+
+    </Fragment>)
 
     const show = () => {
         let vehList = [];
@@ -38,35 +51,29 @@ const PopupValidateReservationLeftPart = props => {
                         id={'vehSelected'}/>
             )
         } else if(vehList.length === 0){
-            return (<Fragment><span style={{marginTop: 20, color: "red"}}>Aucun véhicule n'est disponible à ces dates</span></Fragment>)
+            return (
+                <Fragment>
+                    {selectedVehicle &&
+                    <Typography style={{marginTop: 20, color: "red"}}>Aucun autre véhicule n'est disponible à ces dates</Typography>}
+                    {!selectedVehicle &&
+                    <Typography style={{marginTop: 20, color: "red"}}>Aucun véhicule n'est disponible à ces dates</Typography>}
+                </Fragment>
+            )
         }
+        return {detailVeh}
 
-        return (
-            <Fragment>
-                {selectedVehicle && <Fragment>
-                    <div>{selectedVehicle.vehCommonName} {selectedVehicle.registration}
-
-                    </div>
-                    <div>
-                        <Icon>ev_station</Icon>{selectedVehicle.fuelName}
-                    </div>
-                    <div>
-                        <Icon>supervisor_account</Icon> {selectedVehicle.seatCount}
-                    </div>
-                </Fragment>}
-
-            </Fragment>
-        )
 
     };
 
     return (
         <Fragment>
             <div>
-                Véhicule associé : {data.selectedVehicle !== null ? data.selectedVehicle.vehCommonName: "Aucun"}
+                Véhicule associé : {data.selectedVehicle !== null ? '': "Aucun"}
             </div>
             <div>
+                {selectedVehicle && detailVeh}
                 {show()}
+
             </div>
         </Fragment>
     )
