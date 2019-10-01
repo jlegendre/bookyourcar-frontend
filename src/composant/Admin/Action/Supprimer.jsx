@@ -11,8 +11,7 @@ const Supprimer = props => {
             onClose={props.onClose}
             firstActionTxt={"Confirmer"}
             firstActionFunc={props.onAccept}
-            thirdActionTxt={"Annuler"}
-            thirdActionFunc={props.onClose}
+            closeActionTxt={"Annuler"}
             text={props.text}
         />
     )
