@@ -7,7 +7,7 @@ import columns from "./columns";
 
 const LocationList = props => {
 
-    const {locations, fetchDetailLocation, updateFetchLocation, updateable, id} = props;
+    const {locations, fetchDetailLocation, updateFetchLocation, updateable, id, title, style} = props;
 
     const [popupOpen, setPopupOpen] = useState(false);
     const [currentLocation, setCurrentLocation] = useState(null);
@@ -75,10 +75,11 @@ const LocationList = props => {
     return (
         <React.Fragment>
             <Table
-                title={"Locations"}
+                title={title}
                 columns={columns}
                 data={locations}
                 onClick={openLocation}
+                style={{marginBottom: '25px'}}
             />
 
             <PopupValidateReservation

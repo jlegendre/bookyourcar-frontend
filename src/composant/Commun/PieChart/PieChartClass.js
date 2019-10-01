@@ -16,6 +16,7 @@ export const PieClass = props => {
 
     useEffect(
         () => {
+            console.log('data', props.data)
             const data = createPie(props.data);
             const group = d3.select(ref.current);
             const groupWithData = group.selectAll("g.arc").data(data);
@@ -39,14 +40,13 @@ export const PieClass = props => {
             const text = groupWithUpdate
                 .append("text")
                 .merge(groupWithData.select("text"));
-
             text
                 .attr("text-anchor", "middle")
                 .attr("alignment-baseline", "middle")
                 .attr("transform", d => `translate(${createArc.centroid(d)})`)
                 .style("fill", "white")
                 .style("font-size", 10)
-                .text(d => format(d.value));
+            .text(d => `${d.data.data} : ${d.value}`);
         },
         [props.data, colors, createArc, createPie, format]
     );
