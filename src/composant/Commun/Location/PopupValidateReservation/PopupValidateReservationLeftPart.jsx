@@ -4,7 +4,7 @@ import InputSelect from '../../Input/InputSelect'
 
 const PopupValidateReservationLeftPart = props => {
 
-    const {data, setData} = props;
+    const {data, setData, updateable} = props;
     const {locStateId, selectedVehicle} = data;
 
 
@@ -24,14 +24,14 @@ const PopupValidateReservationLeftPart = props => {
                     {!selectedVehicle ? "Aucune liste disponible" : ""}
                 </Fragment>
             )
-        } else if (locStateId === 0 || locStateId === 2) {
+        } else if ((locStateId === 0 || locStateId === 2) && updateable) {
             return (
                     <InputSelect
                         fullWidth={true}
                         data={data.availableVehicles}
                         name={'Vehicules disponibles'}
                         label={'Vehicules disponibles'}
-                        value={''}
+                        value={data.selectedVehicle? data.selectedVehicle : ''}
                         onChange={(event) => updateVehicle(event)}
                         id={'vehSelected'}/>
             )
@@ -59,7 +59,7 @@ const PopupValidateReservationLeftPart = props => {
     return (
         <Fragment>
             <div>
-                Véhicule associé : {data.selectedVehicle !== null ? data.selectedVehicle.vehCommonName: "Aucun véhicule associé"}
+                Véhicule associé : {data.selectedVehicle !== null ? data.selectedVehicle.vehCommonName: "Aucun"}
             </div>
             <div>
                 {show()}

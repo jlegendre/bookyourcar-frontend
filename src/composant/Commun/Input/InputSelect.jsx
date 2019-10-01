@@ -16,7 +16,6 @@ const InputSelect = props => {
                 onChange={onChange}
                 value={value}
                 error={message && !!message[name]}
-                isDisabled={disabled}
                 inputProps={{
                     name: name,
                     id: id

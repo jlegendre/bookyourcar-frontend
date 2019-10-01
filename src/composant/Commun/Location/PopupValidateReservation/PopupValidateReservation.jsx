@@ -98,6 +98,7 @@ const PopupValidateReservation = props => {
                                 <PopupValidateReservationLeftPart
                                     data={data}
                                     setData={testData}
+                                    updateable={updateable}
                                 />
                             </div>
                         </div>
