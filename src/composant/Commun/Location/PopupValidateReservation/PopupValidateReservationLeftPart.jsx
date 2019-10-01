@@ -26,8 +26,6 @@ const PopupValidateReservationLeftPart = props => {
             )
         } else if (locStateId === 0 || locStateId === 2) {
             return (
-                <div>
-                    {data.selectedVehicle !== null ? data.selectedVehicle.vehCommonName: ''}
                     <InputSelect
                         fullWidth={true}
                         data={data.availableVehicles}
@@ -36,7 +34,6 @@ const PopupValidateReservationLeftPart = props => {
                         value={''}
                         onChange={(event) => updateVehicle(event)}
                         id={'vehSelected'}/>
-                </div>
             )
         }
 
@@ -62,7 +59,7 @@ const PopupValidateReservationLeftPart = props => {
     return (
         <Fragment>
             <div>
-                Véhicule associé :
+                Véhicule associé : {data.selectedVehicle !== null ? data.selectedVehicle.vehCommonName: "Aucun véhicule associé"}
             </div>
             <div>
                 {show()}
