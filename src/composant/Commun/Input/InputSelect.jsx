@@ -7,7 +7,7 @@ import FormHelperText from "@material-ui/core/FormHelperText/index";
 
 const InputSelect = props => {
 
-    const {fullWidth, onChange, data, name, label, message, value, id, className, disabled} = props;
+    const {fullWidth, onChange, data, name, label, message, value, id, style, disabled} = props;
 
     return (
         <FormControl margin={"normal"} fullWidth={fullWidth} disabled={disabled}>
@@ -20,7 +20,7 @@ const InputSelect = props => {
                     name: name,
                     id: id
                 }}
-                className={className}
+                style={style}
             >
                 {data && data.map((item, i) =>
                     <MenuItem key={i} value={item.value}>{item.label}</MenuItem>

@@ -133,7 +133,7 @@ const Vehicule = props => {
                     value={data.vehTypeEssence || ""}
                     onChange={event => updateField(event, "vehTypeEssence")}
                     fullWidth={false}
-                    className={{marginLeft: '10px'}}
+                    style={{marginLeft: '10px'}}
                     data={[{value: 'sans plomb 95', label: 'sans plomb 95'},
                         {value: 'sans plomb 98', label: 'sans plomb 98'},
                         {value: 'diesel', label: 'diesel'},
@@ -155,7 +155,7 @@ const Vehicule = props => {
                     value={data.poleId || ""}
                     onChange={event => updateField(event, "poleId")}
                     fullWidth={false}
-                    className={{marginLeft: '10px'}}
+                    style={{marginLeft: '10px'}}
                     data={poles}
                 />
             </Popup>
@@ -165,7 +165,7 @@ const Vehicule = props => {
                 open={supressionVehicule}
                 onClose={() => setSupressionVehicule(undefined)}
                 onAccept={supprimerVehicule}
-                text={"êtes vous sur de vouloir supprimerle(s) véhicule(s) sélectionné(s) ?"}
+                text={"êtes vous sur de vouloir supprimer le véhicule sélectionné ?"}
             />
 
         </React.Fragment>

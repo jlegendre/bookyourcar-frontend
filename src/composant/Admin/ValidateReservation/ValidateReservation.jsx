@@ -26,7 +26,7 @@ const ValidateReservation = props => {
 
 ValidateReservation.propTypes = {
     classes: PropTypes.object,
-    locations: PropTypes.object,
+    locations: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     fetchAdminLocation: PropTypes.func,
     fetchDetailLocation: PropTypes.func
 };

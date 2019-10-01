@@ -117,7 +117,7 @@ const Utilisateur = props => {
                 open={refuserUtilisateur}
                 onClose={() => setRefuserUtilisateur(undefined)}
                 onAccept={refuseUser}
-                text={"êtes vous sur de vouloir refuser le(s) utilisateur(s) sélectionné(s) ?"}
+                text={"êtes vous sur de vouloir refuser l'utilisateur sélectionné ?"}
             />
 
         </Fragment>

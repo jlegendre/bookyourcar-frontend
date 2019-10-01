@@ -79,11 +79,11 @@ const Pole = props => {
                 title={"Pôle"}
                 open={consultationModification}
                 onClose={closePopup}
-                firstActionTxt={state === "consult" && "Supprimer"}
+                firstActionTxt={state === "consult" ? "Supprimer" : undefined}
                 firstActionFunc={() => setSupressionPole(true)}
-                secondActionTxt={state === "consult" && "Modifier"}
+                secondActionTxt={state === "consult" ? "Modifier" : undefined}
                 secondActionFunc={() => modificationPole()}
-                thirdActionTxt={state === "new" && "Enregistrer"}
+                thirdActionTxt={state === "new" ? "Enregistrer" : undefined}
                 thirdActionFunc={savePole}
             >
                 <InputText
@@ -123,7 +123,7 @@ const Pole = props => {
                 open={supressionPole}
                 onClose={() => setSupressionPole(undefined)}
                 onAccept={supprimerPole}
-                text={"êtes vous sur de vouloir supprimer le(s) pôle(s) sélectionné(s) ?"}
+                text={"êtes vous sur de vouloir supprimer le pôle sélectionné ?"}
             />
 
         </React.Fragment>

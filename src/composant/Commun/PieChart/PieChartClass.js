@@ -14,9 +14,7 @@ export const PieClass = props => {
     const colors = d3.scaleOrdinal(d3.schemeCategory10);
     const format = d3.format(".2f");
 
-    useEffect(
-        () => {
-            console.log('data', props.data)
+    useEffect(() => {
             const data = createPie(props.data);
             const group = d3.select(ref.current);
             const groupWithData = group.selectAll("g.arc").data(data);
