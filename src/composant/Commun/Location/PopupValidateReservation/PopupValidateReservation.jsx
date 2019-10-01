@@ -68,7 +68,7 @@ const PopupValidateReservation = props => {
     return (
         <Popup
             open={open}
-            title={`Location N°${data.locId} - Status : Location`}
+            title={`Location N°${data.locId} - Status : ${data.locState}`}
             firstActionTxt={createOKButton() && createOKButton()[0]}
             firstActionFunc={createOKButton() && createOKButton()[1]}
             secondActionTxt={createKOButton() && createKOButton()[0]}
