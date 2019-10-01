@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import * as PropTypes from 'prop-types';
 import List from "@material-ui/core/List/index";
 import Drawer from "@material-ui/core/Drawer/index";
@@ -11,7 +11,7 @@ const MenuAppBar = props => {
 
     const {classes, theme, role, open, onClose, fetchNumberUserInWaiting} = props;
 
-    const [numberUserActivation, setNumberUserActivation] = useState(undefined);
+    const [number, setNumber] = useState(undefined);
 
     const logout = () => {
         onClose();
@@ -20,11 +20,11 @@ const MenuAppBar = props => {
 
     const fetchNumber = () => {
         if (role === 'Admin') {
-            fetchNumberUserInWaiting(setNumberUserActivation)
+            fetchNumberUserInWaiting(setNumber)
         }
     };
 
-    useEffect(fetchNumber);
+    //useEffect(fetchNumber);
     useInterval(fetchNumber, 12000);
 
     const menu = (
@@ -36,9 +36,9 @@ const MenuAppBar = props => {
             {role && role === 'Admin' &&
             <List>
                 <MenuItem label={"Gestion des utilisateurs"} url={"validUser"} iconName={"how_to_reg"}
-                          onClick={onClose} number={numberUserActivation}/>
+                          onClick={onClose} number={number && number.UserInWaiting}/>
                 <MenuItem label={"Gestion des locations"} url={"reservation"} iconName={"how_to_reg"}
-                          onClick={onClose}/>
+                          onClick={onClose} number={number && number.LocationAsked}/>
                 <MenuItem label={"Gestion des véhicules"} url={"vehicule"} iconName={"directions_car"}
                           onClick={onClose}/>
                 <MenuItem label={"Gestion des pôles"} url={"pole"} iconName={"location_city"} onClick={onClose}/>
