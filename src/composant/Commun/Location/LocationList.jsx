@@ -40,7 +40,7 @@ const LocationList = props => {
      * @param location location a transmettre
      */
     const startLocation = location => {
-        updateFetchLocation(location.locId, null, 'Start');
+        updateFetchLocation(location.locId, location.selectedVehicle.vehId, 'Start');
         setPopupOpen(false);
     };
 
@@ -49,7 +49,7 @@ const LocationList = props => {
      * @param location location a transmettre
      */
     const endLocation = location => {
-        updateFetchLocation(location.locId, null, 'Finish');
+        updateFetchLocation(location.locId, location.selectedVehicle.vehId, 'Finish');
         setPopupOpen(false);
     };
 

@@ -92,6 +92,7 @@ export const updateFetchLocation = (locationId, vehicleid, action) => {
             method: 'PUT',
             data: body
         }).then(() => {
+        }).finally(()=>{
             dispatch(fetchLocationAdmin());
         });
     }
