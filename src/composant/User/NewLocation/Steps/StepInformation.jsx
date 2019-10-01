@@ -50,7 +50,7 @@ const StepInformation = props => {
             <Grid container spacing={24}>
                 <Grid item xs={12} md={6}>
                     <InputDate
-                        label={"Date début"}
+                        label={"Date de début"}
                         id={"dateDebut"}
                         name={"dateDebutResa"}
                         value={formulaire.dateDebutResa}
@@ -59,7 +59,7 @@ const StepInformation = props => {
                 </Grid>
                 <Grid item xs={12} md={6}>
                     <InputDate
-                        label={"Date fin"}
+                        label={"Date de fin"}
                         id={"dateFin"}
                         name={"dateFinResa"}
                         value={formulaire.dateFinResa}
