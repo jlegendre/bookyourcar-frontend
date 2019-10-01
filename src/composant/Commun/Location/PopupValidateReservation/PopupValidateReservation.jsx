@@ -22,7 +22,7 @@ const PopupValidateReservation = props => {
                 }]
             } else if (data.locStateId === 2) {
                 return ["Démarrer la location", () => {
-                    onStart(dataToUpdate)
+                    onStart(data)
                 }]
             }
         }
@@ -32,11 +32,11 @@ const PopupValidateReservation = props => {
         if (updateable) {
             if (data.locStateId === 0) {
                 return ["Refuser", () => {
-                    onRefuser(dataToUpdate)
+                    onRefuser(data)
                 }]
             } else if (data.locStateId === 1) {
                 return ["Terminer la location", () => {
-                    onFinish(dataToUpdate)
+                    onFinish(data)
                 }]
             }
         }
