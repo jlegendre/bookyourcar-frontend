@@ -1,5 +1,6 @@
 import httpClient from "../../utils/httpClient";
 import {setMessage} from "./message";
+import {fetchUserProfil} from "./auth";
 
 export const LOCATIONS = "GET_LOCATIONS";
 export const LOCATION = "GET_LOCATION";
@@ -36,6 +37,7 @@ export const fetchNewLocation = (input, success) => {
         }).then(() => {
             success && success();
             dispatch(setMessage({"Success": ["Votre réservation a bien été prise en compte"]}))
+            dispatch(fetchUserProfil())
         }).catch(() => {
             dispatch(setMessage({"Error": ["Votre demande comporte des erreurs, veuillez vérifier les données saisies"]}))
         })

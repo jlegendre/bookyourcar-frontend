@@ -1,14 +1,15 @@
 import ValidUser from "./Utilisateur.jsx";
 import {connect} from "react-redux";
-import {fetchUserInValidation} from "../../../redux/actions/user";
-import {getUserDetail, getUserInWaiting} from "../../../redux/reducers/user";
+import {fetchUserInValidation, fetchUsers} from "../../../redux/actions/user";
+import {getUserDetail, getUserInWaiting, getUsers} from "../../../redux/reducers/user";
 import {fetchDeleteUser, fetchValidateUser, fetchUser} from "../../../redux/actions/user";
 
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = dispatch => {
     return {
-        fetchUsers: () => dispatch(fetchUserInValidation()),
+        fetchUsersInValidation: () => dispatch(fetchUserInValidation()),
+        fetchUsers: () => dispatch(fetchUsers()),
         fetchUser : (id, callback) => dispatch(fetchUser(id, callback)),
         fetchAccepterUtilisateur: id => dispatch(fetchValidateUser(id)),
         fetchRefuserUtilisateur: id => dispatch(fetchDeleteUser(id))
@@ -18,7 +19,8 @@ const mapDispatchToProps = dispatch => {
 //pour envoyer des objets du store de redux
 const mapStateToProps = state => {
     return {
-        userList: getUserInWaiting(state),
+        userList: getUsers(state),
+        userListInWaiting: getUserInWaiting((state)),
         userDetail: getUserDetail(state)
     }
 };
