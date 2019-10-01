@@ -14,7 +14,7 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 //pour envoyer des objets du store de redux
-const mapStateToProps = (state) => {
+const mapStateToProps = () => {
     return {}
 };
 
