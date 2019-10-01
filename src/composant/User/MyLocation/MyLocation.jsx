@@ -27,7 +27,7 @@ const MyLocation = props => {
 
 MyLocation.propTypes = {
     classes: PropTypes.object,
-    locations: PropTypes.array,
+    locations: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     fetchUserLocation: PropTypes.func
 };
 

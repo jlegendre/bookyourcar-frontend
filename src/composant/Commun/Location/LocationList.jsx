@@ -98,7 +98,7 @@ const LocationList = props => {
 };
 
 LocationList.propTypes = {
-    locations: PropTypes.array.isRequired,
+    locations: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
     completeView: PropTypes.bool,
     fetchDetailLocation: PropTypes.func,
     updateable: PropTypes.bool,
