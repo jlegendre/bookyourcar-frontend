@@ -35,9 +35,9 @@ const MenuAppBar = props => {
             <Divider/>
             {role && role === 'Admin' &&
             <List>
-                <MenuItem label={"Validation d'utilisateurs"} url={"validUser"} iconName={"how_to_reg"}
+                <MenuItem label={"Gestion des utilisateurs"} url={"validUser"} iconName={"how_to_reg"}
                           onClick={onClose} number={numberUserActivation}/>
-                <MenuItem label={"Gestion des réservations"} url={"reservation"} iconName={"how_to_reg"}
+                <MenuItem label={"Gestion des locations"} url={"reservation"} iconName={"how_to_reg"}
                           onClick={onClose}/>
                 <MenuItem label={"Gestion des véhicules"} url={"vehicule"} iconName={"directions_car"}
                           onClick={onClose}/>

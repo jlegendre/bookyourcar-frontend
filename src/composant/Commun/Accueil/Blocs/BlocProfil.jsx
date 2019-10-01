@@ -2,7 +2,6 @@ import React, {Fragment, useEffect, useRef, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from "@material-ui/core/es/styles/withStyles";
 import {Card} from "@material-ui/core";
-import CardMedia from "@material-ui/core/CardMedia/index";
 import CardContent from "@material-ui/core/CardContent/index";
 import Typography from "@material-ui/core/Typography/index";
 import CardActions from "@material-ui/core/CardActions/index";
@@ -11,6 +10,7 @@ import Grid from "@material-ui/core/Grid/index";
 import _ from 'lodash';
 import PopupUpdateProfil from "./Popup/PopupUpdateUser";
 import PopupUpdatePwd from "./Popup/PopupUpdatePwd";
+import Icon from "@material-ui/core/Icon";
 
 const BlocProfil = props => {
 
@@ -19,6 +19,7 @@ const BlocProfil = props => {
     const [openPopupProfil, setOpenPopupProfil] = useState(false);
     const [openPopupPassword, setOpenPopupPassword] = useState(false);
     const [image, setImage] = useState();
+    const [showEditImage, setShowEditImage] = useState(false);
 
 
     const fileSelect = useRef(null);
@@ -52,7 +53,6 @@ const BlocProfil = props => {
 
     return (
         <React.Fragment>
-
             <PopupUpdateProfil
                 open={openPopupProfil}
                 onClose={() => setOpenPopupProfil(false)}
@@ -85,12 +85,22 @@ const BlocProfil = props => {
                             });
                         }}
                     />
-                    <CardMedia
-                        className={classes.cover}
-                        image={image}
-                        title="Photo de profil"
+                    <div
+                        className={classes.imageContainer}
                         onClick={() => fileSelect.current.click()}
-                    />
+                        onMouseOver={() => setShowEditImage(true)}
+                        onMouseOut={() => setShowEditImage(false)}
+                    >
+                        <img
+                            className={classes.image}
+                            src={image}
+                            alt={"button"}
+                        />
+                        {showEditImage && <Icon
+                            style={{fontSize: 209 / 4, position: 'absolute', zIndex: 4}}>
+                            edit
+                        </Icon>}
+                    </div>
                 </Fragment>
                 }
                 <div className={classes.details}>
@@ -157,7 +167,16 @@ export default withStyles(theme => ({
     content: {
         flex: '1 0 auto'
     },
-    cover: {
+    imageContainer: {
         width: 209,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    image: {
+        position: 'relative',
+        height: '100%',
+        width: '100%',
+        zIndex: 2
     }
 }))(BlocProfil);
