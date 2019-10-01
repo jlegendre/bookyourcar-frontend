@@ -60,7 +60,6 @@ const PopupValidateReservationLeftPart = props => {
                 </Fragment>
             )
         }
-        return {detailVeh}
 
 
     };
