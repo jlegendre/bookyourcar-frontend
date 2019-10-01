@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import * as PropTypes from 'prop-types';
 import List from "@material-ui/core/List/index";
 import Drawer from "@material-ui/core/Drawer/index";
@@ -24,7 +24,7 @@ const MenuAppBar = props => {
         }
     };
 
-    //useEffect(fetchNumber);
+    useEffect(fetchNumber);
     useInterval(fetchNumber, 12000);
 
     const menu = (
