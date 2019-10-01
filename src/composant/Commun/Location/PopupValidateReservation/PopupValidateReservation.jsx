@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {Fragment, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -7,12 +7,15 @@ import {formatDate} from "../../../../utils/dateUtils";
 import Popup from "../../Popup/Popup";
 import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart";
 import Typography from "@material-ui/core/Typography";
+import Supprimer from "../../../Admin/Action/Supprimer";
 
 const PopupValidateReservation = props => {
 
     const {classes, data, open, onAccept, onRefuser, onStart, onFinish, setData, onClose, updateable, onUpdate} = props;
 
     const [dataToUpdate, setDataToUpdate] = useState({locId: '', vehId: ''});
+    const [endLocationTest, setEndLocationTest] = useState(false);
+
 
     const createOKButton = () => {
         if (updateable) {
@@ -36,7 +39,7 @@ const PopupValidateReservation = props => {
                 }]
             } else if (data.locStateId === 1) {
                 return ["Terminer la location", () => {
-                    onFinish(data)
+                    setEndLocationTest(true);
                 }]
             }
         }
@@ -66,57 +69,70 @@ const PopupValidateReservation = props => {
 
 
     return (
-        <Popup
-            open={open}
-            title={`Location N°${data.locId} - Status : ${data.locState}`}
-            firstActionTxt={createOKButton() && createOKButton()[0]}
-            firstActionFunc={createOKButton() && createOKButton()[1]}
-            secondActionTxt={createKOButton() && createKOButton()[0]}
-            secondActionFunc={createKOButton() && createKOButton()[1]}
-            thirdActionFunc={createUpdateButton() && createUpdateButton()[1]}
-            thirdActionTxt={createUpdateButton() && createUpdateButton()[0]}
-            fullWidth
-            onClose={onClose}
-        >
-            {data && (
-                <div className={classes.main}>
-                    <CssBaseline/>
-                    <form>
-                        <div className={classes.form}>
-                            <div className={classes.formLeft}>
-                                <div>
-                                    <Typography color={"secondary"}>Demandeur : {data.user}</Typography>
+
+        <Fragment> <Supprimer
+            title={"Terminer la location"}
+            open={endLocationTest}
+            onClose={() => setEndLocationTest(false)}
+            onAccept={() => {setEndLocationTest(false); onFinish(data)}}
+            text={"êtes vous sur de vouloir terminer la location ?"}
+        />
+
+            <Popup
+                open={open}
+                title={`Location N°${data.locId} - Status : ${data.locState}`}
+                firstActionTxt={createOKButton() && createOKButton()[0]}
+                firstActionFunc={createOKButton() && createOKButton()[1]}
+                secondActionTxt={createKOButton() && createKOButton()[0]}
+                secondActionFunc={createKOButton() && createKOButton()[1]}
+                thirdActionFunc={createUpdateButton() && createUpdateButton()[1]}
+                thirdActionTxt={createUpdateButton() && createUpdateButton()[0]}
+                fullWidth
+                onClose={onClose}
+            >
+                {data && (
+                    <div className={classes.main}>
+                        <CssBaseline/>
+                        <form>
+                            <div className={classes.form}>
+                                <div className={classes.formLeft}>
+                                    <div>
+                                        <Typography color={"secondary"}>Demandeur : {data.user}</Typography>
+                                    </div>
+                                    <div>
+                                        <Typography
+                                            color={"secondary"}> Début: {formatDate(data.dateStart)}</Typography>
+                                    </div>
+                                    <div>
+                                        <Typography color={"secondary"}>Fin: {formatDate(data.dateEnd)}</Typography>
+                                    </div>
+                                    <div>
+                                        <Typography color={"secondary"}>Pôle de départ: {data.poleStart}</Typography>
+                                    </div>
+                                    <div>
+                                        <Typography color={"secondary"}>Pôle de fin: {data.poleEnd}</Typography>
+                                    </div>
+                                    <div style={{lineHeight: '1em'}}>
+                                        <Typography color={"secondary"}>Commentaire: {data.comment}</Typography>
+                                    </div>
                                 </div>
-                                <div>
-                                    <Typography color={"secondary"}> Début: {formatDate(data.dateStart)}</Typography>
-                                </div>
-                                <div>
-                                    <Typography color={"secondary"}>Fin: {formatDate(data.dateEnd)}</Typography>
-                                </div>
-                                <div>
-                                    <Typography color={"secondary"}>Pôle de départ: {data.poleStart}</Typography>
-                                </div>
-                                <div>
-                                    <Typography color={"secondary"}>Pôle de fin: {data.poleEnd}</Typography>
-                                </div>
-                                <div style={{lineHeight: '1em'}}>
-                                    <Typography color={"secondary"}>Commentaire: {data.comment}</Typography>
+                                <div className={classes.formRight}>
+                                    <PopupValidateReservationLeftPart
+                                        data={data}
+                                        setData={testData}
+                                        updateable={updateable}
+                                        setDataToUpdate={setDataToUpdate}
+                                        dataToUpdate={dataToUpdate}
+                                    />
                                 </div>
                             </div>
-                            <div className={classes.formRight}>
-                                <PopupValidateReservationLeftPart
-                                    data={data}
-                                    setData={testData}
-                                    updateable={updateable}
-                                    setDataToUpdate={setDataToUpdate}
-                                    dataToUpdate={dataToUpdate}
-                                />
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            )}
-        </Popup>
+                        </form>
+                    </div>
+                )}
+
+
+            </Popup>
+        </Fragment>
     );
 };
 
