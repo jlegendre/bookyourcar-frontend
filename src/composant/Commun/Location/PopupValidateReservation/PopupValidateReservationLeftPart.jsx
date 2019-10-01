@@ -1,23 +1,36 @@
 import React, {Fragment} from 'react'
-import {Icon} from "@material-ui/core";
+import {Icon, Typography} from "@material-ui/core";
 import InputSelect from '../../Input/InputSelect'
 
 const PopupValidateReservationLeftPart = props => {
 
-    const {data, setData, updateable} = props;
+    const {data, updateable, setDataToUpdate, dataToUpdate} = props;
     const {locStateId, selectedVehicle} = data;
 
-
     const updateVehicle = event => {
-        data.selectedVehicle = event.target.value;
-        console.log(data);
-        setData(data);
+        const locUpdate = {locId: data.locId, vehId: event.target.value};
+        setDataToUpdate(locUpdate);
     };
 
+    const detailVeh =( <Fragment>
+        {selectedVehicle && <Fragment>
+            <div><Typography>{selectedVehicle.vehCommonName} {selectedVehicle.registration}</Typography>
+
+            </div>
+            <div>
+                <Typography><Icon>ev_station</Icon>{selectedVehicle.fuelName}</Typography>
+            </div>
+            <div>
+                <Typography>  <Icon>supervisor_account</Icon>{selectedVehicle.seatCount}</Typography>
+            </div>
+        </Fragment>}
+
+    </Fragment>)
+
     const show = () => {
+        let vehList = [];
         data && data.availableVehicles && data.availableVehicles.forEach((vehicle) => {
-            vehicle.label = vehicle.vehCommonName;
-            vehicle.value = vehicle.vehId;
+            vehList.push({label: vehicle.vehCommonName, value: vehicle.vehId});
         });
         if (locStateId === 1) {
             return (
@@ -25,45 +38,40 @@ const PopupValidateReservationLeftPart = props => {
                     {!selectedVehicle ? "Aucune liste disponible" : ""}
                 </Fragment>
             )
-        } else if ((locStateId === 0 || locStateId === 2) && updateable) {
+        } else if ((locStateId === 0 || locStateId === 2) && updateable && vehList.length > 0) {
             return (
                     <InputSelect
                         fullWidth={true}
-                        data={data.availableVehicles}
+                        data={vehList}
                         name={'Vehicules disponibles'}
                         label={'Vehicules disponibles'}
-                        value={data.selectedVehicle? data.selectedVehicle : ''}
+                        value={dataToUpdate.vehId || ''}
                         onChange={(event) => updateVehicle(event)}
                         id={'vehSelected'}/>
             )
+        } else if(vehList.length === 0 && locStateId !==4){
+            return (
+                <Fragment>
+                    {selectedVehicle &&
+                    <Typography style={{marginTop: 20, color: "red"}}>Aucun autre véhicule n'est disponible à ces dates</Typography>}
+                    {!selectedVehicle &&
+                    <Typography style={{marginTop: 20, color: "red"}}>Aucun véhicule n'est disponible à ces dates</Typography>}
+                </Fragment>
+            )
         }
 
-        return (
-            <Fragment>
-                {selectedVehicle && <Fragment>
-                    <div>{selectedVehicle.vehCommonName} {selectedVehicle.registration}
-
-                    </div>
-                    <div>
-                        <Icon>ev_station</Icon>{selectedVehicle.fuelName}
-                    </div>
-                    <div>
-                        <Icon>supervisor_account</Icon> {selectedVehicle.seatCount}
-                    </div>
-                </Fragment>}
-
-            </Fragment>
-        )
 
     };
 
     return (
         <Fragment>
             <div>
-                Véhicule associé : {data.selectedVehicle !== null ? data.selectedVehicle.vehCommonName: "Aucun"}
+                Véhicule associé : {data.selectedVehicle !== null ? '': "Aucun"}
             </div>
             <div>
+                {selectedVehicle && detailVeh}
                 {show()}
+
             </div>
         </Fragment>
     )

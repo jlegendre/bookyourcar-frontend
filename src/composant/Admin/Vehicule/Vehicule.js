@@ -10,6 +10,7 @@ import {
 } from "../../../redux/actions/vehicule";
 import {fetchPoles} from "../../../redux/actions/pole";
 import {getListPolesForSelect} from "../../../redux/reducers/pole";
+import {setNoMessage} from "../../../redux/actions/message";
 
 //Pour recuperer des fonctions de redux (les actions ...)
 const mapDispatchToProps = dispatch => {
@@ -19,8 +20,8 @@ const mapDispatchToProps = dispatch => {
         fetchNewVehicule: (pole, callback) => dispatch(fetchNewVehicule(pole, callback)),
         fetchDeleteVehicule: id => dispatch(fetchDeleteVehicule(id)),
         fetchUpdateVehicule: (id, pole) => dispatch(fetchUpdateVehicule(id, pole)),
-        fetchPoles: () => dispatch(fetchPoles())
-
+        fetchPoles: () => dispatch(fetchPoles()),
+        setNoMessage: () => dispatch(setNoMessage())
     }
 };
 

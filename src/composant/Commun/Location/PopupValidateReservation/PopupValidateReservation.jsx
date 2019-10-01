@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -6,16 +6,19 @@ import {getBreakingLimit} from "../../../../utils/cssUtils";
 import {formatDate} from "../../../../utils/dateUtils";
 import Popup from "../../Popup/Popup";
 import PopupValidateReservationLeftPart from "./PopupValidateReservationLeftPart";
+import Typography from "@material-ui/core/Typography";
 
 const PopupValidateReservation = props => {
 
     const {classes, data, open, onAccept, onRefuser, onStart, onFinish, setData, onClose, updateable, onUpdate} = props;
 
+    const [dataToUpdate, setDataToUpdate] = useState({locId: '', vehId: ''});
+
     const createOKButton = () => {
         if (updateable) {
             if (data.locStateId === 0) {
                 return ["Accepter", () => {
-                    onAccept(data)
+                    onAccept(dataToUpdate)
                 }]
             } else if (data.locStateId === 2) {
                 return ["Démarrer la location", () => {
@@ -43,7 +46,7 @@ const PopupValidateReservation = props => {
         if (updateable) {
             if (data.locStateId === 2) {
                 return ["Mettre a jour la location", () => {
-                    onUpdate(data)
+                    onUpdate(dataToUpdate)
                 }]
             }
         }
@@ -82,22 +85,22 @@ const PopupValidateReservation = props => {
                         <div className={classes.form}>
                             <div className={classes.formLeft}>
                                 <div>
-                                    Demandeur : {data.user}
+                                    <Typography>Demandeur : {data.user}</Typography>
                                 </div>
                                 <div>
-                                    Début: {formatDate(data.dateStart)}
+                                    <Typography> Début: {formatDate(data.dateStart)}</Typography>
                                 </div>
                                 <div>
-                                    Fin: {formatDate(data.dateEnd)}
+                                    <Typography>Fin: {formatDate(data.dateEnd)}</Typography>
                                 </div>
                                 <div>
-                                    Pôle de départ: {data.poleStart}
+                                    <Typography>Pôle de départ: {data.poleStart}</Typography>
                                 </div>
                                 <div>
-                                    Pôle de fin: {data.poleEnd}
+                                    <Typography>Pôle de fin: {data.poleEnd}</Typography>
                                 </div>
                                 <div style={{lineHeight: '1em'}}>
-                                    Commentaire: {data.comment}
+                                    <Typography>Commentaire: {data.comment}</Typography>
                                 </div>
                             </div>
                             <div className={classes.formRight}>
@@ -105,6 +108,8 @@ const PopupValidateReservation = props => {
                                     data={data}
                                     setData={testData}
                                     updateable={updateable}
+                                    setDataToUpdate={setDataToUpdate}
+                                    dataToUpdate={dataToUpdate}
                                 />
                             </div>
                         </div>

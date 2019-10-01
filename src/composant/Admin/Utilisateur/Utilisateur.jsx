@@ -1,40 +1,39 @@
 import React, {Fragment, useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
-import ConsultationModification, {UPDATE} from '../Action/ConsultationModification';
 import Supprimer from "../Action/Supprimer";
 import InputText from "../../Commun/Input/InputText";
 import columns from "./columns";
 import Table from "../../Commun/Table/Table";
+import Popup from "../../Commun/Popup/Popup";
 
 const Utilisateur = props => {
 
     const {fetchUsersInValidation, fetchUser, userList, fetchUsers, userDetail, fetchRefuserUtilisateur, fetchAccepterUtilisateur} = props;
-    const [consultationModification, setConsultationModification] = useState({visible: false, state: UPDATE});
+    const [consultationModification, setConsultationModification] = useState(false);
     const [refuserUtilisateur, setRefuserUtilisateur] = useState(false);
     const [data, setData] = useState(userDetail || {});
-    const [deletedData, setDeletedData] = useState(undefined);
+    const [state, setState] = useState();
 
     useEffect(() => {
         fetchUsers();
     }, [fetchUsersInValidation, fetchUsers]);
 
-    const modificationUser = () => {
+    const acceptUser = () => {
         fetchAccepterUtilisateur(data.userId);
-        setConsultationModification({visible: false})
+        setConsultationModification(false)
     };
 
-    const supprimerUser = () => {
-        deletedData.forEach(user => {
-            fetchRefuserUtilisateur(user.userId);
-        });
+    const refuseUser = () => {
+        fetchRefuserUtilisateur(data.userId);
         setRefuserUtilisateur(false);
+        setConsultationModification(false);
     };
 
     const openConsultationModification = row => {
         fetchUser(row.userId, data => {
             setData(data)
         });
-        setConsultationModification({visible: true, state: UPDATE});
+        setConsultationModification(true);
     };
 
     const updateField = ((event, type) => {
@@ -46,17 +45,15 @@ const Utilisateur = props => {
 
     return (
         <Fragment>
-
             {userList && userList.usersInWaiting && userList.usersInWaiting.length > 0 &&
             <Fragment>
                 <Table
                     title={"Utilisateurs en attente"}
                     columns={columns}
                     data={userList.usersInWaiting}
-                    onClick={openConsultationModification}
-                    onDelete={data => {
-                        setDeletedData(data);
-                        setRefuserUtilisateur(true)
+                    onClick={data => {
+                        setState("attente");
+                        openConsultationModification(data)
                     }}
                 />
                 <div style={{marginBottom: 30}}/>
@@ -67,31 +64,29 @@ const Utilisateur = props => {
                 title={"Gestion des utilisateurs"}
                 columns={columns}
                 data={userList.allUsers}
-                onClick={openConsultationModification}
-                onDelete={data => {
-                    setDeletedData(data);
-                    setRefuserUtilisateur(true)
+                onClick={data => {
+                    setState("all");
+                    openConsultationModification(data)
                 }}
             />
 
-            <ConsultationModification
+            <Popup
                 title={"Utilisateur"}
-                open={consultationModification.visible}
-                state={consultationModification.state}
+                open={consultationModification}
                 onClose={() => {
-                    setConsultationModification({visible: false});
+                    setConsultationModification(false);
                     setData({});
                 }}
-                data={data}
-                onUpdate={() => modificationUser()}
-                onChangeState={state => setConsultationModification({...consultationModification, state: state})}
+                firstActionTxt={state === "attente" ? "Refuser" : undefined}
+                firstActionFunc={refuseUser}
+                secondActionTxt={state === "attente" ? "Accepter" : undefined}
+                secondActionFunc={acceptUser}
             >
                 <InputText
                     id="userName"
                     name={"UserName"}
                     label="Nom"
                     value={data.userName || ""}
-                    disabled
                     onChange={(event => updateField(event, "userName"))}
                 />
                 <InputText
@@ -99,7 +94,6 @@ const Utilisateur = props => {
                     name={"UserFirstname"}
                     label="Prénom"
                     value={data.userFirstname || ""}
-                    disabled
                     onChange={(event => updateField(event, "userFirstname"))}
                 />
                 <InputText
@@ -107,7 +101,6 @@ const Utilisateur = props => {
                     name={"UserEmail"}
                     label="Email"
                     value={data.userEmail || ""}
-                    disabled
                     onChange={(event => updateField(event, "userEmail"))}
                 />
                 <InputText
@@ -115,16 +108,15 @@ const Utilisateur = props => {
                     name={"PoleName"}
                     label="Pole"
                     value={data.poleName || ""}
-                    disabled
                     onChange={(event => updateField(event, "poleName"))}
                 />
-            </ConsultationModification>
+            </Popup>
 
             <Supprimer
                 title={"Refuser utilisateur"}
                 open={refuserUtilisateur}
                 onClose={() => setRefuserUtilisateur(undefined)}
-                onAccept={supprimerUser}
+                onAccept={refuseUser}
                 text={"êtes vous sur de vouloir refuser le(s) utilisateur(s) sélectionné(s) ?"}
             />
 

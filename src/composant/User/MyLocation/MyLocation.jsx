@@ -14,7 +14,7 @@ const MyLocation = props => {
 
     if (locations.length !== 0) {
         return (
-            <LocationList locations={locations} updateable={false} id={match.params.locationId}/>
+            <LocationList locations={locations} updateable={false} id={match.params.locationId} title={"Mes locations"}/>
         )
     } else {
         return (
