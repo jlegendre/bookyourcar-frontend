@@ -1,7 +1,7 @@
 import {LOCATION, LOCATIONS} from '../actions/location';
 
 const initialState = {
-    list: [],
+    list: {},
     detail: undefined
 
 };
