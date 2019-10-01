@@ -30,7 +30,6 @@ const InputText = (props) => {
         onChange && onChange(event);
     };
 
-
     return (
         <FormControl margin={"normal"} fullWidth={fullWidth}>
             <TextField
@@ -55,7 +54,7 @@ InputText.propTypes = {
     onChange: PropTypes.func,
     message: PropTypes.any,
     InputLabelProps: PropTypes.object,
-    value: PropTypes.string,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     max: PropTypes.number,
     format: PropTypes.string
 };

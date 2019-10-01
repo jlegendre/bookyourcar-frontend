@@ -1,45 +1,45 @@
 import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
 import Table from "../../Commun/Table/Table";
-import ConsultationModification, {VIEW} from '../Action/ConsultationModification';
 
 import columns from './columns';
 import Supprimer from "../Action/Supprimer";
 import InputText from "../../Commun/Input/InputText";
 import InputSelect from '../../Commun/Input/InputSelect';
+import Popup from "../../Commun/Popup/Popup";
 
 const Vehicule = props => {
 
-    const {fetchVehicules, fetchVehicule, vehiculeList, vehiculeDetail, fetchNewVehicule, fetchDeleteVehicule, fetchUpdateVehicule, fetchPoles, poles} = props;
-    const [consultationModification, setConsultationModification] = useState({visible: false, state: VIEW});
+    const {fetchVehicules, fetchVehicule, vehiculeList, vehiculeDetail, fetchNewVehicule, fetchDeleteVehicule, fetchUpdateVehicule, fetchPoles, poles, setNoMessage} = props;
+
+    const [consultationModification, setConsultationModification] = useState(false);
     const [supressionVehicule, setSupressionVehicule] = useState(false);
     const [data, setData] = useState(vehiculeDetail || {});
-    const [deletedData, setDeletedData] = useState(undefined);
+    const [state, setState] = useState("consult");
 
     useEffect(() => {
         fetchVehicules();
         fetchPoles();
     }, [fetchVehicules, fetchPoles]);
 
-    const acceptVehicule = () => {
+    const saveVehicule = () => {
         fetchNewVehicule(data, success => {
             if (success) {
                 //si la requête est un succes, on ferme la fenetre
-                setConsultationModification({visible: false})
+                setConsultationModification(false)
             }
         })
     };
 
     const modificationVehicule = () => {
-        setConsultationModification({visible: false})
+        setConsultationModification(false);
         fetchUpdateVehicule(data.vehId, data);
     };
 
     const supprimerVehicule = () => {
-        deletedData.forEach(vehicule => {
-            fetchDeleteVehicule(vehicule.vehId);
-        });
+        fetchDeleteVehicule(data.vehId);
         setSupressionVehicule(false);
+        setConsultationModification(false);
     };
 
     const openConsultationModification = row => {
@@ -47,7 +47,7 @@ const Vehicule = props => {
             data.vehTypeEssence = data.vehTypeEssence.toLowerCase();
             setData(data)
         });
-        setConsultationModification({visible: true, state: VIEW});
+        setConsultationModification(true);
     };
 
     const updateField = ((event, type) => {
@@ -57,6 +57,14 @@ const Vehicule = props => {
         });
     });
 
+    const closePopup = () => {
+        setNoMessage();
+        setConsultationModification(false);
+        setState("consult");
+        setData({})
+    };
+
+
     return (
         <React.Fragment>
             <Table
@@ -64,36 +72,29 @@ const Vehicule = props => {
                 columns={columns}
                 data={vehiculeList}
                 onClick={openConsultationModification}
-                onDelete={data => {
-                    setDeletedData(data);
-                    setSupressionVehicule(true)
-                }}
                 onAdd={() => {
                     setData({});
-                    setConsultationModification({visible: true, state: 'new'})
+                    setConsultationModification(true);
+                    setState("new");
                 }}
             />
 
-            <ConsultationModification
+            <Popup
                 title={"Véhicule"}
-                open={consultationModification.visible}
-                state={consultationModification.state}
-                onClose={() => {
-                    setConsultationModification({visible: false});
-                    setData({});
-                }}
-                data={data}
-                onAccept={acceptVehicule}
-                onUpdate={() => modificationVehicule()}
-                onChangeState={state => setConsultationModification({...consultationModification, state: state})}
-                style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap'}}
+                onClose={closePopup}
+                open={consultationModification}
+                firstActionTxt={state === "consult" ? "Supprimer" : undefined}
+                firstActionFunc={() => setSupressionVehicule(true)}
+                secondActionTxt={state === "consult" ? "Modifier" : undefined}
+                secondActionFunc={() => modificationVehicule()}
+                thirdActionTxt={state === "new" ? "Enregistrer": undefined}
+                thirdActionFunc={saveVehicule}
             >
                 <InputText
                     id={"vehBrand"}
                     name={"VehBrand"}
                     label={"Marque"}
                     value={data.vehBrand || ""}
-                    disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehBrand")}
                     fullWidth={false}
                     style={{marginLeft: '10px'}}
@@ -103,7 +104,6 @@ const Vehicule = props => {
                     name={"VehModel"}
                     label={"Modèle"}
                     value={data.vehModel || ""}
-                    disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehModel")}
                     fullWidth={false}
                     style={{marginLeft: '10px'}}
@@ -113,7 +113,6 @@ const Vehicule = props => {
                     name={"VehColor"}
                     label={"Couleur"}
                     value={data.vehColor || ""}
-                    disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehColor")}
                     fullWidth={false}
                     style={{marginLeft: '10px'}}
@@ -123,7 +122,6 @@ const Vehicule = props => {
                     name={"VehRegistration"}
                     label={"Immatriculation"}
                     value={data.vehRegistration || ""}
-                    disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehRegistration")}
                     fullWidth={false}
                     style={{marginLeft: '10px', marginRight: '10px'}}
@@ -133,21 +131,19 @@ const Vehicule = props => {
                     name={"VehTypeEssence"}
                     label={"Type de carburant"}
                     value={data.vehTypeEssence || ""}
-                    disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehTypeEssence")}
                     fullWidth={false}
                     className={{marginLeft: '10px'}}
                     data={[{value: 'sans plomb 95', label: 'sans plomb 95'},
-                    {value: 'sans plomb 98', label: 'sans plomb 98'},
-                    {value: 'diesel', label: 'diesel'},
-                    {value: 'electrique', label: 'electrique'}]}
+                        {value: 'sans plomb 98', label: 'sans plomb 98'},
+                        {value: 'diesel', label: 'diesel'},
+                        {value: 'electrique', label: 'electrique'}]}
                 />
                 <InputText
                     id={"vehNumberplace"}
                     name={"VehNumberplace"}
                     label={"Nombre de places"}
                     value={data.vehNumberplace || ""}
-                    disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "vehNumberplace")}
                     fullWidth={false}
                     style={{marginLeft: '10px'}}
@@ -157,13 +153,12 @@ const Vehicule = props => {
                     name={"VehPole"}
                     label={"Pole de rattachement"}
                     value={data.poleId || ""}
-                    disabled={consultationModification.state === VIEW}
                     onChange={event => updateField(event, "poleId")}
                     fullWidth={false}
                     className={{marginLeft: '10px'}}
                     data={poles}
                 />
-            </ConsultationModification>
+            </Popup>
 
             <Supprimer
                 title={"Suppression Véhicule"}
@@ -184,7 +179,8 @@ Vehicule.propTypes = {
     vehiculeDetail: PropTypes.object,
     fetchNewVehicule: PropTypes.func,
     fetchDeleteVehicule: PropTypes.func,
-    fetchUpdateVehicule: PropTypes.func
+    fetchUpdateVehicule: PropTypes.func,
+    setNoMessage: PropTypes.func
 };
 
 export default Vehicule;

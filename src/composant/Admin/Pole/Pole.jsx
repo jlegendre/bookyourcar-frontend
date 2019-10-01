@@ -80,9 +80,7 @@ const Pole = props => {
                 open={consultationModification}
                 onClose={closePopup}
                 firstActionTxt={state === "consult" && "Supprimer"}
-                firstActionFunc={() => {
-                    setSupressionPole(true)
-                }}
+                firstActionFunc={() => setSupressionPole(true)}
                 secondActionTxt={state === "consult" && "Modifier"}
                 secondActionFunc={() => modificationPole()}
                 thirdActionTxt={state === "new" && "Enregistrer"}
