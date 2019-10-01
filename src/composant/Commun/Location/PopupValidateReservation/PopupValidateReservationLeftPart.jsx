@@ -1,17 +1,19 @@
-import React, {Fragment, useState} from 'react'
+import React, {Fragment} from 'react'
 import {Icon} from "@material-ui/core";
 import InputSelect from '../../Input/InputSelect'
 
 const PopupValidateReservationLeftPart = props => {
 
-    const {data, setData, updateable} = props;
+    const {data, updateable, setDataToUpdate, dataToUpdate} = props;
     const {locStateId, selectedVehicle} = data;
 
+
     const updateVehicle = event => {
-        data.selectedVehicle = event.target.value;
-        console.log(data);
-        setData(data);
+        const locUpdate = {locId: data.locId, vehId: event.target.value};
+        setDataToUpdate(locUpdate);
     };
+
+    // data.availableVehicles = [];
 
     const show = () => {
         let vehList = [];
@@ -24,17 +26,19 @@ const PopupValidateReservationLeftPart = props => {
                     {!selectedVehicle ? "Aucune liste disponible" : ""}
                 </Fragment>
             )
-        } else if ((locStateId === 0 || locStateId === 2) && updateable) {
+        } else if ((locStateId === 0 || locStateId === 2) && updateable && vehList.length > 0) {
             return (
                     <InputSelect
                         fullWidth={true}
                         data={vehList}
                         name={'Vehicules disponibles'}
                         label={'Vehicules disponibles'}
-                        value={data.selectedVehicle || ''}
+                        value={dataToUpdate.vehId || ''}
                         onChange={(event) => updateVehicle(event)}
                         id={'vehSelected'}/>
             )
+        } else if(vehList.length === 0){
+            return (<Fragment><span style={{marginTop: 20, color: "red"}}>Aucun véhicule n'est disponible à ces dates</span></Fragment>)
         }
 
         return (

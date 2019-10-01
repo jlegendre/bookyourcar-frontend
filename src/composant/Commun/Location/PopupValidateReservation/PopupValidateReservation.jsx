@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import * as PropTypes from 'prop-types';
 import withStyles from '@material-ui/core/styles/withStyles';
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -11,15 +11,17 @@ const PopupValidateReservation = props => {
 
     const {classes, data, open, onAccept, onRefuser, onStart, onFinish, setData, onClose, updateable, onUpdate} = props;
 
+    const [dataToUpdate, setDataToUpdate] = useState({locId: '', vehId: ''});
+
     const createOKButton = () => {
         if (updateable) {
             if (data.locStateId === 0) {
                 return ["Accepter", () => {
-                    onAccept(data)
+                    onAccept(dataToUpdate)
                 }]
             } else if (data.locStateId === 2) {
                 return ["Démarrer la location", () => {
-                    onStart(data)
+                    onStart(dataToUpdate)
                 }]
             }
         }
@@ -29,11 +31,11 @@ const PopupValidateReservation = props => {
         if (updateable) {
             if (data.locStateId === 0) {
                 return ["Refuser", () => {
-                    onRefuser(data)
+                    onRefuser(dataToUpdate)
                 }]
             } else if (data.locStateId === 1) {
                 return ["Terminer la location", () => {
-                    onFinish(data)
+                    onFinish(dataToUpdate)
                 }]
             }
         }
@@ -43,7 +45,7 @@ const PopupValidateReservation = props => {
         if (updateable) {
             if (data.locStateId === 2) {
                 return ["Mettre a jour la location", () => {
-                    onUpdate(data)
+                    onUpdate(dataToUpdate)
                 }]
             }
         }
@@ -105,6 +107,8 @@ const PopupValidateReservation = props => {
                                     data={data}
                                     setData={testData}
                                     updateable={updateable}
+                                    setDataToUpdate={setDataToUpdate}
+                                    dataToUpdate={dataToUpdate}
                                 />
                             </div>
                         </div>

@@ -7,8 +7,7 @@ import columns from "./columns";
 
 const LocationList = props => {
 
-    const {locations, fetchDetailLocation, updateFetchLocation, updateable, id, title, style} = props;
-
+    const {locations, fetchDetailLocation, updateFetchLocation, updateable, id, title,} = props;
     const [popupOpen, setPopupOpen] = useState(false);
     const [currentLocation, setCurrentLocation] = useState(null);
 
@@ -24,7 +23,7 @@ const LocationList = props => {
      * @param location location a transmettre
      */
     const acceptLocation = (location) => {
-        updateFetchLocation(location.locId, location.selectedVehicle, 'Validate');
+        updateFetchLocation(location.locId, location.vehId, 'Validate');
         setPopupOpen(false);
     };
     /**
@@ -32,7 +31,7 @@ const LocationList = props => {
      * @param location location a transmettre
      */
     const updateLocation = (location) => {
-        updateFetchLocation(location.locId, location.selectedVehicle, 'Update');
+        updateFetchLocation(location.locId, location.vehId, 'Update');
         setPopupOpen(false);
     };
 
