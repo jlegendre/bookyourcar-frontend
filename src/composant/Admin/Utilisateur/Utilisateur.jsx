@@ -1,31 +1,30 @@
 import React, {useEffect, useState} from 'react';
 import * as PropTypes from 'prop-types';
-import Table from "../../Commun/Table/Table";
 import ConsultationModification, {UPDATE} from '../Action/ConsultationModification';
-
-import columns from './columns';
 import Supprimer from "../Action/Supprimer";
 import InputText from "../../Commun/Input/InputText";
+import UtilisateurAttente from "./Tableau/UtilisateurAttente";
+import UtilisateurValide from "./Tableau/UtilisateurValide";
 
 const Utilisateur = props => {
 
-    const {fetchUsers, fetchUser, userList, userDetail, fetchRefuserUtilisateur, fetchAccepterUtilisateur} = props;
+    const {fetchUsersInValidation, fetchUser, userListInWaiting, userList, fetchUsers, userDetail, fetchRefuserUtilisateur, fetchAccepterUtilisateur} = props;
     const [consultationModification, setConsultationModification] = useState({visible: false, state: UPDATE});
     const [refuserUtilisateur, setRefuserUtilisateur] = useState(false);
     const [data, setData] = useState(userDetail || {});
     const [deletedData, setDeletedData] = useState(undefined);
 
     useEffect(() => {
+        fetchUsersInValidation();
         fetchUsers();
-    }, [fetchUsers]);
+    }, [fetchUsersInValidation, fetchUsers]);
 
-
-    const modificationPole = () => {
+    const modificationUser = () => {
         fetchAccepterUtilisateur(data.userId);
         setConsultationModification({visible: false})
     };
 
-    const supprimerPole = () => {
+    const supprimerUser = () => {
         deletedData.forEach(user => {
             fetchRefuserUtilisateur(user.userId);
         });
@@ -48,15 +47,19 @@ const Utilisateur = props => {
 
     return (
         <React.Fragment>
-            <Table
-                title={"Gestion des utilisateurs"}
-                columns={columns}
-                data={userList}
-                onClick={openConsultationModification}
-                onDelete={data => {
-                    setDeletedData(data);
-                    setRefuserUtilisateur(true)
-                }}
+
+            <UtilisateurAttente
+                userList={userListInWaiting}
+                setDeletedData={setDeletedData}
+                setRefuserUtilisateur={setRefuserUtilisateur}
+                openConsultationModification={openConsultationModification}
+            />
+
+            <UtilisateurValide
+                userList={userList}
+                setDeletedData={setDeletedData}
+                setRefuserUtilisateur={setRefuserUtilisateur}
+                openConsultationModification={openConsultationModification}
             />
 
             <ConsultationModification
@@ -68,7 +71,7 @@ const Utilisateur = props => {
                     setData({});
                 }}
                 data={data}
-                onUpdate={() => modificationPole()}
+                onUpdate={() => modificationUser()}
                 onChangeState={state => setConsultationModification({...consultationModification, state: state})}
             >
                 <InputText
@@ -109,7 +112,7 @@ const Utilisateur = props => {
                 title={"Refuser utilisateur"}
                 open={refuserUtilisateur}
                 onClose={() => setRefuserUtilisateur(undefined)}
-                onAccept={supprimerPole}
+                onAccept={supprimerUser}
                 text={"êtes vous sur de vouloir refuser le(s) utilisateur(s) sélectionné(s) ?"}
             />
 
@@ -119,8 +122,10 @@ const Utilisateur = props => {
 
 Utilisateur.propTypes = {
     fetchUsers: PropTypes.func,
+    fetchUsersInWaiting: PropTypes.func,
     fetchUser: PropTypes.func,
     userList: PropTypes.array,
+    userListInWaiting: PropTypes.array,
     userDetail: PropTypes.object,
     fetchNewPole: PropTypes.func,
     fetchRefuserUtilisateur: PropTypes.func,

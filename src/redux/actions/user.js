@@ -4,6 +4,7 @@ import {setNoMessage} from "./message";
 
 export const USER_IN_WAITING = "GET_USER_IN_WAITING";
 export const GET_USER = "GET_USER";
+export const USERS = 'USERS';
 
 /**
  * Call /User/userInWaiting Url, pour récupérer tous les utilisateurs en attente de validation
@@ -21,7 +22,6 @@ export const fetchUserInValidation = () => {
     }
 };
 
-
 /**
  * Call /User/ValidateUserInWaiting, url pour accepter un utilisateur
  * @param id identifiant de l'utilisateur
@@ -38,7 +38,6 @@ export const fetchValidateUser = id => {
         })
     }
 };
-
 
 /**
  * Call /User/:id, Url pour supprimer un utilisateur
@@ -78,10 +77,24 @@ export const fetchNumberUserInWaiting = (callback) => {
     }
 };
 
+export const fetchUsers = () => {
+    return dispatch => {
+        httpClient.request({
+            url: '/User'
+        }).then(result => {
+            dispatch(setUsers(result.data))
+        })
+    }
+};
+
 export const setUserInWaiting = userInWaiting => {
     return {type: USER_IN_WAITING, userInWaiting};
 };
 
 export const setUser = user => {
     return {type: GET_USER, user}
+};
+
+export const setUsers = users => {
+    return {type: USERS, users}
 }
