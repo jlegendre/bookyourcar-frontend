@@ -175,6 +175,7 @@ export default withStyles((theme) => ({
             maxWidth: 300
         },
         formRight: {
+            width: 200,
             paddingLeft: 20
         },
         submit: {
