@@ -53,7 +53,7 @@ const PopupValidateReservation = props => {
                 }]
             }
         }
-    }
+    };
 
 
     if (!data) {
@@ -75,7 +75,7 @@ const PopupValidateReservation = props => {
             open={endLocationTest}
             onClose={() => setEndLocationTest(false)}
             onAccept={() => {setEndLocationTest(false); onFinish(data)}}
-            text={"êtes vous sur de vouloir terminer la location ?"}
+            text={"Etes vous sur de vouloir terminer la location ?"}
         />
 
             <Popup
