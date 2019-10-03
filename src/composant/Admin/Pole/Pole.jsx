@@ -58,6 +58,7 @@ const Pole = props => {
     const closePopup = () => {
         setNoMessage();
         setConsultationModification(false);
+        setState('consult');
         setData({})
     };
 
