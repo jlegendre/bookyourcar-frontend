@@ -4,7 +4,7 @@ import LocationList from "../../Commun/Location/LocationList";
 
 const ValidateReservation = props => {
 
-    const {locations, fetchAdminLocation} = props;
+    const {locations, fetchAdminLocation, match} = props;
 
     useEffect(() => {
         fetchAdminLocation();
@@ -18,7 +18,7 @@ const ValidateReservation = props => {
                 <div style={{marginBottom: '30px'}}/>
             </Fragment>
             }
-            <LocationList locations={locations.allLocations} updateable={true} title={"Locations"} completeView/>
+            <LocationList locations={locations.allLocations} updateable={true} title={"Locations"} id={match.params.locationId} completeView/>
 
         </div>
     )

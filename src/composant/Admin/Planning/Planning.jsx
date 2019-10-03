@@ -5,7 +5,7 @@ import {getBreakingLimit} from "../../../utils/cssUtils";
 import {Element} from "../../Commun/Ligne/Ligne";
 import {formatDate, getLibelleOfDayWeek, isIn, nextWeek, previusWeek} from "../../../utils/dateUtils";
 import Paper from "@material-ui/core/Paper";
-import {CssBaseline, Grid, Typography} from "@material-ui/core";
+import {CssBaseline, Grid, Tooltip, Typography} from "@material-ui/core";
 import {PieClass} from '../../Commun/PieChart/PieChartClass';
 
 
@@ -21,8 +21,8 @@ const Planning = props => {
 
     useEffect(() => {
         fetchPlanning(date);
-        setDataGraph([{ data: 'utilisés', value: planning.usedVehiclesCount },
-        { data: 'disponibles', value: planning.totalVehiclesCount - planning.usedVehiclesCount }]);
+        setDataGraph([{data: 'utilisés', value: planning.usedVehiclesCount},
+            {data: 'disponibles', value: planning.totalVehiclesCount - planning.usedVehiclesCount}]);
 
     }, [fetchPlanning, date, setDataGraph, planning.usedVehiclesCount, planning.totalVehiclesCount]);
 
@@ -35,10 +35,10 @@ const Planning = props => {
                     <Grid item xs={12} md={4}>
                         <Paper style={{marginBottom: 24, textAlign: 'center'}}>
                             <Typography gutterBottom variant={"h6"} component={"h6"} color={'secondary'}>
-                                Véhicules en cours d'utilisation  aujourd'hui
+                                Véhicules en cours d'utilisation aujourd'hui
                             </Typography>
 
-                            <br />
+                            <br/>
                             <PieClass
                                 data={dataGraph}
                                 width={300}
@@ -117,13 +117,13 @@ const BodyPlanning = props => {
                     <Element>
                         {item.vehName}
                     </Element>
-                    <BodyCell day={0} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
-                    <BodyCell day={1} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
-                    <BodyCell day={2} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
-                    <BodyCell day={3} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
-                    <BodyCell day={4} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
-                    <BodyCell day={5} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
-                    <BodyCell day={6} dateDebutSemaine={planning.startWeek} vehicule={item.weeklyReservation}/>
+                    <BodyCell day={0} dateDebutSemaine={planning.startWeek} reservations={item.weeklyReservation}/>
+                    <BodyCell day={1} dateDebutSemaine={planning.startWeek} reservations={item.weeklyReservation}/>
+                    <BodyCell day={2} dateDebutSemaine={planning.startWeek} reservations={item.weeklyReservation}/>
+                    <BodyCell day={3} dateDebutSemaine={planning.startWeek} reservations={item.weeklyReservation}/>
+                    <BodyCell day={4} dateDebutSemaine={planning.startWeek} reservations={item.weeklyReservation}/>
+                    <BodyCell day={5} dateDebutSemaine={planning.startWeek} reservations={item.weeklyReservation}/>
+                    <BodyCell day={6} dateDebutSemaine={planning.startWeek} reservations={item.weeklyReservation}/>
                 </div>
             )}
         </React.Fragment>
@@ -131,24 +131,27 @@ const BodyPlanning = props => {
 };
 
 const BodyCell = props => {
-    const {day, vehicule, dateDebutSemaine} = props;
+    const {day, reservations, dateDebutSemaine} = props;
 
-    let found = false;
+    let reservationFind = undefined;
 
-    if (vehicule && vehicule.length > 0) {
-        vehicule.forEach(v => {
-            if (!found) {
-                found = isIn(dateDebutSemaine, day, v.startDate, v.endDate);
+    if (reservations && reservations.length > 0) {
+        reservations.forEach(r => {
+            if (!reservationFind) {
+                reservationFind = isIn(dateDebutSemaine, day, r.startDate, r.endDate) ? r : undefined;
             }
         });
     }
 
-    if (found) {
-        return <Element style={{backgroundColor: '#49AAB3'}}/>
+    if (reservationFind) {
+        return (
+            <Tooltip title={"Voir la réservation associée"}>
+                <Element style={{backgroundColor: '#49AAB3'}} to={`/reservation/${reservationFind.reservationId}`}/>
+            </Tooltip>
+        )
     }
 
     return <Element/>
-
 };
 
 Planning.propTypes = {
